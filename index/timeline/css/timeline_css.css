@@ -1,0 +1,204 @@
+@charset "gb2312";
+/* CSS Document */
+body
+{
+	margin:0px;
+	background:url(../img/background_new.png) fixed;
+	font-family:'微软雅黑';
+}
+
+img
+{
+	border:0px;
+}
+h1
+{
+	margin-top:17px;
+}
+.bubble
+{
+	position:relative;
+	top:30px;
+	left:40px;
+	display:block;
+	border-radius:5px;
+	background-color:#FFF;
+	opacity:0.9;
+	filter: alpha(opacity=90);
+	float:left;
+	margin:10px;
+	padding:10px;
+	box-shadow:3px 5px 5px  #333;
+}
+.bubble h3
+{
+	margin:5px;
+}
+.bubble p
+{
+	margin-top:6px;
+}
+s
+{
+	position:absolute;
+	top:20px;
+	left:-20px;
+	filter: alpha(opacity=90);
+	display:block;
+	border-color:transparent #FFF transparent transparent;
+	border-style:solid;
+	border-width:10px;
+}
+.banner
+{
+	position:relative;
+	top:0px;
+	height:200px;
+	background:#000;
+	opacity:0.6;
+	filter: alpha(opacity=60);
+	box-shadow:0 5px 5px #000000;
+}
+#header
+{
+	width:1000px;
+	height:200px;
+	margin:auto;
+	position:relative;
+	top:-200px;
+	
+}
+#logo
+{
+	margin:25px;
+	float:left;
+	opacity:0.8;
+	filter: alpha(opacity=80);
+}
+#content
+{
+	float:left;
+	color:#CCC;
+	padding:15px;
+	opacity:0.8;
+	filter: alpha(opacity=80);
+	width:700px;
+}
+#time
+{
+	position:fixed;
+	top:190px;
+	width:150px;
+
+	float:left;
+	color:#CCC;
+	opacity:0.8;
+	filter: alpha(opacity=80);
+	text-align:right;
+	margin:15px 25px 25px 25px;
+}
+#time_side
+{
+	position:relative;
+	top:15px;
+	left:20px;
+	width:3px;
+	height:150px;
+	background-color:#CCC;
+	float:right;
+	margin:20px 10px 0px 10px;
+}
+#time_side_cover
+{
+	position:relative;
+	top:25px;
+	left:127px;
+	width:3px;
+	height:25px;
+	background-color:#6EB8D3;
+	float:right;
+	margin:20px 10px 0px 10px;
+}
+#time ul
+{
+	display:block;
+	list-style:none;
+	float:right;
+	margin-top:40px;
+}
+#time ul li
+{
+	margin-top:5px;
+}
+#time a
+{
+	font-weight:800;
+	text-decoration:none;
+	color:#CCC;
+	cursor:pointer;
+	text-shadow: 1px 1px 1px #333;
+}
+#time a:hover
+{
+	color:#6EB8D3;
+}
+#clock
+{
+	position:relative;
+	top:15px;
+	left:35px;
+	background-color:#FFF;
+	opacity:0.6;
+	filter: alpha(opacity=60);
+	border-radius:5px;
+	float:left;
+	margin:15px;
+	box-shadow:3px 5px 5px  #333;
+}
+#clock p
+{
+	font-size:36px;
+	color:#000;
+	margin:10px;
+}
+#clock h3
+{
+	font-weight:normal;
+	color:#000;
+	margin:10px;
+}
+#timeline_content
+{
+	position:relative;
+	left:200px;
+	float:left;
+	width:500px;
+	height:100px;
+}
+#timeline
+{
+	margin:auto;
+	width:1000px;
+	height:17860px;
+	/* 抵消header的定位 */
+	position:relative;
+	top:-200px;
+}
+#footer
+{
+
+	position: relative;
+	background:#000;
+	opacity:0.6;
+	filter: alpha(opacity=60);
+	height:100px;
+	color:#CCC;
+	bottom:0px;
+	width:100%;
+}
+#footer p
+{
+	text-align:center;
+	display:block;
+	padding:15px;
+}

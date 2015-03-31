@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=GB2312" />
+<title>Timeline</title>
+<link href="<?= base_url('index/timeline/css/timeline_css.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?= base_url('index/timeline/css/lightbox.css');?>" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?= base_url('index/timeline/js/jquery.js');?>"></script>
+<script type="text/javascript" src="<?= base_url('index/timeline/js/timeline_js.js');?>"></script>
+<script type="text/javascript" src="<?= base_url('index/timeline/js/jquery.scrollTo.js');?>"></script>
+<script type="text/javascript" src="<?= base_url('index/timeline/js/jquery.lightbox.js');?>"></script>
+<script type="text/javascript">
+$(document).ready(
+	function()
+	{
+		get_time();
+		$('#timeline_content a').lightBox({},100000);
+		$('#logo img').hover(
+			function()
+			{
+				logo_opacity_focus();	
+			},
+			function()
+			{
+				logo_opacity_blur();	
+			}
+		);
+		$('#time_now').click(
+			function()
+			{
+				time_now_slide();
+				$('#header').ScrollTo(1500);
+			}
+		);
+		$('#time_2014').click(
+			function()
+			{
+				time_2014_slide();
+				$('#2014').ScrollTo(1500);
+			}
+		);
+		$('#time_2013').click(
+			function()
+			{
+				time_2013_slide();
+				$('#2013').ScrollTo(1500);
+			}
+		);	
+		$('#time_2012').click(
+			function()
+			{
+				time_2012_slide();
+				$('#2012').ScrollTo(1500);
+			}
+		);
+		$('#time_2011').click(
+			function()
+			{
+				time_2011_slide();
+				$('#2011').ScrollTo(1500);
+			}
+		);
+		$('#time_2010').click(
+			function()
+			{
+				time_2010_slide();
+				$('#2010').ScrollTo(1500);
+			}
+		);
+	}
+);
+</script>
+</head>
+
+<body>
+	<div class="banner">
+    </div>
+    <div id="header">
+    	<div id="logo">
+        	<a href="http://acm.sut.edu.cn"><img src="<?= base_url('index/timeline/img/logo.png');?>" title="HOME" /></a>
+        </div>
+        <div id="content">
+        	<h1>沈阳工业大学ACM</h1>
+<!--            <h6 style="margin:0px; position:absolute; top:52px; left:510px;">为了获得更好的用户体验我们推荐您使用谷歌浏览器(Chrome)</h6>
+            <p>-->ACM国际大学生程序设计竞赛（ACM-ICPC）由计算机学界权威的美国计算机协会主办，是世界上规模最大、水平最高的大学生程序设计竞赛。
+三十多年来，一代又一代大学生凭借自己智慧的大脑驰骋在ACM-ICPC的赛场中，用缜密的思维、优美的代码，书写着自己的青春、人生和梦想。
+            </p>
+        </div>
+    </div>
+    <div id="timeline">
+        <div id="time">
+        	
+        	<div id="time_side"></div>
+            
+        	<ul>
+            	<li><a id="time_now" style="color:#6EB8D3">NOW</a></li>
+            	<li><a id="time_2014">2014</a></li>
+            	<li><a id="time_2013">2013</a></li>
+                <li><a id="time_2012">2012</a></li>
+                <li><a id="time_2011">2011</a></li>
+                <li><a id="time_2010">2010</a></li>
+            </ul>
+            <div id="time_side_cover"></div>
+        </div>
+        <div id="timeline_content">
+        	<div id="clock">
+            </div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第七届ACM程序设计大赛</h3>
+                <p>2014年11月01日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20141101_095748.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20141101_095748.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2014,11,1)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第七届全国大学生网络商务创新应用大赛（辽宁赛区二等奖）</h3>
+                <p>2014年10月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20141012_091434.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20141012_091434.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2014,10,12)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第七届全国大学生计算机设计大赛（全国总决赛一等奖）</h3>
+                <p>2014年07月21日</p>
+                <p><a href="<?= base_url('index/timeline/img/DSC_1622.jpg');?>"><img src="<?= base_url('index/timeline/img/DSC_1622.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2014,7,21)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>东北ACM程序设计大赛（东北赛区二等奖）</h3>
+                <p>2014年06月08日</p>
+                <p><a href="<?= base_url('index/timeline/img/DSC_0876.jpg');?>"><img src="<?= base_url('index/timeline/img/DSC_0876.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2014,6,8)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第七届全国大学生计算机设计大赛（辽宁赛区二等奖）</h3>
+                <p>2014年05月24日</p>
+                <p><a href="<?= base_url('index/timeline/img/DSC_0615.jpg');?>"><img src="<?= base_url('index/timeline/img/DSC_0615.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2014,5,24)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>辽宁省ACM程序设计大赛（辽宁赛区二等奖）</h3>
+                <p>2014年05月10日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20140510_123822.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20140510_123822.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2014,5,10)</script>天前</p>
+        	</div>
+            <div class="bubble" id="2014">
+            	<s></s>
+                <h3>辽宁省ACM程序设计大赛（辽宁赛区二等奖）</h3>
+                <p>2014年05月10日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20140510_101059.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20140510_101059.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2014,5,10)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第五届ACM程序设计大赛第赛场B</h3>
+                <p>2013年11月23日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20131123_125827.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20131123_125827.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2013,11,23)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第五届ACM程序设计大赛赛场A</h3>
+                <p>2013年11月23日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20131123_130337.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20131123_130337.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2013,11,23)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第五届ACM程序设计大赛开赛前</h3>
+                <p>2013年11月23日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20131123_092923.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20131123_092923.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2013,11,23)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第五届ACM程序设计大赛前夜</h3>
+                <p>2013年11月22日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20131122_184623.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20131122_184623.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2013,11,22)</script>天前</p>
+        	</div>
+            <div class="bubble" id="2013">
+            	<s></s>
+                <h3>第六届全国大学生网络商务创新应用大赛（全国总决赛三等奖）</h3>
+                <p>2013年11月19日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20131119_085727.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20131119_085727.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2013,11,19)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第三届ACM程序设计大赛正赛</h3>
+                <p>2012年10月27日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20121027_123227.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20121027_123227.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,10,27)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第三届ACM程序设计大赛热身赛</h3>
+                <p>2012年10月24日</p>
+                <p><a href="<?= base_url('index/timeline/img/IMG_20121024_141636.jpg');?>"><img src="<?= base_url('index/timeline/img/IMG_20121024_141636.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,10,24)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>招新选拔</h3>
+                <p>2012年9月23日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120923xsxb_1.jpg');?>"><img src="<?= base_url('index/timeline/img/20120923xsxb_1.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,9,23)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss_11.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss_11.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss_9.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss_9.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss_8.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss_8.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss_7.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss_7.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss_6.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss_6.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss_5.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss_5.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss_3.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss_3.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss_2.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss_2.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>东北四省赛</h3>
+                <p>2012年6月12日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120612dbsss.jpg');?>"><img src="<?= base_url('index/timeline/img/20120612dbsss.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,6,12)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>亚洲区预选赛</h3>
+                <p>2012年5月1日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120501yzqyqs_4.jpg');?>"><img src="<?= base_url('index/timeline/img/20120501yzqyqs_4.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,5,1)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>亚洲区预选赛</h3>
+                <p>2012年5月1日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120501yzqyqs_3.jpg');?>"><img src="<?= base_url('index/timeline/img/20120501yzqyqs_3.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,5,1)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>亚洲区预选赛</h3>
+                <p>2012年5月1日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120501yzqyqs_2.jpg');?>"><img src="<?= base_url('index/timeline/img/20120501yzqyqs_2.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,5,1)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>亚洲区预选赛</h3>
+                <p>2012年5月1日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120501yzqyqs_1.jpg');?>"><img src="<?= base_url('index/timeline/img/20120501yzqyqs_1.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,5,1)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>亚洲区预选赛</h3>
+                <p>2012年5月1日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120501yzqyqs.jpg');?>"><img src="<?= base_url('index/timeline/img/20120501yzqyqs.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,5,1)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第二届ACM程序设计竞赛</h3>
+                <p>2012年4月8日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120408xs2_3.jpg');?>"><img src="<?= base_url('index/timeline/img/20120408xs2_3.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,4,8)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第二届ACM程序设计竞赛</h3>
+                <p>2012年4月8日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120408xs2_2.jpg');?>"><img src="<?= base_url('index/timeline/img/20120408xs2_2.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,4,8)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第二届ACM程序设计竞赛</h3>
+                <p>2012年4月8日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120408xs2_1.jpg');?>"><img src="<?= base_url('index/timeline/img/20120408xs2_1.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,4,8)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第二届ACM程序设计竞赛</h3>
+                <p>2012年4月8日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120408xs2.jpg');?>"><img src="<?= base_url('index/timeline/img/20120408xs2.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,4,8)</script>天前</p>
+        	</div>
+        	<div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学第二届ACM程序设计竞赛</h3>
+                <p>2012年4月8日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120408xs1_2.jpg');?>"><img src="<?= base_url('index/timeline/img/20120408xs1_2.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,4,8)</script>天前</p>
+        	</div>
+        	<div class="bubble" id="2012">
+            	<s></s>
+                <h3>ACM实验室成立</h3>
+                <p>2012年2月27日</p>
+                <p><a href="<?= base_url('index/timeline/img/20120227syscl.jpg');?>"><img src="<?= base_url('index/timeline/img/20120227syscl.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2012,2,27)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学首届ACM程序设计竞赛</h3>
+                <p>2011年10月30日</p>
+                <p><a href="<?= base_url('index/timeline/img/20111030xs1_1.jpg');?>"><img src="<?= base_url('index/timeline/img/20111030xs1_1.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,10,30)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学首届ACM程序设计竞赛</h3>
+                <p>2011年10月30日</p>
+                <p><a href="<?= base_url('index/timeline/img/20111030xs1_0.jpg');?>"><img src="<?= base_url('index/timeline/img/20111030xs1_0.jpg');?>" height="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,10,30)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>沈阳工业大学首届ACM程序设计竞赛</h3>
+                <p>2011年10月23日</p>
+                <p><a href="<?= base_url('index/timeline/img/20111023xs1.jpg');?>"><img src="<?= base_url('index/timeline/img/20111023xs1.jpg');?>" height="390px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,10,23)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第五届东北赛</h3>
+                <p>2011年6月19日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110619dbs5_4.jpg');?>"><img src="<?= base_url('index/timeline/img/20110619dbs5_4.jpg');?>" height="350px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,6,19)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第五届东北赛</h3>
+                <p>2011年6月19日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110619dbs5_3.jpg');?>"><img src="<?= base_url('index/timeline/img/20110619dbs5_3.jpg');?>" width="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,6,19)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第五届东北赛</h3>
+                <p>2011年6月19日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110619dbs5_2.jpg');?>"><img src="<?= base_url('index/timeline/img/20110619dbs5_2.jpg');?>" height="300" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,6,19)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第五届东北赛</h3>
+                <p>2011年6月19日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110619dbs5_1.jpg');?>"><img src="<?= base_url('index/timeline/img/20110619dbs5_1.jpg');?>" height="350px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,6,19)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第五届东北赛</h3>
+                <p>2011年6月19日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110619dbs5.jpg');?>"><img src="<?= base_url('index/timeline/img/20110619dbs5.jpg');?>" height="350px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,6,19)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第五届东北赛</h3>
+                <p>2011年6月13日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110613dbs5.jpg');?>"><img src="<?= base_url('index/timeline/img/20110613dbs5.jpg');?>" height="360px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,6,13)</script>天前</p>
+        	</div>
+            <div class="bubble" id="2011">
+            	<s></s>
+                <h3>辽宁省大学生程序设计竞赛</h3>
+                <p>2011年5月22日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110522lnss2011.jpg');?>"><img src="<?= base_url('index/timeline/img/20110522lnss2011.jpg');?>" width="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2011,5,22)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>第三届东北赛</h3>
+                <p>2010年6月15日</p>
+                <p><a href="<?= base_url('index/timeline/img/20100615dbs3.jpg');?>"><img src="<?= base_url('index/timeline/img/20100615dbs3.jpg');?>" width="400px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2010,6,15)</script>天前</p>
+        	</div>
+            <div class="bubble">
+            	<s></s>
+                <h3>辽宁省大学生程序设计竞赛</h3>
+                <p>2010年5月9日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110208lnss2010.jpg');?>"><img src="<?= base_url('index/timeline/img/20110208lnss2010.jpg');?>" height="300px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2010,5,9)</script>天前</p>
+        	</div>
+            <div class="bubble" id="2010">
+            	<s></s>
+                <h3>辽宁省大学生程序设计竞赛</h3>
+                <p>2010年5月9日</p>
+                <p><a href="<?= base_url('index/timeline/img/20110208lnss2010_1.jpg');?>"><img src="<?= base_url('index/timeline/img/20110208lnss2010_1.jpg');?>" height="300px" /></a></p>
+                <p style="float:right; margin:0px;"><script>day_number(2010,5,9)</script>天前</p>
+        	</div>
+        </div>
+    </div>
+    
+</body>
+</html>
