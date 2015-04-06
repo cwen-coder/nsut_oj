@@ -8,7 +8,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0px 0px 0px 0px;
 	padding: 0;
-	background: #1f31bb url(images/bg01.png) repeat;
+	background: #1f31bb url(imagesbg01.png) repeat;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #4b4b4b;
@@ -74,7 +74,8 @@ hr {
 
 #wrapper {
 	overflow: hidden;
-	background: #FFFFFF;
+	background:url(images/background.jpg) repeat;
+
 box-shadow: 
         inset 0px 11px 8px -20px #CCC,
         inset 0px -11px 8px -10px #CCC;}
@@ -154,7 +155,7 @@ box-shadow:
 	text-align: center;
 	text-transform: uppercase;
 	font-family: 'Oswald', sans-serif;
-	font-size: 16px;
+	font-size: 20px;
 	font-weight: 300;
 	color: #FFFFFF;
 }

@@ -15,8 +15,8 @@ class Admin_Controller extends CI_Controller{
 		parent::__construct();
 		$this->load->switch_view_off();
         #权限验证
-        if(!$this->session->userdata('username') ){
+       /* if(!$this->session->userdata('username') ){
             redirect('admin/privilege/login');
-       }
+       }*/
 	}
 }

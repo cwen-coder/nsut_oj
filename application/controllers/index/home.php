@@ -3,12 +3,7 @@
 class Home  extends Index_Controller {
 	//载入主页
 	public function index (){
-		$this->load->view('index.html');
-	}
-
-	//载入SUT OJ页面
-	public function sut_oj(){
-		$this->load->view();
+		$this->load->view('home.html');
 	}
 
              //载入研发中心
