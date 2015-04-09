@@ -1,60 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-      <head>
-             <meta charset="utf-8">
-             <meta http-equiv="X-UA-Compatible" content="IE=edge">
-             <meta name="viewport" content="width=device-width, initial-scale=1">
-             <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
-             <title>沈阳工业大学在线判题系统</title>
-
-             <link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
-
-             <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
-             <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-      </head>
-      <style type="text/css">
-      .container_modal{
-      	margin-left:20%;
-      }
-     .label_reg{
-     	width:20%;
-     }
-      </style>
-<body>
-	<nav class="navbar navbar-fixed-top navbar-inverse ">
-	  <div class="container">
-	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-		<span class="sr-only">Toggle navigation</span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="#">沈阳工业大学在线判题系统</a>
-	    </div>
-
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-		<li class="active"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
-		<li><a href="#">比赛</a></li>
-                	<li><a href="#">练习</a></li>
-                	<li><a href="#">排名</a></li>
-                	<li><a href="#">ACM集训队</a></li>
-	      </ul>
-		<form class="navbar-form navbar-right">
-			<button type="button" class="btn btn-primary " data-toggle="modal"  data-backdrop="" data-target="#myModal01">Sign in</button>
-		             <button type="button" class="btn btu-default" data-toggle="modal" data-backdrop="" data-target="#myModal02">Register</button>
-		</form>
-		<?php require('login.html');?>
-		<?php require('register.html');?>
-	    </div><!-- /.navbar-collapse -->
-
-	  </div><!-- /.container-fluid -->
-	</nav>
-
-        <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
-        <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
-</body>
-</html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+		<title>沈阳工业大学在线判题系统</title>
+		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+		<script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
+		<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+	</head>
+	<style type="text/css">
+	.container_modal{
+		margin-left:20%;
+	}
+	.label_reg{
+		width:20%;
+	}
+	</style>
+	<body>
+		<nav class="navbar navbar-fixed-top navbar-inverse ">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">沈阳工业大学在线判题系统</a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
+						<li><a href="#">比赛</a></li>
+						<li><a href="#">练习</a></li>
+						<li><a href="#">排名</a></li>
+						<li><a href="#">ACM集训队</a></li>
+					</ul>
+					<form class="navbar-form navbar-right">
+						<button type="button" class="btn btn-primary " data-toggle="modal"  data-backdrop="" data-target="#myModal01">Sign in</button>
+						<button type="button" class="btn btu-default" data-toggle="modal" data-backdrop="" data-target="#myModal02">Register</button>
+					</form>
+					<?php require('login.html');?>
+					<?php require('register.html');?>
+					</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
+				<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+				<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+				<script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
+			</body>
+		</html>

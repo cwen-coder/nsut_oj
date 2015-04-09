@@ -12,23 +12,33 @@
         <div class="container_modal">
           <form class="form-horizontal">
             <div class="form-group">
-              <label class="control-label label_reg" for="username">用户名</label>
-              <input type="text" class="input-xlarge " id="username" placeholder="用户名"></div>
+                <label class="control-label label_reg" for="username">用户名</label>
+                <input type="text" class="input-xlarge " id="r_username" placeholder="用户名由字母和数字组成">
+                <span style="color:red;">*</span>
+                <span style="color:red;" id="cname"></span>
+              </div>
             <div class="form-group">
-              <label class="control-label label_reg" for="Password1"  >
-                密码</label>
-              <input type="password" class="input-xlarge" id="Password1" placeholder="密码"></div>
+                <label class="control-label label_reg" for="Password1"  >
+                  密码</label>
+                <input type="password" class="input-xlarge" id="password1" placeholder="密码">
+                 <span style="color:red;">*</span>
+              </div>
             <div class="form-group">
-              <label class="control-label label_reg" for="Password2">确认密码</label>
-              <input type="password" class="input-xlarge" id="Password2" placeholder="确认密码"></div>
+                <label class="control-label label_reg" for="Password2">确认密码</label>
+                <input type="password" class="input-xlarge" id="password2" placeholder="确认密码">
+                 <span style="color:red;">*</span>
+              </div>
             <div class="form-group">
-              <label class="control-label label_reg" for="Email">Email</label>
-              <input type="email" class="input-xlarge" id="Email1" placeholder="输入你的邮箱"></div>
+                <label class="control-label label_reg" for="Email">Email</label>
+                <input type="email" class="input-xlarge" id="Email" placeholder="输入你的邮箱">
+                 <span style="color:red;">*</span>
+              </div>
           </form>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">提交</button>
+        <button type="button" class="btn btn-primary" disabled >提交</button>
+        <button type="reset" class="btn btn-primary">重置</button>
       </div>
     </div>
   </div>

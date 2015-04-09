@@ -556,5 +556,44 @@ if ( ! function_exists('html_escape'))
 	}
 }
 
+
+
+/*
+**打印函数
+*/
+function p($arr){
+	echo '<pre>';
+	print_r($arr);
+	echo '</pre>';
+}
+
+
+/*
+**打印常量
+*/
+function print_const(){
+	$const = get_defined_constants(TRUE);
+	p($const['user']);
+}
+
+/*
+ *成功函数
+ */
+function success($url,$msg){
+    header('Content-Type:text/html;charset=utf-8');
+    $url = site_url($url);
+    echo "<script type='text/javascript'> alert('$msg');location.href='$url'; </script>";
+    die;
+}
+
+/*
+ * 失败函数
+ */
+function error($msg){
+    header('Content-Type:text/html;charset=utf-8');
+    echo "<script type='text/javascript'> alert('$msg');window.history.back();</script>";
+    die;
+}
+
 /* End of file Common.php */
 /* Location: ./system/core/Common.php */

@@ -36,7 +36,7 @@ if (isset($_SESSION['OJ_LANG'])) $OJ_LANG=$_SESSION['OJ_LANG'];
 		$DB_NAME=SAE_MYSQL_DB;
 	}else{
 		//for normal install
-		if(!mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS)) 
+		if(!@mysql_pconnect($DB_HOST,$DB_USER,$DB_PASS)) 
 			die('Could not connect: ' . mysql_error());
 	}
 	// use db
