@@ -10,7 +10,7 @@ $(document).ready(function() {
   		 if(name.length == 0 ){
   		 	$("#cname").text('用户名不能为空');
   		 }else if(!Regx.test(name)){
-  		 	$("#cname").text('输入存在非法字符');
+  		 	$("#cname").text('必须为字母与数字组合');
   		 }	 else if(name.length < 6){
   		 	$("#cname").text('用户名不能少于六个字符');
   		 }else if(name.length > 18){
@@ -31,6 +31,11 @@ $(document).ready(function() {
   		 }
  	 });
  	 $("#password1").blur(function() {
- 	 	//var password = $（
+ 	 	var password = $("#passward1").val();
+ 	 	password  = password.replace(/./g, '*');
+ 	 	console.log(password);
+ 	 	if(password.length == 0 ){
+ 	 		$("#pass1").text('密码不能为空');
+ 	 	}
  	 });
 });
