@@ -25,4 +25,9 @@ class  user_model extends CI_Model {
 		$num = mysql_num_rows($result);
 		return $num;
 	}
+
+	public function reg_act($data) {
+		$query = "insert into users (user_id, username, password, accesstime, reg_time, ip, email) values ('$data[user_id]', '$data[username]', '$data[password]', '$data[accesstime]', '$data[reg_time]' ,'$data[ip]',  '$data[email] ' )";
+		return mysql_query($query);
+	}
 }

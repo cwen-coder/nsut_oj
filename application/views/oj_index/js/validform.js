@@ -29,7 +29,7 @@ $(document).ready(function() {
   		 			console.log(data);
   		 		if (data) {
   		 			//console.log(data);
-  		 			$("#cname").text('用户名可用');
+  		 			$("#cname").text('输入正确');
   		 			uname = true;
   		 			chkreg();		 			
   		 		}else {
@@ -92,15 +92,27 @@ $(document).ready(function() {
  	 });
  	 //uname = true;
  	 $("#reg_form").submit(function(e) {  
- 	 	$.$.post("/nsut_oj/index.php/oj_index/register/reg_act",{
- 	 		username : $("#r_username").vai(),
+ 	 	//e.preventDefault();
+ 	 	$.post("/nsut_oj/index.php/oj_index/register/reg_act",{
+ 	 		username : $("#r_username").val(),
  	 		password1 : $("#password1").val(),
  	 		password2 : $("#password2").val(),
- 	 		email : $("#emial").val()
+ 	 		email : $("#email").val()
  	 	},function  (data) {
-
+ 	 		alert(data);
+ 	 		if(data) {
+ 	 			alert('恭喜你！注册成功！');
+ 	 			$("#reg_sub").attr("disabled",true);
+ 	 		}else {
+ 	 			alert('对不起！注册失败！');
+ 	 			//e.preventDefault();
+ 	 			$("#reg_sub").attr("disabled",true);   			
+ 	 		}
  	 	})
-    		$("#reg_sub").attr("disabled",true);   
-    		e.preventDefault();
+
   	  });  
 });
+function formReset()
+{
+	document.getElementById("reg_form").reset();
+}
