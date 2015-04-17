@@ -8,23 +8,39 @@
         </button>
         <h4 class="modal-title" id="myModalLabel">登录信息</h4>
       </div>
-      <div class="modal-body">
-        <div class="container_modal">
-          <form class="form-horizontal">
+      <form class="form-horizontal" method="post" >
+        <div class="modal-body">
+          <div class="container_modal">
+            
             <div class="form-group">
               <label class="control-label label_reg" for="username">用户名</label>
-              <input type="text" class="input-xlarge " id="username" placeholder="用户名">
+              <input type="text" class="input-xlarge " id="username" name="username" placeholder="输入用户名">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="username_c"></span>
             </div>
             <div class="form-group">
-              <label class="control-label label_reg" for="Password1"  >密码</label>
-              <input type="password" class="input-xlarge" id="Password1" placeholder="密码">
+              <label class="control-label label_reg" for="password"  >密码</label>
+              <input type="password" class="input-xlarge" id="password" name="password" placeholder="输入密码">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="password_c"></span>
             </div>
-          </form>
+            <div class="form-group">
+              <label class="control-label label_reg" for="captcha"  >验证码</label>
+              <input type="text" class="input-xlarge " id="captcha" name="captcha" placeholder="输入验证码">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="captcha_c"></span>
+            </div>
+            <div class="form-group">
+            <label type="hidden" class="control-label label_reg" for="password"  ></label>
+             <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+             <span style="color:red;" id="captcha_span">点击刷新图片</span>
+            </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">登录</button>
+        <button type="button" class="btn btn-primary" id="log_sub" disabled >登录</button>
       </div>
-    </div>
+    </form>
   </div>
+</div>
 </div>

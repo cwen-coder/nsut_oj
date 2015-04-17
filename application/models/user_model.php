@@ -30,4 +30,27 @@ class  user_model extends CI_Model {
 		$query = "insert into users (user_id, username, password, accesstime, reg_time, ip, email) values ('$data[user_id]', '$data[username]', '$data[password]', '$data[accesstime]', '$data[reg_time]' ,'$data[ip]',  '$data[email] ' )";
 		return mysql_query($query);
 	}
+
+
+	public function log_act ($data) {
+		$query = "select user_id,password from users where username = '$data[username]'";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		//return $num;
+		if ($num > 0) {
+			$this->load->library('encrypt');
+			$meta = mysql_fetch_assoc($result);
+			if ($this->encrypt->decode($meta['password']) != $data['password'])
+				return false;
+			$user_id = $meta['user_id'];
+			$que = "insert into loginlog (user_id,password,ip,time,SAC) values ('$user_id','$data[password]','$data[ip]','$data[time]','$data[SAC]') ";
+			$res = mysql_query($que);
+			if($res) 
+				return $user_id;
+			else 
+				return false;
+		} else {
+			return false;
+		}
+	}
 }
