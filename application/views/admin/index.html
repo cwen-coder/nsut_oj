@@ -46,6 +46,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <base target="iframe"/>
   </head>
 
   <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
@@ -104,7 +105,8 @@
 
         <a href="#legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-th"></i>题库相关<i class="icon-chevron-up"></i></a>
         <ul id="legal-menu" class="nav nav-list collapse">
-            <li ><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li ><iframe frameboder="0" border="0"  scrolling="yes" name="iframe" src="<?= base_url('application/views/admin/privacy-policy.html');?>"></iframe></li> 
+            <li ><a href="<?= base_url('application/views/admin/privacy-policy.html');?>">Privacy Policy</a></li>
             <li ><a href="terms-and-conditions.html">Terms and Conditions</a></li>
         </ul>
 
