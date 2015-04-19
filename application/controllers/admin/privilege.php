@@ -1,15 +1,16 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
-* @author Yin_CW <[email address]>
-* @copyright [2015.04.14]
-*/
-class Login extends CI_Controller {
+class Privilege extends CI_Controller {
 
 	function __construct(){
         parent::__construct();
         $this->load->model('user_model');
     }
+	//载入登录页
+	function index() {
+		$this->load->view('admin/sign-in.html');
+	}
+
 	/**
 	 * 验证码
 	 */
@@ -28,19 +29,18 @@ class Login extends CI_Controller {
 
 	}
 
+
 	public function log_act () {
-		//$this->output->enable_profiler(TRUE);
-		if(!isset($_SESSION)){
-            session_start();
-        }
+		if (!isset($_SESSION)) {
+			session_start();
+		}
+
 		$captcha = $this->input->post('captcha',TRUE);
 		if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) {
-			//echo strtolower($captcha)."\n";
-			//echo strtolower($_SESSION ['code']);
 			echo 2;
 		} else {
-		$this->load->library('form_validation');
-		$config = array (
+			$this->load->library('form_validation');
+			$config = array (
 			array (
 				'field' => 'username',
 				'label' => '用户名',
@@ -57,13 +57,13 @@ class Login extends CI_Controller {
 				'rules' => 'required | xss_clean'
 				)
 			);
-		$this->form_validation->set_rules($config);
-        $status = $this->form_validation->run();
-        if($status == false) {
-        	echo false;
-        } else {
-        	//$this->load->library('encrypt');
-        	$username = $this->input->post('username',TRUE);
+			$this->form_validation->set_rules($config);
+        	$status = $this->form_validation->run();
+        	if($status == false) {
+        		echo false;
+        	} else {
+
+        		$username = $this->input->post('username',TRUE);
 			$password = $this->input->post('password',TRUE);
 			//$captcha = $this->input->post('captcha',TRUE);
         	$this->load->helper('date');
@@ -82,6 +82,8 @@ class Login extends CI_Controller {
         	//echo $result;
         	if ($result == false) {
         		echo false;
+        	} else if ($result['privilege'] != 1) {
+        		echo false;
         	} else {
         		$newdata = array (
         			'user_id' => $result['user_id'],
@@ -95,7 +97,7 @@ class Login extends CI_Controller {
         	}
 
         }
-    }
-		
+		}
 	}
+
 }
