@@ -1,0 +1,776 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pa",
+				"password1"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"CI_",
+				"CI_Controller"
+			],
+			[
+				"reg",
+				"reg_act"
+			],
+			[
+				"re",
+				"register"
+			],
+			[
+				"reg_",
+				"reg_time"
+			],
+			[
+				"acc",
+				"accesstime"
+			],
+			[
+				"tr",
+				"true"
+			],
+			[
+				"user_",
+				"user_id"
+			],
+			[
+				"mt_",
+				"mt_rand"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"user",
+				"username"
+			],
+			[
+				"ac",
+				"action	Attr"
+			],
+			[
+				"dis",
+				"disabled"
+			],
+			[
+				"remove",
+				"removeAttr	.removeAttr()"
+			],
+			[
+				"mysql_num",
+				"mysql_num_rows"
+			],
+			[
+				"check",
+				"check_email"
+			],
+			[
+				"te",
+				"test	QUnit test"
+			],
+			[
+				"R",
+				"Regx"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"ext",
+				"extends"
+			],
+			[
+				"copy",
+				"copyright	@copyright"
+			],
+			[
+				"fa",
+				"false"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"st",
+				"style	Tag"
+			],
+			[
+				"lo",
+				"login.html"
+			],
+			[
+				"Admin",
+				"Admin_Controller"
+			],
+			[
+				"b",
+				"background"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix",
+				"name": "Xdebug Context",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix",
+				"name": "Xdebug Stack",
+				"read_only": true,
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 361.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 528.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf),'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/home/yin_cwen/.config/sublime-text-3/Packages/Xdebug Client/Xdebug.sublime-settings",
+		"/var/www/html/nsut_oj/application/controllers/oj_index/register.php",
+		"/var/www/html/nsut_oj/application/controllers/oj_index/nsut_oj.sublime-project",
+		"/home/yin_cwen/go/array.go",
+		"/var/www/html/nsut_oj/application/views/oj_index/js/validform.js",
+		"/var/www/html/nsut_oj/application/models/db_info.inc.php",
+		"/home/yin_cwen/go/hello.go",
+		"/home/yin_cwen/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/var/www/html/acmoj/oj/admin/admin-header.php",
+		"/var/www/html/acmoj/oj/extra/fckeditor/fckeditor.php",
+		"/home/yin_cwen/go/test.php",
+		"/home/yin_cwen/.config/sublime-text-3/Packages/GoSublime/CHANGELOG.md",
+		"/var/www/html/nsut_oj/application/views/oj_index/register.html",
+		"/var/www/html/nsut_oj/application/views/oj_index/index.html",
+		"/var/www/html/nsut_oj/application/models/user_model.php",
+		"/var/www/html/nsut_oj/application/config/ form_validation.php",
+		"/var/www/html/nsut_oj/system/core/Common.php",
+		"/var/www/html/nsut_oj/application/config/config.php",
+		"/var/www/html/nsut_oj/application/controllers/oj_index/reg_log.php",
+		"/home/yin_cwen/text.php",
+		"/home/yin_cwen/下载/表单验证1/demo.html",
+		"/home/yin_cwen/下载/表单验证1/js/Validform.js",
+		"/var/www/html/CI_ajax/application/controllers/form.php",
+		"/var/www/html/CI_ajax/css/style.css",
+		"/var/www/html/CI_ajax/application/views/common/footer.php",
+		"/var/www/html/CI_ajax/application/views/common/header.php",
+		"/var/www/html/CI_ajax/application/views/template.html",
+		"/var/www/html/CI_ajax/application/controllers/temp.php",
+		"/var/www/html/CI_ajax/application/config/routes.php",
+		"/var/www/html/nsut_oj/application/views/oj_index/login.html",
+		"/home/yin_cwen/.config/sublime-text-3/Packages/User/HTML.sublime-settings",
+		"/home/yin_cwen/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/var/www/html/y_oj/application/views/oj_index/register.html",
+		"/var/www/html/y_oj/application/views/oj_index/login.html",
+		"/var/www/html/y_oj/application/views/oj_index/index.html",
+		"/var/www/html/acmoj/oj/inc/submit.php",
+		"/var/www/html/acmoj/oj/include/db_info.inc.php",
+		"/var/www/html/acmoj/oj/include/checksource.js",
+		"/home/yin_cwen/.config/sublime-text-3/Packages/Tag/Tag Package.sublime-settings",
+		"/var/www/html/y_oj/application/controllers/oj_index/home.php",
+		"/var/www/html/y_oj/index/header.html",
+		"/var/www/html/y_oj/application/controllers/index/home.php",
+		"/var/www/html/y_oj/application/core/MY_Controller.php",
+		"/var/www/html/y_oj/index/footer.html",
+		"/var/www/html/y_oj/application/controllers/admin/home.php",
+		"/var/www/html/acmoj/oj/register.php",
+		"/var/www/html/acmoj/oj/inc/login.php",
+		"/var/www/html/acmoj/oj/index.php",
+		"/var/www/html/acmoj/oj/inc/header.php",
+		"/var/www/html/acmoj/oj/inc/header2.php",
+		"/var/www/html/acmoj/oj/include/my_func.inc.php",
+		"/var/www/html/y_oj/application/views/admin/index.html",
+		"/var/www/html/acmoj/oj/include/user.class.php",
+		"/var/www/html/acmoj/oj/inc/session.php",
+		"/var/www/html/acmoj/oj/include/contest.class.php",
+		"/var/www/html/y_oj/index/index.html",
+		"/var/www/html/y_oj/index/default.css",
+		"/var/www/html/y_oj/application/models/db_info.inc.php",
+		"/var/www/html/y_oj/index/about_us.html",
+		"/var/www/html/acmoj/home/about.html",
+		"/var/www/html/y_oj/index/timeline/index.html",
+		"/var/www/html/y_oj/index/acm_lab.html",
+		"/var/www/html/y_oj/application/config/database.php",
+		"/var/www/html/acmoj/oj/css/sutoj.css",
+		"/var/www/html/acmoj/oj/inc/head.php",
+		"/var/www/html/acmoj/oj/inc/header1.php",
+		"/var/www/html/acmoj/index.html",
+		"/var/www/html/y_oj/index.html",
+		"/home/yin_cwen/ni.html",
+		"/home/yin_cwen/untitled.html"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"  \n",
+			"$regstart",
+			"$regstart['start_time']",
+			"$password",
+			"$time",
+			"$_SERVER[REMOTE_ADDR",
+			"){",
+			"if(",
+			" \";",
+			"datatype",
+			"Validform_msg",
+			"len",
+			"code_length",
+			"form",
+			"style",
+			"li",
+			"/wide",
+			".jpg\">",
+			"href=\"img/",
+			"src=\"img/",
+			"add_img"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			") {",
+			"if (",
+			".jpg');?>\">",
+			"href=\"<?= base_url('index/timeline/img/",
+			"src=\"<?= base_url('index/timeline/img/"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content"
+							],
+							"syntax": "Packages/Xdebug Client/Xdebug.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 35.0
+	},
+	"input":
+	{
+		"height": 43.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				2,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			],
+			[
+				1,
+				1,
+				2,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.7,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.9o:///home/yin_cwen/go":
+	{
+		"height": 172.0
+	},
+	"output.9o:///var/www/html/nsut_oj/application/controllers/oj_index":
+	{
+		"height": 172.0
+	},
+	"output.GoSublime-output":
+	{
+		"height": 196.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.xdebug":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "nsut_oj.sublime-project",
+	"replace":
+	{
+		"height": 66.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"admin-header",
+				"acmoj/oj/admin/admin-header.php"
+			],
+			[
+				"fckeditor",
+				"acmoj/oj/extra/fckeditor/fckeditor.php"
+			],
+			[
+				"checksource",
+				"acmoj/oj/include/checksource.js"
+			],
+			[
+				"db",
+				"acmoj/oj/include/db_info.inc.php"
+			],
+			[
+				"sub",
+				"acmoj/oj/inc/submit.php"
+			],
+			[
+				"re",
+				"acmoj/oj/register.php"
+			],
+			[
+				"header",
+				"acmoj/oj/inc/header.php"
+			],
+			[
+				"header2",
+				"acmoj/oj/inc/header2.php"
+			],
+			[
+				"user",
+				"acmoj/oj/include/user.class.php"
+			],
+			[
+				"my_f",
+				"acmoj/oj/include/my_func.inc.php"
+			],
+			[
+				"sess",
+				"acmoj/oj/inc/session.php"
+			],
+			[
+				"contest",
+				"acmoj/oj/include/contest.class.php"
+			],
+			[
+				"ab",
+				"y_oj/index/about_us.html"
+			],
+			[
+				"de",
+				"y_oj/index/default.css"
+			],
+			[
+				"uer",
+				"acmoj/oj/include/user.class.php"
+			],
+			[
+				"data",
+				"y_oj/application/config/database.php"
+			],
+			[
+				"sut",
+				"acmoj/oj/css/sutoj.css"
+			],
+			[
+				"header.p",
+				"acmoj/oj/inc/header.php"
+			],
+			[
+				"hea",
+				"acmoj/oj/inc/head.php"
+			],
+			[
+				"contest.",
+				"acmoj/oj/include/contest.class.php"
+			],
+			[
+				"user.c",
+				"acmoj/oj/include/user.class.php"
+			],
+			[
+				"login",
+				"acmoj/oj/inc/login.php"
+			],
+			[
+				"header1",
+				"acmoj/oj/inc/header1.php"
+			],
+			[
+				"db_info.inc.php",
+				"acmoj/oj/include/db_info.inc.php"
+			],
+			[
+				"head",
+				"acmoj/oj/inc/head.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 2,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false,
+			"restore_index":
+			{
+				"24":
+				{
+					"group": 0,
+					"index": 0
+				}
+			},
+			"restore_layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			}
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 205.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
