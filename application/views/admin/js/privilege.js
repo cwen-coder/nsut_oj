@@ -1,13 +1,13 @@
 $(document).ready(function() {
 	$("#A_captcha_span").on("click",function(e){
     e.preventDefault();
-    $("#A_captcha_img").attr("src","../privilege/code");
+    $("#A_captcha_img").attr("src","../admin/privilege/code");
     // alert("123")
   });
 	$("#log_but_A").click(function(e) {
         //alert("odsfo");
         e.preventDefault();
-     $.post("../privilege/log_act",{
+     $.post("../admin/privilege/log_act",{
         username : $("#A_username").val(),
         password : $("#A_password").val(),
         captcha : $("#A_captcha").val()
@@ -17,10 +17,10 @@ $(document).ready(function() {
             alert('验证码错误');
         } else if(data == false) {
           alert("用户名或密码错误");
-          $("#A_captcha_img").attr("src","../privilege/code");
+          $("#A_captcha_img").attr("src","../admin/privilege/code");
         } else {
           //history.go(0);
-          window.location.href="../home/index";          
+          window.location.href="../admin/home/index";          
         }
      })
    });
