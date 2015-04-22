@@ -49,7 +49,7 @@ class Login extends CI_Controller {
 			array (
                  'field' => 'password',
                  'label' => '密码',
-                 'rules' => 'required  | min_length[6] | max_length[32] | xss_clean'
+                 'rules' => 'required  | min_length[6] | max_length[32] | xss_clean '
                  ),
 			array (
 				'field' => 'captcha',
