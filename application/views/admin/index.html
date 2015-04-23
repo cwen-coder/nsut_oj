@@ -101,7 +101,7 @@
 
         <a href="#legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-th"></i>题库相关<i class="icon-chevron-up"></i></a>
         <ul id="legal-menu" class="nav nav-list collapse">
-            <li ><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li ><a href="#" onclick="addTab('easyui','')">添加分类</a></li>
             <li ><a href="terms-and-conditions.html">Terms and Conditions</a></li>
         </ul>
         
@@ -113,28 +113,29 @@
         <a href="help.html" class="nav-header" ><i class="icon-question-sign"></i>帮助</a>
         
     </div>
-
-    <div class="easyui-tabs content" id="tabs" >
+    <div class="content" region="center" border="true" border="false">
+    <div class="easyui-tabs" id="tabs" >
         <div title="Home">
         </div>
        
     </div>
-    
+    </div>
 
 
     <script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.js'); ?>"></script>
     <script src="<?= base_url('application/views/admin/js/jquery.easyui.min.js');?> "></script>
     <script type="text/javascript">
-        $("[rel=tooltip]").tooltip();
+       /* $("[rel=tooltip]").tooltip();
         $(function() {
             $('.demo-cancel-click').click(function(){return false;});
-        });
+        });*/
         function addTab(title, url){
+            //console.log("fhd");
           if ($('#tabs').tabs('exists', title)){
               $('#tabs').tabs('select', title);
           } else {
-            var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
-            $('#tt').tabs('add',{
+            var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:750px;"></iframe>';
+            $('#tabs').tabs('add',{
               title:title,
               content:content,
               closable:true
