@@ -33,7 +33,7 @@ class  user_model extends CI_Model {
 
 
 	public function log_act ($data) {
-		$query = "select user_id,password from users where username = '$data[username]'";
+		$query = "select user_id,password,privilege from users where username = '$data[username]'";
 		$result = mysql_query($query);
 		$num = mysql_num_rows($result);
 		//return $num;
@@ -42,15 +42,18 @@ class  user_model extends CI_Model {
 			$meta = mysql_fetch_assoc($result);
 			if ($this->encrypt->decode($meta['password']) != $data['password'])
 				return false;
-			$user_id = $meta['user_id'];
-			$que = "insert into loginlog (user_id,password,ip,time,SAC) values ('$user_id','$data[password]','$data[ip]','$data[time]','$data[SAC]') ";
+			//$user_id = $meta['user_id'];
+			$que = "insert into loginlog (user_id,password,ip,time,SAC) values ('$meta[user_id]','$data[password]','$data[ip]','$data[time]','$data[SAC]') ";
 			$res = mysql_query($que);
 			if($res) 
-				return $user_id;
+				return $meta;
 			else 
 				return false;
 		} else {
 			return false;
 		}
 	}
+
+
+
 }
