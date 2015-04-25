@@ -10,7 +10,7 @@ class Index_Controller extends CI_Controller {
 
 #OJ前台控制器
 class Oj_Controller extends CI_Controller {
-
+	
 }
 #后台父控制器
 class Admin_Controller extends CI_Controller {
