@@ -9,9 +9,18 @@ class Index_Controller extends CI_Controller {
 }
 
 #OJ前台控制器
-class Oj_Controller extends CI_Controller {
-	
-}
+/*class Oj_Controller extends CI_Controller {
+	public function __construct(){
+		parent::__construct();
+		$this->load->switch_view_off();
+		$this->load->model('User_model');
+	}
+
+	if($this->session->userdata('user_id')) {
+
+	}
+}*/
+
 #后台父控制器
 class Admin_Controller extends CI_Controller {
 	public function __construct(){
