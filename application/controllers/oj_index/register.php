@@ -6,7 +6,7 @@
 class Register extends CI_Controller {
     function __construct(){
         parent::__construct();
-        $this->load->model('user_model');
+        $this->load->model('User_model');
     }
     /**
     * 获取ajax传回数据验证是否存在
@@ -18,7 +18,7 @@ class Register extends CI_Controller {
     }*/
     public function username_check() {
         $username = $this->input->post('username',TRUE);
-        $result = $this->user_model->check_username($username);
+        $result = $this->User_model->check_username($username);
         //$this->output->enable_profiler(TRUE);
         if($result > 0)
             echo false;
@@ -28,7 +28,7 @@ class Register extends CI_Controller {
     //获取ajax传回数据验证是否存在
     public function email_check() {
         $email = $this->input->post('email',TRUE);
-        $result = $this->user_model->check_email($email);
+        $result = $this->User_model->check_email($email);
         if($result > 0)
             echo false;
         else
@@ -79,7 +79,7 @@ class Register extends CI_Controller {
             $password2 = $this->input->post('password2',TRUE);
             $email = $this->input->post('email',TRUE);
             $ip = $this->input->ip_address();
-            if ($this->user_model->check_username($username) > 0 || $password1 != $password2 || $this->user_model->check_email($email) > 0 )
+            if ($this->User_model->check_username($username) > 0 || $password1 != $password2 || $this->User_model->check_email($email) > 0 )
                 echo  false;
             else {
                 $user_id = md5($username.mt_rand(100,999));
@@ -92,7 +92,7 @@ class Register extends CI_Controller {
                         'ip' =>  $ip,
                         'email' => $email
                     );
-                $result = $this->user_model->reg_act($data);
+                $result = $this->User_model->reg_act($data);
                 if($result)
                     echo true;
                 else

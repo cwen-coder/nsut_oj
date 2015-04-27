@@ -8,7 +8,7 @@ class Login extends CI_Controller {
 
 	function __construct(){
         parent::__construct();
-        $this->load->model('user_model');
+        $this->load->model('User_model');
     }
 	/**
 	 * 验证码
@@ -78,7 +78,7 @@ class Login extends CI_Controller {
         		'time' => $time
         		);
         	
-        	$result = $this->user_model->log_act ($data);
+        	$result = $this->User_model->log_act ($data);
         	//echo $result;
         	if ($result == false) {
         		echo false;
