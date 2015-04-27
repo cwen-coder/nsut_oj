@@ -44,7 +44,7 @@ class  User_model extends CI_Model {
 				return false;
 			//$user_id = $meta['user_id'];
 			/*$que1 = "delete * from loginlog where user_id = '$meta[user_id]'";
-			$resque1 = mysql_query($que1) or die(mysql_error());*/
+			$resque1 = mysql_query($que1);*/
 			$que = "insert into loginlog (user_id,password,ip,time,SAC) values ('$meta[user_id]','$meta[password]','$data[ip]','$data[time]','$data[SAC]') ";
 			$res = mysql_query($que);
 			if($res) 
