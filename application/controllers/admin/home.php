@@ -5,5 +5,6 @@ class Home extends Admin_Controller{
 	function index() {
 		//$data['session'] = $this->session->userdata('item');
 		$this->load->view('admin/index.html');
+		
 	}
 }

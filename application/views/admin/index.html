@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    
     <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url('application/views/admin/lib/bootstrap/css/bootstrap.css');?>">
@@ -101,7 +101,7 @@
 
         <a href="#legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-th"></i>题库相关<i class="icon-chevron-up"></i></a>
         <ul id="legal-menu" class="nav nav-list collapse">
-            <li ><a href="#" onclick="addTab('easyui','')">添加分类</a></li>
+            <li ><a onclick="addTab('添加分类','<?= site_url('/admin/problem_category');?>')">添加分类</a></li>
             <li ><a href="terms-and-conditions.html">Terms and Conditions</a></li>
         </ul>
         
@@ -116,6 +116,8 @@
     <div class="content" region="center" border="true" border="false">
     <div class="easyui-tabs" id="tabs" >
         <div title="Home">
+            <?= base_url();?>
+            <?= site_url();?>
         </div>
        
     </div>
