@@ -19,7 +19,19 @@ class Privilege_model extends CI_Model {
 		$query = "select ip from loginlog where user_id = '$user_id'";
 		$result = mysql_query($query);
 		if($result) {
-			$ip = $
-		}
+			$ip = mysql_fetch_assoc($result);
+			return $ip;
+		} else {return false;}
+	}
+
+
+	//获取最后操作时间
+	public function get_time($user_id) {
+		$query = "select time from loginlog where user_id = '$user_id'";
+		$result = mysql_query($query);
+		if($result) {
+			$time = mysql_fetch_assoc($result);
+			return $time;
+		} else {return false;}
 	}
 }

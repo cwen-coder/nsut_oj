@@ -7,9 +7,9 @@ class Index_Controller extends CI_Controller {
 		$this->load->switch_view_on();
 	}
 }
-
+/*
 #OJ前台控制器
-/*class Oj_Controller extends CI_Controller {
+class Oj_Controller extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->switch_view_off();
