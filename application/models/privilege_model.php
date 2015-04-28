@@ -26,12 +26,29 @@ class Privilege_model extends CI_Model {
 
 
 	//获取最后操作时间
-	public function get_time($user_id) {
+	/*public function get_time($user_id) {
 		$query = "select time from loginlog where user_id = '$user_id'";
 		$result = mysql_query($query);
 		if($result) {
 			$time = mysql_fetch_assoc($result);
 			return $time;
 		} else {return false;}
+	}*/
+
+	//更新最后登录时间
+	public function upadte_time($user_id,$time) {
+		$query = "update loginlog set time = '$time' where user_id = '$user_id'";
+		$result = mysql_query($query);
+		if($result) 
+			return true;
+		else 
+			return false;
+	}
+
+	//清除过期登录日志
+	public function delete_log($now) {
+		$query = "delete from loginlog where (UNIX_TIMESTAMP(time)-'$now')%86400/60 > 60";
+		$result = mysql_query($query);
+		return $result;
 	}
 }

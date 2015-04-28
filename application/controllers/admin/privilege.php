@@ -101,7 +101,7 @@ class Privilege extends CI_Controller {
 	}
 
 	public function log_out() {
-		$this->session->unset_userdata('username');
+		$this->session->sess_destroy();
 		success('admin/privilege/index','注销成功');
 	}
 
