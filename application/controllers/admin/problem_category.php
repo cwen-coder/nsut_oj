@@ -7,11 +7,14 @@ class Problem_category extends  Admin_Controller {
 	}
 
 	function index(){
-		echo "Hello CI";
 		$date['name'] = "admin";
-		$this->load->model('user_model');
-		$date['num'] = $this->user_model->check_username('admin');
+		/*$this->load->model('user_model');
+		$date['num'] = $this->user_model->check_username('admin');*/
 		$this->load->view('admin/problem_category.html',$date);
+	}
+	function add_category(){
+		$problem_category = $this->input->post('problem_category',TURE);
+		echo $problem_category;
 	}
 }
 ?>
