@@ -169,7 +169,7 @@ $(document).ready(function() {
         password : $("#password").val(),
         captcha : $("#captcha").val()
      },function (data) {
-        //console.log (data);
+        console.log (data);
         if (data == 2) {
             $("#captcha_c").text('验证码错误');
         } else if(data == false) {
