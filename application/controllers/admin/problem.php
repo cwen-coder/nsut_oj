@@ -8,7 +8,7 @@ class Problem extends Admin_Controller{
 
 	function __construct(){
 		parent::__construct();
-		//$this->load->modle();
+		$this->load->modle('problem_model');
 	}
 	
 	public function index() {
