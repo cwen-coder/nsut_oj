@@ -4,6 +4,9 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('application/views/admin/lib/bootstrap/css/bootstrap.min.css');?>">
+   <link rel="stylesheet" type="text/css" href="<?= base_url('application/views/admin/stylesheets/theme.css');?>">
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/lib/font-awesome/css/font-awesome.css');?>">
 <link rel="stylesheet" type="text/css" href="<?= base_url('application/views/admin/lib/bootstrap/css/bootstrap.css');?>">
 <script src="<?= base_url('application/views/admin/lib/jquery-1.7.2.min.js');?>" type="text/javascript"></script>
 <script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.js'); ?>"></script>
@@ -11,14 +14,13 @@
 <body>
   <!-- Button trigger modal -->
   <br />
-  <br />
   <div class="container-fluid">
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myProblem">
   添加题目类别
 </button>
 </div>
-<form action="<?php echo site_url('admin/problem_category/add_category') ?>" method="post">
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form action="<?php echo site_url('admin/problem_category/add_category') ?>"  method="post">
+<div class="modal fade" id="myProblem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -26,7 +28,7 @@
         <h4 class="modal-title" id="myModalLabel">添加题目类别</h4>
       </div>
       <div class="modal-body">
-       <input type="text" class="form-control" id="problem_catehory" placeholder="题目类别">
+       <input type="text" class="form-control" name="problem_category" placeholder="题目类别">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -36,6 +38,62 @@
   </div>
 </div>
 </form>
+
+<div class="well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>题目类别ID</th>
+          <th>题目类别名称</th>
+          <th>编辑</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($category as $v) : ?>
+        <tr>
+          <td></td>
+          <td><?php echo $v['class_id'] ?></td>
+          <td><?php echo $v['class_name'] ?></td>
+          <td>
+              <a href="#myEdit<?php echo $v['class_id'] ?>" role="button" data-toggle="modal"><i class="icon-pencil"></i></a>
+              <a href="#myDelete<?php echo $v['class_id'] ?>" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+          </td>
+        </tr>
+        <div class="modal small hide fade" id="myDelete<?php echo $v['class_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myDelete" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myDelete">删除题目类别</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>你确定删除改题目类别吗?</p>
+    </div>
+    <form action="<?php echo site_url('admin/problem_category/delete_category') ?>"  method="post"> 
+    <div class="modal-footer">
+        <input type="hidden" name="cid" value="<?php echo $v['class_id'] ?>">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+        <button type="submit"  class="btn btn-danger" >确定</button>
+    </div>
+    </form>
+</div>
+<div class="modal small hide fade" id="myEdit<?php echo $v['class_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myEdit" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myEdit">修改题目类别</h3>
+    </div>
+    <div class="modal-body">
+       <input type="text" class="form-control" name="problem_category" placeholder="题目类别">
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+        <button class="btn btn-danger" data-dismiss="modal">保存</button>
+    </div>
+</div>
+      <?php endforeach ?>
+      </tbody>
+    </table>
+</div>
+
 
 </body>
 </html>
