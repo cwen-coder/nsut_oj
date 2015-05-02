@@ -8,11 +8,13 @@ class Problem extends Admin_Controller{
 
 	function __construct(){
 		parent::__construct();
-		$this->load->modle('problem_model');
+		$this->load->model('problem_model');
 	}
 	
 	public function index() {
-		$this->load->view('admin/problem.html');
+		$data['num'] = $this->problem_model->problem_all_num();
+		$data['problem'] = $this->problem_model->problem_list();	
+		$this->load->view('admin/problem.html',$data);
 	}
 }
 
