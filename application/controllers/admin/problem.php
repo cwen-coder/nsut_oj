@@ -43,6 +43,14 @@ class Problem extends Admin_Controller{
 	/*public function get_problem() {
 		$data = $this->problem_model->problem_list();
 	}*/
+
+	//删除题目
+	public function problem_del() {
+		$problem_id = $this->input->post('problem_id',TRUE);
+		$result = $this->problem_model->problem_del($problem_id);
+		if($result) echo true;
+		else echo false;
+	}
 }
 
 ?>

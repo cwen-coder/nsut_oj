@@ -27,5 +27,14 @@ class Problem_model extends CI_Model {
 		$num = mysql_num_rows($result);
 		return $num;
 	}
+
+	public function problem_del($problem_id) {
+		$query1 = "DELETE FROM problem_class WHERE problem_id = '$problem_id'";
+		$query2 = "DELETE FROM problem WHERE problem_id = '$problem_id'";
+		$result1 = mysql_query($query1);
+		$result2 = mysql_query($query2);
+		if($result1 && $result2) return true;
+		else return false;
+	}
 }
 ?>
