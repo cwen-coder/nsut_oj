@@ -13,8 +13,8 @@ class Problemcategory_model extends CI_Model{
 		$query = "insert into class_name(class_name) values('$data')";
 		return mysql_query($query);
 	}
-	function check(){
-		$query = "select * from class_name";
+	function check($num,$limt){
+		$query = "select * from class_name limit $limt, $num";
 		$result = mysql_query($query);
 		while($row = mysql_fetch_assoc($result))
 			$data[] = $row;
@@ -24,6 +24,12 @@ class Problemcategory_model extends CI_Model{
 		$query = "delete from class_name where class_id = $cid";
 		$result = mysql_query($query);
 		return $result;
+	}
+	function total_rows(){
+		$query = "select* from class_name";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		return $num;
 	}
 }
 ?>
