@@ -11,9 +11,30 @@ class Problem_model extends CI_Model {
 	}
 
 
-	public function problem_list() {
-		$query = "select a.problem_id, title, b.class_id from problem a, problem_class b where a.problem_id = b.problem_id";
+	public function problem_list($perPage, $offset) {
+		$query = "select a.problem_id, title, c.class_name from problem a, problem_class b,class_name c where a.problem_id = b.problem_id and b.class_id = c.class_id order by problem_id limit $offset,$perPage;";
 		$result = mysql_query($query);
+		$data = array();
+		while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
+			$data[] = $row;
+		}
+		return $data;
+	}
+
+	public function problem_all_num() {
+		$query = "select a.problem_id, title, c.class_name from problem a, problem_class b,class_name c where a.problem_id = b.problem_id and b.class_id = c.class_id;";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		return $num;
+	}
+
+	public function problem_del($problem_id) {
+		$query1 = "DELETE FROM problem_class WHERE problem_id = '$problem_id'";
+		$query2 = "DELETE FROM problem WHERE problem_id = '$problem_id'";
+		$result1 = mysql_query($query1);
+		$result2 = mysql_query($query2);
+		if($result1 && $result2) return true;
+		else return false;
 	}
 }
 ?>
