@@ -34,7 +34,7 @@
 <body>
 <div class="container">
 <div class="btn-toolbar" style="display:inline">
-    <button type="button" id="myButton" class="btn btn-primary" autocomplete="off"><i class="icon-plus"></i> 添加题目</button>
+    <button type="button" id="problem_add_but" class="btn btn-primary" autocomplete="off"><i class="icon-plus"></i>添加题目</button>
   <div class="btn-group">
   </div>
 </div>
@@ -94,11 +94,18 @@
 </div>
 </div>
 <?php require('problem_del.html');?>
-<?php require('problem_edit.html');?>
 <script src="<?= base_url('application/views/admin/lib/jquery-1.8.1.min.js');?>" type="text/javascript"></script>
 <script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.min.js');?>" type="text/javascript"></script>
 
 <script src="<?= base_url('application/views/admin/js/problem_act.js');?>" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  //相应题目添加按钮
+  $("#problem_add_but").click(function() {
+        window.location.href = "<?php echo site_url('admin/problem/problem_add');?>";
+    });
+});
+</script>
 
 </body>
 </html>

@@ -51,6 +51,11 @@ class Problem extends Admin_Controller{
 		if($result) echo true;
 		else echo false;
 	}
+
+	//添加题目
+	public function problem_add() {
+		$this->load->view('admin/problem_add.html');
+	}
 }
 
 ?>
