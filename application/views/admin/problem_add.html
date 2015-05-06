@@ -3,8 +3,107 @@
 <head>
 	<meta charset="UTF-8">
 	<title>添加题目</title>
+	<link rel="stylesheet" type="text/css" href="<?= base_url('application/views/admin/lib/bootstrap/css/bootstrap.min.css');?>">
+	
+	<style type="text/css">
+		body {
+		    background: #eee;
+		    background-image: url(http://subtlepatterns.com/patterns/furley_bg.png);
+		    background-position: initial initial;
+		    background-repeat: initial initial;
+		    background-position: initial initial;
+		    background-repeat: initial initial;
+		    margin: 0px;
+		    padding: 0px;
+		  }
+		  span {
+		  	color: red;
+		  }
+		 .container {
+			margin-top: 3%;
+		  }
+		  .UEditor {
+		  	width:80% ;
+		  }
+	</style>
 </head>
 <body>
-	
+<div class="container">
+	<div >
+		<h4>添加题目</h4>
+	</div>
+	<div class="well">
+			
+		<table class = "table">
+	   	<form name="example" method="post" action="" >
+	   	<tbody>
+		  <tr>
+			<td>题号：</td>
+			<td>&nbsp;<input name="title" value="" type="text" size="60" /> <span>*必填</span></td>
+		  </tr>
+		  <tr>
+			<td>标题：</td>
+			<td>&nbsp;<input type="text"  value="" size="40" /> <span class="f00">*</span></td>
+		  </tr>
+		  <tr>
+			<td>所属分类：</td>
+			<td>&nbsp;<select >
+			
+				<option value="" ></option>
+			
+			  </select>
+			  <span>*</span>
+			</td>
+		  </tr>
+		  <tr>
+			<td>时间限制：</td>
+			<td>&nbsp;<input type="text"  value="" size="40" /> <span>*</span></td>
+		  </tr>
+		  <tr>
+			<td>内存限制：</td>
+			<td>&nbsp;<input type="text"  value="" size="40" /> <span>*</span></td>
+		  </tr>
+		  <tr>
+			<td>题目描述：</td>
+			<td>&nbsp;
+			<script id="container1" name="content" class = "UEditor" type="text/plain">
+    		</script>
+    		</td>
+		  </tr>
+		  <tr>
+			<td>输入信息：</td>
+			<td><script id="container2" name="content" class = "UEditor" type="text/plain">
+    		</script>
+    		</td>
+		  </tr>
+		   <tr>
+			<td>输出信息：</td>
+			<td><script id="container3" name="content" class = "UEditor" type="text/plain">
+    		</script>
+    		</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;<input type="submit" name="Submit" value="编辑" />
+		    &nbsp; <input type="reset" name="Submit2" value="重置" /></td>
+		  </tr>
+		  </tbody>
+		 </form>
+	  </table>
+	</div>
+</div>
+<script src="<?= base_url('application/views/admin/lib/jquery-1.8.1.min.js');?>" type="text/javascript"></script>
+<script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.min.js');?>" type="text/javascript"></script>
+ <!-- 加载编辑器的容器 -->
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="<?= base_url('application/views/admin/UEditor/ueditor.config.js');?>"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="<?= base_url('application/views/admin/UEditor/ueditor.all.js');?>"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container1');
+        var ue = UE.getEditor('container2');
+        var ue = UE.getEditor('container3');
+    </script>
 </body>
 </html>
