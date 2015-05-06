@@ -26,31 +26,36 @@ class Problem_category extends  Admin_Controller {
 		$config['uri_segment'] = 4; 
 		$this->pagination->initialize($config);
 		$data['links'] = $this->pagination->create_links();
-		
-		$offset = $this->uri->segment(4);
-		if($offset == null) $offset=0;
-		$data['category'] = $this->cate->check($config['per_page'], $offset);
+		$data['offset'] = $this->uri->segment(4);
+		if($data['offset'] == null) $data['offset']=0;
+		$data['category'] = $this->cate->check($config['per_page'], $data['offset'] );
 		$this->load->view('admin/problem_category.html', $data);
 	}
 	//
 	function add_category(){
 		$problem_category = $this->input->post('problem_category',TRUE);
 		$result = $this->cate->add($problem_category);
-		$data['category'] = $this->cate->check();
-		$this->load->view('admin/problem_category.html', $data);
+		self::index();
 	}
 	//
 	function delete_category(){
 		$cid = $this->input->post('cid');
 		$result = $this->cate->delete($cid);
-		$data['category'] = $this->cate->check();
-		$this->load->view('admin/problem_category.html', $data);
+
+		self::index();
 	}
 	function edit_category(){
 		$cid = $this->input->post('cid');
-		$result = $this->cate->edit($cid);
-		$data['category'] = $this->cate->check();
-		$this->load->view('admin/problem_category.html', $data);
+		$category =$this->input->post('problem_category');
+		$result = $this->cate->edit_category($cid, $category);
+		echo $result;
+		self::index();
+		
+		/*if($result){
+			<script>alert('success');</script>
+			self::index();
+		}else{
+			<script>alert('shibai');</script>*/
 	}
 }
 ?>

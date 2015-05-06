@@ -31,5 +31,9 @@ class Problemcategory_model extends CI_Model{
 		$num = mysql_num_rows($result);
 		return $num;
 	}
+	function edit_category($cid, $cate){
+		$query = "update class_name set class_name='$cate' where class_id = '$cid' ";
+		return mysql_query($query);
+	}
 }
 ?>
