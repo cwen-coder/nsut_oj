@@ -5,13 +5,13 @@ var ema = false;
 var usern = false;
 var pad = false;
 var cap = false;
-
+//注册按钮检查
 function chkreg(){  
     	if(uname && pas1 && pas2 && ema){  
       		$("#reg_sub").removeAttr('disabled');  
    	 }  
 }  
-
+//登录按钮检查
 function chklog() {
   if (usern && pad && cap) {
     $("#log_sub").removeAttr('disabled'); 
@@ -19,11 +19,14 @@ function chklog() {
 }
 
 $(document).ready(function() {
+  //点击刷新验证码
   $("#captcha_span").on("click",function(e){
     e.preventDefault();
     $("#captcha_img").attr("src","../login/code");
     // alert("123")
   })
+
+  //检验用户名
  	 $("#r_username").blur(function() {
   		 var name = $("#r_username").val();
   		 var len = name.length;
@@ -54,6 +57,7 @@ $(document).ready(function() {
   		 }
  	 });
 
+   //检验第一次输入密码
  	 $("#password1").blur(function() {
  	 	var password = $("#password1").val();
  	 	var len = password.length;
@@ -70,6 +74,8 @@ $(document).ready(function() {
  	 		chkreg();
  	 	}
  	 });
+
+   //检验第二次输入的密码
  	 $("#password2").blur(function() {
  	 	var password = $("#password2").val();
  	 	//console.log(password);
@@ -83,6 +89,8 @@ $(document).ready(function() {
  	 		$("#pass2").text('两次密码不一致');
  	 	}
  	 });
+
+   //检验邮箱
  	 $("#email").blur(function() {
  	 	var email = $("#email").val();
  	 	var Regx = /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-.]+$/;
@@ -106,6 +114,8 @@ $(document).ready(function() {
  	 	}
  	 });
  	 //uname = true;
+   //
+   //注册动作
  	 $("#reg_sub").click(function(e) {  
  	 	//e.preventDefault();
  	 	$.post("../register/reg_act",{
@@ -128,6 +138,9 @@ $(document).ready(function() {
  	 	})
 
   	  }); 
+
+
+   //登录检验用户名
    $("#username").blur(function() {
        var name = $("#username").val();
        if(name.length == 0) {
@@ -140,6 +153,8 @@ $(document).ready(function() {
         chklog();      
        }
    });
+
+   //登录检验密码
    $("#password").blur(function() {
        var pass = $("#password").val();
        if (pass.length == 0) {
@@ -151,6 +166,8 @@ $(document).ready(function() {
         chklog();     
        }
    });
+
+   //登录检验验证码
    $("#captcha").blur(function() {
        var pass = $("#captcha").val();
        if(pass.length == 0) {
@@ -162,6 +179,8 @@ $(document).ready(function() {
         //chklog();
        }
    });
+
+   //登录动作
    $("#log_sub").click(function() {
     //console.log("odsfo");
      $.post("../login/log_act",{
@@ -181,6 +200,8 @@ $(document).ready(function() {
      })
    });
 });
+
+//重置动作
 function formReset()
 {
 	document.getElementById("reg_form").reset();

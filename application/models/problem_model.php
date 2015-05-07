@@ -36,5 +36,12 @@ class Problem_model extends CI_Model {
 		if($result1 && $result2) return true;
 		else return false;
 	}
+
+	//获取已添加题目最大题号
+	public function get_max_id() {
+		$query = "SELECT MAX(problem_id) FROM problem";
+		$result = mysql_query($query);
+		return mysql_fetch_assoc($result);
+	}
 }
 ?>

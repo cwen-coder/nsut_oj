@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     //获取点击删除模态框的所在行的id
-    $('a[href*="#myModal"').click(function() {
+    $('a[href*="#myModal"]').click(function() {
       $("#problem_span").text($(this).attr("id"));
     });
 

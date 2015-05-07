@@ -25,6 +25,10 @@
 		  .UEditor {
 		  	width:80% ;
 		  }
+		  .textarea {
+		  	width: 80%;
+		  	height: 200px;
+		  }
 	</style>
 </head>
 <body>
@@ -39,15 +43,15 @@
 	   	<tbody>
 		  <tr>
 			<td>题号：</td>
-			<td>&nbsp;<input name="title" value="" type="text" size="60" /> <span>*必填</span></td>
+			<td><input id = "problem_id" name="problem_id" value="" type="text"  /> <span>*&nbsp;&nbsp;&nbsp;之前已添加到第&nbsp; <?php echo $max_id['MAX(problem_id)'];?>&nbsp; 题</span></td>
 		  </tr>
 		  <tr>
 			<td>标题：</td>
-			<td>&nbsp;<input type="text"  value="" size="40" /> <span class="f00">*</span></td>
+			<td><input type="text"  value=""  /> <span class="f00">*</span></td>
 		  </tr>
 		  <tr>
 			<td>所属分类：</td>
-			<td>&nbsp;<select >
+			<td><select >
 			
 				<option value="" ></option>
 			
@@ -57,15 +61,15 @@
 		  </tr>
 		  <tr>
 			<td>时间限制：</td>
-			<td>&nbsp;<input type="text"  value="" size="40" /> <span>*</span></td>
+			<td><input type="text"  value="" /> <span>S*</span></td>
 		  </tr>
 		  <tr>
 			<td>内存限制：</td>
-			<td>&nbsp;<input type="text"  value="" size="40" /> <span>*</span></td>
+			<td><input type="text"  value="" /> <span>MB*</span></td>
 		  </tr>
 		  <tr>
 			<td>题目描述：</td>
-			<td>&nbsp;
+			<td>
 			<script id="container1" name="content" class = "UEditor" type="text/plain">
     		</script>
     		</td>
@@ -83,9 +87,53 @@
     		</td>
 		  </tr>
 		  <tr>
+		  	<td>样例输入：</td>
+		  	<td><textarea class = "textarea"></textarea></td>
+		  </tr>
+		  <tr>
+		  	<td>样例输出：</td>
+		  	<td><textarea class = "textarea"></textarea></td>
+		  </tr>
+		  <tr>
+		  	<td>测试输入：</td>
+		  	<td><input type="file" name="test_in"/></td>
+		  </tr>
+		  <tr>
+		  	<td>测试输入：</td>
+		  	<td><input type="file" name="test_out"/></td>
+		  </tr>
+		   <tr>
+			<td>提示信息：</td>
+			<td><script id="container4" name="content" class = "UEditor" type="text/plain">
+    		</script>
+    		</td>
+		  </tr>
+		  <tr>
+		  	<td>是否进行多解判题：</td>
+		  	<td>
+			  	<div class="controls" style="display:inline">
+
+	            <!-- Inline Radios -->
+	            <label class="radio inline">
+	              <input type="radio" value="0" checked="checked" name="group">
+	              否&nbsp;&nbsp;&nbsp;&nbsp;
+	            </label>
+	            <label class="radio inline">
+	              <input type="radio" value="1" name="group">
+	              是&nbsp;&nbsp;&nbsp;&nbsp;
+	            </label>
+	          	</div> 
+		  	</td>
+		  </tr>
+		  <tr>
+		  	<td>题目来源：</td>
+		  	<td><input type="text"></td>
+		  </tr>
+		  <tr>
 			<td>&nbsp;</td>
-			<td>&nbsp;<input type="submit" name="Submit" value="编辑" />
-		    &nbsp; <input type="reset" name="Submit2" value="重置" /></td>
+			<td> <button type="submit" class="btn btn-default">添加</button>
+				&nbsp;&nbsp;&nbsp;&nbsp; <button type="reset" class="btn btn-default">重置</button>
+			</td>
 		  </tr>
 		  </tbody>
 		 </form>
@@ -99,11 +147,7 @@
     <script type="text/javascript" src="<?= base_url('application/views/admin/UEditor/ueditor.config.js');?>"></script>
     <!-- 编辑器源码文件 -->
     <script type="text/javascript" src="<?= base_url('application/views/admin/UEditor/ueditor.all.js');?>"></script>
+    <script type="text/javascript" src="<?= base_url('application/views/admin/js/problem_add.js');?>"></script>
     <!-- 实例化编辑器 -->
-    <script type="text/javascript">
-        var ue = UE.getEditor('container1');
-        var ue = UE.getEditor('container2');
-        var ue = UE.getEditor('container3');
-    </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 class Home extends Oj_Controller{
 	//载入主页
-	public function index(){
+	public function index() {
  		$this->load->view('oj_index/index.html');
 	}
 }

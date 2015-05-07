@@ -47,7 +47,7 @@ class Privilege_model extends CI_Model {
 
 	//清除过期登录日志
 	public function delete_log($now) {
-		$query = "delete from loginlog where (UNIX_TIMESTAMP(time)-'$now')%86400/60 > 60";
+		$query = "delete from loginlog where ('$now'-UNIX_TIMESTAMP(time))/60 > 60";
 		$result = mysql_query($query);
 		return $result;
 	}
