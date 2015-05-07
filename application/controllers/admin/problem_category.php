@@ -22,35 +22,42 @@ class Problem_category extends  Admin_Controller {
 		$config['full_tag_close'] = '</ul>';
 		$config['cur_tag_open'] = '<li><a>'; // 当前页开始样式   
 		$config['cur_tag_close'] = '</a></li>'; 
-		$config['num_links'] = 4;// 当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
-		$config['uri_segment'] = 4; 
+        		$config['num_links'] = 4;//    当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
+        		$config['uri_segment'] = 4; 
 		$this->pagination->initialize($config);
 		$data['links'] = $this->pagination->create_links();
-		
-		$offset = $this->uri->segment(4);
-		if($offset == null) $offset=0;
-		$data['category'] = $this->cate->check($config['per_page'], $offset);
+		$data['offset'] = $this->uri->segment(4);
+		if($data['offset'] == null) $data['offset']=0;
+		$data['category'] = $this->cate->check($config['per_page'], $data['offset'] );
 		$this->load->view('admin/problem_category.html', $data);
 	}
-	//
+	//添加题目类别
 	function add_category(){
 		$problem_category = $this->input->post('problem_category',TRUE);
 		$result = $this->cate->add($problem_category);
-		$data['category'] = $this->cate->check();
-		$this->load->view('admin/problem_category.html', $data);
+		self::index();
 	}
-	//
+	//删除题目类别
 	function delete_category(){
 		$cid = $this->input->post('cid');
 		$result = $this->cate->delete($cid);
-		$data['category'] = $this->cate->check();
-		$this->load->view('admin/problem_category.html', $data);
-	}
+
+		self::index();
+    }
+    //修改题目类别
 	function edit_category(){
 		$cid = $this->input->post('cid');
-		$result = $this->cate->edit($cid);
-		$data['category'] = $this->cate->check();
-		$this->load->view('admin/problem_category.html', $data);
+		$category =$this->input->post('problem_category');
+		$result = $this->cate->edit_category($cid, $category);
+        if($result){
+        	header('Content-Type:text/html;charset=utf-8');
+         	echo "<script type='text/javascript'>alert('修改成功');</script>";
+              self::index(); 
+        }else{
+        	header('Content-Type:text/html;charset=utf-8');
+           	echo " <script type='text/javascript'>alert('修改失败');</script>";
+            	self::index();
+        }
 	}
 }
 ?>
