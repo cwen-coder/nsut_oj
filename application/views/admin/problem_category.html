@@ -49,6 +49,7 @@
         </tr>
       </thead>
       <tbody>
+
         <?php foreach($category as $v) : ?>
         <tr>
           <td></td>
@@ -97,6 +98,9 @@
 <div class="pagination" style="text-align:right">
 <?php echo $links;?>
 </div>
+</div>
+<div style="text-align:center">
+<?php if($category==null) echo "<strong><span'>无信息</span></stong>";?>
 </div>
 </body>
 </html>

@@ -14,8 +14,9 @@ class Problemcategory_model extends CI_Model{
 		return mysql_query($query);
 	}
 	function check($num,$limt){
-		$query = "select * from class_name limit $limt, $num";
+		$query = "select * from class_name order by class_id limit $limt, $num";
 		$result = mysql_query($query);
+		$data = array();
 		while($row = mysql_fetch_assoc($result))
 			$data[] = $row;
 		return $data;
