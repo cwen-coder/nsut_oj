@@ -43,5 +43,12 @@ class Problem_model extends CI_Model {
 		$result = mysql_query($query);
 		return mysql_fetch_assoc($result);
 	}
+
+	//ajax检查题号
+	public function check_id($problem_id) {
+		$query = "SELECT * FROM problem WHERE problem_id = '$problem_id'";
+		$result = mysql_query($query);
+		return mysql_num_rows($result);
+	}
 }
 ?>

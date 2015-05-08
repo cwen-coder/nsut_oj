@@ -61,6 +61,14 @@ class Problem extends Admin_Controller{
 		$data['max_id'] = $this->problem_model->get_max_id();
 		$this->load->view('admin/problem_add.html',$data);
 	}
+
+	//ajax检查题号
+	public function check_id() {
+		$problem_id = $this->input->post('problem_id',TRUE);
+		$result = $this->problem_model->check_id($problem_id);
+		if($result > 0 ) echo false;
+		else echo true;
+	}
 }
 
 ?>

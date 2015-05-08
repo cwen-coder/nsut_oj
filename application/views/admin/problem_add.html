@@ -43,17 +43,18 @@
 	   	<tbody>
 		  <tr>
 			<td>题号：</td>
-			<td><input id = "problem_id" name="problem_id" value="" type="text"  /> <span>*&nbsp;&nbsp;&nbsp;之前已添加到第&nbsp; <?php echo $max_id['MAX(problem_id)'];?>&nbsp; 题</span></td>
+			<td><input id = "problem_id" name="problem_id" value="" type="text"  /> <span id = "problem_id_span">*&nbsp;&nbsp;&nbsp;之前已添加到第&nbsp; <?php echo $max_id['MAX(problem_id)'];?>&nbsp; 题</span></td>
 		  </tr>
 		  <tr>
 			<td>标题：</td>
-			<td><input type="text"  value=""  /> <span class="f00">*</span></td>
+			<td><input type="text"  id = "pro_title"  /> <span id = "pro_title_span">*</span></td>
 		  </tr>
 		  <tr>
 			<td>所属分类：</td>
 			<td><select >
 			
-				<option value="" ></option>
+				<option value="0" >1</option>
+				<option value="1" >2</option>
 			
 			  </select>
 			  <span>*</span>
@@ -131,7 +132,7 @@
 		  </tr>
 		  <tr>
 			<td>&nbsp;</td>
-			<td> <button type="submit" class="btn btn-default">添加</button>
+			<td> <button type="submit" class="btn btn-default" id = "pro_add" disabled="true">添加</button>
 				&nbsp;&nbsp;&nbsp;&nbsp; <button type="reset" class="btn btn-default">重置</button>
 			</td>
 		  </tr>
