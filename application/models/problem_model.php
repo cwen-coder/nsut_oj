@@ -50,5 +50,15 @@ class Problem_model extends CI_Model {
 		$result = mysql_query($query);
 		return mysql_num_rows($result);
 	}
+
+	//获取已有分类
+	public function get_class() {
+		$query = "SELECT class_id,class_name FROM class_name WHERE 1";
+		$result = mysql_query($query);
+		while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
+			$data[] = $row;
+		}
+		return $data;
+	}
 }
 ?>

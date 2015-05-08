@@ -52,10 +52,9 @@
 		  <tr>
 			<td>所属分类：</td>
 			<td><select >
-			
-				<option value="0" >1</option>
-				<option value="1" >2</option>
-			
+			<?php foreach($class as $v):?>			
+				<option value="<?= $v['class_id'];?>" ><?= $v['class_name'];?></option>
+			<?php endforeach;?>
 			  </select>
 			  <span>*</span>
 			</td>

@@ -52,7 +52,5 @@ $(document).ready(function() {
 			chksub();
 		}
 	});
-
-	//检查题目分类
 	
 });

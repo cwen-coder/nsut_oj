@@ -59,6 +59,7 @@ class Problem extends Admin_Controller{
 	//添加题目
 	public function problem_add() {
 		$data['max_id'] = $this->problem_model->get_max_id();
+		$data['class'] = $this->problem_model->get_class();
 		$this->load->view('admin/problem_add.html',$data);
 	}
 
