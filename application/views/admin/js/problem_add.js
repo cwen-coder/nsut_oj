@@ -6,8 +6,10 @@ var hint = UE.getEditor('container4');
 //
 var check_id = false;
 var check_title = false;
+var check_time_limt = false;
+var check_memory_limt = false;
 function chksub() {
-	if(check_id && check_title) {
+	if(check_id && check_title && check_time_limt && check_memory_limt) {
 		$("#pro_add").removeAttr('disabled');
 	}
 }
@@ -49,6 +51,39 @@ $(document).ready(function() {
 		} else {
 			$("#pro_title_span").text('*');
 			check_title = true;
+			chksub();
+		}
+	});
+
+	//检查时间限制
+	$("#time_limt").blur(function() {
+		var len = ($(this).val()).length;
+		var regx = /^[0-9]*$/;
+		//alert(len);
+		if(len == 0) {
+			$("#time_limt_span").text('时间限制不能为空');
+		} else if(!regx.test($(this).val())) {
+			$("#time_limt_span").text('请输入正确的时间限制');
+		} else {
+			$("#time_limt_span").text('');
+			check_time_limt = true;
+			chksub();
+		}
+	});
+
+
+	//检查内存限制
+	$("#memory_limt").blur(function() {
+		var len = ($(this).val()).length;
+		var regx = /^[0-9]*$/;
+		//alert(len);
+		if(len == 0) {
+			$("#memory_limt_span").text('内存限制不能为空');
+		} else if(!regx.test($(this).val())) {
+			$("#memory_limt_span").text('请输入正确的时内存限制');
+		} else {
+			$("#memory_limt_span").text('');
+			check_memory_limt = true;
 			chksub();
 		}
 	});

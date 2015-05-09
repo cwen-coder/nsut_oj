@@ -43,11 +43,11 @@
 	   	<tbody>
 		  <tr>
 			<td>题号：</td>
-			<td><input id = "problem_id" name="problem_id" value="" type="text"  /> <span id = "problem_id_span">*&nbsp;&nbsp;&nbsp;之前已添加到第&nbsp; <?php echo $max_id['MAX(problem_id)'];?>&nbsp; 题</span></td>
+			<td><input id = "problem_id" name="problem_id" value="" type="text"  /> <span >*&nbsp;&nbsp;&nbsp;之前已添加到第&nbsp; <?php echo $max_id['MAX(problem_id)'];?>&nbsp; 题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id = "problem_id_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>标题：</td>
-			<td><input type="text"  id = "pro_title"  /> <span id = "pro_title_span">*</span></td>
+			<td><input type="text"  id = "pro_title" value="" /> <span >*</span><span id = "pro_title_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>所属分类：</td>
@@ -61,11 +61,11 @@
 		  </tr>
 		  <tr>
 			<td>时间限制：</td>
-			<td><input type="text"  value="" /> <span>S*</span></td>
+			<td><input type="text"  value="" id = "time_limt" /> <span>S*</span><span id = "time_limt_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>内存限制：</td>
-			<td><input type="text"  value="" /> <span>MB*</span></td>
+			<td><input type="text"  value="" id = "memory_limt" /> <span>MB*</span><span id = "memory_limt_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>题目描述：</td>
