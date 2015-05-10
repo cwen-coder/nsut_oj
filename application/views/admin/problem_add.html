@@ -39,7 +39,7 @@
 	<div class="well">
 			
 		<table class = "table">
-	   	<form name="example" method="post" action="" >
+	   	<form name="example" method="post" action="<?= site_url('admin/problem/add_act');?>" >
 	   	<tbody>
 		  <tr>
 			<td>题号：</td>
@@ -47,11 +47,11 @@
 		  </tr>
 		  <tr>
 			<td>标题：</td>
-			<td><input type="text"  id = "pro_title" value="" /> <span >*</span><span id = "pro_title_span"></span></td>
+			<td><input type="text"  id = "pro_title" name = "pro_title" value="" /> <span >*</span><span id = "pro_title_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>所属分类：</td>
-			<td><select >
+			<td><select name = "pro_class" >
 			<?php foreach($class as $v):?>			
 				<option value="<?= $v['class_id'];?>" ><?= $v['class_name'];?></option>
 			<?php endforeach;?>
@@ -61,50 +61,50 @@
 		  </tr>
 		  <tr>
 			<td>时间限制：</td>
-			<td><input type="text"  value="" id = "time_limt" /> <span>S*</span><span id = "time_limt_span"></span></td>
+			<td><input type="text"  value="" id = "time_limt" name = "time_limt" /> <span>S*</span><span id = "time_limt_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>内存限制：</td>
-			<td><input type="text"  value="" id = "memory_limt" /> <span>MB*</span><span id = "memory_limt_span"></span></td>
+			<td><input type="text"  value="" id = "memory_limt" name = "memory_limt" /> <span>MB*</span><span id = "memory_limt_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>题目描述：</td>
 			<td>
-			<script id="container1" name="content" class = "UEditor" type="text/plain">
+			<script id="container1" name="content_des" class = "UEditor" type="text/plain">
     		</script>
     		</td>
 		  </tr>
 		  <tr>
 			<td>输入信息：</td>
-			<td><script id="container2" name="content" class = "UEditor" type="text/plain">
+			<td><script id = "container2" name="content_input" class = "UEditor" type="text/plain">
     		</script>
     		</td>
 		  </tr>
 		   <tr>
 			<td>输出信息：</td>
-			<td><script id="container3" name="content" class = "UEditor" type="text/plain">
+			<td><script id="container3" name="content_output" class = "UEditor" type="text/plain">
     		</script>
     		</td>
 		  </tr>
 		  <tr>
 		  	<td>样例输入：</td>
-		  	<td><textarea class = "textarea"></textarea></td>
+		  	<td><textarea class = "textarea" name = "sample_input" ></textarea></td>
 		  </tr>
 		  <tr>
 		  	<td>样例输出：</td>
-		  	<td><textarea class = "textarea"></textarea></td>
+		  	<td><textarea class = "textarea" name = "sample_output" ></textarea></td>
 		  </tr>
 		  <tr>
 		  	<td>测试输入：</td>
-		  	<td><input type="file" name="test_in"/></td>
+		  	<td><input type="file" name="test_in"/><span>请以test.in命名文件</span></td>
 		  </tr>
 		  <tr>
-		  	<td>测试输入：</td>
-		  	<td><input type="file" name="test_out"/></td>
+		  	<td>测试输出：</td>
+		  	<td><input type="file" name="test_out"/><span>请以test.out命名文件</span></td>
 		  </tr>
 		   <tr>
 			<td>提示信息：</td>
-			<td><script id="container4" name="content" class = "UEditor" type="text/plain">
+			<td><script id="container4" name="hint" class = "UEditor" type="text/plain">
     		</script>
     		</td>
 		  </tr>
@@ -115,11 +115,11 @@
 
 	            <!-- Inline Radios -->
 	            <label class="radio inline">
-	              <input type="radio" value="0" checked="checked" name="group">
+	              <input type="radio" value="0" checked="checked" name="spj" >
 	              否&nbsp;&nbsp;&nbsp;&nbsp;
 	            </label>
 	            <label class="radio inline">
-	              <input type="radio" value="1" name="group">
+	              <input type="radio" value="1" name="spj" >
 	              是&nbsp;&nbsp;&nbsp;&nbsp;
 	            </label>
 	          	</div> 
@@ -127,7 +127,7 @@
 		  </tr>
 		  <tr>
 		  	<td>题目来源：</td>
-		  	<td><input type="text"></td>
+		  	<td><input type="text" name = "source" ></td>
 		  </tr>
 		  <tr>
 			<td>&nbsp;</td>

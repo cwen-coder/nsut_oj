@@ -70,6 +70,22 @@ class Problem extends Admin_Controller{
 		if($result > 0 ) echo false;
 		else echo true;
 	}
+
+	public function add_act() {
+		$data = array(
+				'problem_id' => $this->input->post('problem_id',TRUE),
+				'title' => $this->input->post('pro_title',TRUE),
+				'class_id' => $this->input->post('pro_class',TRUE),
+				'time_limt' => $this->input->post('time_limt',TRUE),
+				'memory_limt' => $this->input->post('memory_limt',TRUE),
+				'description' => $this->input->post('content_des',TRUE),
+				'input' => $this->input->post('content_input',TRUE),
+				'output' => $this->input->post('content_output',TRUE),
+				'sample_input' => $this->input->post('sample_input',TRUE),
+				'sample_output' => $this->input->post('sample_output',TRUE),
+				
+			)
+	}
 }
 
 ?>

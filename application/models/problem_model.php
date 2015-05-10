@@ -60,5 +60,10 @@ class Problem_model extends CI_Model {
 		}
 		return $data;
 	}
+
+	//按题号获取题
+	public function get_problem() {
+		//$query = "SELECT * FROM "
+	}
 }
 ?>
