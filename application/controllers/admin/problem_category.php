@@ -10,7 +10,7 @@ class Problem_category extends  Admin_Controller {
 	//
 	function index(){
 		//$this->config->set_item('url_suffix', '');
-		$total_rows = $this->cate->total_rows();
+		$total_rows = $this->cate->problem_all_num();
 		$config['base_url'] = site_url('admin/problem_category/index');   
 		$config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
 		$config['per_page'] = 5; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
