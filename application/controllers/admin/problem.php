@@ -82,9 +82,9 @@ class Problem extends Admin_Controller{
 				'input' => $this->input->post('content_input',TRUE),
 				'output' => $this->input->post('content_output',TRUE),
 				'sample_input' => $this->input->post('sample_input',TRUE),
-				'sample_output' => $this->input->post('sample_output',TRUE),
+				'sample_output' => $this->input->post('sample_output',TRUE)
 				
-			)
+			);
 	}
 }
 
