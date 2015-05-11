@@ -62,8 +62,10 @@ class Problem_model extends CI_Model {
 	}
 
 	//按题号获取题
-	public function get_problem() {
-		//$query = "SELECT * FROM "
+	public function get_problem($Problem_id) {
+		$query = "SELECT * FROM problem a, problem_class b,class_name c WHERE a.problem_id = '$problem_id' AND a.problem_id = b.problem_id AND b.class_id = c.class_id  ";
+		$result = mysql_query($query);
+		return mysql_fetch_assoc($result);
 	}
 }
 ?>
