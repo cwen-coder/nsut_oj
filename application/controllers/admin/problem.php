@@ -71,6 +71,7 @@ class Problem extends Admin_Controller{
 		else echo true;
 	}
 
+	//题目添加动作
 	public function add_act() {
 		$data = array(
 				'problem_id' => $this->input->post('problem_id',TRUE),
@@ -82,9 +83,13 @@ class Problem extends Admin_Controller{
 				'input' => $this->input->post('content_input',TRUE),
 				'output' => $this->input->post('content_output',TRUE),
 				'sample_input' => $this->input->post('sample_input',TRUE),
-				'sample_output' => $this->input->post('sample_output',TRUE)
-				
+				'sample_output' => $this->input->post('sample_output',TRUE),
+				'hint' => $this->input->post('hint',TRUE),
+				'spj' => $this->input->post('spj',TRUE),
+				'source' => $this->input->post('source',TRUE)				
 			);
+		$result = $this->problem_model->add_act($data);
+		
 	}
 }
 
