@@ -17,11 +17,11 @@ class Home extends Oj_Controller{
 		$config['last_link'] = '末页'; // 最后一页显示   
 		$config['next_link'] = '下一页 >'; // 下一页显示   
 		$config['prev_link'] = '< 上一页'; // 上一页显示   
-		$config['full_tag_open'] = '<ul>';
-		$config['full_tag_close'] = '</ul>';
-		$config['cur_tag_open'] = '<li><a>'; // 当前页开始样式   
+		$config['full_tag_open'] = '';
+		$config['full_tag_close'] = '';
+		$config['cur_tag_open'] = '<li><a style="color:white;background-color:black">'; // 当前页开始样式   
 		$config['cur_tag_close'] = '</a></li>'; 
-        		$config['num_links'] = 4;//    当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
+        		$config['num_links'] = 20;//    当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
         		$config['uri_segment'] = 4; 
 		$this->pagination->initialize($config);
 		$data['links'] = $this->pagination->create_links();
@@ -32,6 +32,16 @@ class Home extends Oj_Controller{
 	}
 
 	public function problem(){
-		$this->load->view('oj_index/problem.html');
+		$cid=$this->input->get('id');
+		echo $cid;
+		$data['problem']=$this->pro->get_problem_id($cid);
+		$this->load->view('oj_index/problem.html',$data);
 	}
+	 public function contest_list(){
+	 	$this->load->view('oj_index/contest_list.html');
+	 }
+
+	 public function status(){
+	 	$this->load->view('oj_index/status.html');
+	 }
 }

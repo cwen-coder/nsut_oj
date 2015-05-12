@@ -8,10 +8,10 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="<?php echo site_url('oj_index/home/index');?>">练习<span class="sr-only">(current)</span></a></li>
-						<li><a href="<?php echo site_url('contest/home');?>">比赛</a></li>
-						<li><a href="#">status</a></li>
-						<li><a href="#">排名</a></li>
+						<li ><a href="<?php echo site_url('oj_index/home/index');?>">题库<span class="sr-only">(current)</span></a></li>
+						<li id="contest"><a href="<?php echo site_url('oj_index/home/contest_list');?>">比赛</a></li>
+						<li id="status"><a href="<?php echo site_url('oj_index/home/status');?>">提交状态</a></li>
+						<li><a href="##">排名</a></li>
 						<li><a href="#">ACM集训队</a></li>
 					</ul>
 					<form class="navbar-form navbar-right">
@@ -21,6 +21,12 @@
 					<?php require('login.html');?>
 					<?php require('register.html');?>
 					</div><!-- /.navbar-collapse -->
+					<script type="text/javascript">
+						$(function(){
+							$("a[href='"+window.location+"']").parent().addClass("active");
+							//console.log($("a[href='"+window.location+"']"));
+						});
+					</script>
 					</div><!-- /.container-fluid -->
 				</nav>
 				
