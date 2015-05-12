@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
     <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
-   <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
+    <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
   </head>
   <style type="text/css">
   .container_modal{
@@ -23,6 +23,7 @@
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>
+
 <style type="text/css">
     body {
     background: #eee;
@@ -36,8 +37,6 @@
   }
 
 	.control-group {
-              margin-top: 7%;
-              margin-right: 100px;
 		display: inline;
 		float: right;
 	}
@@ -45,7 +44,7 @@
               margin-top: 7%;
               margin-right: 100px;
               display: inline;
-              float: center;
+              float: right;
   }
   .table-group{
     position:absolute;
@@ -59,14 +58,7 @@
   td,th{
     text-align:center
   }
-</style>
-  <?php p($problem); ?>
-<div class="control-group">
+	</style>
 
-<form>
-  <input type="text" size="35" />
-  <input type="submit" value="Submit" />
-</form>
-</div>
-</body>
+  </body>
 </html>
