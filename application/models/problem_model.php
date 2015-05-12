@@ -4,7 +4,7 @@
 * @date(2015-4-29)
 */
 class Problem_model extends CI_Model {
-
+	
 	function __construct(){
 		parent::__construct();
 		require('db_info.inc.php');
@@ -81,11 +81,23 @@ class Problem_model extends CI_Model {
 		$query_c = "INSERT into problem_class(problem_id,class_id) VALUES ('$data[problem_id]','$data[class_id]')";
 		$result_p = mysql_query($query_p);
 		$result_c = mysql_query($query_c);
+		if($result_p && $result_c) return true;
+		else return false;
 	}
 
-	/*//按题号创建文件夹
-	public function create_dir($problem_id) {
+	//返回数据库配置常量
+	public function get_oj_data() {
+		$OJ_DATA = "/home/judge/data";
+		return $OJ_DATA ;
+	}
 
-	}*/
+	//存放用户编辑题目权限
+	public function privilege($user_id,$problem_id) {
+		$query = "INSERT into privilege (user_id,rightstr)  
+		VALUES('$user_id','$problem_id')";
+		$reslut = mysql_query($query);
+		return $reslut;
+	}
+
 }
 ?>
