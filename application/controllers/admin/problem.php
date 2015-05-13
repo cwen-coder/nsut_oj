@@ -75,11 +75,11 @@ class Problem extends Admin_Controller{
 	public function create_dir($problem_id) {
 		$OJ_DATA = $this->problem_model->get_oj_data();
 		$dir = "$OJ_DATA/$problem_id";
+		$result = false;
 		if (!file_exists($dir)) { 
                 $result = mkdir($dir); 
         } 
-        if($result) return $dir;
-        else return false;
+        return $result;
 	}	
 
 	//写入文件操作
@@ -129,62 +129,76 @@ class Problem extends Admin_Controller{
 			);
 		//echo $_POST['content_des'];
 		//p($data);die;
-		$result1 = $this->problem_model->add_act($data);
-		$result2 = $this->problem_model->privilege($this->session->userdata('user_id'),$data['problem_id']);
-		if($result1 && $result2) {
-			$OJ_DATA = $this->problem_model->get_oj_data();
+		$result_w_in = false;
+		$result_w_out = false;
+		$result_in = false;
+		$result_out = false;
+		$result1 = false;
+		$result2 = false;
+		
+		$OJ_DATA = $this->problem_model->get_oj_data();
 
-			self::create_dir($data['problem_id']);
-			//写入sample_in
-			if(strlen($data['sample_input'])) {
-				$path = "$data[problem_id]/sample.in";
-				self::write_file($path,$data['sample_input']);
-			}
+		self::create_dir($data['problem_id']);
+		//写入sample_in
+		if(strlen($data['sample_input'])) {
+			$path = "$data[problem_id]/sample.in";
+			$result_w_in = self::write_file($path,$data['sample_input']);
+		}
 
-			//写入sample_out
-			if(strlen($data['sample_output'])) {
-				$path = "$data[problem_id]/sample.out";
-				self::write_file($path,$data['sample_output']);
-			}
+		//写入sample_out
+		if(strlen($data['sample_output'])) {
+			$path = "$data[problem_id]/sample.out";
+			$result_w_out = self::write_file($path,$data['sample_output']);
+		}
 
-			//上传test_in
-			//echo $_FILES['test_in']['tmp_name'];
-			if(!empty($_FILES['test_in']['tmp_name'])) {
-				$path = "$OJ_DATA/$data[problem_id]";
-				$cof_in = array(
-					'path' => $path,
-					'types' => 'txt',
-					'max_size' => '10240',
-					'file_name' => 'test_in',
-					'name' => 'test_in'
-				);
-				$result_in = self::do_upload($cof_in);
-				if($result_in == true) {
-					$a = "$path/test_in.txt";
-					$b = "$path/test.in";
-					rename($a, $b);
-				} else p($result_in);
+		//上传test_in
+		//echo $_FILES['test_in']['tmp_name'];
+		if(!empty($_FILES['test_in']['tmp_name'])) {
+			$path = "$OJ_DATA/$data[problem_id]";
+			$cof_in = array(
+				'path' => $path,
+				'types' => 'txt',
+				'max_size' => '10240',
+				'file_name' => 'test_in',
+				'name' => 'test_in'
+			);
+			$result_in = self::do_upload($cof_in);
+			if($result_in == true) {
+				$a = "$path/test_in.txt";
+				$b = "$path/test.in";
+				rename($a, $b);
+			} else p($result_in);
 				//p($result_in);
-			}
+		}
 
 			//上传test_out
-			if(!empty($_FILES['test_out']['tmp_name'])) {
-				$path = "$OJ_DATA/$data[problem_id]";
-				$cof_out = array(
-					'path' => $path,
-					'types' => 'txt',
-					'max_size' => '10240',
-					'file_name' => 'test_out',
-					'name' => 'test_out'
-				);
-				$result_out = self::do_upload($cof_out);
-				if($result_out == true) {
-					$a = "$path/test_out.txt";
-					$b = "$path/test.out";
-					rename($a, $b);
-				} else p($result_out);
-			}
-		}else return false;
+		if(!empty($_FILES['test_out']['tmp_name'])) {
+			$path = "$OJ_DATA/$data[problem_id]";
+			$cof_out = array(
+				'path' => $path,
+				'types' => 'txt',
+				'max_size' => '10240',
+				'file_name' => 'test_out',
+				'name' => 'test_out'
+			);
+			$result_out = self::do_upload($cof_out);
+			if($result_out == true) {
+				$a = "$path/test_out.txt";
+				$b = "$path/test.out";
+				rename($a, $b);
+			} else p($result_out);
+		}
+		if(($result_w_in == true || $result_w_in == false) && ($result_w_out == true || $result_w_out == false) 
+			&& ($result_in == true || $result_in == false) && ($result_out == true || $result_out == false)) {
+			$result1 = $this->problem_model->add_act($data);
+			$result2 = $this->problem_model->privilege($this->session->userdata('user_id'),$data['problem_id']);
+		}
+
+		if($result1 && $result2) {
+			success('admin/problem/index','添加成功');
+		} else {
+			error("添加失败");
+		}
 		
 	}
 }
