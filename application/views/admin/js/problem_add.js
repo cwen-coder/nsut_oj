@@ -1,15 +1,15 @@
 //UEditor实例化编辑器到不同的id上
-var desc = UE.getEditor('container1');
-var sample_in = UE.getEditor('container2');
-var sample_out = UE.getEditor('container3');
-var hint = UE.getEditor('container4');
+var content_des = UE.getEditor('content_des');
+var content_input = UE.getEditor('content_input');
+var content_output = UE.getEditor('content_output');
+var hint = UE.getEditor('hint');
 //
 var check_id = false;
 var check_title = false;
-var check_time_limt = false;
-var check_memory_limt = false;
+var check_time_limit = false;
+var check_memory_limit = false;
 function chksub() {
-	if(check_id && check_title && check_time_limt && check_memory_limt) {
+	if(check_id && check_title && check_time_limit && check_memory_limit) {
 		$("#pro_add").removeAttr('disabled');
 	}
 }
@@ -33,7 +33,7 @@ $(document).ready(function() {
 			},function(data){
 				//console.log(data);
 				if(data) {
-					$("#problem_id_span").text('*');
+					$("#problem_id_span").text('');
 					check_id = true;
 					chksub();
 				} else {
@@ -49,41 +49,41 @@ $(document).ready(function() {
 		if(len == 0) {
 			$("#pro_title_span").text('标题不能为空');
 		} else {
-			$("#pro_title_span").text('*');
+			$("#pro_title_span").text('');
 			check_title = true;
 			chksub();
 		}
 	});
 
 	//检查时间限制
-	$("#time_limt").blur(function() {
+	$("#time_limit").blur(function() {
 		var len = ($(this).val()).length;
 		var regx = /^[0-9]*$/;
 		//alert(len);
 		if(len == 0) {
-			$("#time_limt_span").text('时间限制不能为空');
+			$("#time_limit_span").text('时间限制不能为空');
 		} else if(!regx.test($(this).val())) {
-			$("#time_limt_span").text('请输入正确的时间限制');
+			$("#time_limit_span").text('请输入正确的时间限制');
 		} else {
-			$("#time_limt_span").text('');
-			check_time_limt = true;
+			$("#time_limit_span").text('');
+			check_time_limit = true;
 			chksub();
 		}
 	});
 
 
 	//检查内存限制
-	$("#memory_limt").blur(function() {
+	$("#memory_limit").blur(function() {
 		var len = ($(this).val()).length;
 		var regx = /^[0-9]*$/;
 		//alert(len);
 		if(len == 0) {
-			$("#memory_limt_span").text('内存限制不能为空');
+			$("#memory_limit_span").text('内存限制不能为空');
 		} else if(!regx.test($(this).val())) {
-			$("#memory_limt_span").text('请输入正确的时内存限制');
+			$("#memory_limit_span").text('请输入正确的时内存限制');
 		} else {
-			$("#memory_limt_span").text('');
-			check_memory_limt = true;
+			$("#memory_limit_span").text('');
+			check_memory_limit = true;
 			chksub();
 		}
 	});

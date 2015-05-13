@@ -71,14 +71,53 @@ class Problem extends Admin_Controller{
 		else echo true;
 	}
 
+	//按题号创建文件夹
+	public function create_dir($problem_id) {
+		$OJ_DATA = $this->problem_model->get_oj_data();
+		$dir = "$OJ_DATA/$problem_id";
+		$result = false;
+		if (!file_exists($dir)) { 
+                $result = mkdir($dir); 
+        } 
+        return $result;
+	}	
+
+	//写入文件操作
+	public function write_file($path_, $content) {
+		$OJ_DATA = $this->problem_model->get_oj_data();
+		$path = "$OJ_DATA/$path_";
+		file_put_contents($path,$content);
+		if (file_exists($path))
+		  	return true;
+		else
+		  	return false;
+	}
+
+	//上传文件动作
+	public function do_upload($cof) {
+		$config['upload_path'] = $cof['path'];
+		$config['allowed_types'] = $cof['types'];
+		$config['max_size'] = $cof['max_size'];
+		$config['file_name'] = $cof['file_name'];
+		$this->load->library('upload',$config);
+		$this->upload->initialize($config);
+		$result = $this->upload->do_upload($cof['name']);
+		if($result) return true;
+		else {
+			 $error = array('error' => $this->upload->display_errors());
+			 return $error;
+		}
+	}
+
+
 	//题目添加动作
 	public function add_act() {
 		$data = array(
 				'problem_id' => $this->input->post('problem_id',TRUE),
 				'title' => $this->input->post('pro_title',TRUE),
 				'class_id' => $this->input->post('pro_class',TRUE),
-				'time_limt' => $this->input->post('time_limt',TRUE),
-				'memory_limt' => $this->input->post('memory_limt',TRUE),
+				'time_limit' => $this->input->post('time_limit',TRUE),
+				'memory_limit' => $this->input->post('memory_limit',TRUE),
 				'description' => $this->input->post('content_des',TRUE),
 				'input' => $this->input->post('content_input',TRUE),
 				'output' => $this->input->post('content_output',TRUE),
@@ -88,7 +127,78 @@ class Problem extends Admin_Controller{
 				'spj' => $this->input->post('spj',TRUE),
 				'source' => $this->input->post('source',TRUE)				
 			);
-		$result = $this->problem_model->add_act($data);
+		//echo $_POST['content_des'];
+		//p($data);die;
+		$result_w_in = false;
+		$result_w_out = false;
+		$result_in = false;
+		$result_out = false;
+		$result1 = false;
+		$result2 = false;
+		
+		$OJ_DATA = $this->problem_model->get_oj_data();
+
+		self::create_dir($data['problem_id']);
+		//写入sample_in
+		if(strlen($data['sample_input'])) {
+			$path = "$data[problem_id]/sample.in";
+			$result_w_in = self::write_file($path,$data['sample_input']);
+		}
+
+		//写入sample_out
+		if(strlen($data['sample_output'])) {
+			$path = "$data[problem_id]/sample.out";
+			$result_w_out = self::write_file($path,$data['sample_output']);
+		}
+
+		//上传test_in
+		//echo $_FILES['test_in']['tmp_name'];
+		if(!empty($_FILES['test_in']['tmp_name'])) {
+			$path = "$OJ_DATA/$data[problem_id]";
+			$cof_in = array(
+				'path' => $path,
+				'types' => 'txt',
+				'max_size' => '10240',
+				'file_name' => 'test_in',
+				'name' => 'test_in'
+			);
+			$result_in = self::do_upload($cof_in);
+			if($result_in == true) {
+				$a = "$path/test_in.txt";
+				$b = "$path/test.in";
+				rename($a, $b);
+			} else p($result_in);
+				//p($result_in);
+		}
+
+			//上传test_out
+		if(!empty($_FILES['test_out']['tmp_name'])) {
+			$path = "$OJ_DATA/$data[problem_id]";
+			$cof_out = array(
+				'path' => $path,
+				'types' => 'txt',
+				'max_size' => '10240',
+				'file_name' => 'test_out',
+				'name' => 'test_out'
+			);
+			$result_out = self::do_upload($cof_out);
+			if($result_out == true) {
+				$a = "$path/test_out.txt";
+				$b = "$path/test.out";
+				rename($a, $b);
+			} else p($result_out);
+		}
+		if(($result_w_in == true || $result_w_in == false) && ($result_w_out == true || $result_w_out == false) 
+			&& ($result_in == true || $result_in == false) && ($result_out == true || $result_out == false)) {
+			$result1 = $this->problem_model->add_act($data);
+			$result2 = $this->problem_model->privilege($this->session->userdata('user_id'),$data['problem_id']);
+		}
+
+		if($result1 && $result2) {
+			success('admin/problem/index','添加成功');
+		} else {
+			error("添加失败");
+		}
 		
 	}
 }

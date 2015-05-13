@@ -34,12 +34,11 @@
 <body>
 <div class="container">
 	<div >
-		<h4>添加题目</h4>
+		<h4 style = "display: inline;">添加题目</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h4 style = "display: inline;"><a href="<?= site_url('admin/problem/index');?>">返回</a></h4> 
 	</div>
 	<div class="well">
-			
+		<form name="example" method="post" action="<?= site_url('admin/problem/add_act');?>" enctype="multipart/form-data">
 		<table class = "table">
-	   	<form name="example" method="post" action="<?= site_url('admin/problem/add_act');?>" >
 	   	<tbody>
 		  <tr>
 			<td>题号：</td>
@@ -61,28 +60,28 @@
 		  </tr>
 		  <tr>
 			<td>时间限制：</td>
-			<td><input type="text"  value="" id = "time_limt" name = "time_limt" /> <span>S*</span><span id = "time_limt_span"></span></td>
+			<td><input type="text"  value="" id = "time_limit" name = "time_limit" /> <span>S*</span><span id = "time_limit_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>内存限制：</td>
-			<td><input type="text"  value="" id = "memory_limt" name = "memory_limt" /> <span>MB*</span><span id = "memory_limt_span"></span></td>
+			<td><input type="text"  value="" id = "memory_limit" name = "memory_limit" /> <span>MB*</span><span id = "memory_limit_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>题目描述：</td>
 			<td>
-			<script id="container1" name="content_des" class = "UEditor" type="text/plain">
+			<script id="content_des" name="content_des" class = "UEditor" type="text/plain">
     		</script>
     		</td>
 		  </tr>
 		  <tr>
 			<td>输入信息：</td>
-			<td><script id = "container2" name="content_input" class = "UEditor" type="text/plain">
+			<td><script id = "content_input" name="content_input" class = "UEditor" type="text/plain">
     		</script>
     		</td>
 		  </tr>
 		   <tr>
 			<td>输出信息：</td>
-			<td><script id="container3" name="content_output" class = "UEditor" type="text/plain">
+			<td><script id="content_output" name="content_output" class = "UEditor" type="text/plain">
     		</script>
     		</td>
 		  </tr>
@@ -96,15 +95,15 @@
 		  </tr>
 		  <tr>
 		  	<td>测试输入：</td>
-		  	<td><input type="file" name="test_in"/><span>请以test.in命名文件</span></td>
+		  	<td><input type="file" name="test_in"/><span>请以test_in.txt命名文件</span></td>
 		  </tr>
 		  <tr>
 		  	<td>测试输出：</td>
-		  	<td><input type="file" name="test_out"/><span>请以test.out命名文件</span></td>
+		  	<td><input type="file" name="test_out"/><span>请以test_out.txt命名文件</span></td>
 		  </tr>
 		   <tr>
 			<td>提示信息：</td>
-			<td><script id="container4" name="hint" class = "UEditor" type="text/plain">
+			<td><script id="hint" name="hint" class = "UEditor" type="text/plain">
     		</script>
     		</td>
 		  </tr>
@@ -136,17 +135,17 @@
 			</td>
 		  </tr>
 		  </tbody>
-		 </form>
-	  </table>
+	  	</table>
+	  	</form>
 	</div>
 </div>
 <script src="<?= base_url('application/views/admin/lib/jquery-1.8.1.min.js');?>" type="text/javascript"></script>
 <script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.min.js');?>" type="text/javascript"></script>
  <!-- 加载编辑器的容器 -->
     <!-- 配置文件 -->
-    <script type="text/javascript" src="<?= base_url('application/views/admin/UEditor/ueditor.config.js');?>"></script>
+    <script type="text/javascript" src="<?= base_url('UEditor/ueditor.config.js');?>"></script>
     <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="<?= base_url('application/views/admin/UEditor/ueditor.all.js');?>"></script>
+    <script type="text/javascript" src="<?= base_url('UEditor/ueditor.all.js');?>"></script>
     <script type="text/javascript" src="<?= base_url('application/views/admin/js/problem_add.js');?>"></script>
     <!-- 实例化编辑器 -->
 </body>

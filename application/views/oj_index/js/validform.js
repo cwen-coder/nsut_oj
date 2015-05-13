@@ -5,6 +5,14 @@ var ema = false;
 var usern = false;
 var pad = false;
 var cap = false;
+//获取目录地址
+var curPath=window.location.href;
+curPath = curPath.split("/");
+curPath.pop();
+curPath.pop();
+curPath = curPath.join("/");
+//console.log(curPath);
+
 //注册按钮检查
 function chkreg(){  
     	if(uname && pas1 && pas2 && ema){  
@@ -22,7 +30,9 @@ $(document).ready(function() {
   //点击刷新验证码
   $("#captcha_span").on("click",function(e){
     e.preventDefault();
-    $("#captcha_img").attr("src","../login/code");
+    var url = curPath+'/oj_index/login/code';
+    $("#captcha_img").attr("src",url);
+    //$("#captcha_img").attr("src","../login/code");
     // alert("123")
   })
 
@@ -41,7 +51,8 @@ $(document).ready(function() {
   		 }else if (len > 32) {
   		 	$("#cname").text('用户名不能超过32个字符');
   		 }else {
-  		 	$.post("../register/username_check",{
+        var url = curPath+'/oj_index/register/username_check';
+  		 	$.post(url,{
   		 			username:name
   		 		},function(data) {
   		 			//console.log(data);
@@ -100,7 +111,8 @@ $(document).ready(function() {
  	 	}else if (!Regx.test(email)){
  	 		$("#email1").text('请输入正确的邮箱');
  	 	}else {
- 	 		$.post('../register/email_check', {
+       var url = curPath+'/oj_index/register/email_check';
+ 	 		$.post(url, {
  	 			email:email
  	 		}, function(data) {
  	 			if(data) {
@@ -118,7 +130,8 @@ $(document).ready(function() {
    //注册动作
  	 $("#reg_sub").click(function(e) {  
  	 	//e.preventDefault();
- 	 	$.post("../register/reg_act",{
+    var url = curPath+'/oj_index/register/reg_act';
+ 	 	$.post(url,{
  	 		username : $("#r_username").val(),
  	 		password1 : $("#password1").val(),
  	 		password2 : $("#password2").val(),
@@ -183,7 +196,8 @@ $(document).ready(function() {
    //登录动作
    $("#log_sub").click(function() {
     //console.log("odsfo");
-     $.post("../login/log_act",{
+    var url = curPath+'/oj_index/login/log_act';
+     $.post(url,{
         username : $("#username").val(),
         password : $("#password").val(),
         captcha : $("#captcha").val()
@@ -193,7 +207,8 @@ $(document).ready(function() {
             $("#captcha_c").text('验证码错误');
         } else if(data == false) {
           alert("用户名或密码错误");
-          $("#captcha_img").attr("src","../login/code");
+          url = curPath+'/oj_index/login/code';
+          $("#captcha_img").attr("src",url);
         } else {
           history.go(0);
         }
