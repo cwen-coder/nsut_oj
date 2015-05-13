@@ -7,6 +7,7 @@ class Problem_category extends  Admin_Controller {
 		$this->load->model('Problemcategory_model','cate');
 		$this->load->helper('url');
 	}
+	public $off = 4;
 	//
 	function index(){
 		//$this->config->set_item('url_suffix', '');
@@ -16,11 +17,11 @@ class Problem_category extends  Admin_Controller {
 		$config['per_page'] = 5; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
 		$config['first_link'] = '首页'; // 第一页显示   
 		$config['last_link'] = '末页'; // 最后一页显示   
-		$config['next_link'] = '下一页 >'; // 下一页显示   
+		$config['next_link'] = '下一页 >'; // 下一页显示
 		$config['prev_link'] = '< 上一页'; // 上一页显示   
 		$config['full_tag_open'] = '<ul>';
 		$config['full_tag_close'] = '</ul>';
-		$config['cur_tag_open'] = '<li><a style="color:white;background-color:black">'; // 当前页开始样式   
+		$config['cur_tag_open'] = '<li><a style="color:white;background-color:blue">'; // 当前页开始样式   
 		$config['cur_tag_close'] = '</a></li>'; 
         		$config['num_links'] = 4;//    当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
         		$config['uri_segment'] = 4; 
@@ -35,29 +36,45 @@ class Problem_category extends  Admin_Controller {
 	function add_category(){
 		$problem_category = $this->input->post('problem_category',TRUE);
 		$result = $this->cate->add($problem_category);
-		self::index();
+		if($result){
+        		header('Content-Type:text/html;charset=utf-8');
+         		echo "<script type='text/javascript'>alert('添加成功');</script>";
+              	self::index();
+       		 }else{
+        		header('Content-Type:text/html;charset=utf-8');
+           		echo " <script type='text/javascript'>alert('添加失败');</script>";
+            		self::index();
+        		}
 	}
 	//删除题目类别
 	function delete_category(){
 		$cid = $this->input->post('cid');
 		$result = $this->cate->delete($cid);
-
-		self::index();
-    }
+		if($result){
+        		header('Content-Type:text/html;charset=utf-8');
+         		echo "<script type='text/javascript'>alert('删除成功');</script>";
+              	self::index();
+       		 }else{
+        		header('Content-Type:text/html;charset=utf-8');
+           		echo " <script type='text/javascript'>alert('删除失败');</script>";
+            		self::index();
+        		}
+    	}
     //修改题目类别
 	function edit_category(){
 		$cid = $this->input->post('cid');
 		$category =$this->input->post('problem_category');
 		$result = $this->cate->edit_category($cid, $category);
-        if($result){
-        	header('Content-Type:text/html;charset=utf-8');
-         	echo "<script type='text/javascript'>alert('修改成功');</script>";
-              self::index(); 
-        }else{
-        	header('Content-Type:text/html;charset=utf-8');
-           	echo " <script type='text/javascript'>alert('修改失败');</script>";
-            	self::index();
-        }
+		echo $off;die;
+        		if($result){
+        		header('Content-Type:text/html;charset=utf-8');
+         		echo "<script type='text/javascript'>alert('修改成功');</script>";
+              	self::index();
+       		 }else{
+        		header('Content-Type:text/html;charset=utf-8');
+           		echo " <script type='text/javascript'>alert('修改失败');</script>";
+            		self::index();
+        		}
 	}
 }
 ?>
