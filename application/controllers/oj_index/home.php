@@ -30,18 +30,19 @@ class Home extends Oj_Controller{
 		$data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
 		$this->load->view('oj_index/problem_list.html',$data);
 	}
-
 	public function problem(){
 		$cid=$this->input->get('id');
 		echo $cid;
 		$data['problem']=$this->pro->get_problem_id($cid);
 		$this->load->view('oj_index/problem.html',$data);
 	}
-	 public function contest_list(){
+	public function contest_list(){
 	 	$this->load->view('oj_index/contest_list.html');
-	 }
-
-	 public function status(){
+	}
+	public function status(){
 	 	$this->load->view('oj_index/status.html');
-	 }
+	}
+	public function submitpage(){
+		$this->load->view('oj_index/submitpage.html');
+	}
 }

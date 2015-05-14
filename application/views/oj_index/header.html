@@ -23,7 +23,12 @@
 					</div><!-- /.navbar-collapse -->
 					<script type="text/javascript">
 						$(function(){
-							$("a[href='"+window.location+"']").parent().addClass("active");
+							var s = window.location.href;
+							var a = s.split("/");
+							//var l = s.length;
+							var str = s.substring(0,49);
+							//console.log(str+a[7]);
+							$("a[href='"+str+a[7]+"']").parent().addClass("active");
 							//console.log($("a[href='"+window.location+"']"));
 						});
 					</script>

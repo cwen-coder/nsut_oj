@@ -14,6 +14,16 @@
    <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
   </head>
   <style type="text/css">
+  .container_modal{
+    margin-left:20%;
+  }
+  .label_reg{
+    width:20%;
+  }
+  </style>
+  <body>
+<?php $this->load->view('oj_index/header.html');?>
+<style type="text/css">
     body {
     background: #eee;
     background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
@@ -24,14 +34,6 @@
     margin: 0px;
     padding: 0px;
   }
-  .group{
-    position:absolute;
-    margin-top: 11%;
-    left: 50%;
-  }
-  </style>
-  <body>
-<?php $this->load->view('oj_index/header.html');?>
-<a class="group" href="<?php echo site_url('oj_index/home/submitpage?pid='.$problem['problem_id']);?>">submit</a>
+</style>
 </body>
 </html>
