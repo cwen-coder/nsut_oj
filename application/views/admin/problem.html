@@ -88,7 +88,7 @@
           <td><?php echo $temp['title'];?></td>
           <td><?php echo $temp['class_name'];?></td>
           <td>
-              <a href="" ><i class="icon-pencil"></i></a>
+              <a href="<?= site_url('admin/problem_edit/pro_edit/'.$temp['problem_id']); ?>" ><i class="icon-pencil"></i></a>
               <a href="#myModal" role="button" data-toggle="modal" id = "<?php echo $temp['problem_id'];?>"><i class="icon-remove"></i></a>
           </td>
         </tr>

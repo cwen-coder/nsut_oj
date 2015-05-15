@@ -34,25 +34,25 @@
 <body>
 <div class="container">
 	<div >
-		<h4 style = "display: inline;">添加题目</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h4 style = "display: inline;"><a href="<?= site_url('admin/problem/index');?>">返回</a></h4> 
+		<h4 style = "display: inline;">题目修改</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h4 style = "display: inline;"><a href="<?= site_url('admin/problem/index');?>">返回</a></h4> 
 	</div>
 	<div class="well">
-		<form name="example" method="post" action="<?= site_url('admin/problem/edit_act');?>" enctype="multipart/form-data">
+		<form name="example" method="post" action="<?= site_url('admin/problem_edit/edit_act');?>" enctype="multipart/form-data">
 		<table class = "table">
 	   	<tbody>
 		  <tr>
 			<td>题号：</td>
-			<td><input id = "problem_id" name="problem_id" value="" type="text"  /> <span >*&nbsp;&nbsp;&nbsp;之前已添加到第&nbsp; <?php echo $max_id['MAX(problem_id)'];?>&nbsp; 题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id = "problem_id_span"></span></td>
+			<td><input id = "problem_id" name="problem_id" value="<?= $problem['problem_id'];?>" type="text"  /> <span >*</span><span id = "problem_id_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>标题：</td>
-			<td><input type="text"  id = "pro_title" name = "pro_title" value="" /> <span >*</span><span id = "pro_title_span"></span></td>
+			<td><input type="text"  id = "pro_title" name = "pro_title" value="<?= $problem['title'];?>" /> <span >*</span><span id = "pro_title_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>所属分类：</td>
-			<td><select name = "pro_class" >
-			<?php foreach($class as $v):?>			
-				<option value="<?= $v['class_id'];?>" ><?= $v['class_name'];?></option>
+			<td><select name = "pro_class" id = "sel">
+			<?php foreach($class as $v):?>
+					<option value="<?= $v['class_id'];?>"><?= $v['class_name'];?></option>
 			<?php endforeach;?>
 			  </select>
 			  <span>*</span>
@@ -60,34 +60,37 @@
 		  </tr>
 		  <tr>
 			<td>时间限制：</td>
-			<td><input type="text"  value="" id = "time_limit" name = "time_limit" /> <span>S*</span><span id = "time_limit_span"></span></td>
+			<td><input type="text"  value="<?= $problem['time_limit'];?>" id = "time_limit" name = "time_limit" /> <span>S*</span><span id = "time_limit_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>内存限制：</td>
-			<td><input type="text"  value="" id = "memory_limit" name = "memory_limit" /> <span>MB*</span><span id = "memory_limit_span"></span></td>
+			<td><input type="text"  value="<?= $problem['memory_limit'];?>" id = "memory_limit" name = "memory_limit" /> <span>MB*</span><span id = "memory_limit_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>题目描述：</td>
 			<td>
 			<script id="content_des" name="content_des" class = "UEditor" type="text/plain">
+			<?= $problem['description'];?>
     		</script>
     		</td>
 		  </tr>
 		  <tr>
 			<td>输入信息：</td>
 			<td><script id = "content_input" name="content_input" class = "UEditor" type="text/plain">
+			<?= $problem['input'];?>
     		</script>
     		</td>
 		  </tr>
 		   <tr>
 			<td>输出信息：</td>
 			<td><script id="content_output" name="content_output" class = "UEditor" type="text/plain">
+			<?= $problem['output'];?>
     		</script>
     		</td>
 		  </tr>
 		  <tr>
 		  	<td>样例输入：</td>
-		  	<td><textarea class = "textarea" name = "sample_input" ></textarea></td>
+		  	<td><textarea class = "textarea" name = "sample_input" ><?= $problem['sample_input'];?></textarea></td>
 		  </tr>
 		  <tr>
 		  	<td>样例输出：</td>
@@ -147,6 +150,15 @@
     <!-- 编辑器源码文件 -->
     <script type="text/javascript" src="<?= base_url('UEditor/ueditor.all.js');?>"></script>
     <script type="text/javascript" src="<?= base_url('application/views/admin/js/problem_add.js');?>"></script>
-    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+    	var opList = document.getElementById("sel").childNodes;
+    	var val = <?= $problem['class_id'] ?>;
+            for (var i = 0, len = opList.length; i < len; i++) {
+                if (opList[i].value == val) {
+                    opList[i].selected = true;
+                    break;
+                }
+            }
+    </script>
 </body>
 </html>
