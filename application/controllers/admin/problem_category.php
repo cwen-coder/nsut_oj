@@ -7,8 +7,7 @@ class Problem_category extends  Admin_Controller {
 		$this->load->model('Problemcategory_model','cate');
 		$this->load->helper('url');
 	}
-	public $off = 4;
-	//
+	//载入首页
 	function index(){
 		//$this->config->set_item('url_suffix', '');
 		$total_rows = $this->cate->total_rows();
@@ -36,44 +35,34 @@ class Problem_category extends  Admin_Controller {
 	function add_category(){
 		$problem_category = $this->input->post('problem_category',TRUE);
 		$result = $this->cate->add($problem_category);
+		$url = 'admin/problem_category/index';
 		if($result){
-        		header('Content-Type:text/html;charset=utf-8');
-         		echo "<script type='text/javascript'>alert('添加成功');</script>";
-              	self::index();
+			success($url,'添加成功');
        		 }else{
-        		header('Content-Type:text/html;charset=utf-8');
-           		echo " <script type='text/javascript'>alert('添加失败');</script>";
-            		self::index();
+       		 	error('添加失败');
         		}
 	}
 	//删除题目类别
 	function delete_category(){
 		$cid = $this->input->post('cid');
 		$result = $this->cate->delete($cid);
+		$url = 'admin/problem_category/index';
 		if($result){
-        		header('Content-Type:text/html;charset=utf-8');
-         		echo "<script type='text/javascript'>alert('删除成功');</script>";
-              	self::index();
+			success($url,'删除成功');
        		 }else{
-        		header('Content-Type:text/html;charset=utf-8');
-           		echo " <script type='text/javascript'>alert('删除失败');</script>";
-            		self::index();
+       		 	error('删除失败');
         		}
     	}
-    //修改题目类别
+    	//修改题目类别
 	function edit_category(){
 		$cid = $this->input->post('cid');
 		$category =$this->input->post('problem_category');
 		$result = $this->cate->edit_category($cid, $category);
-		echo $off;die;
-        		if($result){
-        		header('Content-Type:text/html;charset=utf-8');
-         		echo "<script type='text/javascript'>alert('修改成功');</script>";
-              	self::index();
+		$url = 'admin/problem_category/index';
+		if($result){
+			success($url,'修改成功');
        		 }else{
-        		header('Content-Type:text/html;charset=utf-8');
-           		echo " <script type='text/javascript'>alert('修改失败');</script>";
-            		self::index();
+       		 	error('修改失败');
         		}
 	}
 }
