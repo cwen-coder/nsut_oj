@@ -99,5 +99,19 @@ class Problem_model extends CI_Model {
 		return $reslut;
 	}
 
+	//题目修改动作
+	public function edit_act($data) {
+		$query_p = "UPDATE problem SET title = '$data[title]',time_limit = '$data[time_limit]',
+		memory_limit = '$data[memory_limit]',description = '$data[description]',input = '$data[input]',
+		output =  '$data[output]',sample_input = '$data[sample_input]',sample_output = '$data[sample_output]',
+		hint = '$data[hint]',source = '$data[source]',spj = '$data[spj]',in_date = NOW(),defunct = 'N'
+		WHERE problem_id = '$data[problem_id]'";
+		$query_c = "UPDATE problem_class SET class_id = '$data[class_id]' WHERE problem_id = '$data[problem_id]'";
+		$result_p = mysql_query($query_p);
+		$result_c = mysql_query($query_c);
+		if($result_p && $result_c) return true;
+		else return false;
+	}
+
 }
 ?>
