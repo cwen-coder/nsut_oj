@@ -13,7 +13,7 @@ class Home extends Oj_Controller{
 		$config['base_url'] = site_url('oj_index/home/index');   
 		$config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
 		$config['per_page'] = 2; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
-		$config['first_link'] = '首页'; // 第一页显示   
+		$config['first_link'] = '首页'; // 第一页显示
 		$config['last_link'] = '末页'; // 最后一页显示   
 		$config['next_link'] = '下一页 >'; // 下一页显示   
 		$config['prev_link'] = '< 上一页'; // 上一页显示   
@@ -30,18 +30,22 @@ class Home extends Oj_Controller{
 		$data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
 		$this->load->view('oj_index/problem_list.html',$data);
 	}
+	//显示题目具体内容
 	public function problem(){
-		$cid=$this->input->get('id');
+		$cid=$this->input->get('id',TRUE);
 		echo $cid;
 		$data['problem']=$this->pro->get_problem_id($cid);
 		$this->load->view('oj_index/problem.html',$data);
 	}
+	//比赛列表显示
 	public function contest_list(){
 	 	$this->load->view('oj_index/contest_list.html');
 	}
+	//提交状态显示
 	public function status(){
 	 	$this->load->view('oj_index/status.html');
 	}
+	//提交页面显示
 	public function submitpage(){
 		$this->load->view('oj_index/submitpage.html');
 	}

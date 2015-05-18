@@ -44,7 +44,7 @@ class Problem_category extends  Admin_Controller {
 	}
 	//删除题目类别
 	function delete_category(){
-		$cid = $this->input->post('cid');
+		$cid = $this->input->post('cid',TRUE);
 		$result = $this->cate->delete($cid);
 		$url = 'admin/problem_category/index';
 		if($result){
@@ -55,7 +55,7 @@ class Problem_category extends  Admin_Controller {
     	}
     	//修改题目类别
 	function edit_category(){
-		$cid = $this->input->post('cid');
+		$cid = $this->input->post('cid',TRUE);
 		$category =$this->input->post('problem_category');
 		$result = $this->cate->edit_category($cid, $category);
 		$url = 'admin/problem_category/index';
