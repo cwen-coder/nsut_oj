@@ -112,6 +112,26 @@ class Problem_model extends CI_Model {
 		if($result_p && $result_c) return true;
 		else return false;
 	}
+	//按题号搜索题目
+	public function search_problem_byId($problem_id) {
+		$query = "SELECT a.problem_id,a.title,c.class_name FROM problem a, problem_class b,class_name c 
+		WHERE a.problem_id = '$problem_id' AND a.problem_id = b.problem_id AND b.class_id = c.class_id  ";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		if($num < 1) return 0;
+		else return mysql_fetch_assoc($result);
+	}
+
+	//按标题搜索题目
+	public function search_problem_byTitle($title) {
+		$query = "SELECT a.problem_id,a.title,c.class_name FROM problem a, problem_class b,class_name c 
+		WHERE title = '$title' AND a.problem_id = b.problem_id AND b.class_id = c.class_id  ";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		if($num < 1) return 0;
+		else return mysql_fetch_assoc($result);
+	}
+
 
 }
 ?>

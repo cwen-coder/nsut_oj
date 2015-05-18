@@ -1,13 +1,23 @@
+var curPath=window.location.href;
+curPath = curPath.split("/");
+curPath.pop();
+curPath.pop();
+curPath = curPath.join("/");
+
 $(document).ready(function() {
 	$("#A_captcha_span").on("click",function(e){
     e.preventDefault();
-    $("#A_captcha_img").attr("src","../privilege/code");
+     var url = curPath+'/admin/privilege/code';
+    $("#A_captcha_img").attr("src",url);
     // alert("123")
   });
 	$("#log_but_A").click(function(e) {
         //alert("odsfo");
         e.preventDefault();
-     $.post("../privilege/log_act",{
+    var url = curPath+'/admin/privilege/log_act';
+    var url_ = curPath+'/admin/privilege/code';
+    var url1 = curPath+'/admin/home/index';
+     $.post(url,{
         username : $("#A_username").val(),
         password : $("#A_password").val(),
         captcha : $("#A_captcha").val()
@@ -17,10 +27,10 @@ $(document).ready(function() {
             alert('验证码错误');
         } else if(data == false) {
           alert("用户名或密码错误");
-          $("#A_captcha_img").attr("src","../privilege/code");
+          $("#A_captcha_img").attr("src",url_);
         } else {
           //history.go(0);
-          window.location.href="../home/index";          
+          window.location.href=url1;          
         }
      })
    });

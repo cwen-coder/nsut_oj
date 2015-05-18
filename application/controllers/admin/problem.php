@@ -203,10 +203,10 @@ class Problem extends Admin_Controller{
 			success('admin/problem/index','添加成功');
 		} else {
 			error("添加失败");
-		}
-		
+		}		
 	}
 
+	//载入编辑页面
 	public function pro_edit() {
 		$problem_id = $this->uri->segment(4);
 		$data['problem'] = $this->problem_model->get_problem_id($problem_id);
@@ -214,6 +214,7 @@ class Problem extends Admin_Controller{
 		$this->load->view('admin/problem_edit.html',$data);
 	}
 
+	//编辑动作
 	public function edit_act() {
 		$data = array(
 				'problem_id' => $this->input->post('problem_id',TRUE),
@@ -238,7 +239,7 @@ class Problem extends Admin_Controller{
 		$result2 = false;
 		
 		$OJ_DATA = $this->problem_model->get_oj_data();
-
+		self::create_dir($data['problem_id']);
 		//写入sample_in
 		if(strlen($data['sample_input'])) {
 			$path = "$data[problem_id]/sample.in";
@@ -301,6 +302,38 @@ class Problem extends Admin_Controller{
 		}
 		
 	}
+
+	//后台按题号查找函数
+	public function search_problem_byId() {
+		$problem_id = $this->input->post('problem_id',TRUE);
+		$result = preg_match("/^[0-9]*$/", $problem_id);
+		if($result) {
+			$problem = $this->problem_model->search_problem_byId($problem_id);
+			if($problem == 0) {echo 1;return;}
+		}else {
+			echo false;
+			return;
+		}
+		$problem = json_encode($problem);
+		echo $problem;
+		return;
+	}
+
+	//后台按标题查找函数
+	public function search_problem_byTitle() {
+		$title = $this->input->post('title',TRUE);
+		$problem = $this->problem_model->search_problem_byTitle($title); 
+		if($problem == 0) {
+			echo false;
+			return;
+		} else {
+			$problem = json_encode($problem);
+			echo $problem;
+			return;
+		}
+	}
+
+	
 }
 
 ?>
