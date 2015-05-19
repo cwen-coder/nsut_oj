@@ -14,9 +14,9 @@ $(document).ready(function() {
 	$("#log_but_A").click(function(e) {
         //alert("odsfo");
         e.preventDefault();
-    var url = curPath+'/admin/privilege/log_act';
-    var url_ = curPath+'/admin/privilege/code';
-    var url1 = curPath+'/admin/home/index';
+    var url = curPath+'/privilege/log_act';
+    var url_ = curPath+'/privilege/code';
+    var url1 = curPath+'/home/index';
      $.post(url,{
         username : $("#A_username").val(),
         password : $("#A_password").val(),

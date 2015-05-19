@@ -45,7 +45,7 @@ function search_id(search) {
       alert("请输入正确题号");
       return 
     } else {
-      var url = $("#hid_site").val() + '/admin/problem/search_problem_byId';
+      var url = $("#hid_site").val() + '/admin/problem_search/search_problem_byId';
       $.post(url, {
         problem_id : search
       },function(data) {
@@ -78,7 +78,7 @@ function search_id(search) {
 }
 
 function search_title(search) {
-      var url = $("#hid_site").val() + '/admin/problem/search_problem_byTitle';
+      var url = $("#hid_site").val() + '/admin/problem_search/search_problem_byTitle';
       $.post(url,{
         title : search
       },function(data) {
@@ -103,6 +103,38 @@ function search_title(search) {
            "  <a href='#myModal' role='button' data-toggle='modal' id = '" + pro.problem_id + "'><i class='icon-remove'></i></a>" 
            + "</td>");
           td.appendTo(tr);
+        }
+      });
+}
+//安题目分类查询
+function search_class(search) {
+  var url = $("#hid_site").val() + '/admin/problem_search/search_problem_byClass';
+      $.post(url,{
+        class_name : search
+      },function(data) {
+        if(data == false) {
+          $("#tbody").html("");
+          $("#links").remove();
+          alert("抱歉没有找到");
+        } else {
+          var pro = eval("("+data+")");
+          $("#tbody").html("");
+          $("#links").remove();
+          for(var i = 0; i < pro.length; i++) {
+            var tr = $("<tr></tr>");
+            tr.appendTo(tbody);
+            td = $("<td>"+ pro[i].problem_id +"</td>");
+            td.appendTo(tr);
+            td = $("<td>"+ pro[i].title +"</td>");
+            td.appendTo(tr);
+            td = $("<td>"+ pro[i].class_name +"</td>");
+            td.appendTo(tr);
+            var url_ed = $("#hid_site").val() + '/admin/problem/pro_edit/' + pro[i].problem_id;
+            td = $("<td>"+ "<a href='" + url_ed + "'><i class='icon-pencil'></i></a>" +
+             "  <a href='#myModal' role='button' data-toggle='modal' id = '" + pro[i].problem_id + "'><i class='icon-remove'></i></a>" 
+             + "</td>");
+            td.appendTo(tr);
+          }
         }
       });
 }
