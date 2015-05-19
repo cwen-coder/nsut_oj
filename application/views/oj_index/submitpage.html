@@ -11,6 +11,22 @@
     <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
+    <script language="Javascript" type="text/javascript" src="<?php echo base_url('edit_area/edit_area_full.js');?>"></script>
+<script language="Javascript" type="text/javascript">
+
+editAreaLoader.init({
+          id: "source"            
+          ,start_highlight: true 
+          ,allow_resize: "both"
+          ,allow_toggle: true
+          ,word_wrap: true
+          ,language: "en"
+          ,syntax: "cpp"  
+      ,font_size: "8"
+          /*,syntax_selection_allow: "basic,c,cpp,java,pas,perl,php,python,ruby"*/
+      ,toolbar: "search, go_to_line, fullscreen, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, word_wrap, |, help"          
+  });
+</script>
    <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
   </head>
   <style type="text/css">
@@ -20,11 +36,11 @@
   .label_reg{
     width:20%;
   }
-  </style>
-  <body>
-<?php $this->load->view('oj_index/header.html');?>
-<style type="text/css">
-    body {
+  .group{
+    margin-top: 8%;
+  }
+  body {
+    font-family: 微软雅黑;
     background: #eee;
     background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
     background-position: initial initial;
@@ -34,6 +50,28 @@
     margin: 0px;
     padding: 0px;
   }
-</style>
+  </style>
+  <body>
+<?php $this->load->view('oj_index/header.html');?>
+<center>
+<div class="group">
+<form action="<?php echo site_url('oj_index/problem_submit/index');?>" method="post">
+  <div>
+    <span style="color:red">Problem A</span><br/>
+    <span style="color:red">Language:</span>
+  <select id="language" name="language">
+            <option value="0" >C</option>
+            <option value="1" >C++</option>
+</select>
+<div>
+<!-- <input type='hidden' value='1001' name="cid"> -->
+<!-- <input type='hidden' value='1000' name="pid"> -->
+<textarea style="width:60%;" cols=60 rows=20 id="source" name="source"></textarea>
+
+<input type="submit" class="btn btn-primary" value="Submit">
+<input type="reset" class="btn btn-default" value="Reset">
+<form>
+</div>
+</center>
 </body>
 </html>
