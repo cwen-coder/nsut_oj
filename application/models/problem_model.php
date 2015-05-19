@@ -132,6 +132,22 @@ class Problem_model extends CI_Model {
 		else return mysql_fetch_assoc($result);
 	}
 
+	//按题目分类查询题目
+	public function search_problem_byClass($calss_name) {
+		$query = "SELECT a.problem_id,a.title,c.class_name FROM problem a, problem_class b,class_name c 
+		WHERE c.class_name = '$calss_name' AND a.problem_id = b.problem_id AND b.class_id = c.class_id  ";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		if($num < 1) return 0;
+		else {
+			$problem = array();
+			while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
+				$problem[] = $row;
+			}
+			return $problem;
+		}
+	}
+
 
 }
 ?>
