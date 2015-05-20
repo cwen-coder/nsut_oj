@@ -7,7 +7,7 @@ curPath = curPath.join("/");
 $(document).ready(function() {
 	$("#A_captcha_span").on("click",function(e){
     e.preventDefault();
-     var url = curPath+'/admin/privilege/code';
+     var url = curPath+'/privilege/code';
     $("#A_captcha_img").attr("src",url);
     // alert("123")
   });
