@@ -8,7 +8,8 @@ class Problemsubmit_model extends CI_Model{
 		parent::__construct();
 		require('db_info.inc.php');
 	}
-	function problem_submit(){
-
+	function problem_submit($data){
+		p($data);
+		echo Now();
 	}
 }

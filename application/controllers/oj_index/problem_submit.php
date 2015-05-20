@@ -6,13 +6,17 @@
 class Problem_submit extends Oj_Controller{
 	function __construct(){
 		parent::__construct();
-		//$this->load->model('problemsubmit','ps');
+		$this->load->model('problemsubmit_model','ps');
 	}
 	function index(){
-		//$this->input->post('source');
-		echo "11111";
-		$session_id = $this->session->userdata('ip_address');
-		echo "<br/>";
-		echo $session_id;
+		$data['user_id'] = $this->session->userdata('user_id');
+		if($data['user_id'] == null){
+			error('请先登录');
+		}else{
+			$data['source'] = $this->input->post('source', TRUE);
+			$data['pid'] = $this->input->post('pid', TRUE);
+			$data['ip'] = $this->session->userdata('ip_address');
+			$result = $this->ps->problem_submit($data);
+		}
 	}
 }

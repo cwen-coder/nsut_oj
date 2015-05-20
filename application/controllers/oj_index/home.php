@@ -32,9 +32,8 @@ class Home extends Oj_Controller{
 	}
 	//显示题目具体内容
 	public function problem(){
-		$cid=$this->input->get('id',TRUE);
-		echo $cid;
-		$data['problem']=$this->pro->get_problem_id($cid);
+		$pid=$this->input->get('pid', TRUE);
+		$data['problem']=$this->pro->get_problem_id($pid);
 		$this->load->view('oj_index/problem.html',$data);
 	}
 	//比赛列表显示
@@ -47,6 +46,13 @@ class Home extends Oj_Controller{
 	}
 	//提交页面显示
 	public function submitpage(){
-		$this->load->view('oj_index/submitpage.html');
+		$username = $this->session->userdata('username');
+		if($username == null){
+			self::problem();
+			echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click();}</script>";
+		}else{
+			$data['pid'] = $this->input->get('pid', TRUE);
+			$this->load->view('oj_index/submitpage.html', $data);
+		}
 	}
 }

@@ -36,9 +36,11 @@ editAreaLoader.init({
   .label_reg{
     width:20%;
   }
-  .group{
+    .group{
     margin-top: 8%;
   }
+  </style>
+  <style type="text/css">
   body {
     font-family: 微软雅黑;
     background: #eee;
@@ -64,8 +66,8 @@ editAreaLoader.init({
             <option value="1" >C++</option>
 </select>
 <div>
-<!-- <input type='hidden' value='1001' name="cid"> -->
-<!-- <input type='hidden' value='1000' name="pid"> -->
+<input type='hidden' value='1001' name="cid"> 
+<input type='hidden' value='<?php echo $pid;?>' name="pid"> 
 <textarea style="width:60%;" cols=60 rows=20 id="source" name="source"></textarea>
 
 <input type="submit" class="btn btn-primary" value="Submit">

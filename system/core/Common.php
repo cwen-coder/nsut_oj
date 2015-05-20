@@ -591,9 +591,16 @@ function success($url,$msg){
  */
 function error($msg){
     header('Content-Type:text/html;charset=utf-8');
-    echo "<script type='text/javascript'> alert('$msg');window.history.back();</script>";
+    echo "<script type='text/javascript'>alert('$msg');window.history.back();</script>";
     die;
 }
-
+/*
+*当前时间
+*/
+function Now(){
+	$datestring = "%Y-%m-%d %h:%i:%s";
+	$time = time();
+	return mdate($datestring, $time); 
+}
 /* End of file Common.php */
 /* Location: ./system/core/Common.php */
