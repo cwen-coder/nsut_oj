@@ -14,8 +14,11 @@ class Problem_submit extends Oj_Controller{
 			error('请先登录');
 		}else{
 			$data['source'] = $this->input->post('source', TRUE);
+			$data['language'] = $this->input->post('language', TRUE);
 			$data['pid'] = $this->input->post('pid', TRUE);
 			$data['ip'] = $this->session->userdata('ip_address');
+			$data['code_length'] = strlen($data['source']);
+			/*echo $data['code_length'];die;*/
 			$result = $this->ps->problem_submit($data);
 		}
 	}
