@@ -6,7 +6,6 @@
 class Problem_submit extends Oj_Controller{
 	function __construct(){
 		parent::__construct();
-		require('db_info.inc.php');
 		$this->load->model('problemsubmit_model','ps');
 	}
 	function index(){
@@ -21,12 +20,6 @@ class Problem_submit extends Oj_Controller{
 			$data['code_length'] = strlen($data['source']);
 			/*echo $data['code_length'];die;*/
 			$result = $this->ps->problem_submit($data);
-			if($OJ_MEMCACHE&&$result){
-				$this->load->library('CI_Memcache');
-				$mem = new CI_Memcache();
-				$mem->mc = $mem->init();
-				$mem->mc->delete($file,0);
-			}
 		}
 	}
 	/**

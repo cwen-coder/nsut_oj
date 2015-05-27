@@ -38,7 +38,7 @@ class CI_Memcache {
             
             $this->port = isset( $memcache_config['port'] ) ? $memcache_config['port'] : '11211';
             
-            $this->timeout = isset( $memcache_config['timeout'] ) ? $memcache_config['timeout'] : '60';
+            $this->timeout = isset( $memcache_config['timeout'] ) ? $memcache_config['timeout'] : '1';
             
             return true;
         }
