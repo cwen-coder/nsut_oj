@@ -22,4 +22,20 @@ class Problem_submit extends Oj_Controller{
 			$result = $this->ps->problem_submit($data);
 		}
 	}
+	/**
+	 * memcache调用 
+	 */
+	function memcache(){
+		$this->load->library('CI_Memcache');
+		$mem = new CI_Memcache();
+		$mem->mc = $mem->init();
+		$key = 'admin_memcache';
+		if($mem->mc->get( $key ))
+			echo $mem->mc->get( $key );
+		else{
+			echo 'normal';
+		}
+		$mem->mc->set($key, time());
+		//$mem->mc->delete($key,0);
+	}
 }
