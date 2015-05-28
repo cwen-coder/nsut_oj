@@ -8,7 +8,7 @@ class Contest extends Admin_Controller {
 
 	function __construct() {
 		parent::__construct();
-		//$this->load->model('contest_model');
+		$this->load->model('contest_model');
 	}
 
 	public function index() {
@@ -16,7 +16,16 @@ class Contest extends Admin_Controller {
 	}
 
 	public function contest_add() {
-		$this->load->view("admin/contest_add.html");
+		$data['con_id'] = $this->contest_model->get_max_id();
+		//p($data['con_id']['MAX(contest_id)']);
+		if ($data['con_id']['MAX(contest_id)'] == false) {
+			$data['con_id']['MAX(contest_id)'] = 1000;
+		} else {
+			$data['con_id']['MAX(contest_id)'] += 1;
+		}
+		//p($data['con_id']['MAX(contest_id)']);
+		$this->load->view("admin/contest_add.html",$data);
 	}
+
 }
 ?>
