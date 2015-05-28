@@ -120,6 +120,7 @@ $(document).ready(function() {
 			chksub();
 		}
 	});
+	
 	//密码检查
 	$("#con_pwd").bind('input propertychange blur', function() {
 		var sel = $("#class_sel").val();
@@ -138,6 +139,7 @@ $(document).ready(function() {
 			}
 		}
 	});
+
 	//开始时间检测
 	$("#start_time").bind('input propertychange blur', function() {
 		var start_time = $(this).val();
@@ -152,6 +154,7 @@ $(document).ready(function() {
 			chksub();
 		}
 	});
+
 	//结束时间检测
 	$("#end_time").bind('input propertychange blur', function() {
 		var end_time = $(this).val();

@@ -16,5 +16,13 @@ class Contest_model extends CI_Model {
 		return mysql_fetch_assoc($result);
 	}
 
+	//创建比赛动作
+	public function add_act($data) {
+		$sql = "INSERT INTO contest(contest_id,title,con_class,problem_sum,start_time,end_time,pre_start_time,pre_end_time,gold,silver,copper,con_pwd)
+		VALUES ('$data[contest_id]','$data[title]','$data[con_class]','$data[problem_sum]','$data[start_time]','$data[end_time]','$data[p_s_time]',
+			'$data[p_s_time]','$data[gold]','$data[silver]','$data[copper]','$data[con_pwd]') ";
+		$result = mysql_query($sql);
+		return $result;
+	}
 }
 ?>

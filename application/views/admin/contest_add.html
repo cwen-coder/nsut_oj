@@ -37,22 +37,23 @@
 			<h4 style = "display: inline;">创建比赛</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h4 style = "display: inline;"><a href="<?= site_url('admin/contest/index');?>">返回</a></h4> 
 	</div>
 	<div class="well">
-		<form class="form-inline">
+		<form class="form-inline" method="post" action="<?= site_url('admin/contest/con_add_act');?>" >
 		<hr>
 	  <div class="form-group">
 	    <label for="con_id">新建比赛ID：</label>
 	   	<span style = "margin-left:7%;"><?= $con_id['MAX(contest_id)'];?></span>
+	   	<input type="hidden" id = "con_id" name = "con_id" value="<?= $con_id['MAX(contest_id)'];?>" >
 	  </div>
 	  <hr>
 	  <div class="form-group">
 	    <label for="con_title">比赛标题：</label>
-	    <input  type="text" class="form-control" style = "margin-left:8%;" id="con_title">
-	    <span >*&nbsp;&nbsp;</span><span id = "con_title_span"></span>
+	    <input  type="text" class="form-control" style = "margin-left:8%;" id="con_title"  name="con_title" >
+	    <span >*&nbsp;&nbsp;</span><span id = "con_title_span" name = "con_title_span"></span>
 	  </div>
 	  <hr>
 	   <div class="form-group">
 	    <label for="con_num">题目总数：</label>
-	    <input  type="text" class="form-control" style = "margin-left:8%;" id="con_num">
+	    <input  type="text" class="form-control" style = "margin-left:8%;" id="con_num" name = "con_num">
 	 	<span id = "con_num_span"></span>
 	  </div>
 	  <hr>
@@ -66,42 +67,42 @@
 		  </select>
 	  </div>
 	  <div class="form-group display"  style="margin-left:12%;" id = "div_pwd">
-	  	<label for="con_pwd">比赛密码：</label>
-	  	<input  type="password" class="form-control" style = "margin-left:8%;" id="con_pwd">
+	  	<label for="con_pwd" >比赛密码：</label>
+	  	<input  type="password" class="form-control" style = "margin-left:8%;" id="con_pwd" name="con_pwd">
 	  	<span>*&nbsp;&nbsp;</span>
 	  	<span id = "con_pwd_span"></span>
 	  </div>
 	  <hr>
 	  <div class="form-group" style="display: inline;">
 	  	<label for="start_time">开始时间：</label>
-	  	<input  type="datetime-local" class="form-control" id = "start_time" style = "margin-left:8%;" >
+	  	<input  type="datetime-local" class="form-control" id = "start_time" name = "start_time" style = "margin-left:8%;" >
 	  	<span>*&nbsp;&nbsp;</span>
 	  	<span id = "con_s_t_span"></span>
 	  </div>
 	  <div class="form-group" style="display: inline; margin-left:12%;">
 	  	<label for="end_time">结束时间：</label>
-	  	<input  type="datetime-local" class="form-control" id = "end_time" style = "margin-left:8%;" >
+	  	<input  type="datetime-local" class="form-control" id = "end_time" name = "end_time" style = "margin-left:8%;" >
 	  	<span>*&nbsp;&nbsp;</span>
 	  	<span id = "con_e_t_span"></span>
 	  </div>
 	  <hr>
 	  <div class="form-group display" id = "p_s_time">
 	  	<label for="pre_start_time">注册开始时间：</label>
-	  	<input  type="datetime-local" class="form-control" style = "margin-left:5.5%;" >
+	  	<input  type="datetime-local" class="form-control" name = "p_s_time" style = "margin-left:5.5%;" >
 	  </div>
-	  <div class="form-group display" style="margin-left:12%;" id = "p_e_time">
+	  <div class="form-group display" style="margin-left:13.5%;" id = "p_e_time">
 	  	<label for="pre_end_time">注册结束时间：</label>
-	  	<input  type="datetime-local" class="form-control" style = "margin-left:5.5%;" >
+	  	<input  type="datetime-local" class="form-control" name = "p_e_time" style = "margin-left:5.5%;" >
 	  	<hr>
 	  </div>
 	  <div class="form-group display" id = "medal">
 	  	<label for="medal">奖牌设置：</label>
 	  	<label for="gold" style = "margin-left:8%;">金：</label>
-	  	<input  type="text" class="form-control medal" id = "gold" >
+	  	<input  type="text" class="form-control medal" id = "gold" name = "gold">
 	  	<label type="text"  for="silver">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;银：</label>
-	  	<input  type="text" class="form-control medal" id = "silver">
+	  	<input  type="text" class="form-control medal" id = "silver" name = "silver">
 	  	<label type="text"  for="copper">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;铜：</label>
-	  	<input  type="text" class="form-control medal" id = "copper">
+	  	<input  type="text" class="form-control medal" id = "copper" name = "copper">
 		<hr>
 	  </div>
 	  <div class="form-group" style = "margin-left:40%;">
