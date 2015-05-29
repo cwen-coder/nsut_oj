@@ -52,7 +52,7 @@ class Contest extends Admin_Controller {
 			);
 		//p($data);
 		if($data['con_class'] != 2) $data['con_pwd'] = NULL;
-		if($data['con_class'] != 3 || $data['con_class'] != 4) {
+		if($data['con_class'] == 1 || $data['con_class'] == 2) {
 			$data['p_s_time'] = NULL;
 			$data['p_e_time'] = NULL;
 		}
@@ -68,12 +68,17 @@ class Contest extends Admin_Controller {
 		if($result) echo true;
 		else echo false;
 	}
-	//比赛编辑
+	//载入比赛编辑
 	public function contest_edit() {
 		$contest_id = $this->uri->segment(4);
 		$data['contest'] = $this->contest_model->get_contest_id($contest_id);
 		//p($data);
 		$this->load->view('admin/contest_edit.html',$data);
+	}
+
+	//比赛编辑动作
+	public function con_edit_act() {
+		
 	}	
 }
 ?>
