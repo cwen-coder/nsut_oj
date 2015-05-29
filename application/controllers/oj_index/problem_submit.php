@@ -41,7 +41,7 @@ class Problem_submit extends Oj_Controller{
 	function problem_status(){
 		$limit=0;
 		$num=20;
-		$result = $this->ps->problem_status($limit, $num);
-		p($result);
+		$data['result'] = $this->ps->problem_status($limit, $num);
+		$this->load->view('oj_index/status.html', $data);
 	}
 }
