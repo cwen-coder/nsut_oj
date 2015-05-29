@@ -51,6 +51,11 @@ class Contest extends Admin_Controller {
 				'con_pwd' => $this->encrypt->encode($this->input->post('con_pwd',TRUE))
 			);
 		//p($data);
+		if($data['con_class'] != 2) $data['con_pwd'] = NULL;
+		if($data['con_class'] != 3 || $data['con_class'] != 4) {
+			$data['p_s_time'] = NULL;
+			$data['p_e_time'] = NULL;
+		}
 		$result = $this->contest_model->add_act($data);
 		if($result) {
 			success('admin/contest/index','创建成功');
@@ -63,6 +68,12 @@ class Contest extends Admin_Controller {
 		if($result) echo true;
 		else echo false;
 	}
-
+	//比赛编辑
+	public function contest_edit() {
+		$contest_id = $this->uri->segment(4);
+		$data['contest'] = $this->contest_model->get_contest_id($contest_id);
+		//p($data);
+		$this->load->view('admin/contest_edit.html',$data);
+	}	
 }
 ?>

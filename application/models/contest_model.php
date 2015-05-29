@@ -42,5 +42,12 @@ class Contest_model extends CI_Model {
 		$result = mysql_query($query);
 		return $result;
 	}
+
+	//按题号获取比赛信息
+	public function get_contest_id($contest_id) {
+		$query = "SELECT * FROM contest where contest_id = '$contest_id' ";
+		$result = mysql_query($query);
+		return mysql_fetch_assoc($result);
+	}
 }
 ?>
