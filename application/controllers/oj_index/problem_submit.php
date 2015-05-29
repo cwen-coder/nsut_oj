@@ -38,4 +38,10 @@ class Problem_submit extends Oj_Controller{
 		$mem->mc->set($key, time());
 		//$mem->mc->delete($key,0);
 	}
+	function problem_status(){
+		$limit=0;
+		$num=20;
+		$result = $this->ps->problem_status($limit, $num);
+		p($result);
+	}
 }
