@@ -70,14 +70,63 @@
 	          <th class="th_title" >标题</th>
 	          <th class="th_class" >类别</th>
 	          <th class="th_edit" >进行状态</th>
+	          <th class="th_edit" >题目管理</th>
 	          <th class="th_edit" >操作</th>
 	        </tr>
 	      </thead>
+	      <tbody id = "tbody" >
+      <?php foreach($contest as $temp):?>
+        <tr>
+          <td><?php echo $temp['contest_id'];?></td>
+          <td><?php echo $temp['title'];?></td>
+          <td>
+          <?php switch ($temp['con_class']) {
+          	case '1':
+          		echo "公开";
+          		break;
+          	case '2':
+          		echo "私有";
+          		break;
+          	case '3':
+          		echo "校赛新生组";
+          		break;
+          	default:
+          		echo "校赛老生组";
+          		break;
+          } ?>
+          </td>
+          <td>
+          	<?php if($temp['start_time'] > $now) echo "未开始";
+          		else if($now > $temp['start_time'] && $now < $temp['end_time']) echo "正在进行中...";
+          		else echo "已结束"; ?>
+          </td>
+          <td><a href="">[题目管理]</a></td>
+          <td>
+              <a href="<?= site_url('admin/contest/con_edit/'.$temp['contest_id']); ?>" ><i class="icon-pencil"></i></a>
+              <a href="#myModal" role="button" data-toggle="modal" id = "<?php echo $temp['contest_id'];?>"><i class="icon-remove"></i></a>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+       
+      </tbody>
   		</table>
 	</div>
 </div>
+<table width="60%" align="right">
+    <tr>
+      <td>
+        <div id="barcon" name="barcon"></div>
+      </td>
+    </tr>
+</table>
+<?php require('contest_del.html');?>
+<div>
+  <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
+  <input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
+</div>
 <script src="<?= base_url('application/views/admin/lib/jquery-1.8.1.min.js');?>" type="text/javascript"></script>
 <script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.min.js');?>" type="text/javascript"></script>
+<script src="<?= base_url('application/views/admin/js/contest_act.js');?>" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   //相应题目添加按钮

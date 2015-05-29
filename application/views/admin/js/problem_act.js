@@ -9,7 +9,8 @@ $(document).ready(function() {
     $('#problem_but_del').click(function(){
       var pro_id = $("#problem_span").text();
       //console.log(pro_id);
-      $.post("../problem_del", {
+      var url = $("#hid_site").val() + '/admin/problem/problem_del';
+      $.post(url, {
       	problem_id : pro_id
       },function(e) {
       		if(e) {

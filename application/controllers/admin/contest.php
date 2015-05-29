@@ -12,7 +12,12 @@ class Contest extends Admin_Controller {
 	}
 
 	public function index() {
-		$this->load->view('admin/contest.html');
+		$data['contest'] = $this->contest_model->get_all_con();
+		//$data['contest'] = json_encode($data['contest']);
+		$data['now'] = date('Y-m-d h:i:s',time());
+		//p($data);
+		
+		$this->load->view('admin/contest.html',$data);
 	}
 
 	//载入创建比赛页面
@@ -51,7 +56,13 @@ class Contest extends Admin_Controller {
 			success('admin/contest/index','创建成功');
 		} else error("创建失败");
 	}
-
+	//删除比赛
+	public function contest_del() {
+		$problem_id = $this->input->post('contest_id',TRUE);
+		$result = $this->contest_model->contest_del($problem_id);
+		if($result) echo true;
+		else echo false;
+	}
 
 }
 ?>
