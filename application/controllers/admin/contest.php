@@ -78,7 +78,33 @@ class Contest extends Admin_Controller {
 
 	//比赛编辑动作
 	public function con_edit_act() {
-		
+		$this->load->library('encrypt');
+		$data = array(
+				'contest_id' => $this->input->post('con_id',TRUE),
+				'title' => $this->input->post('con_title',TRUE),
+				'con_class' => $this->input->post('con_class',TRUE),
+				'problem_sum' => $this->input->post('con_num',TRUE),
+				'start_time' => $this->input->post('start_time',TRUE),
+				'end_time' => $this->input->post('end_time',TRUE),
+				'p_s_time' => $this->input->post('p_s_time',TRUE),
+				'p_e_time' => $this->input->post('p_e_time',TRUE),
+				'gold' => $this->input->post('gold',TRUE),
+				'silver' => $this->input->post('silver',TRUE),
+				'copper' => $this->input->post('copper',TRUE),
+				'con_pwd' => $this->encrypt->encode($this->input->post('con_pwd',TRUE))
+			);
+		//p($data);
+		if($data['con_class'] != 2) $data['con_pwd'] = NULL;
+		if($data['con_class'] == 1 || $data['con_class'] == 2) {
+			$data['p_s_time'] = NULL;
+			$data['p_e_time'] = NULL;
+		}
+		$result = $this->contest_model->edit_act($data);
+		if($result) {
+			success('admin/contest/index','修改成功');
+		} else {
+			error("修改失败");
+		}
 	}	
 }
 ?>

@@ -20,6 +20,31 @@ $(document).ready(function() {
       		else alert("删除失败！");
       })
     });
+
+    $("#search_but").click(function() {
+      var search = $("#search").val();
+       if(search.length == 0) {
+        alert("请输入搜索关键字");
+       } else {
+          var checked = $('input:radio[name="search"]:checked').val();
+          switch (checked) {
+            case '1': var regx = /^[0-9]*$/;
+                      if(!regx.test(search)) {
+                        alert("请输入正确题号");
+                        return 
+                      } else {
+                        
+                      }
+                      break;
+            case '2':
+              break;
+            case '3':
+              break;
+            case '4':
+              break;          
+          }
+       }
+    });
 })
 
 function goPage(pno,psize){
@@ -102,3 +127,23 @@ function goPage(pno,psize){
     $("#con_table th:eq(5)").width(100);
  
 }
+//筛表格函数
+function onSearch(obj){
+    // setTimeout(function(){
+        var storeId = document.getElementById('store');
+        var rowsLength = storeId.rows.length; 
+        var key = obj.value;
+  
+        var searchCol = 0;
+  
+        for(var i=1;i<rowsLength;i++){  
+            var searchText = storeId.rows[i].cells[searchCol].innerHTML;
+  
+            if(searchText.match(key)){
+                storeId.rows[i].style.display='';
+            }else{  
+                storeId.rows[i].style.display='none'; 
+            }  
+        }  
+    // },200);//200为延时时间  
+}  

@@ -49,5 +49,17 @@ class Contest_model extends CI_Model {
 		$result = mysql_query($query);
 		return mysql_fetch_assoc($result);
 	}
+
+	//修改比赛动作
+	public function edit_act($data) {
+		$query = "UPDATE contest SET title = '$data[title]', con_class = '$data[con_class]', 
+		problem_sum = '$data[problem_sum]', start_time = '$data[start_time]',
+		end_time = '$data[end_time]', pre_start_time = '$data[p_s_time]',
+		pre_end_time = '$data[p_e_time]',gold = '$data[gold]', 
+		silver= '$data[silver]', copper = '$data[copper]', con_pwd = '$data[con_pwd]' 
+		WHERE contest_id = '$data[contest_id]' ";
+		$result = mysql_query($query);
+		return $result;
+	}
 }
 ?>
