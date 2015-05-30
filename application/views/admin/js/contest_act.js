@@ -31,17 +31,22 @@ $(document).ready(function() {
             case '1': var regx = /^[0-9]*$/;
                       if(!regx.test(search)) {
                         alert("请输入正确题号");
-                        return 
+                        return; 
                       } else {
-                        
+                        onSearch(search,0);
+                        //thcss();
+                        $("#con_bar").remove();
                       }
                       break;
-            case '2':
-              break;
-            case '3':
-              break;
-            case '4':
-              break;          
+            case '2': onSearch(search,1);
+                      $("#con_bar").remove();
+                      break;
+            case '3': onSearch(search,2);
+                      $("#con_bar").remove();
+                      break;
+            case '4': onSearch(search,3);
+                      $("#con_bar").remove();
+                      break;       
           }
        }
     });
@@ -119,31 +124,42 @@ function goPage(pno,psize){
     var url = $("#hid_base").val() + 'application/views/admin/lib/bootstrap/css/bootstrap.min.css';
     //addSheetFile(url);
     //$.parser.parse(pro_table);
-    $("#con_table th:eq(0)").width(117);
+    /*$("#con_table th:eq(0)").width(117);
     $("#con_table th:eq(1)").width(400);
     $("#con_table th:eq(2)").width(200);
     $("#con_table th:eq(3)").width(200);
     $("#con_table th:eq(4)").width(100);
-    $("#con_table th:eq(5)").width(100);
+    $("#con_table th:eq(5)").width(100);*/
+    thcss();
  
 }
 //筛表格函数
-function onSearch(obj){
+function onSearch(val,td){
     // setTimeout(function(){
-        var storeId = document.getElementById('store');
+        var storeId = document.getElementById('con_table');
         var rowsLength = storeId.rows.length; 
-        var key = obj.value;
+        var key = val;
   
-        var searchCol = 0;
+        var searchCol = td;
   
-        for(var i=1;i<rowsLength;i++){  
+        for(var i = 0; i < rowsLength; i++){  
             var searchText = storeId.rows[i].cells[searchCol].innerHTML;
   
-            if(searchText.match(key)){
+            if(searchText.match(key) || i == 0){
                 storeId.rows[i].style.display='';
             }else{  
                 storeId.rows[i].style.display='none'; 
             }  
         }  
     // },200);//200为延时时间  
-}  
+    //thcss();
+} 
+
+function thcss() {
+    $("#con_table th:eq(0)").width(117);
+    $("#con_table th:eq(1)").width(400);
+    $("#con_table th:eq(2)").width(200);
+    $("#con_table th:eq(3)").width(200);
+    $("#con_table th:eq(4)").width(100);
+    $("#con_table th:eq(5)").width(100);
+} 
