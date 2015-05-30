@@ -6,6 +6,7 @@ class Home extends Oj_Controller{
 		$this->load->library('pagination');
 		$this->load->helper('url');
 		$this->load->model('problem_model','pro');
+		$this->load->model('problemsubmit_model','ps');
 	}
 	//载入主页
 	public function index(){
@@ -42,7 +43,10 @@ class Home extends Oj_Controller{
 	}
 	//提交状态显示
 	public function status(){
-	 	$this->load->view('oj_index/status.html');
+		$limit=0;
+		$num=20;
+		$data['result'] = $this->ps->problem_status($limit, $num);
+	 	$this->load->view('oj_index/status.html', $data);
 	}
 	//提交页面显示
 	public function submitpage(){
