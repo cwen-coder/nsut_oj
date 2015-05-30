@@ -106,5 +106,12 @@ class Contest extends Admin_Controller {
 			error("修改失败");
 		}
 	}	
+
+	//载入比赛题目列表页
+	public function con_pro_list() {
+		$contest_id = $this->uri->segment(4);
+		//$data['con_pro'] = $this->contest_model->get_contest_id($contest_id);
+		$this->load->view("admin/con_pro_list.html");
+	}
 }
 ?>

@@ -37,7 +37,7 @@ $(document).ready(function() {
   })
 
   //检验用户名
- 	 $("#r_username").blur(function() {
+ 	 $("#r_username").bind('input propertychange blur',function() {
   		 var name = $("#r_username").val();
   		 var len = name.length;
   		  var Regx = /^[A-Za-z0-9]*$/;
@@ -69,7 +69,7 @@ $(document).ready(function() {
  	 });
 
    //检验第一次输入密码
- 	 $("#password1").blur(function() {
+ 	 $("#password1").bind('input propertychange blur',function() {
  	 	var password = $("#password1").val();
  	 	var len = password.length;
  	 	//console.log(password);
@@ -87,7 +87,7 @@ $(document).ready(function() {
  	 });
 
    //检验第二次输入的密码
- 	 $("#password2").blur(function() {
+ 	 $("#password2").bind('input propertychange blur',function() {
  	 	var password = $("#password2").val();
  	 	//console.log(password);
  	 	if (password.length == 0) {
@@ -102,7 +102,7 @@ $(document).ready(function() {
  	 });
 
    //检验邮箱
- 	 $("#email").blur(function() {
+ 	 $("#email").bind('input propertychange blur',function() {
  	 	var email = $("#email").val();
  	 	var Regx = /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-.]+$/;
  	 	//var Regx =  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
@@ -154,7 +154,7 @@ $(document).ready(function() {
 
 
    //登录检验用户名
-   $("#username").blur(function() {
+   $("#username").bind('input propertychange blur',function() {
        var name = $("#username").val();
        if(name.length == 0) {
         $("#username_c").text('请输入用户名');
@@ -168,7 +168,7 @@ $(document).ready(function() {
    });
 
    //登录检验密码
-   $("#password").blur(function() {
+   $("#password").bind('input propertychange blur',function() {
        var pass = $("#password").val();
        if (pass.length == 0) {
         $("#password_c").text('请输入密码');
@@ -181,7 +181,7 @@ $(document).ready(function() {
    });
 
    //登录检验验证码
-   $("#captcha").blur(function() {
+   $("#captcha").bind('input propertychange blur',function() {
        var pass = $("#captcha").val();
        if(pass.length == 0) {
         $("#captcha_c").text('请输入验证码');

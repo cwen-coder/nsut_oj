@@ -8,7 +8,7 @@
 	<style type="text/css">
     body {
     background: #eee;
-    background-image: url(http://subtlepatterns.com/patterns/furley_bg.png);
+    background-image: url(/admin/images/furley_bg.png);
     background-position: initial initial;
     background-repeat: initial initial;
     background-position: initial initial;
@@ -100,7 +100,7 @@
           		else if($now > $temp['start_time'] && $now < $temp['end_time']) echo "正在进行中...";
           		else echo "已结束"; ?>
           </td>
-          <td><a href="">[题目管理]</a></td>
+          <td><a href="<?= site_url('admin/contest/con_pro_list/'.$temp['contest_id']); ?>">[题目管理]</a></td>
           <td>
               <a href="<?= site_url('admin/contest/contest_edit/'.$temp['contest_id']); ?>" ><i class="icon-pencil"></i></a>
               <a href="#myModal" role="button" data-toggle="modal" id = "<?php echo $temp['contest_id'];?>"><i class="icon-remove"></i></a>

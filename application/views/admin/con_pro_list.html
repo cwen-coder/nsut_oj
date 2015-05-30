@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>题目管理</title>
+	<link rel="stylesheet" type="text/css" href="<?= base_url('application/views/admin/lib/bootstrap/css/bootstrap.min.css');?>">
+  
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/lib/font-awesome/css/font-awesome.css');?>">
+	<style type="text/css">
+    body {
+    background: #eee;
+    /* background-image: url(http://subtlepatterns.com/patterns/furley_bg.png); */
+    background-image: url(/admin/images/furley_bg.png);
+    background-position: initial initial;
+    background-repeat: initial initial;
+    background-position: initial initial;
+    background-repeat: initial initial;
+    margin: 0px;
+    padding: 0px;
+  }
+	.container {
+		margin-top: 3%;
+	}
+	.th_num {
+		width: 20%;
+	}
+	.th_title {
+		width: 55%;
+	}
+	.th_edit {
+		width: 20%;
+	}
+	.control-group {
+		display: inline;
+		float: right;
+	}
+
+  
+	</style>
+</head>
+<body>
+<div class="container">
+<h5 style="color:blue;">已添加题目列表</h5>
+<div class="well">
+  	<table class="table table-striped " id = "pro_table" >
+      <thead>
+        <tr>
+          <th class="th_num" >题号</th>
+          <th class="th_title" >标题</th>
+          <th class="th_edit" >操作</th>
+        </tr>
+      </thead>
+      <tbody id = "tbody" >
+        <tr>
+          <td></td>
+          <td></td>
+          <td>
+              <a href="" ><i class="icon-pencil"></i></a>
+              <a href="#myModal" role="button" data-toggle="modal" id = ""><i class="icon-remove"></i></a>
+          </td>
+        </tr>    
+      </tbody>
+    </table>
+    
+</div>
+
+<h5 style="color:red;">未添加题目列表</h5>
+<div class="well">
+  	<table class="table table-striped " id = "pro_table" >
+      <thead>
+        <tr>
+          <th style="width: 80%;" >题号</th>
+          <th style="width: 20%;" >添加题目</th>
+        </tr>
+      </thead>
+      <tbody id = "tbody" >
+        <tr>
+          <td></td>
+          <td>
+              <a href="" >[新建题目]</a>
+              <a href="" role="button" id = "">[来自题库]</a>
+          </td>
+        </tr>    
+      </tbody>
+    </table>
+    
+</div>
+</div>
+<?php require('problem_del.html');?>
+<div>
+  <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
+  <input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
+</div>
+<script src="<?= base_url('application/views/admin/lib/jquery-1.8.1.min.js');?>" type="text/javascript"></script>
+<script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.min.js');?>" type="text/javascript"></script>
+<script type="text/javascript">
+/*$(document).ready(function() {
+  //相应题目添加按钮
+  $("#problem_add_but").click(function() {
+        window.location.href = "<?php echo site_url('admin/problem/problem_add');?>";
+    });
+});*/
+</script>
+
+</body>
+</html>
