@@ -148,6 +148,5 @@ class Problem_model extends CI_Model {
 		}
 	}
 
-
 }
 ?>

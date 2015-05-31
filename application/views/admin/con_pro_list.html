@@ -22,10 +22,13 @@
 		margin-top: 3%;
 	}
 	.th_num {
-		width: 20%;
+		width: 15%;
 	}
 	.th_title {
-		width: 55%;
+		width: 45%;
+	}
+	.th_source {
+		width: 20%;
 	}
 	.th_edit {
 		width: 20%;
@@ -40,25 +43,33 @@
 </head>
 <body>
 <div class="container">
-<h5 style="color:blue;">已添加题目列表</h5>
+<h5 style="color:blue;display: inline;">第&nbsp;<?= $contest_id;?>&nbsp;场比赛已添加题目列表 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5>
+<h5 style = "display: inline;"><a href="<?= site_url('admin/contest/index');?>">返回</a></h5> 
 <div class="well">
   	<table class="table table-striped " id = "pro_table" >
       <thead>
         <tr>
           <th class="th_num" >题号</th>
           <th class="th_title" >标题</th>
+          <th class="th_source" >来源</th>
           <th class="th_edit" >操作</th>
         </tr>
       </thead>
-      <tbody id = "tbody" >
-        <tr>
-          <td></td>
-          <td></td>
-          <td>
-              <a href="" ><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal" id = ""><i class="icon-remove"></i></a>
-          </td>
-        </tr>    
+      <tbody id = "tbody0" >
+		<?php foreach($pro as $v):?>
+			<?php if($v != NULL):?>
+		        <tr>
+		          <td id = "<?= $v['num']?>" ><?= $arr[$v['num']];?></td>
+		          <td><?= $v['title'];?></td>
+		          <td><?php if($v['source'] == 0) echo "新建题目";
+		          		else echo "来自题库第".$v['problem_id']."题"; ?></td>
+		          <td>
+		              <a href="" ><i class="icon-pencil"></i></a>
+		              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+		          </td>
+		        </tr> 
+    		<?php endif;?>
+        <?php endforeach;?>   
       </tbody>
     </table>
     
@@ -73,26 +84,32 @@
           <th style="width: 20%;" >添加题目</th>
         </tr>
       </thead>
-      <tbody id = "tbody" >
-        <tr>
-          <td></td>
-          <td>
-              <a href="" >[新建题目]</a>
-              <a href="" role="button" id = "">[来自题库]</a>
-          </td>
-        </tr>    
+      <tbody id = "tbody1" >
+      <?php foreach($pro as $key => $val):?>
+			<?php if($val == NULL):?>
+	        <tr>
+	          <td><?= $arr[$key];?></td>
+	          <td>
+	              <a href="" >[新建题目]</a>
+	              <a href="<?= site_url('admin/contest/con_pro_from/'.$contest_id.'/'.$key); ?>" role="button" id = "pro_from">[来自题库]</a>
+	          </td>
+	        </tr>   
+        	<?php endif;?>
+        <?php endforeach;?>  
       </tbody>
     </table>
     
 </div>
 </div>
-<?php require('problem_del.html');?>
+<?php require('con_pro_del.html');?>
 <div>
   <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
   <input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
+
 </div>
 <script src="<?= base_url('application/views/admin/lib/jquery-1.8.1.min.js');?>" type="text/javascript"></script>
 <script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.min.js');?>" type="text/javascript"></script>
+<script src="<?= base_url('application/views/admin/js/con_pro_list.js');?>" type="text/javascript"></script>
 <script type="text/javascript">
 /*$(document).ready(function() {
   //相应题目添加按钮

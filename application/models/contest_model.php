@@ -61,5 +61,32 @@ class Contest_model extends CI_Model {
 		$result = mysql_query($query);
 		return $result;
 	}
+
+	//返回比赛题目总数
+	public function get_con_pro_sum($contest_id) {
+		$query = "SELECT problem_sum FROM contest WHERE contest_id = '$contest_id' ";
+		$result = mysql_query($query);
+		return mysql_fetch_assoc($result);
+	}
+
+	//返回比赛题目id以及num
+	public function get_con_pro_id($contest_id) {
+		$query = "SELECT problem_id,title,num,source FROM problem_contest 
+		WHERE contest_id = '$contest_id'";
+		$result = mysql_query($query);
+		$data = array();
+		while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
+			$data[] = $row;
+		}
+		return $data;
+	}
+
+	//为比赛添加来自题库的题目
+	public function add_pro_list($data) {
+		$query = "INSERT INTO problem_contest(problem_id,contest_id,title,num,source) VALUES ('$data[problem_id]',
+			'$data[contest_id]','$data[title]','$data[num]','$data[source]') ";
+		$result = mysql_query($query) or mysql_error();
+		return $result;
+	}
 }
 ?>
