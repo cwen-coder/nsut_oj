@@ -276,6 +276,12 @@ $(document).ready(function() {
         }
      })
    });
+
+  //登录页注册按钮
+  $("#log_sub_reg").click(function() {
+    /* Act on the event */
+    $("#register").click();
+  });
 });
 
 //重置动作
