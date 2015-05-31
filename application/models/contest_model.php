@@ -88,5 +88,12 @@ class Contest_model extends CI_Model {
 		$result = mysql_query($query) or mysql_error();
 		return $result;
 	}
+
+	//删除比赛题目
+	public function del_con_pro($contest_id,$num) {
+		$query = "DELETE FROM problem_contest WHERE contest_id = '$contest_id' AND num = '$num' ";
+		$result = mysql_query($query);
+		return $result;
+	}
 }
 ?>

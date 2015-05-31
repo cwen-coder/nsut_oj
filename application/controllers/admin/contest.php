@@ -181,5 +181,12 @@ class Contest extends Admin_Controller {
 	/*public function back_pro_list() {
 		self::con_pro_list();
 	}*/
+	//删除比赛题目
+	public function del_con_pro() {
+		$contest_id = $this->input->post('contest_id',TRUE);
+		$num = $this->input->post('num',TRUE);
+		$result = $this->contest_model->del_con_pro($contest_id,$num);
+		echo $result;
+	}
 }
 ?>
