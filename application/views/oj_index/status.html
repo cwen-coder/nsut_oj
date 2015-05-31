@@ -7,7 +7,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
     <title>沈阳工业大学在线判题系统</title>
     <link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
-    
+    <link href="<?= base_url('application/views/oj_index/css/sutoj.css');?>" rel="stylesheet">
     <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
@@ -22,10 +22,7 @@
     width:20%;
   }
   </style>
-  <body>
-<?php $this->load->view('oj_index/header.html');?>
-<link href="<?= base_url('application/views/oj_index/css/sutoj.css');?>" rel="stylesheet">
-<style type="text/css">
+  <style type="text/css">
     body {
     background: #eee;
     background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
@@ -37,10 +34,10 @@
     padding: 0px;
   }
 
-	.control-group {
-		display: inline;
-		float: right;
-	}
+  .control-group {
+    display: inline;
+    float: right;
+  }
   .container-search{
               margin-top: 7%;
               margin-right: 100px;
@@ -48,9 +45,7 @@
               float: right;
   }
   .table-group{
-    position:absolute;
     margin-top: 11%;
-    left: 10%;
   }
   .th_class {
     background-color:#000000;
@@ -59,135 +54,54 @@
   td,th{
     text-align:center;
   }
-	</style>
+  </style>
+  <body>
+<?php $this->load->view('oj_index/header.html');?>
+
+
+  <div class="container">
 <div class="table-group">
-<table class="table table-bordered table-hover " style="width: 1000px;">
+<table class="table table-bordered table-hover " >
   <thead>
   <tr class="th_class">
   <th style="width:8%">Run.ID</th>
   <th style="width:8%">User</th>
   <th style="width:8%">Problem</th>
-  <th style="width:15%">Result</th>
+  <th style="width:14%">Result</th>
   <th style="width:6%">Memory</th>
   <th style="width:6%">Time</th>
-  <th style="width:8%">Language</th>
-  <th style="width:15%">Code Length</th>
+  <th style="width:6%">Language</th>
+  <th style="width:18%">Code Length</th>
   <th style="width:20%">Submit Time</th>
  </tr>
 </theaad>
 <tbody>
+  <?php foreach($result as $v): ?>
   <tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=1007">1007</a></td>
-    <td><span class="btn_status btn-success">*Accepted</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
+    <td><?php echo $v['solution_id']?></td>
+    <td><?php echo $v['user_id']?></td>
+    <td><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=<?php echo $v['problem_id']?>"><?php echo $v['problem_id']?></a></td>
+    <td><span class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?></span></td>
+    <td><span style="color:red"><?php echo $v['memory']?></span></td>
+    <td><span style="color:red"><?php echo $v['time']?></span></td>
+    <td><?php echo $v['language']? "C++":"C"?></td>
+    <td><?php echo $v['code_length']?></td>
+    <td><?php echo $v['in_date']?></td>
   </tr>
-  <tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-warning">Compile Error</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
-  <tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-warning">Runtime Error</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
-  <tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-warning">Memory Limit Exceed</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
-  <tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-danger">Wrong Answer</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
-<tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-danger">Wrong Answer</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
-<tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-warning">Output Limit Exceed</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
-  <tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-success">*Accepted</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
- <tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-warning">Time Limit Exceed</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
- <tr class="evenrow">
-    <td>666</td>
-    <td>admin</td>
-    <td>1001</td>
-    <td><span class="btn_status btn-success">Accepted</span></td>
-    <td><span style="color:red">325</span></td>
-    <td><span style="color:red">1000</span></td>
-    <td>C++</td>
-    <td>300B</td>
-    <td>2015-05-19 18:44:15</td>
-  </tr>
+<?php endforeach ?>
 </tbody>
 </table>
+</div>
+
+<div id="center" class="center">
+<?php echo "[<a href=status.php?".$str.">Top</a>]&nbsp;&nbsp;";
+if (isset($prevtop))
+        echo "[<a href=status.php?".$str."&top=".$prevtop.">Previous Page</a>]&nbsp;&nbsp;";
+else
+        echo "[<a href=status.php?".$str."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href=status.php?".$str."&top=".$bottom."&prevtop=$top>Next Page</a>]";
+?>
+</div>
 </div>
   </body>
 </html>

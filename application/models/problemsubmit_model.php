@@ -26,7 +26,7 @@ class Problemsubmit_model extends CI_Model{
 		}*/
 	}
 	function problem_status($limit, $num){
-		$sql = "select user_id, memory, time, result, language, code_length, solution_id, in_date, problem_id from solution order  by in_date DESC limit $limit, $num";
+		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution order  by solution_id DESC limit $limit, $num";
 		$result = mysql_query($sql);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){
