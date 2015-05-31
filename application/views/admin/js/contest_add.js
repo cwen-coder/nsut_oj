@@ -146,10 +146,12 @@ $(document).ready(function() {
 		//console.log(start_time);
 		if(start_time.length == 0) {
 			$("#con_s_t_span").text('不正确');
+			$("#div_end").css('margin-left','8%');
 			check_start_time = false;
 			chksub();
 		} else {
 			$("#con_s_t_span").text('');
+			$("#div_end").css('margin-left','12%');
 			check_start_time = true;
 			chksub();
 		}
