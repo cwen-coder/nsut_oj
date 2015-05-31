@@ -20,7 +20,7 @@ class Oj_Controller extends CI_Controller {
 
 		if($this->session->userdata('user_id')) {
 			$user_id = $this->session->userdata('user_id');			
-			$ip = implode($this->privilege_model->get_ip($user_id));
+			$ip = implode('',$this->privilege_model->get_ip($user_id));
 			if(strcmp($ip,$this->session->userdata('ip')) == 0) {
 				$this->load->helper('date');
         		$format = 'DATE_W3C';

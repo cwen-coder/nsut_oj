@@ -37,6 +37,13 @@ class Register extends CI_Controller {
     //注册
     public function reg_act() {
         //$this->output->enable_profiler(TRUE);
+        $captcha = $this->input->post('cap_r',TRUE);
+        if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) {
+            //echo strtolower($captcha)."\n";
+            //echo strtolower($_SESSION ['code']);
+            echo 2;
+            return;
+        } 
         $this->load->helper('form');
         $this->load->library('form_validation');
         $config = array(
