@@ -7,11 +7,10 @@ var usern = false;
 var pad = false;
 var cap = false;
 //获取目录地址
-var curPath=window.location.href;
+/*var curPath=window.location.href;
 curPath = curPath.split("/");
 curPath.pop();
-curPath.pop();
-curPath = curPath.join("/");
+curPath.pop();*/
 //console.log(curPath);
 
 //注册按钮检查
@@ -30,9 +29,12 @@ function chklog() {
 }
 
 $(document).ready(function() {
+
+  var curPath = $("#hid_site").val() + '/oj_index';
   //点击刷新验证码
   $("#captcha_span").on("click",function(e){
     e.preventDefault();
+    //console.log(curPath);
     var url = curPath+'/login/code';
     $("#captcha_img").attr("src",url);
     //$("#captcha_img").attr("src","../login/code");
@@ -280,6 +282,7 @@ $(document).ready(function() {
   //登录页注册按钮
   $("#log_sub_reg").click(function() {
     /* Act on the event */
+    $("#login_close").click();
     $("#register").click();
   });
 });
