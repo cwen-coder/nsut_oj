@@ -46,12 +46,13 @@ class Home extends Oj_Controller{
 		$data['judge_result']=Array("Pending", "Pending Rejudging", "Compiling", "Running & Judging", "Accepted", "Presentation Error", "Wrong Answer", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed", "Runtime Error", "Compile Error", "Compile OK","Test Running Done");
 		$data['judge_color']=Array("btn_status gray","btn_status btn-info","btn_status btn-warning","btn_status btn-warning","btn_status btn-success","btn_status btn-danger","btn_status btn-danger","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-info");
 		$limit=0;
-		$data['top'] = $this->input->get('top');
-		$data['prevtop'] = $this->input->get('prevtop');
-		$data['str'] = $data['prevtop'];
-		$data['bottom'] = $data['prevtop'];
+		if($data['pagination'] = $this->input->get('pagination')) 
+			$limit = $data['pagination']*20-20;
+		if($this->input->get('previous')) 
+			$data['previous'] = $this->input->get('previous');
 		$num=20;
 		$data['result'] = $this->ps->problem_status($limit, $num);
+		$data['pagination'] = $limit/20+2;
 	 	$this->load->view('oj_index/status.html', $data);
 	}
 	//提交页面显示

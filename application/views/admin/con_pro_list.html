@@ -90,7 +90,7 @@
 	        <tr>
 	          <td><?= $arr[$key];?></td>
 	          <td>
-	              <a href="" >[新建题目]</a>
+	              <a href="<?= site_url('admin/contest/con_pro_add?cid='.$contest_id.'&pid='.$key); ?>" >[新建题目]</a>
 	              <a href="<?= site_url('admin/contest/con_pro_from/'.$contest_id.'/'.$key); ?>" role="button" id = "pro_from">[来自题库]</a>
 	          </td>
 	        </tr>   

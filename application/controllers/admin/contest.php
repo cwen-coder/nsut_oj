@@ -188,5 +188,58 @@ class Contest extends Admin_Controller {
 		$result = $this->contest_model->del_con_pro($contest_id,$num);
 		echo $result;
 	}
+	//载入添加题目页面
+	public function con_pro_add(){
+		$data['arr'] = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+		$data['cid'] = $this->input->get('cid');
+		$data['pid'] = $this->input->get('pid');
+		$this->load->view('admin/contest_problem_add.html', $data);
+	}
+	//创建文件夹
+	public function create_dir($problem_id){
+			$path="/home/judge/data/$problem_id";
+			echo $path."<br/>";
+			if(!file_exists($path))
+				mkdir($path);
+	}
+	//上传文件
+	public function upload($file_name, $problem_id){
+		$config['allowed_types'] = 'txt';
+		$config['max_size'] = '1024';
+		$config['file_name'] = $file_name;
+		$config['upload_path'] = "/home/judge/data/$problem_id";
+		$this->load->library('upload', $config);
+		$file_path = "$config[upload_path]/$file_name.txt";
+		echo $file_path;
+		if (file_exists($file_path) ){ 
+            			unlink($file_path); 
+        		}
+		if($this->upload->do_upload($file_name))
+			p($this->upload->data());
+		else
+			echo $this->upload->display_errors();
+	}
+	//添加新题目动作
+	public function con_pro_new(){
+		$data = array(
+			'pro_title' => $this->input->post('pro_title'),
+			'contest_id' => $this->input->post('cid'),
+			'num' => $this->input->post('num'),
+			'time_limit' => $this->input->post('time_limit'),
+			'memory_limit' => $this->input->post('memory_limit'),
+			'content_des' => $this->input->post('content_des'),
+			'content_input' => $this->input->post('content_input'),
+			'content_output' => $this->input->post('content_output'),
+			'sample_input' => $this->input->post('sample_input'),
+			'sample_output' => $this->input->post('sample_output'),
+			'hint' => $this->input->post('hint'),
+			'source' => $this->input->post('source'),
+			'spj' => $this->input->post('spj')
+			);
+		if($problem_id = $this->contest_model->add_pro_new($data))echo $problem_id;die;
+				self::create_dir($problem_id);
+		self::upload('text_in','1001');
+		
+	}
 }
 ?>

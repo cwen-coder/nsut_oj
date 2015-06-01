@@ -21,10 +21,7 @@
     width:20%;
   }
   </style>
-  <body>
-<?php $this->load->view('oj_index/header.html');?>
-
-<style type="text/css">
+  <style type="text/css">
     body {
     font-family: 微软雅黑;
     background: #eee;
@@ -37,10 +34,10 @@
     padding: 0px;
   }
 
-	.control-group {
-		display: inline;
-		float: right;
-	}
+  .control-group {
+    display: inline;
+    float: right;
+  }
   .container-search{
               margin-top: 7%;
               margin-right: 100px;
@@ -48,9 +45,7 @@
               float: right;
   }
   .table-group{
-    position:absolute;
     margin-top: 11%;
-    left: 10%;
   }
   .th_class {
     background-color:#000000;
@@ -59,7 +54,10 @@
   td,th{
     text-align:center
   }
-	</style>
+  </style>
+  <body>
+<?php $this->load->view('oj_index/header.html');?>
+<div class="container">
 <div class="container-search">
 <div class="control-group">
           <div class="controls" style="display:inline">
@@ -102,7 +100,7 @@
   <div class="pagination">
 <!--  <td><?php echo $links; ?></td>  -->
 </div>
-<table class="table table-bordered table-hover" style="width: 1000px;">
+<table class="table table-bordered table-hover">
   <thead>
   <tr class="th_class">
   <th style="width:10%">Pro.ID</th>
@@ -127,6 +125,6 @@
 </tbody>
 </table>
 </div>
-
+</div>
 </body>
 </html>

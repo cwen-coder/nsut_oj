@@ -95,5 +95,20 @@ class Contest_model extends CI_Model {
 		$result = mysql_query($query);
 		return $result;
 	}
+	//插入题目
+	public function add_pro_new($data){
+		$sql_pro = "insert into problem(title, description, input, output, sample_output, sample_input, spj, hint, in_date, time_limit, memory_limit, defunct, source)
+		values('$data[pro_title]', '$data[content_des]', '$data[content_input]', '$data[content_output]', '$data[sample_output]', '$data[sample_input]',
+			'$data[spj]', '$data[hint]', NOW(), '$data[time_limit]', '$data[memory_limit]', 'N', '$data[source]')";
+		$result_pro = mysql_query($sql_pro);
+		$insert_id=mysql_insert_id();
+		echo $insert_id;
+		$sql_con_pro = "insert into problem_contest(problem_id, contest_id, title, num, source) values('$insert_id', '$data[contest_id]', '$data[pro_title]', '$data[num]', '0')";
+		$result_con_pro = mysql_query($sql_con_pro);
+		if($result_pro && $result_con_pro)
+			return $insert_id;
+		else 
+			return false;
+	}
 }
 ?>

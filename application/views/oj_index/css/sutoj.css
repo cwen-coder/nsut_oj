@@ -9,12 +9,6 @@ a:hover {
 h2 {
     color: blue;
 }
-
-
-input{
-   height:24px;
-}
-
 .toprow {
     background-color: #1A5CC8;
     color: #FFFFFF;
@@ -648,42 +642,13 @@ input[type="submit"].btn.btn-mini {
 .yn{	
 	width:5px!important!important;
 }
-.table colgroup + thead tr:first-child th,
-.table colgroup + thead tr:first-child td,
-.table thead:first-child tr:first-child th,
-.table thead:first-child tr:first-child td {
-  border-top: 0;
-}
+
 .table tbody + tbody {
   border-top: 2px solid #dddddd;
 }
 .table-condensed th,
 .table-condensed td {
   padding: 4px 5px;
-}
-.table-bordered {
-  border: 1px solid #dddddd;
-  border-left: 0;
-  border-collapse: separate;
-  *border-collapse: collapsed;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
-.table-bordered th,
-.table-bordered td {
-  border-left: 1px solid #dddddd;
-}
-.table-bordered thead:first-child tr:first-child th,
-.table-bordered tbody:first-child tr:first-child th,
-.table-bordered tbody:first-child tr:first-child td {
-  border-top: 0;
-}
-.table-bordered thead:first-child tr:first-child th:first-child,
-.table-bordered tbody:first-child tr:first-child td:first-child {
-  -webkit-border-radius: 4px 0 0 0;
-  -moz-border-radius: 4px 0 0 0;
-  border-radius: 4px 0 0 0;
 }
 .table-bordered thead:first-child tr:first-child th:last-child,
 .table-bordered tbody:first-child tr:first-child td:last-child {
