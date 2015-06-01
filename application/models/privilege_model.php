@@ -18,7 +18,9 @@ class Privilege_model extends CI_Model {
 	public function get_ip($user_id) {
 		$query = "select ip from loginlog where user_id = '$user_id'";
 		$result = mysql_query($query);
-		if($result) {
+		$num = mysql_num_rows($result);
+		
+		if($result && $num > 0) {
 			$ip = mysql_fetch_assoc($result);
 			return $ip;
 		} else {return false;}

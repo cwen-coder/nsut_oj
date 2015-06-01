@@ -11,15 +11,25 @@
 						<li ><a href="<?php echo site_url('oj_index/home/index');?>">题库<span class="sr-only">(current)</span></a></li>
 						<li id="contest"><a href="<?php echo site_url('oj_index/home/contest_list');?>">比赛</a></li>
 						<li id="status"><a href="<?php echo site_url('oj_index/home/status');?>">提交状态</a></li>
-						<li><a href="##">排名</a></li>
+						<!-- <li><a href="##">排名</a></li> -->
 						<li><a href="#">ACM集训队</a></li>
 					</ul>
+				 	<?php if($username == false || $user_id == false): ?> 
 					<form class="navbar-form navbar-right">
 						<button type="button" class="btn btn-primary " data-toggle="modal"   data-target="#myModal01" id="signin">Sign in</button>
 						<button type="button" class="btn btu-default" data-toggle="modal" data-target="#myModal02" id="register">Register</button>
 					</form>
+					<?php else:?>
+						<form class="navbar-form navbar-right">
+						<h5><a href="<?= site_url('oj_index/home/log_out');?>" style="text-decoration:none;"><span class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销</a></h5>
+						</form>
+						<form class="navbar-form navbar-right">
+						<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $username;?></a></h5>
+						</form>
+					<?php endif;?> 
 					<?php require('login.html');?>
 					<?php require('register.html');?>
+					  
 					</div><!-- /.navbar-collapse -->
 					<script type="text/javascript">
 						Array.prototype.in_array = function(e) {  

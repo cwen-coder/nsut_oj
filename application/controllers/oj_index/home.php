@@ -10,6 +10,13 @@ class Home extends Oj_Controller{
 	}
 	//载入主页
 	public function index(){
+		/*$this->load->model('privilege_model');
+		$user_id = $this->session->userdata('user_id');	
+		$ip = implode($this->privilege_model->get_ip($user_id));
+		p($this->privilege_model->get_ip($user_id));
+		p($ip);
+		p($this->session->userdata('ip'));
+		die;*/
 		$total_rows = $this->pro->problem_all_num();
 		$config['base_url'] = site_url('oj_index/home/index');   
 		$config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
@@ -29,17 +36,38 @@ class Home extends Oj_Controller{
 		$data['offset'] = $this->uri->segment(4);
 		if($data['offset'] == null) $data['offset']=0;
 		$data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
 		$this->load->view('oj_index/problem_list.html',$data);
 	}
 	//显示题目具体内容
 	public function problem(){
 		$pid=$this->input->get('pid', TRUE);
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
 		$data['problem']=$this->pro->get_problem_id($pid);
 		$this->load->view('oj_index/problem.html',$data);
 	}
 	//比赛列表显示
 	public function contest_list(){
-	 	$this->load->view('oj_index/contest_list.html');
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
+	 	$this->load->view('oj_index/contest_list.html',$data);
 	}
 	//提交状态显示
 	public function status(){
@@ -52,7 +80,16 @@ class Home extends Oj_Controller{
 			$data['previous'] = $this->input->get('previous');
 		$num=20;
 		$data['result'] = $this->ps->problem_status($limit, $num);
+
 		$data['pagination'] = $limit/20+2;
+
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
 	 	$this->load->view('oj_index/status.html', $data);
 	}
 	//提交页面显示
@@ -63,7 +100,14 @@ class Home extends Oj_Controller{
 			echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click();}</script>";
 		}else{
 			$data['pid'] = $this->input->get('pid', TRUE);
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
 			$this->load->view('oj_index/submitpage.html', $data);
 		}
+	}
+
+	public function log_out() {
+		$this->session->sess_destroy();
+		success('oj_index/home/index','注销成功');
 	}
 }
