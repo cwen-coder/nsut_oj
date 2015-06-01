@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
@@ -24,6 +24,7 @@
   </style>
   <style type="text/css">
     body {
+    font-family: 微软雅黑;
     background: #eee;
     background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
     background-position: initial initial;
@@ -60,19 +61,51 @@
 
 
   <div class="container">
+    <div class="container-search">
+    <div class="control-group">
+          <div class="controls" style="display:inline">
+
+            <!-- Inline Radios -->
+            <table>
+              <th>
+            <label class="radio inline">
+              <input type="radio" value="1" checked="checked" name="group">
+              Problem ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
+          </th>
+          <th>
+            <label class="radio inline">
+              <input type="radio" value="2" name="group">
+              User&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
+          </th>
+          </div> 
+          
+           <div class="form-group" style="display:inline">
+            <th>
+          <input type="text" class="form-control"  placeholder="Search for..." >
+            </th>
+        <th>
+          <button class="btn btn-default" type="button" id = "search_but">Go!</button>
+        </th>
+  </div>
+</table>
+        </div>
+</div>
+</div>
 <div class="table-group">
 <table class="table table-bordered table-hover " >
   <thead>
   <tr class="th_class">
   <th style="width:8%">Run.ID</th>
-  <th style="width:8%">User</th>
+  <th style="width:10%">User</th>
   <th style="width:8%">Problem</th>
-  <th style="width:14%">Result</th>
+  <th style="width:16%">Result</th>
   <th style="width:6%">Memory</th>
   <th style="width:6%">Time</th>
   <th style="width:6%">Language</th>
-  <th style="width:18%">Code Length</th>
-  <th style="width:20%">Submit Time</th>
+  <th style="width:10%">Code Length</th>
+  <th style="width:24%">Submit Time</th>
  </tr>
 </theaad>
 <tbody>
@@ -94,12 +127,10 @@
 </div>
 
 <div id="center" class="center">
-<?php echo "[<a href=status.php?".$str.">Top</a>]&nbsp;&nbsp;";
-if (isset($prevtop))
-        echo "[<a href=status.php?".$str."&top=".$prevtop.">Previous Page</a>]&nbsp;&nbsp;";
-else
-        echo "[<a href=status.php?".$str."&top=".($top+20).">Previous Page</a>]&nbsp;&nbsp;";
-echo "[<a href=status.php?".$str."&top=".$bottom."&prevtop=$top>Next Page</a>]";
+<?php echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1).">Top</a>]&nbsp;&nbsp;";
+if (isset($previous)) 
+        echo "[<a href=status?previous=".($previous-1)."&pagination=".($pagination-2).">Previous Page</a>]&nbsp;&nbsp;";
+echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination).">Next Page</a>]";
 ?>
 </div>
 </div>

@@ -103,8 +103,8 @@ class Problem extends Admin_Controller{
 		$this->upload->initialize($config);
 		$aimurl = "$cof[path]/$cof[file_name]";
 		if (file_exists($aimurl)) { 
-            unlink($aimurl); 
-        }
+            			unlink($aimurl); 
+        		}
 		$result = $this->upload->do_upload($cof['name']);
 		if($result) return true;
 		else {

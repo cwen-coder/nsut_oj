@@ -20,6 +20,8 @@ class Problem_submit extends Oj_Controller{
 			$data['code_length'] = strlen($data['source']);
 			/*echo $data['code_length'];die;*/
 			$result = $this->ps->problem_submit($data);
+			$url = 'oj_index/home/status';
+			if($result) success('$url','提交成功');
 		}
 	}
 	/**
@@ -37,13 +39,5 @@ class Problem_submit extends Oj_Controller{
 		}
 		$mem->mc->set($key, time());
 		//$mem->mc->delete($key,0);
-	}
-	function problem_status(){
-		$data['judge_result']=Array("Pending", "Pending Rejudging", "Compiling", "Running & Judging", "Accepted", "Presentation Error", "Wrong Answer", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed", "Runtime Error", "Compile Error", "Compile OK","Test Running Done");
-		$data['judge_color']=Array("btn_status gray","btn_status btn-info","btn_status btn-warning","btn_status btn-warning","btn_status btn-success","btn_status btn-danger","btn_status btn-danger","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-info");
-		$limit=0;
-		$num=20;
-		$data['result'] = $this->ps->problem_status($limit, $num);
-		$this->load->view('oj_index/status.html', $data);
 	}
 }
