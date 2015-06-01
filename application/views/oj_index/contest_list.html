@@ -20,11 +20,6 @@
   .label_reg{
     width:20%;
   }
-  </style>
-  <body>
-<?php $this->load->view('oj_index/header.html');?>
-
-<style type="text/css">
     body {
     font-family: 微软雅黑;
     background: #eee;
@@ -37,10 +32,10 @@
     padding: 0px;
   }
 
-	.control-group {
-		display: inline;
-		float: right;
-	}
+  .control-group {
+    display: inline;
+    float: right;
+  }
   .container-search{
               margin-top: 7%;
               margin-right: 100px;
@@ -52,81 +47,92 @@
     margin-top: 11%;
     left: 10%;
   }
-  .th_class {
-    background-color:#000000;
+  /* .th_class {
+    background-color:#222;
     color:#FFFFFF;
-  }
-  td,th{
+  } */
+  /* td,th{
     text-align:center
-  }
-	</style>
-<div class="container-search">
-<div class="control-group">
-          <div class="controls" style="display:inline">
+  } */
+  .container{
 
-            <!-- Inline Radios -->
-            <table>
-              <th>
-            <label class="radio inline">
-              <input type="radio" value="1" checked="checked" name="group">
-              题号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </label>
-          </th>
-          <th>
-            <label class="radio inline">
-              <input type="radio" value="2" name="group">
-              标题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </label>
-          </th>
-          <th>
-            <label class="radio inline">
-              <input type="radio" value="3" name="group">
-              类别&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </label>
-          </th>
-          </div> 
-          
-           <div class="form-group" style="display:inline">
-            <th>
-	      	<input type="text" class="form-control"  placeholder="Search for..." >
-            </th>
-        <th>
-	        <button class="btn btn-default" type="button" id = "search_but">Go!</button>
-        </th>
-	</div>
-</table>
-        </div>
-</div>
-</div>
-<div class="table-group">
-  <div class="pagination">
-<!--  <td><?php echo $links; ?></td>  -->
-</div>
-<table class="table table-bordered table-hover" style="width: 1000px;">
+  }
+  </style>
+  <body>
+<?php $this->load->view('oj_index/header.html');?>
+
+
+
+<div class="container">
+<div class="well" style="margin-top:7%;">
+<h5 style="color:blue;">正在进行、即将开始 比赛</h5>
+<table class="table table-striped" >
   <thead>
   <tr class="th_class">
-  <th style="width:10%">Pro.ID</th>
-  <th style="width:50%">Problem Title</th>
-  <th style="width:20%">Problem Category</th>
-  <th style="width:20%">Ratio(Accepted/Submissions)</th>
+  <th style="width:10%;">编号</th>
+  <th style="width:50%;">比赛名称</th>
+  <th style="width:20%;">开始时间</th>
+  <th style="width:20%;">类型</th>
  </tr>
 </theaad>
 <tbody>
-  <tr>
-    <td>1000</td>
-    <td><a href="<?php echo site_url('contest/home'); ?>?id=1007">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
+ <?php foreach($con_now as $temp):?>
+    <tr>
+       <td><?php echo $temp['contest_id'];?></td>
+       <td><a href = "<?= site_url('contest/home/index');?>"><?php echo $temp['title'];?></a></td>
+          <td><?php echo $temp['start_time'];?></td>
+          <td>
+          <?php switch ($temp['con_class']) {
+            case '1':
+              echo "公开";
+              break;
+            case '2':
+              echo "私有";
+              break;
+          } ?>
+          </td>
+    </tr>
+  <?php endforeach;?>
 </tbody>
 </table>
 </div>
-
+<div class="well" style="margin-top:5%;">
+<h5 style="color:blue;">已结束 比赛</h5>
+<table class="table  table-striped" >
+  <thead>
+  <tr class="th_class">
+  <th style="width:10%">编号</th>
+  <th style="width:50%">比赛名称</th>
+  <th style="width:20%">结束时间</th>
+  <th style="width:20%">类型</th>
+ </tr>
+</theaad>
+<tbody>
+  <?php foreach($con_pass as $temp):?>
+    <tr>
+       <td><?php echo $temp['contest_id'];?></td>
+       <td><a href = ""><?php echo $temp['title'];?></a></td>
+          <td><?php echo $temp['start_time'];?></td>
+          <td>
+          <?php switch ($temp['con_class']) {
+            case '1':
+              echo "公开";
+              break;
+            case '2':
+              echo "私有";
+              break;
+          } ?>
+          </td>
+    </tr>
+  <?php endforeach;?>
+</tbody>
+</table>
+ <div class="pagination" style="text-align:right;" id = "links">
+  <?php echo $links;?>
+</div>
+</div>
+</div>
+<input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
+<input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
 </body>
 </html>

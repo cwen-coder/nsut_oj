@@ -48,7 +48,7 @@
     margin-top: 11%;
   }
   .th_class {
-    background-color:#000000;
+    background-color:#222;
     color:#FFFFFF;
   }
   td,th{
@@ -103,5 +103,7 @@ echo "[<a href=status.php?".$str."&top=".$bottom."&prevtop=$top>Next Page</a>]";
 ?>
 </div>
 </div>
+<input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
+<input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
   </body>
 </html>
