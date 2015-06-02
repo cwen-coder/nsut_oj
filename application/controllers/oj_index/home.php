@@ -102,6 +102,19 @@ class Home extends Oj_Controller{
 		die;*/
 		//echo $data['links'];die;
 	 	$this->load->view('oj_index/contest_list.html',$data);
+	 	$offset1 = $this->uri->segment(5);
+	 	if($offset1 == 1000 && !$this->session->userdata('username')) {
+	 		echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click(); }</script>";
+	 	} else if($offset1 == 1001) {
+	 		$offset_con = $this->uri->segment(6);
+	 		$data['contest'] = $this->oj_con->con_byId($offset_con);
+	 		if(!$this->session->userdata('username')) {
+	 			echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click(); }</script>";
+	 		}else if(!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $data['contest']['con_pwd']){
+		 		//echo "<script type='text/javascript'> alert(' ".$offset_con."')</script>";
+		 		echo "<script type='text/javascript'>window.onload=function(){document.getElementById('con_log').click();}</script>";
+		 	}
+	 	}
 	}
 	//提交状态显示
 	public function status(){

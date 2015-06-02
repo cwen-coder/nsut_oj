@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal_con_pwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id = "con_login_close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">请输入比赛密码</h4>
+      </div>
+      <form class="form-horizontal" method="post" action = "<?= site_url('contest/home/con_log_act');?>" >
+        <div class="modal-body">
+          <div class="container_modal">
+            <div class="form-group">
+              <label class="control-label label_reg" for="password"  >密码</label>
+              <input type="password" class="input-xlarge" id="con_password" name="password" placeholder="输入密码">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="password_c"></span>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="con_log_sub" disabled >登录</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

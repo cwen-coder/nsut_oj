@@ -43,5 +43,22 @@ class Oj_con_model extends CI_Model {
 		$result = mysql_query($query);
 		return  mysql_fetch_assoc($result);
 	}
+	//比赛登录
+	public function con_log_act($contest_id,$con_pwd) {
+		$query = "SELECT con_class,con_pwd FROM contest WHERE contest_id = '$contest_id'";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		if($num > 0) {
+			//return 1;
+			$this->load->library('encrypt');
+			$meta = mysql_fetch_assoc($result);
+			if($this->encrypt->decode($meta['con_pwd']) != $con_pwd) {
+				return false;
+			} else {
+				$this->session->set_userdata('con_pwd',$meta['con_pwd']);
+				return true;
+			}
+		}else return false;
+	}
 }
 ?>
