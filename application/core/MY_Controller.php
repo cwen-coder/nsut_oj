@@ -48,3 +48,15 @@ class Admin_Controller extends CI_Controller {
        }
 	}
 }
+
+/*#网站前台控制器
+class Con_Controller extends CI_Controller {
+	public function __construct(){
+		parent::__construct();
+		$this->load->switch_view_off();
+        #权限验证
+        if(!$this->session->userdata('username')){
+            //success('oj_index/home/contest_list','请先登录！');
+       }
+	}
+}*/

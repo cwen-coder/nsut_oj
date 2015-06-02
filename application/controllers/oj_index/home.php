@@ -145,4 +145,8 @@ class Home extends Oj_Controller{
 		header('Content-Type:text/html;charset=utf-8');
 		echo "<script type='text/javascript'> alert('注销成功 ');history.go(-1); </script>";
 	}
+
+	/*public function log_but() {
+		self::contest_list();
+	}*/
 }
