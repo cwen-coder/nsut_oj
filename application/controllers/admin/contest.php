@@ -198,26 +198,46 @@ class Contest extends Admin_Controller {
 	//创建文件夹
 	public function create_dir($problem_id){
 			$path="/home/judge/data/$problem_id";
-			echo $path."<br/>";
-			if(!file_exists($path))
-				mkdir($path);
+			//echo $path."<br/>";
+			if(!file_exists($path)){
+				if(mkdir($path)) return true;
+					else
+						return false;
+			}
+			else 
+				return true;
+
 	}
 	//上传文件
-	public function upload($file_name, $problem_id){
+	public function upload($file_name, $name, $problem_id){
 		$config['allowed_types'] = 'txt';
 		$config['max_size'] = '1024';
 		$config['file_name'] = $file_name;
 		$config['upload_path'] = "/home/judge/data/$problem_id";
 		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
 		$file_path = "$config[upload_path]/$file_name.txt";
-		echo $file_path;
+		//echo $file_path;
 		if (file_exists($file_path) ){ 
-            			unlink($file_path); 
+            			unlink($file_path);
         		}
-		if($this->upload->do_upload($file_name))
-			p($this->upload->data());
-		else
+		if($this->upload->do_upload($file_name)){
+			$a = "/home/judge/data/$problem_id/$file_name.txt";
+			$b = "/home/judge/data/$problem_id/$name";
+			rename($a, $b);
+			//p($this->upload->data());
+			return true;
+		}
+		else{
 			echo $this->upload->display_errors();
+			return false;
+		}
+	}
+	//输入输出样例写入
+	public function write_file($path_,$content){
+		$path = "/home/judge/data/$path_";
+		if(file_put_contents($path, $content)) return true;
+			else return false;
 	}
 	//添加新题目动作
 	public function con_pro_new(){
@@ -236,9 +256,18 @@ class Contest extends Admin_Controller {
 			'source' => $this->input->post('source'),
 			'spj' => $this->input->post('spj')
 			);
-		if($problem_id = $this->contest_model->add_pro_new($data))echo $problem_id;die;
-				self::create_dir($problem_id);
-		self::upload('text_in','1001');
+		$url = "admin/contest/con_pro_list/$data[contest_id]";
+		if($problem_id = $this->contest_model->add_pro_new($data)){
+				if(!self::create_dir($problem_id)) error_link($url, "创建文件夹失败");
+				if(!self::upload('text_out', 'text.out', $problem_id)) error_link($url, "text_out上传文件失败");
+				if(!self::upload('text_in', 'text.in', $problem_id)) error_link($url, "text_in上传文件失败");
+				if(!self::write_file($problem_id."/sample.in", $data['sample_input'])) error_link($url, "sample.in创建失败");
+				if(!self::write_file($problem_id."/sample.out", $data['sample_output'])) error_link($url, "sample.out创建失败");
+				success("admin/contest/con_pro_list/$data[contest_id]",'添加成功');
+			}
+		else{
+			error_link($url, "题目插入失败");
+		}
 		
 	}
 }

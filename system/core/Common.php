@@ -585,6 +585,15 @@ function success($url,$msg){
     echo "<script type='text/javascript'> alert('$msg');location.href='$url'; </script>";
     die;
 }
+/*
+ *成功函数
+ */
+function error_link($url,$msg){
+    header('Content-Type:text/html;charset=utf-8');
+    $url = site_url($url);
+    echo "<script type='text/javascript'> alert('$msg');location.href='$url'; </script>";
+    die;
+}
 
 /*
  * 失败函数
