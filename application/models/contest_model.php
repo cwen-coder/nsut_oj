@@ -102,12 +102,11 @@ class Contest_model extends CI_Model {
 			'$data[spj]', '$data[hint]', NOW(), '$data[time_limit]', '$data[memory_limit]', 'N', '$data[source]')";
 		$result_pro = mysql_query($sql_pro);
 		$insert_id=mysql_insert_id();
-		echo $insert_id;
 		$sql_con_pro = "insert into problem_contest(problem_id, contest_id, title, num, source) values('$insert_id', '$data[contest_id]', '$data[pro_title]', '$data[num]', '0')";
 		$result_con_pro = mysql_query($sql_con_pro);
 		if($result_pro && $result_con_pro)
 			return $insert_id;
-		else 
+		else
 			return false;
 	}
 }
