@@ -83,6 +83,21 @@ class Home extends Con_Controller {
 		$data['contest_id'] = $this->uri->segment(4);
 		$data['problem_id'] = $this->uri->segment(5);
 		$data['num'] = $this->uri->segment(6);
-		$this->load->view('contest/submit.html',$data);
+		$contest = $this->oj_con->con_byId($data['contest_id']);
+		if(!$this->session->userdata('user_id')){
+			$offset = $this->uri->segment(5);
+		 	redirect('oj_index/home/contest_list/'.$offset.'/1000');
+		 	//echo 1;
+		} else if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd'])) {
+				$offset = $this->uri->segment(5);
+				//echo 2;
+				redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
+		} else if (time() < strtotime($contest['start_time'])) {
+				redirect('contest/home/home/'.$data['contest_id']);
+		} else if(time() > strtotime($contest['end_time'])){
+			error("对不起比赛已经结束！您无法提交!");
+		}else {
+			$this->load->view('contest/submit.html',$data);
+		}
 	}
 }

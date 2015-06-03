@@ -92,5 +92,44 @@ class Oj_con_model extends CI_Model {
 		} else return false;
 
 	}
+
+	//判断题目是否存在
+	public function check_pro($problem_id) {
+		$query = "SELECT problem_id FROM problem WHERE problem_id = '$problem_id' ";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		if($num > 0) return true;
+		else return false;
+	}
+	//判断比赛是否存在
+	public function check_con($contest_id) {
+		$query = "SELECT contest_id FROM contest WHERE contest_id = '$contest_id' ";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		if($num > 0) return true;
+		else return false;
+	}
+	//判断比赛中是否存在某题
+	public function check_con_pro($problem_id,$contest_id) {
+		$query = "SELECT num FROM problem_contest WHERE contest_id = '$contest_id' and  problem_id = '$problem_id' ";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		if($num > 0) return mysql_fetch_assoc($result);
+		else return false;
+	}
+
+	function problem_submit($data){
+		/*p($data);
+		echo Now();*/
+		$sql_solution = "insert into solution(problem_id, user_id, in_date, language, ip, code_length, contest_id,num) values('$data[pid]', '$data[user_id]' , NOW(), '$data[language]', '$data[ip]', '$data[code_length]', '$data[cid]', '$data[num]')";
+		$result_solution = mysql_query($sql_solution);
+		if($result_solution) {
+			$insert_id=mysql_insert_id();
+			$sql_source = "insert into source_code(solution_id, source) values('$insert_id', '$data[source]')";
+			$result_source = mysql_query($sql_source);
+			if($result_source) return true;
+			else return false;
+		} else return false;
+	}
 }
 ?>
