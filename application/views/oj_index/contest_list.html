@@ -58,13 +58,16 @@
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>
-
+<button type="button" class="btn btn-primary " data-toggle="modal"   data-target="#myModal_con_pwd" id="con_log" aria-hidden="true" ></button>
+<?php require('con_log.html');?>
 <div class="container">
 
 
 <div class="container">
 <div class="well" style="margin-top:7%;">
-<h5 style="color:blue;">正在进行、即将开始 比赛</h5>
+
+<h4 style="color:red;"><strong>正在进行、即将开始的比赛</strong></h4>
+
 <table class="table table-striped" >
   <thead>
   <tr class="th_class">
@@ -75,10 +78,11 @@
  </tr>
 </theaad>
 <tbody>
+
  <?php foreach($con_now as $temp):?>
     <tr>
        <td><?php echo $temp['contest_id'];?></td>
-       <td><a href = "<?= site_url('contest/home/index/'.$temp['contest_id']);?>" id="<?php echo $temp['contest_id'];?>" class="con_a"><?php echo $temp['title'];?></a></td>
+       <td><a href = "<?php $offset = $this->uri->segment(4); if($offset<1)$offset = 0; echo site_url('contest/home/index/'.$temp['contest_id'].'/'.$offset);?>" id="<?php echo $temp['contest_id'];?>" class="con_a"><?php echo $temp['title'];?></a></td>
           <td><?php echo $temp['start_time'];?></td>
           <td>
           <?php switch ($temp['con_class']) {
@@ -96,10 +100,10 @@
 </table>
 </div>
 <div class="well" style="margin-top:5%;">
-<h5 style="color:blue;">已结束 比赛</h5>
-<table class="table  table-striped" >
+<h4 style="color:red;"><strong> 已结束的比赛</strong></h4>
+<!-- <table class="table  table-striped" > -->
 
-<table class="table table-bordered table-hover">
+<table class="table table-striped">
   <thead>
   <tr class="th_class">
   <th style="width:10%">编号</th>
@@ -112,7 +116,7 @@
   <?php foreach($con_pass as $temp):?>
     <tr>
        <td><?php echo $temp['contest_id'];?></td>
-       <td><a href = "" id="<?php echo $temp['contest_id'];?>" class="con_a"><?php echo $temp['title'];?></a></td>
+       <td><a href = "<?php $offset = $this->uri->segment(4); if($offset<1)$offset = 0; echo site_url('contest/home/index/'.$temp['contest_id'].'/'.$offset);?>" id="<?php echo $temp['contest_id'];?>" class="con_a"><?php echo $temp['title'];?></a></td>
           <td><?php echo $temp['start_time'];?></td>
           <td>
           <?php switch ($temp['con_class']) {

@@ -84,9 +84,9 @@ function goPage(pno,psize){
         var x = irow.cells;
         //console.log(x[0]);
         x[0].style.width="117px";
-        x[1].style.width="400px";
-        x[2].style.width="200px";
-        x[3].style.width="200px";
+        x[1].style.width="550px";
+        x[2].style.width="100px";
+        x[3].style.width="150px";
         x[4].style.width="100px";
         x[5].style.width="100px";
       }else{
@@ -157,9 +157,9 @@ function onSearch(val,td){
 
 function thcss() {
     $("#con_table th:eq(0)").width(117);
-    $("#con_table th:eq(1)").width(400);
-    $("#con_table th:eq(2)").width(200);
-    $("#con_table th:eq(3)").width(200);
+    $("#con_table th:eq(1)").width(550);
+    $("#con_table th:eq(2)").width(100);
+    $("#con_table th:eq(3)").width(150);
     $("#con_table th:eq(4)").width(100);
     $("#con_table th:eq(5)").width(100);
 } 

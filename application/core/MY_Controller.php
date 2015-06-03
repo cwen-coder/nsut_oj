@@ -49,14 +49,16 @@ class Admin_Controller extends CI_Controller {
 	}
 }
 
-/*#网站前台控制器
+#网站前台控制器
 class Con_Controller extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->switch_view_off();
         #权限验证
-        if(!$this->session->userdata('username')){
-            //success('oj_index/home/contest_list','请先登录！');
-       }
+        if(!$this->session->userdata('username')) {
+		 	$offset = $this->uri->segment(5);
+		 	redirect('oj_index/home/contest_list/'.$offset.'/1000');
+			//echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click(); }</script>";
+		}
 	}
-}*/
+}

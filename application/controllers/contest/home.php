@@ -1,60 +1,88 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends Oj_Controller{
+class Home extends Con_Controller {
+	function __construct(){
+		parent::__construct();
+		$this->load->model('oj_con_model','oj_con');
+		$this->load->model('contest_model');
+	}
+
 	public function index(){
 		$contest_id = $this->uri->segment(4);
-		if(!$this->session->userdata('username')) {
+		/*if(!$this->session->userdata('username')) {
 			self::contest_list();
 			echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click(); }</script>";
-		}else {
-
+		}*/
+		$data['contest'] = $this->oj_con->con_byId($contest_id);
+		//p($data['con']);
+		if($data['contest']['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $data['contest']['con_pwd'])) {
+				$offset = $this->uri->segment(5);
+				redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
 		}
-		//$this->load->view('contest/contest.html');
+		$user_id = $this->session->userdata('user_id');
+		$con_pro_id = $this->contest_model->get_con_pro_id($contest_id);
+		$con_pro_sub = $this->oj_con->get_con_pro_sub($user_id,$contest_id);
+		$con_pro_ac = $this->oj_con->get_con_pro_ac($user_id,$contest_id);
+		$data['pro'] = array();
+		foreach ($con_pro_id as $v) {
+			$data['pro'][$v['num']] = $v;
+			foreach ($con_pro_sub as $sub) {
+				if($v['problem_id'] == $sub['problem_id']) {
+					$temp = 0;
+					foreach ($con_pro_ac as $ac) {
+						if($v['problem_id'] == $ac['problem_id']) {
+							$data['pro'][$v['num']]['status'] = true;
+							$temp = 1;
+							break;
+						} /*else {
+							$data['pro'][$v['num']]['status'] = 0;
+							break;
+						}*/
+					}
+					if($temp == 0) {
+						$data['pro'][$v['num']]['status'] = false;
+					}
+				}
+			}
+		}
+		$data['arr'] = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+		$this->load->view('contest/contest.html',$data);
+	}
+	//比赛登录
+	public function con_log_act() {
+		//self:index();
+		$contest_id = $this->input->post('contest_id',TRUE);
+		$con_pwd = $this->input->post('con_pwd',TRUE);
+		//echo 1;
+		$result = $this->oj_con->con_log_act($contest_id,$con_pwd);
+		if($result == true) {
+			//redirect('contest/home/index/'.$contest_id);
+			echo true;
+			return;
+		} else {
+			echo false;
+			return;
+		}
+
+	}
+	//载入比赛题目
+	public function con_pro() {
+		$contest_id = $this->uri->segment(4);
+		$problem_id = $this->uri->segment(5);
+		$num = $this->uri->segment(6);
+		$data['pro'] = $this->oj_con->con_pro_byId($problem_id);
+		$data['num'] = $num;
+		$data['contest_id'] = $contest_id;
+		//echo "jdfkdjfkdfjkj";
+		//p($data);
+		$this->load->view('contest/con_pro.html',$data);
 	}
 
-	public function contest_list(){
-		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
-			$data['username'] = $this->session->userdata('username');
-			$data['user_id'] = $this->session->userdata('user_id');
-		}else {			
-			$data['username'] = false;
-			$data['user_id'] = false;
-		}
-		$this->load->model('oj_con_model','oj_con');
-		$data['con_now'] = $this->oj_con->get_now_contest();
-		//分页获取已结束的比赛
-		$data['num'] =  $this->oj_con->pass_con_num();
-		//后台设置后缀为空，否则分页出错
-		$this->config->set_item('url_suffix', '');
-		//载入分页类
-		$this->load->library('pagination');
-		$perPage = 3;
-		//配置项设置
-		$config['base_url'] = site_url('oj_index/home/contest_list/');
-		$config['total_rows'] = $data['num']['count(*)'];
-		$config['per_page'] = $perPage;
-		$config['uri_segment'] = 4;
-		$config['first_link'] = '首页';
-		$config['prev_link'] = '上一页';
-		$config['next_link'] = '下一页';
-		$config['last_link'] = '尾页';
-		$config['full_tag_open'] = '';
-		$config['full_tag_close'] = '';
-		$config['cur_tag_open'] = '<li class="active"><a>'; // 当前页开始样式   
-		$config['cur_tag_close'] = '</a></li>'; 
-
-		$this->pagination->initialize($config);
-
-		$data['links'] = $this->pagination->create_links();	
-		$offset = $this->uri->segment(4);
-		if($offset < 1) $offset = 0;
-		//$this->db->limit($perPage, $offset);
-		$data['con_pass'] = $this->oj_con->con_pass_list($perPage, $offset);
-		/*p($data['con_now']);
-		p($data['con_pass']);
-		die;*/
-		//echo $data['links'];die;
-	 	$this->load->view('oj_index/contest_list.html',$data);
+	//载入提交页
+	public function con_pro_sub() {
+		$data['contest_id'] = $this->uri->segment(4);
+		$data['problem_id'] = $this->uri->segment(5);
+		$data['num'] = $this->uri->segment(6);
+		$this->load->view('contest/submit.html',$data);
 	}
-
 }
