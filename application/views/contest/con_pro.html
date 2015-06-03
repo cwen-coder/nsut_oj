@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+		<title>沈阳工业大学在线判题系统</title>
+		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
+		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
+		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
+	</head>
+</head>
+<body>
+	<nav class="navbar navbar-fixed-top navbar-inverse ">
+<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+					<a class="navbar-brand" href="<?php echo site_url('oj_index/home/contest_list');?>">沈阳工业大学在线判题系统</a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="<?= site_url('contest/home/index/'.$contest_id);?>">题目<span class="sr-only">(current)</span></a></li>
+			<li><a href="#">状态</a></li>
+			<li><a href="#">排名</a></li>
+			<li><a href="#">统计</a></li>
+			<li><a href="#">讨论</a></li>
+		</ul>
+		<form class="navbar-form navbar-right">
+			<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $this->session->userdata('username');?></a></h5>
+		</form>
+		</div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<div class="container container_contest">
+	<h2  class="page-title"><?= $num;?>  -  <?= $pro['title'];?></h2>
+	<div style="text-align: center;">
+	<span>时间限制： </span>
+		<span style = "color:red;" id = "start_time" ><?= $pro['time_limit'] ;?>&nbsp;&nbsp;S</span>
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内存限制： </span>
+		<span style = "color:red;"><?= $pro['memory_limit'] ;?>&nbsp;&nbsp;MB</span>
+	</div>
+	<h4>题目描述：</h4>
+	<div class="well" style="margin-top: 1%; ">
+		<?= $pro['description'] ;?>
+	</div>
+	<h4>输入：</h4>
+	<div class="well" style="margin-top: 1%; ">
+		<?= $pro['input'] ;?>
+	</div>
+	<h4>样例输入：</h4>
+	<div class="well" style="margin-top: 1%; ">
+		<?= $pro['output'] ;?>
+	</div>
+	<h4>样例输出：</h4>
+	<div class="well" style="margin-top: 1%; ">
+		<?= $pro['sample_input'] ;?>
+	</div>
+	<h4>输出：</h4>
+	<div class="well" style="margin-top: 1%; ">
+		<?= $pro['sample_output'] ;?>
+	</div>
+	<?php if (!empty($pro['hint'])) : ?>
+	<h4>提示：</h4>
+	<div class="well" style="margin-top: 1%; ">
+		<?= $pro['hint'] ;?>
+	</div>
+	<?php endif; ?>
+	<?php if (!empty($pro['source'])) : ?>
+	<h4>提示：</h4>
+	<div class="well" style="margin-top: 1%; ">
+		<?= $pro['source'] ;?>
+	</div>
+	<?php endif; ?>
+	<center>
+		<a href="<?= site_url('contest/home/con_pro_sub/'.$contest_id.'/'.$pro['problem_id'].'/'.$num);?>"><img src="<?= base_url('application/views/contest/images/submit.jpg');?>"></a>
+	</center>
+</div>
+
+</body>
+</html>

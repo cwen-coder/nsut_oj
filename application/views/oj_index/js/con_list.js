@@ -53,4 +53,9 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$(document).keypress(function (event) {
+		if(event.which == 13) {
+			$("#con_log_sub").click();
+		} 
+	});
 });

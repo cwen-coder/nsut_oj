@@ -9,6 +9,7 @@ class Contest_model extends CI_Model {
 		require('db_info.inc.php');
 	}
 
+
 	//获取已添加题目最大题号
 	public function get_max_id() {
 		$query = "SELECT MAX(contest_id) FROM contest";
