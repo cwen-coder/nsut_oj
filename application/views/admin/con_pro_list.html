@@ -64,7 +64,7 @@
 		          <td><?php if($v['source'] == 0) echo "新建题目";
 		          		else echo "来自题库第".$v['problem_id']."题"; ?></td>
 		          <td>
-		              <a href="" ><i class="icon-pencil"></i></a>
+		              <a href="<?php echo site_url('admin/contest/con_pro_edit/'.$v['problem_id']);?>" ><i class="icon-pencil"></i></a>
 		              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
 		          </td>
 		        </tr> 

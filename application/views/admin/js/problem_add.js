@@ -8,13 +8,16 @@ var check_id = false;
 var check_title = false;
 var check_time_limit = false;
 var check_memory_limit = false;
+var check_sample_input = false;
+var check_sample_output = false;
 function chksub() {
-	if(check_id && check_title && check_time_limit && check_memory_limit) {
+	if(check_id && check_title && check_time_limit && check_memory_limit &&check_sample_input &&check_sample_output) {
 		$("#pro_add").removeAttr('disabled');
 	}
 }
 
 $(document).ready(function() {
+	if(!document.getElementById("problem_id")) check_id = true;
 	//题号验证
 	$("#problem_id").blur(function() {
 		var problem_id = $(this).val();
@@ -42,7 +45,7 @@ $(document).ready(function() {
 			})
 		}
 	});
-
+	
 	//检查题目标题
 	$("#pro_title").blur(function() {
 		var len = ($(this).val()).length;
@@ -51,6 +54,28 @@ $(document).ready(function() {
 		} else {
 			$("#pro_title_span").text('');
 			check_title = true;
+			chksub();
+		}
+	});
+	//检查sample_input
+	$("#sample_input").blur(function() {
+		var len = ($(this).val()).length;
+		if(len == 0) {
+			$("#pro_sample_input_span").text('样例输入不能为空');
+		} else {
+			$("#pro_sample_input_span").text('');
+			check_sample_input = true;
+			chksub();
+		}
+	});
+	//检查sample_output
+	$("#sample_output").blur(function() {
+		var len = ($(this).val()).length;
+		if(len == 0) {
+			$("#pro_sample_output_span").text('样例输出不能为空');
+		} else {
+			$("#pro_sample_output_span").text('');
+			check_sample_output = true;
 			chksub();
 		}
 	});

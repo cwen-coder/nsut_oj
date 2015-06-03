@@ -607,9 +607,9 @@ function error($msg){
 *当前时间
 */
 function Now(){
-	$datestring = "%Y-%m-%d %h:%i:%s";
+	$datestring = "Y-m-d h:i:s";
 	$time = time();
-	return mdate($datestring, $time); 
+	return date($datestring, $time); 
 }
 /* End of file Common.php */
 /* Location: ./system/core/Common.php */

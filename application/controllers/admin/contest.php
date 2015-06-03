@@ -240,8 +240,9 @@ class Contest extends Admin_Controller {
 			else return false;
 	}
 	//添加新题目动作
-	public function con_pro_new(){
+	public function con_pro_add_do(){
 		$data = array(
+			'pro_id' => time(),
 			'pro_title' => $this->input->post('pro_title'),
 			'contest_id' => $this->input->post('cid'),
 			'num' => $this->input->post('num'),
@@ -259,16 +260,44 @@ class Contest extends Admin_Controller {
 		$url = "admin/contest/con_pro_list/$data[contest_id]";
 		if($problem_id = $this->contest_model->add_pro_new($data)){
 				if(!self::create_dir($problem_id)) error_link($url, "创建文件夹失败");
-				if(!self::upload('text_out', 'text.out', $problem_id)) error_link($url, "text_out上传文件失败");
-				if(!self::upload('text_in', 'text.in', $problem_id)) error_link($url, "text_in上传文件失败");
-				if(!self::write_file($problem_id."/sample.in", $data['sample_input'])) error_link($url, "sample.in创建失败");
+				if(!self::write_file($problem_id."/sample.in", $data['sample_input'])) error_link($url, "sample.in和sample.out创建失败");
 				if(!self::write_file($problem_id."/sample.out", $data['sample_output'])) error_link($url, "sample.out创建失败");
-				success("admin/contest/con_pro_list/$data[contest_id]",'添加成功');
+				if(!self::upload('text_out', 'text.out', $problem_id)) error_link($url, "text_out和text_in未上传");
+				if(!self::upload('text_in', 'text.in', $problem_id)) error_link($url, "text_in上传文件失败");
+				success($url, '添加成功');
 			}
 		else{
 			error_link($url, "题目插入失败");
 		}
 		
 	}
+	//展示比赛题目修改页面
+	public function con_pro_edit(){
+		$problem_id = $this->uri->segment(4);
+		$data= $this->contest_model->check_con_pro($problem_id);
+		//p($data);die;
+		$this->load->view("admin/contest_problem_edit.html",$data);
+
+	}
+	//修改新增题目动作
+	public function con_pro_edit_do(){
+		$data = array(
+			'pro_id' => $this->input->post('pid'),
+			'pro_title' => $this->input->post('pro_title'),
+			'contest_id' => $this->input->post('cid'),
+			'num' => $this->input->post('num'),
+			'time_limit' => $this->input->post('time_limit'),
+			'memory_limit' => $this->input->post('memory_limit'),
+			'content_des' => $this->input->post('content_des'),
+			'content_input' => $this->input->post('content_input'),
+			'content_output' => $this->input->post('content_output'),
+			'sample_input' => $this->input->post('sample_input'),
+			'sample_output' => $this->input->post('sample_output'),
+			'hint' => $this->input->post('hint'),
+			'source' => $this->input->post('source'),
+			'spj' => $this->input->post('spj')
+			);
+	}
+	
 }
 ?>
