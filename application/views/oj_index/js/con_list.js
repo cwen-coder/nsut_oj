@@ -28,7 +28,7 @@ $(document).ready(function() {
 			$("#con_log_sub").attr("disabled",true);
 		}
 	});
-	$("#con_log_sub").click(function() {
+	$("#con_log_sub").click(function(e) {
 		/* Act on the event */
 		var curPath=window.location.href;
 		curPath = curPath.split("/");
@@ -49,13 +49,18 @@ $(document).ready(function() {
 				document.getElementById(contest_id).click();
 				//$("a#"+contest_id).click();
 			} else {
+				//e.preventDefault;
 				alert("密码不正确!");
+				//$("#password_cs").text('密码不正确');
+				//e.preventDefault;
+				//location.href = $("#hid_site").val()+'/oj_index/home/contest_list';
 			}
 		});
 	});
-	$(document).keypress(function (event) {
+	$(document).keypress(function (e) {
 		if(event.which == 13) {
 			$("#con_log_sub").click();
+			//e.preventDefault;
 		} 
 	});
 });

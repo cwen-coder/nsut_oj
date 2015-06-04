@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,7 +61,7 @@ editAreaLoader.init({
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="<?= site_url('contest/home/index/'.$contest_id);?>">题目<span class="sr-only">(current)</span></a></li>
-			<li><a href="#">状态</a></li>
+			<li><a href="<?= site_url('contest/home/con_status/'.$contest_id);?>">状态</a></li>
 			<li><a href="#">排名</a></li>
 			<li><a href="#">统计</a></li>
 			<li><a href="#">讨论</a></li>
@@ -75,7 +74,7 @@ editAreaLoader.init({
 </nav>
 <center>
 <div class="group">
-<form action="<?php echo site_url('contest/prob_sub/index');?>" method="post">
+<form action="<?php echo site_url('contest/con_sub/index');?>" method="post">
 	<div>
 	    <h3 style="color:red">Problem： <?= $num?></h3><br/>
 	    <span style="color:red">Language:</span>

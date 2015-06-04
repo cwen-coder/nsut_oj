@@ -12,7 +12,6 @@
 		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
 		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
 	</head>
-</head>
 <body>
 	<nav class="navbar navbar-fixed-top navbar-inverse ">
 <div class="container">
@@ -24,7 +23,7 @@
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="<?= site_url('contest/home/index/'.$contest_id);?>">题目<span class="sr-only">(current)</span></a></li>
-			<li><a href="#">状态</a></li>
+			<li><a href="<?= site_url('contest/home/con_status/'.$contest_id);?>">状态</a></li>
 			<li><a href="#">排名</a></li>
 			<li><a href="#">统计</a></li>
 			<li><a href="#">讨论</a></li>

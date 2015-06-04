@@ -60,4 +60,11 @@ valign: middle; */
         font-size: 13px;
         font-weight: bold;
         color: #000;
-      }
+  }
+  .container-contest{
+              margin-top: 6%;
+  }
+  .control-group {
+		display: inline;
+		float: right;
+}
