@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * @author SUTNB <[email address]>
-* @copyright [2015.05.19]
+* @copyright [2015.05.29]
 */
 class Con_sub extends Con_Controller{
 	function __construct(){
