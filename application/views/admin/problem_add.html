@@ -42,7 +42,7 @@
 	   	<tbody>
 		  <tr>
 			<td>题号：</td>
-			<td><input id = "problem_id" name="problem_id" value="" type="text"  /> <span >*&nbsp;&nbsp;&nbsp;之前已添加到第&nbsp; <?php echo $max_id['MAX(problem_id)'];?>&nbsp; 题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id = "problem_id_span"></span></td>
+			<td><input id = "problem_id" name="problem_id" value="" type="text"  /> <span >*&nbsp;&nbsp;&nbsp;之前已添加到第&nbsp; <?php echo $max_id['MAX(pc.problem_id)'];?>&nbsp; 题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id = "problem_id_span"></span></td>
 		  </tr>
 		  <tr>
 			<td>标题：</td>
@@ -87,11 +87,11 @@
 		  </tr>
 		  <tr>
 		  	<td>样例输入：</td>
-		  	<td><textarea class = "textarea" name = "sample_input" ></textarea></td>
+		  	<td><textarea class = "textarea" name = "sample_input" id="sample_output"></textarea><span id = "pro_sample_input_span"></span></td>
 		  </tr>
 		  <tr>
 		  	<td>样例输出：</td>
-		  	<td><textarea class = "textarea" name = "sample_output" ></textarea></td>
+		  	<td><textarea class = "textarea" name = "sample_output" id="sample_input"></textarea><span id = "pro_sample_output_span"></span></td>
 		  </tr>
 		  <tr>
 		  	<td>测试输入：</td>

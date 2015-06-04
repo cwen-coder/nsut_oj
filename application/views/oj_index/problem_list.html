@@ -109,69 +109,19 @@
   <th style="width:20%">Ratio(Accepted/Submissions)</th>
  </tr>
 </theaad>
-<?php p($category)?>
+
 
 <tbody>
+  <?php foreach($category as $v): ?>
   <tr>
-    <td>1000</td>
-    <td><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=1007">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
+    <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>" ?><?php echo $v['problem_id']?></td>
+    <td><a href="<?php echo site_url('oj_index/home/problem').'?pid='.$v['problem_id']?>"><?php echo $v['title']?></a></td>
+    <td><a href="#"><?php echo $v['class_name']?></a></td>
+    <td><?php if($v['submit']!=0) echo $v['accepted']/$v['submit']*100;
+                                else echo 0;
+    ?>%(<a href="#"><?php echo $v['accepted']?></a>/<a href="#"><?php echo $v['submit']?></a>)</td>
   </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
-  <tr>
-    <td>1000</td>
-    <td><a href="#">A+B</a></td>
-    <td><a href="#">C基础</a></td>
-    <td>10%(<a href="#">1</a>/<a href="#">10</a>)</td>
-  </tr>
+<?php endforeach ?>
 </tbody>
 </table>
 </div>

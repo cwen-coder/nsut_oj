@@ -21,23 +21,7 @@ class Problem_submit extends Oj_Controller{
 			/*echo $data['code_length'];die;*/
 			$result = $this->ps->problem_submit($data);
 			$url = 'oj_index/home/status';
-			if($result) success('$url','提交成功');
+			if($result) success($url,'提交成功');
 		}
-	}
-	/**
-	 * memcache调用 
-	 */
-	function memcache(){
-		$this->load->library('CI_Memcache');
-		$mem = new CI_Memcache();
-		$mem->mc = $mem->init();
-		$key = 'admin_memcache';
-		if($mem->mc->get( $key ))
-			echo $mem->mc->get( $key );
-		else{
-			echo 'normal';
-		}
-		$mem->mc->set($key, time());
-		//$mem->mc->delete($key,0);
 	}
 }

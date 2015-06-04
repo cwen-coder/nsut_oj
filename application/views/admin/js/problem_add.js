@@ -14,7 +14,7 @@ function chksub() {
 	if(check_id && check_title && check_time_limit && check_memory_limit &&check_sample_input &&check_sample_output) {
 		$("#pro_add").removeAttr('disabled');
 	}
-}
+}	
 
 $(document).ready(function() {
 	if(!document.getElementById("problem_id")) check_id = true;

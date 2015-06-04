@@ -96,6 +96,15 @@ class Contest_model extends CI_Model {
 		$result = mysql_query($query);
 		return $result;
 	}
+	//删除新建的比赛题目
+	public function new_problem_del($problem_id){
+		$query1 = "DELETE FROM problem_contest WHERE problem_id = '$problem_id'";
+		$query2 = "DELETE FROM problem WHERE problem_id = '$problem_id'";
+		$result1 = mysql_query($query1);
+		$result2 = mysql_query($query2);
+		if($result1 && $result2) return true;
+		else return false;
+	}
 	//插入题目
 	public function add_pro_new($data){
 		$sql_pro = "insert into problem(problem_id, title, description, input, output, sample_output, sample_input, spj, hint, in_date, time_limit, memory_limit, defunct, source)
@@ -115,6 +124,18 @@ class Contest_model extends CI_Model {
 		from problem p,problem_contest c where p.problem_id = c.problem_id AND p.problem_id='$problem_id'";
 		$result = mysql_query($sql);
 		return mysql_fetch_assoc($result);
+	}
+	//修改题目
+	public function edit_pro_new($data){
+		$sql_pro = "UPDATE problem SET title = '$data[pro_title]',time_limit = '$data[time_limit]',
+		memory_limit = '$data[memory_limit]',description = '$data[content_des]',input = '$data[content_input]',
+		output =  '$data[content_output]',sample_input = '$data[sample_input]',sample_output = '$data[sample_output]',
+		hint = '$data[hint]',source = '$data[source]',spj = '$data[spj]',in_date = NOW(),defunct = 'N'
+		WHERE problem_id = '$data[pro_id]'";
+		$sql_con_pro = "update problem_contest set title ='$data[pro_title]' where problem_id='$data[pro_id]'";
+		if(mysql_query($sql_pro) && mysql_query($sql_con_pro))
+			return $data['pro_id'];
+		else return false;
 	}
 }
 ?>

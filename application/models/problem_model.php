@@ -12,7 +12,7 @@ class Problem_model extends CI_Model {
 
 
 	public function problem_list($perPage, $offset) {
-		$query = "select a.problem_id, title, c.class_name from problem a, problem_class b,class_name c 
+		$query = "select a.problem_id, a.title, c.class_name, a.accepted, a.submit from problem a, problem_class b,class_name c 
 		where a.problem_id = b.problem_id and b.class_id = c.class_id order by problem_id limit $offset,$perPage;";
 		$result = mysql_query($query);
 		$data = array();
@@ -41,7 +41,7 @@ class Problem_model extends CI_Model {
 
 	//获取已添加题目最大题号
 	public function get_max_id() {
-		$query = "SELECT MAX(problem_id) FROM problem";
+		$query = "select MAX(pc.problem_id) from problem p,problem_class pc where p.problem_id=pc.problem_id";
 		$result = mysql_query($query);
 		return mysql_fetch_assoc($result);
 	}
@@ -146,6 +146,13 @@ class Problem_model extends CI_Model {
 			}
 			return $problem;
 		}
+	}
+	//检查某一题是否以ＡＣ
+	public function problem_check($user_id, $pid){
+		$query = "select* from solution where user_id = '$user_id' and result = '4' and problem_id='$pid'";
+		$result = mysql_query($query);
+		if(mysql_num_rows($result)==0) return false;
+			else return true;
 	}
 
 }

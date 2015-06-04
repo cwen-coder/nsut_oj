@@ -20,7 +20,7 @@ class Home extends Oj_Controller{
 		$total_rows = $this->pro->problem_all_num();
 		$config['base_url'] = site_url('oj_index/home/index');   
 		$config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
-		$config['per_page'] = 2; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
+		$config['per_page'] = 10; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
 		$config['first_link'] = '首页'; // 第一页显示
 		$config['last_link'] = '末页'; // 最后一页显示   
 		$config['next_link'] = '下一页 >'; // 下一页显示   
@@ -37,12 +37,16 @@ class Home extends Oj_Controller{
 		if($data['offset'] == null) $data['offset']=0;
 		$data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
-			$data['username'] = $this->session->userdata('username');
+			$data['username'] = $this->session->userdata('username');//$this->pro->problem_check('$data[user_id]','$v[problem_id]')
 			$data['user_id'] = $this->session->userdata('user_id');
+			foreach($data['category'] as &$v):
+				$v = array_merge(array('do'=>$this->pro->problem_check($data['user_id'],$v['problem_id'])), $v);
+			endforeach;
 		}else {			
 			$data['username'] = false;
 			$data['user_id'] = false;
 		}
+		//p($data);die;
 		$this->load->view('oj_index/problem_list.html',$data);
 	}
 	//显示题目具体内容

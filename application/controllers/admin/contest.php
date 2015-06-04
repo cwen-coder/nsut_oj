@@ -185,7 +185,13 @@ class Contest extends Admin_Controller {
 	public function del_con_pro() {
 		$contest_id = $this->input->post('contest_id',TRUE);
 		$num = $this->input->post('num',TRUE);
-		$result = $this->contest_model->del_con_pro($contest_id,$num);
+		$problem_id = $this->input->post('problem_id',TRUE);
+		$source = $this->input->post('source',TRUE);
+		if($source==1) 
+			$result = $this->contest_model->del_con_pro($contest_id,$num);
+		else 
+			$result = $this->contest_model->new_problem_del($problem_id);
+
 		echo $result;
 	}
 	//载入添加题目页面
@@ -262,8 +268,12 @@ class Contest extends Admin_Controller {
 				if(!self::create_dir($problem_id)) error_link($url, "创建文件夹失败");
 				if(!self::write_file($problem_id."/sample.in", $data['sample_input'])) error_link($url, "sample.in和sample.out创建失败");
 				if(!self::write_file($problem_id."/sample.out", $data['sample_output'])) error_link($url, "sample.out创建失败");
-				if(!self::upload('text_out', 'text.out', $problem_id)) error_link($url, "text_out和text_in未上传");
-				if(!self::upload('text_in', 'text.in', $problem_id)) error_link($url, "text_in上传文件失败");
+				if(!empty($_FILES['text_out']['tmp_name'])){
+					if(!self::upload('text_out', 'text.out', $problem_id)) error_link($url, "text_out和text_in上传失败");
+				}
+				if(!empty($_FILES['text_out']['tmp_name'])){
+					if(!self::upload('text_in', 'text.in', $problem_id)) error_link($url, "text_in上传文件失败");
+				}
 				success($url, '添加成功');
 			}
 		else{
@@ -275,6 +285,8 @@ class Contest extends Admin_Controller {
 	public function con_pro_edit(){
 		$problem_id = $this->uri->segment(4);
 		$data= $this->contest_model->check_con_pro($problem_id);
+		$arr = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+		$data = array_merge(array('arr'=>$arr),$data);
 		//p($data);die;
 		$this->load->view("admin/contest_problem_edit.html",$data);
 
@@ -297,6 +309,23 @@ class Contest extends Admin_Controller {
 			'source' => $this->input->post('source'),
 			'spj' => $this->input->post('spj')
 			);
+		//p($data);die;
+		$url = "admin/contest/con_pro_list/$data[contest_id]";
+		if($problem_id = $this->contest_model->edit_pro_new($data)){
+				if(!self::create_dir($problem_id)) error_link($url, "创建文件夹失败");
+				if(!self::write_file($problem_id."/sample.in", $data['sample_input'])) error_link($url, "sample.in和sample.out创建失败");
+				if(!self::write_file($problem_id."/sample.out", $data['sample_output'])) error_link($url, "sample.out创建失败");
+				if(!empty($_FILES['text_out']['tmp_name'])){
+					if(!self::upload('text_out', 'text.out', $problem_id)) error_link($url, "text_out和text_in上传失败");
+				}
+				if(!empty($_FILES['text_out']['tmp_name'])){
+					if(!self::upload('text_in', 'text.in', $problem_id)) error_link($url, "text_in上传文件失败");
+				}
+				success($url, '题目修改成功');
+			}
+		else{
+			error_link($url, "题目修改失败");
+		}
 	}
 	
 }
