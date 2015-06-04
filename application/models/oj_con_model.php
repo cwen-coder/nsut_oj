@@ -131,5 +131,61 @@ class Oj_con_model extends CI_Model {
 			else return false;
 		} else return false;
 	}
+
+	//比赛题目状态页
+	public function con_problem_status($contest_id,$limit,$num) {
+		$query = "select solution_id, user_id, memory, time, result, language, code_length, in_date, num from solution where contest_id = '$contest_id' order  by solution_id DESC limit $limit,$num ";
+		$result = mysql_query($query);
+		$data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		return $data;
+	}
+	//比赛题目状态总数
+	public function con_problem_status_sum($contest_id) {
+		$query = "select count(*) from solution where contest_id = '$contest_id'";
+		$result = mysql_query($query);
+		if ($result) {
+				return mysql_fetch_assoc($result);
+		} else return false;
+	}
+
+	//获取username
+	public function get_username($user_id) {
+		$query = "SELECT username FROM users WHERE user_id = '$user_id' ";
+		$result = mysql_query($query);
+		if ($result) {
+			$num = mysql_num_rows($result);
+			if($num > 0) {
+				return mysql_fetch_assoc($result);
+			} else return false;
+		} else return false;
+	}
+
+	//获取编译错误信息
+	public function get_compile_false($solution_id) {
+		$query = "SELECT error FROM compileinfo WHERE solution_id = '$solution_id' ";
+		$result = mysql_query($query);
+		//$num = mysql_num_rows($result);
+		if ($result) {
+			$num = mysql_num_rows($result);
+			if($num > 0) {
+				return mysql_fetch_assoc($result);
+			} else return false;
+		} else return false;
+	}
+	//获取源码
+	public function get_source_code($solution_id) {
+		$query = "SELECT source FROM source_code WHERE solution_id = '$solution_id' ";
+		$result = mysql_query($query);
+		//$num = mysql_num_rows($result);
+		if ($result) {
+			$num = mysql_num_rows($result);
+			if($num > 0) {
+				return mysql_fetch_assoc($result);
+			} else return false;
+		} else return false;
+	}
 }
 ?>

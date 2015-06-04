@@ -45,10 +45,10 @@ class Con_sub extends Con_Controller{
 					$data['num'] = $check_con_pro['num'];
 					//echo 7;
 					$result = $this->oj_con->problem_submit($data);
-					$url = 'oj_index/home/status';
+					$url = 'contest/home/status';
 					if($result) {
 						//echo 11;
-						success($url,'提交成功');
+						redirect('contest/home/con_status/'.$data['cid']);
 					}else {
 						error("提交失败！");
 					}
