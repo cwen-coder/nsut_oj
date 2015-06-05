@@ -579,14 +579,16 @@ function print_const(){
 /*
  *成功函数
  */
-function success($url,$msg){
+function success($url,$msg="0"){
     header('Content-Type:text/html;charset=utf-8');
     $url = site_url($url);
-    echo "<script type='text/javascript'> alert('$msg');location.href='$url'; </script>";
+     if($msg!="0")
+    echo "<script type='text/javascript'>alert('$msg');location.href='$url'; </script>";
+    else echo "<script type='text/javascript'>location.href='$url'; </script>";
     die;
 }
 /*
- *成功函数
+ *失败跳转函数
  */
 function error_link($url,$msg){
     header('Content-Type:text/html;charset=utf-8');

@@ -11,6 +11,7 @@
     <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/status_info.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
     <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
   </head>
@@ -58,7 +59,7 @@
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>
-
+<?php $this->load->view('oj_index/info.html');?>
 
   <div class="container">
     <div class="container-search">
@@ -111,13 +112,21 @@
 <tbody>
   <?php foreach($result as $v): ?>
   <tr class="evenrow">
-    <td><?php echo $v['solution_id']?></td>
+    <td id="solution_id"><?php echo $v['solution_id']?></td>
     <td><?php echo $v['user_id']?></td>
     <td><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=<?php echo $v['problem_id']?>"><?php echo $v['problem_id']?></a></td>
-    <td><span class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?></span></td>
+  <?php   if($v['user_id']==$this->session->userdata('user_id')&&$v['result']==11){ ?>
+    <td><a class="compileinfo"><button class="<?php echo $judge_color[$v['result']]?>"  data-target='#myModal_compileinfo' data-toggle='modal' ><?php echo $judge_result[$v['result']]?></button></a></td>
+    <?php }else{?>
+    <td><button class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?></button></td>
+    <?php }?>
     <td><span style="color:red"><?php echo $v['memory']?></span></td>
     <td><span style="color:red"><?php echo $v['time']?></span></td>
-    <td><?php echo $v['language']? "C++":"C"?></td>
+  <?php   if($v['user_id']==$this->session->userdata('user_id')){ ?>
+    <td><a href="#" class="source" data-target='#myModal_source' data-toggle='modal'><?php echo $v['language']? "C++":"C"?></a></td>
+  <?php }else{?>
+  <td><?php echo $v['language']? "C++":"C"?></td>
+      <?php }?>
     <td><?php echo $v['code_length']?></td>
     <td><?php echo $v['in_date']?></td>
   </tr>
