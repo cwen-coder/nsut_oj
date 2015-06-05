@@ -10,6 +10,12 @@ class Con_rank extends Con_Controller {
 
 	public function index() {
 		$data['contest_id'] = $this->uri->segment(4);
+		
+
+
+
+
+		
 		$this->load->view('contest/con_rank.html',$data);
 	}
 }
