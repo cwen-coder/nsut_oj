@@ -16,6 +16,8 @@ class Problemsubmit_model extends CI_Model{
 		$insert_id=mysql_insert_id();
 		$sql_source = "insert into source_code(solution_id, source) values('$insert_id', '$data[source]')";
 		$result_source = mysql_query($sql_source);
+		if($result_solution) return true;
+		else return false;
 	}
 	function problem_status($limit, $num){
 		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution where contest_id = '0' order  by solution_id DESC limit $limit, $num";
@@ -31,4 +33,15 @@ class Problemsubmit_model extends CI_Model{
 		}//$mem->delete(md5("mysql_query".$sql),0);
 		return $data;
 	}
+	function compileinfo($solution_id){
+		$sql = "select error from compileinfo where solution_id = '$solution_id'";
+		$result = mysql_query($sql);
+		return mysql_fetch_assoc($result);
+	}
+	function source($solution_id){
+		$sql = "select source from source_code where solution_id = '$solution_id'";
+		$result = mysql_query($sql);
+		return mysql_fetch_array($result);
+	} 
+
 }

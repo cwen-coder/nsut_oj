@@ -34,13 +34,50 @@
     padding: 0px;
   }
   .group{
-    position:absolute;
     margin-top: 11%;
     left: 50%;
   }
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>
-<a class="group" href="<?php echo site_url('oj_index/home/submitpage?pid='.$problem['problem_id']);?>">submit</a>
+<div class="container">
+<div class="group">
+
+<center>
+<h2 style="color:blue"><?php echo $problem['title']?></h2>
+<span style="color:red">时间限制:<?php echo $problem['time_limit']?>s&nbsp;&nbsp;&nbsp;&nbsp;内存限制:<?php echo $problem['memory_limit']?>MB<span>
+</center>
+<h4>题目描述</h4>
+<div style="margin-top: 1%; ">
+    <pre><?php echo $problem['description']?></pre>
+</div>
+<h4>输入</h4>
+<div style="margin-top: 1%; ">
+   <pre><?php echo $problem['input']?></pre>
+</div>
+<h4>输出</h4>
+<div style="margin-top: 1%; ">
+   <pre><div><?php echo $problem['output']?></div></pre>
+</div>
+<h4>样例输入</h4>
+<div style="margin-top: 1%; ">
+   <pre><div><?php echo $problem['sample_input']?></div></pre>
+</div>
+<h4>样例输出</h4>
+<div style="margin-top: 1%; ">
+   <pre><div><?php echo $problem['sample_output']?></div></pre>
+</div>
+<h4>提示</h4>
+<div style="margin-top: 1%; ">
+   <pre><div><?php echo $problem['hint']?></div></pre>
+</div>
+<center>
+<a href="<?php echo site_url('oj_index/home/submitpage?pid='.$problem['problem_id']);?>"><img src="<?= base_url('application/views/contest/images/submit.jpg');?>"></a>
+<center>
+</div>
+</div>
+
+<input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
+<input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
 </body>
 </html>

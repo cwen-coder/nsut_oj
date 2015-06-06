@@ -13,15 +13,27 @@ class Problem_submit extends Oj_Controller{
 		if($data['user_id'] == null){
 			error('请先登录');
 		}else{
-			$data['source'] = $this->input->post('source', TRUE);
+
+			$data['source'] = $this->input->post('source');
 			$data['language'] = $this->input->post('language', TRUE);
 			$data['pid'] = $this->input->post('pid', TRUE);
 			$data['ip'] = $this->session->userdata('ip_address');
 			$data['code_length'] = strlen($data['source']);
+			//p($data);die;
 			/*echo $data['code_length'];die;*/
 			$result = $this->ps->problem_submit($data);
 			$url = 'oj_index/home/status';
-			if($result) success($url,'提交成功');
+			if($result) success($url);
 		}
+	}
+	function compileinfo(){
+		$solution_id = $this->input->post('solution_id');
+		$data = $this->ps->compileinfo($solution_id);
+		echo $data['error'];
+	}
+	function source(){
+		$solution_id = $this->input->post('solution_id');
+		$data = $this->ps->source($solution_id);
+		echo $data['source'];
 	}
 }
