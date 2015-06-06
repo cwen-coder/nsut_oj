@@ -11,6 +11,12 @@
 		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
 		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
 	</head>
+	<style type="text/css">
+	th {
+		background-color: #222;
+		color: #FFFFFF;
+	}
+	</style>
 <body>
 <nav class="navbar navbar-fixed-top navbar-inverse ">
 <div class="container">
@@ -39,24 +45,37 @@
 </nav>
 <div class="container container_contest">
 	<div class="well">
-		<table class="table table-striped">
+		<table class="table table-bordered" id = "ran_table" style="background-color:#FFFFFF;">
 			<thead>
-				<th style="width:7%;">排名</th>
+				<th style="width:5%;">排名</th>
 		  		<th style="width:10%;">用户名</th>
-		  		<th style="width:10%;">罚时</th>
-		  		<th>A</th>
-		  		<th>B</th>
-		  		<th>C</th>
-		  		<th>D</th>
-		  		<th>E</th>
-		  		<th>E</th>
+		  		<th style="width:6%;">罚时</th>
+		  		<?php foreach($con_pro as $v) :?>
+		  			<th style="text-align: center;
+"><?= $arr[$v['num']];?></th>
+		  		<?php endforeach;?>
 			</thead>
 			<tbody>
-				
+				<?php foreach($con_user as $key => $vu) :?>
+					<tr>
+						<td><?= $key+1;?></td>
+						<td><?= $vu['username'];?></td>
+						<td><?= $vu['penalty'];?></td>
+						<?php foreach($con_pro as $v) :?>
+							<?php if ($vu[$v['num']]['error_sum'] > 0): ?>
+		  				<td class="td_pro" name = "<?= $vu[$v['num']]['error_sum'];?>" ><?= $vu[$v['num']]['ac_time'].'(-'.$vu[$v['num']]['error_sum'].')';?></td>
+						<?php else: ?>
+							<td class="td_pro" name = "<?= $vu[$v['num']]['error_sum'];?>"><?= $vu[$v['num']]['ac_time'];?></td>
+						<?php endif; ?>
+		  				<?php endforeach;?>
+					</tr>
+				<?php endforeach;?>
 			</tbody>
 		</table>
 	</div>
 </div>
-
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/contest/js/con_rank.js');?>"></script>
 </body>
 </html>

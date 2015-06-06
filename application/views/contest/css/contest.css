@@ -68,3 +68,9 @@ valign: middle; */
 		display: inline;
 		float: right;
 }
+.td_pro {
+	text-align: center;
+}
+td{
+	height: 20px;
+}
