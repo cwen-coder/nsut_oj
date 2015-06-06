@@ -35,7 +35,10 @@
     margin: 0px;
     padding: 0px;
   }
-
+    .form-control{
+      width:120px;
+      height:30px;
+    }
 	.control-group {
 		display: inline;
 		float: right;
@@ -56,6 +59,11 @@
   td,th{
     text-align:center
   }
+  select{
+    height:30px;
+    background-color:#ffffff;
+    border:1px solid #cccccc;
+  }
 	</style>
   <div class="container">
 <div class="container-search">
@@ -66,30 +74,42 @@
             <table>
               <th>
             <label class="radio inline">
-              <input type="radio" value="1" checked="checked" name="group">
-              题号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              题号:&nbsp;&nbsp;<div class="form-group" style="display:inline">
+            <th>
+          <input type="text" class="form-control"  placeholder="Problem ID" id="pro_id">
+            </th>
+          </div>
             </label>
           </th>
           <th>
             <label class="radio inline">
-              <input type="radio" value="2" name="group">
-              标题&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;标题:&nbsp;&nbsp;<div class="form-group" style="display:inline">
+              <th>
+          <input type="text" class="form-control"  placeholder="Problem Title" id="pro_title">
+            </th>
+          </div>
             </label>
           </th>
           <th>
             <label class="radio inline">
-              <input type="radio" value="3" name="group">
-              类别&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <!-- <input type="radio" value="3" name="group"> -->
+              &nbsp;&nbsp;类别:&nbsp;&nbsp;
+              <div class="form-group" style="display:inline" id="pro_cate">
+              <th>
+              <select id="cate">
+                <option>分类</option>
+                <option>数组</option>
+                <option>C基础</option>
+              </select>
+              </th>
+          </div>
             </label>
           </th>
           </div> 
           
            <div class="form-group" style="display:inline">
-            <th>
-	      	<input type="text" class="form-control"  placeholder="Search for..." >
-            </th>
         <th>
-	        <button class="btn btn-default" type="button" id = "search_but">Go!</button>
+	        &nbsp;&nbsp;<button class="btn btn-default" type="button" id = "search_but">Go!</button>
         </th>
 	</div>
 </table>
@@ -127,6 +147,13 @@
 </div>
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
-<input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
+<input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#cate").click(function(){
+    alert($("#cate").val());
+  });
+})
+</script>
 </body>
 </html>
