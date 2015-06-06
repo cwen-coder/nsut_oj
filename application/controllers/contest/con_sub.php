@@ -43,7 +43,7 @@ class Con_sub extends Con_Controller{
 				$check_con_pro = $this->oj_con->check_con_pro($data['pid'],$data['cid']);
 				if($check_pro && $check_con && $check_con_pro) {
 					$data['num'] = $check_con_pro['num'];
-					//echo 7;
+					$data['source'] = base64_decode($data['source']);
 					$result = $this->oj_con->problem_submit($data);
 					$url = 'contest/home/status';
 					if($result) {

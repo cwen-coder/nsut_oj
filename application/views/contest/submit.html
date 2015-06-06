@@ -74,7 +74,7 @@ editAreaLoader.init({
 </nav>
 <center>
 <div class="group">
-<form action="<?php echo site_url('contest/con_sub/index');?>" method="post">
+<form action="<?php echo site_url('contest/con_sub/index');?>" method="post" onsubmit = "return check();" >
 	<div>
 	    <h3 style="color:red">Problem： <?= $num?></h3><br/>
 	    <span style="color:red">Language:</span>
@@ -85,12 +85,31 @@ editAreaLoader.init({
 		</div>
 	<input type='hidden' value='<?= $contest_id;?>' name="cid">
 	<input type='hidden' value='<?= $problem_id;?>' name="pid"> 
-	<textarea style="width:60%;" cols=60 rows=20 id="source" name="source"></textarea>
+	<textarea style="width:60%;" cols=60 rows=20 id="source" name="source" ></textarea>
 
-	<input type="submit" class="btn btn-primary" value="提交">
+	<input type="submit" id = "sub_but" class="btn btn-primary" value="提交">
 	<input type="reset" class="btn btn-default" value="重置">
 </form>
 </div>
 </center>
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script language="Javascript" type="text/javascript" src="<?php echo base_url('application/views/contest/js/jquery.base64.js');?>"></script> 
+<script type="text/javascript">
+ /*$(function(){
+ 	//console.log("jfdffffffffff");
+	//console.log($.base64.btoa("jddddjdj"));
+ 	$("form").submit(function(event) {
+ 		var val = document.getElementById("source").innerHTML;
+ 		alert($.base64.btoa(val));
+ 	});
+});*/
+function check() {
+	var val = $("#source").val();
+	//alert(val);
+	$("#source").val($.base64.btoa(val));
+	//alert($("#source").val());
+	return true;
+}
+</script>
 </body>
 </html>

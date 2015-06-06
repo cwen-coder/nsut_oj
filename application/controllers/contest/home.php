@@ -122,6 +122,8 @@ class Home extends Con_Controller {
 		//p($sum['count(*)']);
 		if($data['pagination'] != 0 && $data['pagination']*20 < $sum['count(*)']) {
 			$data['pag'] = true;
+		}else if($data['pagination'] == 0 && $sum['count(*)'] > 20) {
+			$data['pag'] = true;
 		}
 		$data['pagination'] = $limit/20+2;
 		$data['judge_result']=Array("Pending", "Pending Rejudging", "Compiling", "Running & Judging", "Accepted", "Presentation Error", "Wrong Answer", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed", "Runtime Error", "Compile Error", "Compile OK","Test Running Done");
