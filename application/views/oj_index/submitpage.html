@@ -67,14 +67,14 @@ editAreaLoader.init({
 </select>
   </div>
 <input type='hidden' value='0' name="cid">
-<input type='hidden' value='<?php echo $pid;?>' name="pid"> 
+<input type='hidden' value='<?php echo $pid;?>' name="pid">
 <textarea style="width:60%;" cols=80 rows=20 id="source" name="source"></textarea>
 
 <input type="submit" class="btn btn-primary" value="Submit">
 <input type="reset" class="btn btn-default" value="Reset">
 
   </form>
-  <button id="test">button</button> 
+  <!-- <button id="test">button</button>  -->
 </div>
 </center>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
@@ -97,11 +97,5 @@ function check() {
   //alert($("#source").val());
   return true;
 }
-
-$(document).ready(function(){
-  $("#test").click(function(){
-    alert($("#source").html());
-  });
-})
-</script>
+  </script>
 </html>
