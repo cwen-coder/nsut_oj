@@ -46,6 +46,7 @@ class Home extends Oj_Controller{
 			$data['username'] = false;
 			$data['user_id'] = false;
 		}
+		$data['cate'] = $this->pro->get_class();
 		//p($data);die;
 		$this->load->view('oj_index/problem_list.html',$data);
 	}
@@ -156,7 +157,7 @@ class Home extends Oj_Controller{
 			$this->load->view('oj_index/submitpage.html', $data);
 		}
 	}
-
+	//注销登录
 	public function log_out() {
 		$this->session->sess_destroy();
 		header('Content-Type:text/html;charset=utf-8');
@@ -166,4 +167,8 @@ class Home extends Oj_Controller{
 	/*public function log_but() {
 		self::contest_list();
 	}*/
+	//按题号查找
+	public function search_pid(){
+
+	}
 }
