@@ -57,7 +57,7 @@ editAreaLoader.init({
 <?php $this->load->view('oj_index/header.html');?>
 <center>
 <div class="group">
-<form action="<?php echo site_url('oj_index/problem_submit/index');?>" method="post">
+<form action="<?php echo site_url('oj_index/problem_submit/index');?>" method="post" onsubmit = "return check();">
   <div>
     <span style="color:red">Problem A</span><br/>
     <span style="color:red">Language:</span>
@@ -79,12 +79,23 @@ editAreaLoader.init({
 </center>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
-<!-- <script type="text/javascript">
-$(document).ready(function(){
-  $("#test").click(function(){
-    alert($("#source").html());
-  });
-})
-</script> 
 </body>
+<script language="Javascript" type="text/javascript" src="<?php echo base_url('application/views/contest/js/jquery.base64.js');?>"></script> 
+<script type="text/javascript">
+ /*$(function(){
+  //console.log("jfdffffffffff");
+  //console.log($.base64.btoa("jddddjdj"));
+  $("form").submit(function(event) {
+    var val = document.getElementById("source").innerHTML;
+    alert($.base64.btoa(val));
+  });
+});*/
+function check() {
+  var val = $("#source").val();
+  //alert(val);
+  $("#source").val($.base64.btoa(val));
+  //alert($("#source").val());
+  return true;
+}
+  </script>
 </html>
