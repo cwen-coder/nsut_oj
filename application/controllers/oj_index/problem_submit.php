@@ -14,7 +14,7 @@ class Problem_submit extends Oj_Controller{
 			error('请先登录');
 		}else{
 
-			$data['source'] = $this->input->post('source');
+			$data['source'] =base64_decode($this->input->post('source'));
 			$data['language'] = $this->input->post('language', TRUE);
 			$data['pid'] = $this->input->post('pid', TRUE);
 			$data['ip'] = $this->session->userdata('ip_address');
