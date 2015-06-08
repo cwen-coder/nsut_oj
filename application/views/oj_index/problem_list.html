@@ -79,9 +79,9 @@
               <div class="form-group" style="display:inline" id="pro_cate">
               <th>
               <select id="cate">
-                <option value="1">题号</option>
-                <option value="2">标题</option>
-                <option value="3">分类</option>
+                <option value="1">按题号</option>
+                <option value="2">按标题</option>
+                <option value="3">按分类</option>
               </select>
               </th>
           </div>
@@ -93,9 +93,9 @@
               &nbsp;&nbsp;类别:&nbsp;&nbsp;
               <div class="form-group"  style="display:inline" id="pro_cate">
               <th style="display: none" id="cate_th">
-              <select id="cate">
+              <select id="cate_cate">
                 <?php foreach ($cate as $v) :?>
-                <option value="<?php echo $v['class_id'];?>"><?php echo $v['class_name']; ?></option>
+                <option value="<?php echo $v['class_name'];?>"><?php echo $v['class_name']; ?></option>
                <?php endforeach;?>
               </select>
               </th>
@@ -106,7 +106,7 @@
             <label class="radio inline">
               &nbsp;&nbsp;输入:&nbsp;&nbsp;<div class="form-group" style="display:inline">
               <th>
-          <input type="text" class="form-control"  placeholder="Search for....." id="pro_title">
+          <input type="text" class="form-control"  placeholder="Search for....." id="search_terms">
             </th>
           </div>
             </label>
@@ -116,7 +116,7 @@
           
            <div class="form-group" style="display:inline">
         <th>
-	        &nbsp;&nbsp;<button class="btn btn-default" type="button" id = "search_but">Go!</button>
+	        &nbsp;&nbsp;<a href="<?php echo site_url('/oj_index/home/search');?>"class="btn btn-default" type="button" id = "search_but">Go!</a>
         </th>
 	</div>
 </table>
@@ -125,7 +125,7 @@
 </div>
 <div class="table-group">
   <div class="pagination">
-  <td><?php echo $links; ?></td>
+  <td><?php  if(!empty($links))echo $links; ?></td>
 </div>
 <table class="table table-bordered table-hover">
   <thead>
@@ -137,9 +137,9 @@
  </tr>
 </theaad>
 
-
 <tbody>
   <?php foreach($category as $v): ?>
+
   <tr>
     <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>"; else echo "<span class='glyphicon glyphicon-star-empty'></span>";?><?php echo $v['problem_id']?></td>
     <td><a href="<?php echo site_url('oj_index/home/problem').'?pid='.$v['problem_id']?>"><?php echo $v['title']?></a></td>
@@ -161,11 +161,60 @@ $(document).ready(function(){
     if($("#cate").val()==3){
       $("#cate_").removeAttr("style");
       $("#cate_th").removeAttr("style");
+      $("#search_terms").css("display","none");
     }else{
       $("#cate_").css("display","none");
       $("#cate_th").css("display","none");
+      $("#search_terms").removeAttr("style");
     }
   });
+  $("#search_but").click(function(){
+    if($("#cate").val()==1){
+      var href = "search?pid=";
+      var search_terms = $("#search_terms").val();
+      $("#search_but").attr("href", href+search_terms);
+    }
+    if($("#cate").val()==2){
+      var href = "search?pn=";
+      var search_terms = $("#search_terms").val();
+      $("#search_but").attr("href", href+search_terms);
+    }
+      if($("#cate").val()==3){
+      var href = "search?pc=";
+      var search_terms = $("#cate_cate").val();
+      $("#search_but").attr("href", href+search_terms);
+    }
+  });
+  function GetRequest() { 
+      var url = location.search; //获取url中"?"符后的字串 
+      var theRequest = new Object(); 
+      if (url.indexOf("?") != -1) { 
+            var str = url.substr(1); 
+            strs = str.split("&"); 
+            for(var i = 0; i < strs.length; i ++) { 
+            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+            } 
+      }    
+      return theRequest; 
+} 
+  var Request = new Object(); 
+  Request = GetRequest();
+  var pid = Request['pid'];
+  var pn = Request['pn'];
+  var pc = Request['pc'];
+  if(pid !=undefined){
+    $("#cate").val(1);
+    $("#search_terms").val(pid);
+  }
+  if(pn !=undefined){
+    $("#cate").val(2);
+    $("#search_terms").val(pn);
+  }
+  if(pc !=undefined){
+    $("#cate").val(3);
+    $("#cate").click();
+    $("#cate_").val(pc);
+  }
 })
 </script>
 </body>

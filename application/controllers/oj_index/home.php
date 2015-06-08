@@ -168,7 +168,26 @@ class Home extends Oj_Controller{
 		self::contest_list();
 	}*/
 	//按题号查找
-	public function search_pid(){
-
+	public function search(){
+		$pid = $this->input->get('pid', TRUE);
+		$pn = $this->input->get('pn', TRUE);
+		$pc = $this->input->get('pc', TRUE);
+		if(!empty($pid)) $data['category'][0]=$this->pro->search_problem_byId($pid);
+		if(!empty($pn)) $data['category'][0]=$this->pro->search_problem_byTitle($pn);
+		if(!empty($pc)) $data['category']=$this->pro->search_problem_byClass($pc);
+		
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');//$this->pro->problem_check('$data[user_id]','$v[problem_id]')
+			$data['user_id'] = $this->session->userdata('user_id');
+			foreach($data['category'] as &$v):
+				$v = array_merge(array('do'=>$this->pro->problem_check($data['user_id'],$v['problem_id'])), $v);
+			endforeach;
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
+		$data['cate'] = $this->pro->get_class();
+		//p($data);die;
+		$this->load->view('oj_index/problem_list.html',$data);
 	}
 }
