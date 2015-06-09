@@ -64,7 +64,7 @@ editAreaLoader.init({
 			<li><a href="<?= site_url('contest/home/con_status/'.$contest_id);?>">状态</a></li>
 			<li><a href="<?= site_url('contest/con_rank/index/'.$contest_id);?>">排名</a></li>
 			<li><a href="#">统计</a></li>
-			<li><a href="#">讨论</a></li>
+			<li><a href="<?= site_url('contest/ask_pro/index/'.$contest_id);?>">提问</a></li>
 		</ul>
 		<form class="navbar-form navbar-right">
 			<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $this->session->userdata('username');?></a></h5>

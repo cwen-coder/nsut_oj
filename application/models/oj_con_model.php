@@ -134,7 +134,7 @@ class Oj_con_model extends CI_Model {
 
 	//比赛题目状态页
 	public function con_problem_status($contest_id,$limit,$num) {
-		$query = "select solution_id, user_id, memory, time, result, language, code_length, in_date, num from solution where contest_id = '$contest_id' order  by solution_id DESC limit $limit,$num ";
+		$query = "select solution_id, problem_id,user_id, memory, time, result, language, code_length, in_date, num from solution where contest_id = '$contest_id' order  by solution_id DESC limit $limit,$num ";
 		$result = mysql_query($query);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){
