@@ -1,29 +1,13 @@
 $(document).ready(function(){
-	$("#cate").click(function(){
-    if($("#cate").val()==3){
-      $("#cate_").removeAttr("style");
-      $("#cate_th").removeAttr("style");
-      $("#search_terms").css("display","none");
-    }else{
-      $("#cate_").css("display","none");
-      $("#cate_th").css("display","none");
-      $("#search_terms").removeAttr("style");
-    }
-  });
   $("#search_but").click(function(){
-    if($("#cate").val()==1){
-      var href = "search?pid=";
+    if($('[name="group"]:checked').val()==1){
+      var href = "?pid=";
       var search_terms = $("#search_terms").val();
       $("#search_but").attr("href", href+search_terms);
     }
-    if($("#cate").val()==2){
-      var href = "search?pn=";
+    if($('[name="group"]:checked').val()==2){
+      var href = "?user=";
       var search_terms = $("#search_terms").val();
-      $("#search_but").attr("href", href+search_terms);
-    }
-      if($("#cate").val()==3){
-      var href = "search?pc=";
-      var search_terms = $("#cate_cate").val();
       $("#search_but").attr("href", href+search_terms);
     }
   });
@@ -42,19 +26,13 @@ $(document).ready(function(){
   var Request = new Object(); 
   Request = GetRequest();
   var pid = Request['pid'];
-  var pn = Request['pn'];
-  var pc = Request['pc'];
+  var user = Request['user'];
   if(pid !=undefined){
-    $("#cate").val(1);
+    $('[name="group"][value="1"]').attr("checked",true);
     $("#search_terms").val(pid);
   }
-  if(pn !=undefined){
-    $("#cate").val(2);
-    $("#search_terms").val(pn);
-  }
-  if(pc !=undefined){
-    $("#cate").val(3);
-    $("#cate").click();
-    $("#cate_").val(pc);
+  if(user !=undefined){
+    $('[name="group"][value="2"]').attr("checked",true);
+    $("#search_terms").val(user);
   }
 });
