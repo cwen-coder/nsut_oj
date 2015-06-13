@@ -134,8 +134,14 @@ class Home extends Oj_Controller{
 		if($this->input->get('previous')) 
 			$data['previous'] = $this->input->get('previous');
 		$num=20;
-		if(!empty($pid)) $data['result'] = $this->ps->status_search_pid($limit, $num, $pid);
-		else if(!empty($user)) $data['result'] = $this->ps->status_search_user($limit, $num, $user);
+		if(!empty($pid)) {
+			$data['result'] = $this->ps->status_search_pid($limit, $num, $pid);
+			$data['pid'] = $pid;
+		}
+		else if(!empty($user)){
+			$data['result'] = $this->ps->status_search_user($limit, $num, $user);
+			$data['user'] = $user;
+		}
 		else $data['result'] = $this->ps->problem_status($limit, $num);
 
 		$data['pagination'] = $limit/20+2;

@@ -63,7 +63,7 @@ class Problemsubmit_model extends CI_Model{
 		}
 		//$mem->set(md5("mysql_query".$sql), $data, 0, 1);
 		//$mem->delete(md5("mysql_query".$sql),0);
-		p($data);die;
+		//p($data);die;
 		return $data;
 	}
 
