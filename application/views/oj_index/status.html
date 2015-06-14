@@ -137,11 +137,27 @@
 </div>
 
 <div id="center" class="center">
-<?php echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1)">Top</a>]&nbsp;&nbsp;";
+<?php if(empty($pid)&&empty($user)){ echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1).">Top</a>]&nbsp;&nbsp;";
 if (isset($previous)) 
         echo "[<a href=status?previous=".($previous-1)."&pagination=".($pagination-2).">Previous Page</a>]&nbsp;&nbsp;";
+if($pre > $pagination-1 )
 echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination).">Next Page</a>]";
-?>
+}?>
+<?php if(!empty($pid)){ echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1)."&pid=".$pid.">Top</a>]&nbsp;&nbsp;";
+if (isset($previous)) 
+        echo "[<a href=status?previous=".($previous-1)."&pagination=".($pagination-2)."&pid=".$pid.">Previous Page</a>]&nbsp;&nbsp;";
+if($pre > $pagination-1 )
+echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination)."&pid=".$pid.">Next Page</a>]";
+
+}?>
+<?php if(!empty($user)){ echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1)."&user=".$user.">Top</a>]&nbsp;&nbsp;";
+if (isset($previous)) 
+        echo "[<a href=status?previous=".($previous-1)."&pagination=".($pagination-2)."&user=".$user.">Previous Page</a>]&nbsp;&nbsp;";
+if($pre > $pagination-1 )
+echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination)."&user=".$user.">Next Page</a>]";
+
+}?>
+
 </div>
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 

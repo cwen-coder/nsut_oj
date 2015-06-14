@@ -66,5 +66,21 @@ class Problemsubmit_model extends CI_Model{
 		//p($data);die;
 		return $data;
 	}
+	//mysql_num_rows
+	function status_num_pid($pid){
+		$sql_pid="select count(*)  from solution where problem_id='$pid' and contest_id='0' ";
+		$reslut = mysql_query($sql_pid);
+		return mysql_fetch_row($reslut);
+	}
+	function status_num_user($user){
+		$sql_user="select count(*)  from solution where user_id='$user' and contest_id='0' ";
+		$reslut = mysql_query($sql_user);
+		return mysql_fetch_row($reslut);
+	}
+	function status_num(){
+		$sql="select count(*)  from solution where contest_id='0'";
+		$reslut = mysql_query($sql);
+		return mysql_fetch_row($reslut);
+	}
 
 }

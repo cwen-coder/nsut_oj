@@ -136,13 +136,19 @@ class Home extends Oj_Controller{
 		$num=20;
 		if(!empty($pid)) {
 			$data['result'] = $this->ps->status_search_pid($limit, $num, $pid);
+			$data['pre'] = $this->ps->status_num_pid($pid)[0]/20;
 			$data['pid'] = $pid;
 		}
 		else if(!empty($user)){
 			$data['result'] = $this->ps->status_search_user($limit, $num, $user);
+			$data['pre'] = $this->ps->status_num_user($user)[0]/20;
 			$data['user'] = $user;
+			//p($data);die;
 		}
-		else $data['result'] = $this->ps->problem_status($limit, $num);
+		else {
+			$data['result'] = $this->ps->problem_status($limit, $num);
+			$data['pre'] = $this->ps->status_num()[0]/20;
+		}
 
 		$data['pagination'] = $limit/20+2;
 
