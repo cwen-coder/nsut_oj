@@ -54,6 +54,17 @@ class Problemsubmit_model extends CI_Model{
 		//$mem->delete(md5("mysql_query".$sql),0);
 		return $data;
 	}
+	function status_search_pid_ps($limit, $num, $pid){
+		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution where contest_id = '0' and problem_id = '$pid' and result='4' order  by solution_id DESC limit $limit, $num";
+		$result = mysql_query($sql);
+		$data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		//$mem->set(md5("mysql_query".$sql), $data, 0, 1);
+		//$mem->delete(md5("mysql_query".$sql),0);
+		return $data;
+	}
 	function status_search_user($limit, $num,$user){
 		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution where contest_id = '0' and user_id = '$user' order  by solution_id DESC limit $limit, $num";
 		$result = mysql_query($sql);
@@ -72,6 +83,7 @@ class Problemsubmit_model extends CI_Model{
 		$reslut = mysql_query($sql_pid);
 		return mysql_fetch_row($reslut);
 	}
+
 	function status_num_user($user){
 		$sql_user="select count(*)  from solution where user_id='$user' and contest_id='0' ";
 		$reslut = mysql_query($sql_user);

@@ -328,6 +328,6 @@ class Contest extends Admin_Controller {
 		}
 	}
 	public function contest_res(){
-		echo "1111";
+		//echo "1111";
 	}
 }?>

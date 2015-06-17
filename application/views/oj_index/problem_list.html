@@ -142,12 +142,12 @@
   <?php foreach($category as $v): ?>
 
   <tr>
-    <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>"; else echo "<span class='glyphicon glyphicon-star-empty'></span>";?><?php echo $v['problem_id']?></td>
+    <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>"; if($this->session->userdata('user_id')&&!$v['do']) echo "<span class='glyphicon glyphicon-star-empty'></span>";?><?php echo $v['problem_id']?></td>
     <td><a href="<?php echo site_url('oj_index/home/problem').'?pid='.$v['problem_id']?>"><?php echo $v['title']?></a></td>
-    <td><a href="#"><?php echo $v['class_name']?></a></td>
+    <td><a href="<?php echo site_url().'/oj_index/home/search?pc='.$v['class_name']?>"><?php echo $v['class_name']?></a></td>
     <td><?php if($v['submit']!=0) echo sprintf("%.2f", $v['accepted']/$v['submit']*100);
                                 else echo 0;
-    ?>%(<a href="#"><?php echo $v['accepted']?></a>/<a href="#"><?php echo $v['submit']?></a>)</td>
+    ?>%(<a href="<?php echo site_url().'/oj_index/home/status?pid='.$v['problem_id'].'&ps='.'accepted'?>"><?php echo $v['accepted']?></a>/<a href="<?php echo site_url().'/oj_index/home/status?pid='.$v['problem_id']?>"><?php echo $v['submit']?></a>)</td>
   </tr>
 <?php endforeach ?>
 </tbody>
