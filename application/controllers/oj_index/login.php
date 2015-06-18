@@ -98,4 +98,16 @@ class Login extends CI_Controller {
     }
 		
 	}
+	public function user_info(){
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
+		$this->load->view('oj_index/user.html',$data);
+	}
 }
+
+?>

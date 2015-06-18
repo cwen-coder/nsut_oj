@@ -20,7 +20,7 @@ class Problemsubmit_model extends CI_Model{
 		else return false;
 	}
 	function problem_status($limit, $num){
-		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution where contest_id = '0' order  by solution_id DESC limit $limit, $num";
+		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and  contest_id = '0' order  by solution_id DESC limit $limit, $num";
 		$mem = new Memcache(); //创建Memcache对象  
 		$mem->connect('127.0.0.1', 11211); //连接Memcache服务器
 		if(!($data=$mem->get(md5("mysql_query".$sql)))){
@@ -44,7 +44,7 @@ class Problemsubmit_model extends CI_Model{
 		return mysql_fetch_array($result);
 	}
 	function status_search_pid($limit, $num, $pid){
-		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution where contest_id = '0' and problem_id = '$pid' order  by solution_id DESC limit $limit, $num";
+		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and contest_id = '0' and problem_id = '$pid' order  by solution_id DESC limit $limit, $num";
 		$result = mysql_query($sql);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){
@@ -55,7 +55,7 @@ class Problemsubmit_model extends CI_Model{
 		return $data;
 	}
 	function status_search_pid_ps($limit, $num, $pid){
-		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution where contest_id = '0' and problem_id = '$pid' and result='4' order  by solution_id DESC limit $limit, $num";
+		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and contest_id = '0' and problem_id = '$pid' and result='4' order  by solution_id DESC limit $limit, $num";
 		$result = mysql_query($sql);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){
@@ -66,7 +66,7 @@ class Problemsubmit_model extends CI_Model{
 		return $data;
 	}
 	function status_search_user($limit, $num,$user){
-		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution where contest_id = '0' and user_id = '$user' order  by solution_id DESC limit $limit, $num";
+		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and  contest_id = '0' and b.username = '$user' order  by solution_id DESC limit $limit, $num";
 		$result = mysql_query($sql);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){

@@ -114,16 +114,16 @@
   <?php foreach($result as $v): ?>
   <tr class="evenrow">
     <td id="solution_id"><?php echo $v['solution_id']?></td>
-    <td><?php echo $v['user_id']?></td>
+    <td><?php echo $v['username']?></td>
     <td><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=<?php echo $v['problem_id']?>"><?php echo $v['problem_id']?></a></td>
-  <?php   if($v['user_id']==$this->session->userdata('user_id')&&$v['result']==11){ ?>
+  <?php   if($v['username']==$this->session->userdata('username')&&$v['result']==11){ ?>
     <td><a class="compileinfo"><button class="<?php echo $judge_color[$v['result']]?>"  data-target='#myModal_compileinfo' data-toggle='modal' ><?php echo $judge_result[$v['result']]?></button></a></td>
     <?php }else{?>
     <td><button class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?></button></td>
     <?php }?>
     <td><span style="color:red"><?php echo $v['memory']?></span></td>
     <td><span style="color:red"><?php echo $v['time']?></span></td>
-  <?php   if($v['user_id']==$this->session->userdata('user_id')){ ?>
+  <?php   if($v['username']==$this->session->userdata('username')){ ?>
     <td><a href="#" class="source" data-target='#myModal_source' data-toggle='modal'><?php echo $v['language']? "C++":"C"?></a></td>
   <?php }else{?>
   <td><?php echo $v['language']? "C++":"C"?></td>

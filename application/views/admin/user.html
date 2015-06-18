@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>用户列表</title>
-  <link rel="stylesheet" type="text/css" href="<?= base_url('application/views/admin/lib/bootstrap/css/bootstrap.min.css');?>">
-  
-    <link rel="stylesheet" href="<?= base_url('application/views/admin/lib/font-awesome/css/font-awesome.css');?>">
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+    <title>沈阳工业大学在线判题系统</title>
+    <link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+    <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/problem_search.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
+    <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
+  </head>
   <style type="text/css">
-    body {
+      body {
+    font-family: 微软雅黑;
     background: #eee;
-    background-image: url(/admin/images/furley_bg.png);
+    background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
     background-position: initial initial;
     background-repeat: initial initial;
     background-position: initial initial;
@@ -17,118 +26,49 @@
     margin: 0px;
     padding: 0px;
   }
-  .container {
-    margin-top: 3%;
-  }
-  .th_id {
-    width: 20%;
-  }
-  .th_title {
-    width: 45%;
-  }
-  .th_class {
-    width: 25%;
-  }
-  .th_edit {
-    width: 10%;
-  }
+    .form-control{
+      width:160px;
+      height:30px;
+    }
   .control-group {
     display: inline;
     float: right;
   }
-
-  
+  .container-search{
+              margin-top: 7%;
+              margin-right: 100px;
+              display: inline;
+              float: right;
+  }
+  .table-group{
+    margin-top: 11%;
+  }
+  .th_class {
+    background-color:#222;
+    color:#FFFFFF;
+  }
+  td,th{
+    text-align:center
+  }
+  select{
+    height:30px;
+    background-color:#ffffff;
+    border:1px solid #cccccc;
+  }
+  .container_modal{
+    margin-left:20%;
+  }
+  .label_reg{
+    width:20%;
+  }
   </style>
-</head>
-<body>
+  <body>
+<?php $this->load->view('oj_index/header.html');?>  
 <div class="container">
-<div class="btn-toolbar" style="display:inline">
-    <button type="button" id="problem_add_but" class="btn btn-primary" autocomplete="off"><i class="icon-plus"></i>添加题目</button>
-  <div class="btn-group">
-  </div>
-</div>
-<div class="control-group">
-          <div class="controls" style="display:inline">
 
-            <!-- Inline Radios -->
-            <label class="radio inline">
-              <input type="radio" value="1" checked="checked" name="search">
-              题号&nbsp;&nbsp;&nbsp;&nbsp;
-            </label>
-            <label class="radio inline">
-              <input type="radio" value="2" name="search">
-              标题&nbsp;&nbsp;&nbsp;&nbsp;
-            </label>
-            <label class="radio inline">
-              <input type="radio" value="3" name="search">
-              类别&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </label>
-          </div> 
-           <div class="form-group" style="display:inline">
-          <input type="text" class="form-control" id = "search" placeholder="Search for..." style="margin-top:2%;">
-          <button class="btn btn-default" type="button" id = "search_but">Go!</button>
-        </div>
-</div>
-<br>
-<br>
-<hr>
-<div class="well">
-    <table class="table table-striped" id = "pro_table" >
-      <thead>
-        <tr>
-          <th class="th_id" >题号</th>
-          <th class="th_title" >标题</th>
-          <th class="th_class" >类别</th>
-          <th class="th_edit" >操作</th>
-        </tr>
-      </thead>
-      <tbody id = "tbody" >
-      <?php foreach($problem as $temp):?>
-        <tr>
-          <td><?php echo $temp['problem_id'];?></td>
-          <td><?php echo $temp['title'];?></td>
-          <td><?php echo $temp['class_name'];?></td>
-          <td>
-              <a href="<?= site_url('admin/problem/pro_edit/'.$temp['problem_id']); ?>" ><i class="icon-pencil"></i></a>
-              <a href="#myModal" role="button" data-toggle="modal" id = "<?php echo $temp['problem_id'];?>"><i class="icon-remove"></i></a>
-          </td>
-        </tr>
-      <?php endforeach; ?>
-       
-      </tbody>
-    </table>
-    <div>
-  <div class="pagination" style="text-align:right" id = "links">
-    <?php echo $links;?>
-  </div>
-    </div>
-<table width="60%" align="right">
-    <tr>
-      <td>
-        <div id="barcon" name="barcon"></div>
-      </td>
-    </tr>
-</table>
 
 </div>
-</div>
-<?php require('problem_del.html');?>
-<div>
-  <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
-  <input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
-</div>
-<script src="<?= base_url('application/views/admin/lib/jquery-1.8.1.min.js');?>" type="text/javascript"></script>
-<script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.min.js');?>" type="text/javascript"></script>
-
-<script src="<?= base_url('application/views/admin/js/problem_act.js');?>" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-  //相应题目添加按钮
-  $("#problem_add_but").click(function() {
-        window.location.href = "<?php echo site_url('admin/problem/problem_add');?>";
-    });
-});
-</script>
-
+<input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
+<input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
 </body>
 </html>
