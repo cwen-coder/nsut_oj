@@ -80,19 +80,23 @@ class Problemsubmit_model extends CI_Model{
 	//mysql_num_rows
 	function status_num_pid($pid){
 		$sql_pid="select count(*)  from solution where problem_id='$pid' and contest_id='0' ";
-		$reslut = mysql_query($sql_pid);
-		return mysql_fetch_row($reslut);
+		$result = mysql_query($sql_pid);
+		return mysql_fetch_row($result);
 	}
-
+	function status_num_pid_ac($pid){
+		$sql_pid="select count(*)  from solution where problem_id='$pid' and contest_id='0' and result='4' ";
+		$result = mysql_query($sql_pid);
+		return mysql_fetch_row($result);
+	}
 	function status_num_user($user){
 		$sql_user="select count(*)  from solution where user_id='$user' and contest_id='0' ";
-		$reslut = mysql_query($sql_user);
-		return mysql_fetch_row($reslut);
+		$result = mysql_query($sql_user);
+		return mysql_fetch_row($result);
 	}
 	function status_num(){
 		$sql="select count(*)  from solution where contest_id='0'";
-		$reslut = mysql_query($sql);
-		return mysql_fetch_row($reslut);
+		$result = mysql_query($sql);
+		return mysql_fetch_row($result);
 	}
 
 }
