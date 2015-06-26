@@ -9,6 +9,7 @@
     <link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
     <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/problem_search.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
     <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
@@ -141,12 +142,12 @@
   <?php foreach($category as $v): ?>
 
   <tr>
-    <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>"; else echo "<span class='glyphicon glyphicon-star-empty'></span>";?><?php echo $v['problem_id']?></td>
+    <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>"; if($this->session->userdata('user_id')&&!$v['do']) echo "<span class='glyphicon glyphicon-star-empty'></span>";?><?php echo $v['problem_id']?></td>
     <td><a href="<?php echo site_url('oj_index/home/problem').'?pid='.$v['problem_id']?>"><?php echo $v['title']?></a></td>
-    <td><a href="#"><?php echo $v['class_name']?></a></td>
+    <td><a href="<?php echo site_url().'/oj_index/home/search?pc='.$v['class_name']?>"><?php echo $v['class_name']?></a></td>
     <td><?php if($v['submit']!=0) echo sprintf("%.2f", $v['accepted']/$v['submit']*100);
                                 else echo 0;
-    ?>%(<a href="#"><?php echo $v['accepted']?></a>/<a href="#"><?php echo $v['submit']?></a>)</td>
+    ?>%(<a href="<?php echo site_url().'/oj_index/home/status?pid='.$v['problem_id'].'&ps='.'accepted'?>"><?php echo $v['accepted']?></a>/<a href="<?php echo site_url().'/oj_index/home/status?pid='.$v['problem_id']?>"><?php echo $v['submit']?></a>)</td>
   </tr>
 <?php endforeach ?>
 </tbody>
@@ -155,67 +156,5 @@
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
-<script type="text/javascript">
-$(document).ready(function(){
-  $("#cate").click(function(){
-    if($("#cate").val()==3){
-      $("#cate_").removeAttr("style");
-      $("#cate_th").removeAttr("style");
-      $("#search_terms").css("display","none");
-    }else{
-      $("#cate_").css("display","none");
-      $("#cate_th").css("display","none");
-      $("#search_terms").removeAttr("style");
-    }
-  });
-  $("#search_but").click(function(){
-    if($("#cate").val()==1){
-      var href = "search?pid=";
-      var search_terms = $("#search_terms").val();
-      $("#search_but").attr("href", href+search_terms);
-    }
-    if($("#cate").val()==2){
-      var href = "search?pn=";
-      var search_terms = $("#search_terms").val();
-      $("#search_but").attr("href", href+search_terms);
-    }
-      if($("#cate").val()==3){
-      var href = "search?pc=";
-      var search_terms = $("#cate_cate").val();
-      $("#search_but").attr("href", href+search_terms);
-    }
-  });
-  function GetRequest() { 
-      var url = location.search; //获取url中"?"符后的字串 
-      var theRequest = new Object(); 
-      if (url.indexOf("?") != -1) { 
-            var str = url.substr(1); 
-            strs = str.split("&"); 
-            for(var i = 0; i < strs.length; i ++) { 
-            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
-            } 
-      }    
-      return theRequest; 
-} 
-  var Request = new Object(); 
-  Request = GetRequest();
-  var pid = Request['pid'];
-  var pn = Request['pn'];
-  var pc = Request['pc'];
-  if(pid !=undefined){
-    $("#cate").val(1);
-    $("#search_terms").val(pid);
-  }
-  if(pn !=undefined){
-    $("#cate").val(2);
-    $("#search_terms").val(pn);
-  }
-  if(pc !=undefined){
-    $("#cate").val(3);
-    $("#cate").click();
-    $("#cate_").val(pc);
-  }
-})
-</script>
 </body>
 </html>

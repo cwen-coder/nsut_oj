@@ -20,7 +20,7 @@ class Problemsubmit_model extends CI_Model{
 		else return false;
 	}
 	function problem_status($limit, $num){
-		$sql = "select solution_id, user_id, memory, time, result, language, code_length, in_date, problem_id from solution where contest_id = '0' order  by solution_id DESC limit $limit, $num";
+		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and  contest_id = '0' order  by solution_id DESC limit $limit, $num";
 		$mem = new Memcache(); //创建Memcache对象  
 		$mem->connect('127.0.0.1', 11211); //连接Memcache服务器
 		if(!($data=$mem->get(md5("mysql_query".$sql)))){
@@ -42,6 +42,61 @@ class Problemsubmit_model extends CI_Model{
 		$sql = "select source from source_code where solution_id = '$solution_id'";
 		$result = mysql_query($sql);
 		return mysql_fetch_array($result);
-	} 
+	}
+	function status_search_pid($limit, $num, $pid){
+		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and contest_id = '0' and problem_id = '$pid' order  by solution_id DESC limit $limit, $num";
+		$result = mysql_query($sql);
+		$data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		//$mem->set(md5("mysql_query".$sql), $data, 0, 1);
+		//$mem->delete(md5("mysql_query".$sql),0);
+		return $data;
+	}
+	function status_search_pid_ps($limit, $num, $pid){
+		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and contest_id = '0' and problem_id = '$pid' and result='4' order  by solution_id DESC limit $limit, $num";
+		$result = mysql_query($sql);
+		$data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		//$mem->set(md5("mysql_query".$sql), $data, 0, 1);
+		//$mem->delete(md5("mysql_query".$sql),0);
+		return $data;
+	}
+	function status_search_user($limit, $num,$user){
+		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and  contest_id = '0' and b.username = '$user' order  by solution_id DESC limit $limit, $num";
+		$result = mysql_query($sql);
+		$data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		//$mem->set(md5("mysql_query".$sql), $data, 0, 1);
+		//$mem->delete(md5("mysql_query".$sql),0);
+		//p($data);die;
+		return $data;
+	}
+	//mysql_num_rows
+	function status_num_pid($pid){
+		$sql_pid="select count(*)  from solution where problem_id='$pid' and contest_id='0' ";
+		$result = mysql_query($sql_pid);
+		return mysql_fetch_row($result);
+	}
+	function status_num_pid_ac($pid){
+		$sql_pid="select count(*)  from solution where problem_id='$pid' and contest_id='0' and result='4' ";
+		$result = mysql_query($sql_pid);
+		return mysql_fetch_row($result);
+	}
+	function status_num_user($user){
+		$sql_user="select count(*)  from solution where user_id='$user' and contest_id='0' ";
+		$result = mysql_query($sql_user);
+		return mysql_fetch_row($result);
+	}
+	function status_num(){
+		$sql="select count(*)  from solution where contest_id='0'";
+		$result = mysql_query($sql);
+		return mysql_fetch_row($result);
+	}
 
 }

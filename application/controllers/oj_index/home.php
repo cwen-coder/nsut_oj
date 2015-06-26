@@ -123,6 +123,10 @@ class Home extends Oj_Controller{
 	}
 	//提交状态显示
 	public function status(){
+		$user = $this->input->get('user', TRUE);
+		$pid = $this->input->get('pid', TRUE);
+		$ps = $this->input->get('ps', TRUE);
+
 		$data['judge_result']=Array("Pending", "Pending Rejudging", "Compiling", "Running & Judging", "Accepted", "Presentation Error", "Wrong Answer", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed", "Runtime Error", "Compile Error", "Compile OK","Test Running Done");
 		$data['judge_color']=Array("btn_status gray","btn_status btn-info","btn_status btn-warning","btn_status btn-warning","btn_status btn-success","btn_status btn-danger","btn_status btn-danger","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-info");
 		$limit=0;
@@ -131,7 +135,28 @@ class Home extends Oj_Controller{
 		if($this->input->get('previous')) 
 			$data['previous'] = $this->input->get('previous');
 		$num=20;
-		$data['result'] = $this->ps->problem_status($limit, $num);
+		if(!empty($pid)) {
+			if(!empty($ps)){
+				$data['result'] = $this->ps->status_search_pid_ps($limit, $num, $pid);
+				$data['ps'] = "accepted";
+				$data['pre'] = $this->ps->status_num_pid_ac($pid)[0]/20;
+			}
+			if(empty($ps)){
+				$data['result'] = $this->ps->status_search_pid($limit, $num, $pid);
+				$data['pre'] = $this->ps->status_num_pid($pid)[0]/20;
+			}
+			$data['pid'] = $pid;
+		}
+		else if(!empty($user)){
+			$data['result'] = $this->ps->status_search_user($limit, $num, $user);
+			$data['pre'] = $this->ps->status_num_user($user)[0]/20;
+			$data['user'] = $user;
+			//p($data);die;
+		}
+		else {
+			$data['result'] = $this->ps->problem_status($limit, $num);
+			$data['pre'] = $this->ps->status_num()[0]/20;
+		}
 
 		$data['pagination'] = $limit/20+2;
 

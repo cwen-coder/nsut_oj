@@ -10,6 +10,7 @@
     <link href="<?= base_url('application/views/oj_index/css/sutoj.css');?>" rel="stylesheet">
     <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/status_search.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/status_info.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
@@ -84,10 +85,10 @@
           
            <div class="form-group" style="display:inline">
             <th>
-          <input type="text" class="form-control"  placeholder="Search for..." >
+          <input type="text" class="form-control"  placeholder="Search for..." id="search_terms">
             </th>
         <th>
-          <button class="btn btn-default" type="button" id = "search_but">Go!</button>
+          <a href="<?php echo site_url('/oj_index/home/status');?>" class="btn btn-default" type="button" id = "search_but">Go!</a>
         </th>
   </div>
 </table>
@@ -113,16 +114,16 @@
   <?php foreach($result as $v): ?>
   <tr class="evenrow">
     <td id="solution_id"><?php echo $v['solution_id']?></td>
-    <td><?php echo $v['user_id']?></td>
+    <td><?php echo $v['username']?></td>
     <td><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=<?php echo $v['problem_id']?>"><?php echo $v['problem_id']?></a></td>
-  <?php   if($v['user_id']==$this->session->userdata('user_id')&&$v['result']==11){ ?>
+  <?php   if($v['username']==$this->session->userdata('username')&&$v['result']==11){ ?>
     <td><a class="compileinfo"><button class="<?php echo $judge_color[$v['result']]?>"  data-target='#myModal_compileinfo' data-toggle='modal' ><?php echo $judge_result[$v['result']]?></button></a></td>
     <?php }else{?>
     <td><button class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?></button></td>
     <?php }?>
     <td><span style="color:red"><?php echo $v['memory']?></span></td>
     <td><span style="color:red"><?php echo $v['time']?></span></td>
-  <?php   if($v['user_id']==$this->session->userdata('user_id')){ ?>
+  <?php   if($v['username']==$this->session->userdata('username')){ ?>
     <td><a href="#" class="source" data-target='#myModal_source' data-toggle='modal'><?php echo $v['language']? "C++":"C"?></a></td>
   <?php }else{?>
   <td><?php echo $v['language']? "C++":"C"?></td>
@@ -136,11 +137,34 @@
 </div>
 
 <div id="center" class="center">
-<?php echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1).">Top</a>]&nbsp;&nbsp;";
+<?php if(empty($pid)&&empty($user)){ echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1).">Top</a>]&nbsp;&nbsp;";
 if (isset($previous)) 
         echo "[<a href=status?previous=".($previous-1)."&pagination=".($pagination-2).">Previous Page</a>]&nbsp;&nbsp;";
+if($pre > $pagination-1 )
 echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination).">Next Page</a>]";
-?>
+}?>
+<?php if(!empty($pid)&&empty($ps)){ echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1)."&pid=".$pid.">Top</a>]&nbsp;&nbsp;";
+if (isset($previous)) 
+        echo "[<a href=status?previous=".($previous-1)."&pagination=".($pagination-2)."&pid=".$pid.">Previous Page</a>]&nbsp;&nbsp;";
+if($pre > $pagination-1 )
+echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination)."&pid=".$pid.">Next Page</a>]";
+
+}?>
+<?php if(!empty($user)){ echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1)."&user=".$user.">Top</a>]&nbsp;&nbsp;";
+if (isset($previous)) 
+        echo "[<a href=status?previous=".($previous-1)."&pagination=".($pagination-2)."&user=".$user.">Previous Page</a>]&nbsp;&nbsp;";
+if($pre > $pagination-1 )
+echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination)."&user=".$user.">Next Page</a>]";
+
+}?>
+<?php if(!empty($ps)){ echo "[<a href=status?previous=".($pagination-2)."&pagination=".($pagination-1)."&ps=accpeted&pid=".$pid.">Top</a>]&nbsp;&nbsp;";
+if (isset($previous)) 
+        echo "[<a href=status?previous=".($previous-1)."&pagination=".($pagination-2)."&ps=accpeted&pid=".$pid.">Previous Page</a>]&nbsp;&nbsp;";
+if($pre > $pagination-1 )
+echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination)."&ps=accpeted&pid=".$pid.">Next Page</a>]";
+
+}?>
+
 </div>
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
