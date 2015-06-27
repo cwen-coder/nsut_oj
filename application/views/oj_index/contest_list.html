@@ -117,7 +117,7 @@
     <tr>
        <td><?php echo $temp['contest_id'];?></td>
        <td><a href = "<?php $offset = $this->uri->segment(4); if($offset<1)$offset = 0; echo site_url('contest/home/index/'.$temp['contest_id'].'/'.$offset);?>" id="<?php echo $temp['contest_id'];?>" class="con_a"><?php echo $temp['title'];?></a></td>
-          <td><?php echo $temp['start_time'];?></td>
+          <td><?php echo $temp['end_time'];?></td>
           <td>
           <?php switch ($temp['con_class']) {
             case '1':

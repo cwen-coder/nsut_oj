@@ -38,8 +38,13 @@
 </div><!-- /.container-fluid -->
 </nav>
 <div class="container container_contest">
-	<div class="well">
-		
+	<div class="well" style="text-align:center;">
+	<form action="<?php echo site_url('contest/ask_que/ask');?>" method="post" >
+		<textarea name="content" id="content" cols="100" rows="6"></textarea>
+		<input type="hidden" name = "contest_id" value="<?= $contest_id;?>" >
+		<input type="hidden" name = "user_id" value="<?= $this->session->userdata('user_id');?>" >
+
+	</form>
 	</div>
 </div>
 <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
