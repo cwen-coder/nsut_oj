@@ -10,7 +10,17 @@
 		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
 		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
 		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
-	</head>
+		<style type="text/css">
+		.div_textarea {
+			width: 70%;
+		}
+		.all_question {
+			width: 70%;
+			margin-left: 16%;
+			text-align: left;
+		}
+		</style>
+</head>
 <body>
 <nav class="navbar navbar-fixed-top navbar-inverse ">
 <div class="container">
@@ -39,15 +49,31 @@
 </nav>
 <div class="container container_contest">
 	<div class="well" style="text-align:center;">
-	<form action="<?php echo site_url('contest/ask_que/ask');?>" method="post" >
-		<textarea name="content" id="content" cols="100" rows="6"></textarea>
+	<form action="<?php echo site_url('contest/ask_pro/ask_question');?>" method="post" role="form" onsubmit = "return check();">
+	<div class="form-group div_textarea"  style="margin:0 auto;">
+	<label for="name" style="float:left;">向管理员提问</label>
+	<span style="float:right;">总共 <?= $question_sum;?> 条提问</span>
+		<textarea name="content" id="content"  rows="3" class="form-control" ></textarea>
 		<input type="hidden" name = "contest_id" value="<?= $contest_id;?>" >
 		<input type="hidden" name = "user_id" value="<?= $this->session->userdata('user_id');?>" >
-
+		<br>
+		 <button type="submit" class="btn btn-primary" style="float:right;">马上提问</button>
+		 <br>
+	</div>
 	</form>
+	<div class = "all_question" >
+	<h4><strong>提问记录(<?= $question_sum;?>)</strong></h4>
+		<?php foreach($question as $v): ?>
+			<p ><span style="color:blue;"><strong><?= $v['username']; ?> </strong></span>  &nbsp;&nbsp;&nbsp;&nbsp;提问 ：</p>
+			<p><?= $v['content']; ?></p>
+			<span style="color:blue;"><?= $v['time']; ?></span>
+			<hr>
+		<?php endforeach;?>
+	</div>
 	</div>
 </div>
 <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
 <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/contest/js/ask_pro.js');?>"></script>
 </body>
 </html>
