@@ -52,7 +52,7 @@
 	<form action="<?php echo site_url('contest/ask_pro/ask_question');?>" method="post" role="form" onsubmit = "return check();">
 	<div class="form-group div_textarea"  style="margin:0 auto;">
 	<label for="name" style="float:left;">向管理员提问</label>
-	<span style="float:right;">总共 <?= $question_sum;?> 条提问</span>
+	<span style="float:right;">总共 <?= $question_sum;?> 条提问记录</span>
 		<textarea name="content" id="content"  rows="3" class="form-control" ></textarea>
 		<input type="hidden" name = "contest_id" value="<?= $contest_id;?>" >
 		<input type="hidden" name = "user_id" value="<?= $this->session->userdata('user_id');?>" >
@@ -69,6 +69,9 @@
 			<span style="color:blue;"><?= $v['time']; ?></span>
 			<hr>
 		<?php endforeach;?>
+	</div>
+	<div class="pagination" style="text-align:right;" id = "links">
+  		<?php echo $links;?>
 	</div>
 	</div>
 </div>

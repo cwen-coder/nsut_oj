@@ -18,8 +18,8 @@ class Ask_que_model extends CI_Model {
 	}
 
 	//获取提问
-	public function get_all_que($contest_id) {
-		$query = "SELECT * FROM ask_que WHERE contest_id = '$contest_id' ORDER BY time desc ";
+	public function get_all_que($contest_id,$perPage,$offset) {
+		$query = "SELECT * FROM ask_que WHERE contest_id = '$contest_id' ORDER BY time desc limit $offset,$perPage";
 		$result = mysql_query($query);
 		$data = array();
 		while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {

@@ -12,12 +12,40 @@ class Ask_pro extends Con_Controller {
 	//载入比赛提问页面
 	public function index() {
 		$data['contest_id'] = $this->uri->segment(4);
-		$ask_pro = $this->ask_pro->get_all_que($data['contest_id']);
+		//$ask_pro = $this->ask_pro->get_all_que($data['contest_id']);
 		//p($ask_pro);die;
 		$data['question_sum'] = $this->ask_pro->get_que_sum($data['contest_id']);
-		$data['question'] = $this->ask_pro->get_all_que($data['contest_id']);
+
+		//后台设置后缀为空，否则分页出错
+		$this->config->set_item('url_suffix', '');
+		//载入分页类
+		$this->load->library('pagination');
+		$perPage = 12;
+		//配置项设置
+		$config['base_url'] = site_url('contest/ask_pro/index/'.$data['contest_id'].'/');
+		$config['total_rows'] = $data['question_sum'];
+		$config['per_page'] = $perPage;
+		$config['uri_segment'] = 5;
+		$config['first_link'] = '首页';
+		$config['prev_link'] = '上一页';
+		$config['next_link'] = '下一页';
+		$config['last_link'] = '尾页';
+		$config['full_tag_open'] = '';
+		$config['full_tag_close'] = '';
+		$config['cur_tag_open'] = '<li class="active"><a>'; // 当前页开始样式   
+		$config['cur_tag_close'] = '</a></li>'; 
+
+		$this->pagination->initialize($config);
+
+		$data['links'] = $this->pagination->create_links();	
+		$offset = $this->uri->segment(5);
+		if($offset < 1) $offset = 0;
+		//$this->db->limit($perPage, $offset);
+		//$data['con_pass'] = $this->oj_con->con_pass_list($perPage, $offset);
+		$data['question'] = $this->ask_pro->get_all_que($data['contest_id'],$perPage,$offset);
 		$this->load->model('oj_con_model','oj_con');
-		for ($i = 0; $i < $data['question_sum']; $i++) {
+		$sum = count($data['question']);
+		for ($i = 0; $i < $sum; $i++) {
 			$result = $this->oj_con->get_username($data['question'][$i]['ask_user_id']);
 			$data['question'][$i]['username'] = $result['username'];
 		}
