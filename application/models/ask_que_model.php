@@ -38,6 +38,37 @@ class Ask_que_model extends CI_Model {
 		} else return false;
 	}
 
+	//获取正在进行中的比赛
+	public function get_now_contest() {
+		$query = "SELECT contest_id,title,con_class,start_time,end_time FROM contest WHERE end_time > NOW() and start_time < NOW() ORDER BY start_time DESC";
+		$result = mysql_query($query);
+		$data = array();
+		while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
+			$data[] = $row;
+		}
+		return $data;
+	}
+
+	//获取未回复提问数目
+	public function no_ans_que($contest_id) {
+		$query = "SELECT count(*) FROM ask_que WHERE contest_id = '$contest_id' AND ans_num = 0 ";
+		$result = mysql_query($query);
+		if($result) {
+			$sum = mysql_fetch_assoc($result);
+			return $sum['count(*)'];
+		} else return false;
+	}
+
+	//获取回复提问数目
+	public function ans_que_sum($contest_id) {
+		$query = "SELECT count(*) FROM ask_que WHERE contest_id = '$contest_id' AND ans_num > 0 ";
+		$result = mysql_query($query);
+		if($result) {
+			$sum = mysql_fetch_assoc($result);
+			return $sum['count(*)'];
+		} else return false;
+	}
+
 }
 
 
