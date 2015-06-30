@@ -66,7 +66,13 @@
 		<?php foreach($question as $v): ?>
 			<p ><span style="color:blue;"><strong><?= $v['username']; ?> </strong></span>  &nbsp;&nbsp;&nbsp;&nbsp;提问 ：</p>
 			<p><?= $v['content']; ?></p>
-			<span style="color:blue;"><?= $v['time']; ?></span>
+			<p style="color:blue;"><?= $v['time']; ?></p>
+			<?php if($v['ans_num'] > 0):?>
+				<?php foreach ($v['answer'] as $ans): ?>
+				<p style="margin-left:5%;"><strong style="color:blue;" >管理员回复</strong>：<?= $ans['content'];?></p>
+				<p style="color:blue;margin-left:16%;"><?= $ans['time']; ?></p>
+				<?php endforeach; ?>
+			<?php endif; ?>
 			<hr>
 		<?php endforeach;?>
 	</div>

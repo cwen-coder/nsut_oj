@@ -26,14 +26,85 @@
   <body>
       <div class="container">
         <ul class="nav nav-tabs" >
-            <li role="presentation" class="active"><a href="#" id = "no_ans_que">未回复(<?= $no_ans_que;?>)</a></li>
-            <li role="presentation"><a href="#" id = "ans_que_sum">已回复(<?= $ans_que_sum;?>)</a></li>
-            <li style="float:right;"> <a href=""><strong>返回 </strong></a></li>
+            <li role="presentation" class="active"><a href="javascript:;" id = "no_ans_que">未回复(<?= $no_ans_que;?>)</a></li>
+            <li role="presentation"><a href="javascript:;" id = "ans_que_sum">已回复(<?= $ans_que_sum;?>)</a></li>
+            <li style="float:right;"> <a href="<?= site_url('admin/ans_que'); ?>"><strong>返回 </strong></a></li>
         </ul>
-          <div class="well">
-                
+          <div class="well" id = "no_ans_que_well" >
+               <?php foreach($no_ans_question as $v): ?>
+                    <p ><span style="color:blue;"><strong><?= $v['username']; ?> </strong></span>  &nbsp;&nbsp;&nbsp;&nbsp;提问 ：</p>
+                    <p><?= $v['content']; ?></p>
+                    <span style="color:blue;"><?= $v['time']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                    <a rel = "reply" href="javascript:;" name="<?= $v['id'];?>" >回复</a>&nbsp;&nbsp;
+                    <a rel = "delete" href="javascript:;" name="<?= $v['id'];?>"  >删除提问</a>
+                    <div  style="display: none" name="<?= $v['id'];?>" >
+                        <textarea  id="<?= $v['id'];?>" rows="3" style="width:60%;" ></textarea>
+                        <p>
+                            <button name = "ans_que_ok" >确定</button>
+                            &nbsp;&nbsp;
+                            <a rel = "reply_off" href="javascript:;">取消</a>
+                        </p>
+                    </div>
+                    <hr>
+                <?php endforeach;?> 
+          </div>
+
+
+          <div class="well" style="display: none" id = "ans_que_well" >
+               <?php foreach($ans_question as $v): ?>
+                    <p ><span style="color:blue;"><strong><?= $v['username']; ?> </strong></span>  &nbsp;&nbsp;&nbsp;&nbsp;提问 ：</p>
+                    <p><?= $v['content']; ?></p>
+                    <span style="color:blue;"><?= $v['time']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+                    <a rel = "reply" href="javascript:;" name="<?= $v['id'];?>" >补充回复</a>&nbsp;&nbsp;
+                    <a rel = "delete" href="javascript:;" name="<?= $v['id'];?>"  >删除提问</a>
+                    <?php foreach ($v['answer'] as $ans): ?>
+                        <p style="margin-left:5%;"><strong style="color:blue;" >管理员回复</strong>：<?= $ans['content'];?></p>
+                        <p style="color:blue;margin-left:12%;"><?= $ans['time']; ?> 
+                        &nbsp; &nbsp; &nbsp;
+                        <a rel = "delete_ans" href="javascript:;" name="<?= $ans['id'];?>" question = "<?= $ans['que_id'];?>" >删除</a>
+                        </p>
+                    <?php endforeach; ?>
+                    <div  style="display: none" name="<?= $v['id'];?>" >
+                        <textarea  id="<?= $v['id'];?>" rows="3" style="width:60%;" ></textarea>
+                        <p>
+                            <button name = "ans_que_ok" >确定</button>
+                            &nbsp;&nbsp;
+                            <a rel = "reply_off" href="javascript:;">取消</a>
+                        </p>
+                    </div>
+                    <hr>
+                <?php endforeach;?> 
           </div>
       </div>
+
+<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">删除信息</h3>
+    </div>
+    <div class="modal-body">
+    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>你确定要这条提问?</p>
+    </div>
+    <input type="hidden" id = "hid_ask_id" value="">
+    <input type="hidden" id = "hid_site" value="<?= site_url();?>">
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+        <button class="btn btn-danger" id = "del_ask_que" data-dismiss="modal">删除</button>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-sm" id="myModal_ans" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">删除信息</h3>
+    </div>
+    <div class="modal-body">
+    <p class="error-text"><i class="icon-warning-sign modal-icon"></i>你确定要这条回复?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+        <button class="btn btn-danger" id = "del_ask_ans" data-dismiss="modal">删除</button>
+    </div>
+</div>
 <script src="<?= base_url('application/views/admin/lib/jquery-1.8.1.min.js');?>" type="text/javascript"></script>
 <script src="<?= base_url('application/views/admin/lib/bootstrap/js/bootstrap.min.js');?>" type="text/javascript"></script>
 <script src="<?= base_url('application/views/admin/js/ans_que.js');?>" type="text/javascript"></script>

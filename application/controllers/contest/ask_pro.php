@@ -48,6 +48,10 @@ class Ask_pro extends Con_Controller {
 		for ($i = 0; $i < $sum; $i++) {
 			$result = $this->oj_con->get_username($data['question'][$i]['ask_user_id']);
 			$data['question'][$i]['username'] = $result['username'];
+			if($data['question'][$i]['ans_num'] > 0) {
+				$answer = $this->ask_pro->get_answer($data['question'][$i]['id']);
+				$data['question'][$i]['answer'] = $answer;
+			}
 		}
 		header('Content-Type:text/html;charset=utf-8');
 		//p($data);die;

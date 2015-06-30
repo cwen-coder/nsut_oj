@@ -58,8 +58,8 @@
                         break;
                   } ?>
                   </td>
-                  <td><a href=""><?= $temp['no_ans_que'];?></a></td>
-                  <td><a href=""><?= $temp['ans_que_sum'];?></a></td>
+                  <td><a href="<?= site_url('admin/ans_que/ans_question/'.$temp['contest_id']) ;?>"><?= $temp['no_ans_que'];?></a></td>
+                  <td><a href="<?= site_url('admin/ans_que/ans_question/'.$temp['contest_id']) ;?>"><?= $temp['ans_que_sum'];?></a></td>
                 </tr>
               <?php endforeach; ?>
                
