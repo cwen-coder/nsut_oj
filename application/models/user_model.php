@@ -55,4 +55,26 @@ class  User_model extends CI_Model {
 			return false;
 		}
 	}
+	public function user_rank(){
+		$sql_query = "SELECT a.user_id, a.submit, a.solved, COUNT( b.solved ) rank, a.reg_time
+				FROM users a JOIN users b
+				WHERE a.solved <= b.solved
+				GROUP BY a.username, a.solved
+				ORDER BY rank, a.submit";
+		$result = mysql_query($sql_query);
+		$data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		return $data;
+	}
+	public function user_info($user){
+		$sql_query = "SELECT a.user_id, a.submit, a.solved, COUNT( b.solved ) rank, a.reg_time
+				FROM users a JOIN users b
+				WHERE a.solved <= b.solved
+				GROUP BY a.username, a.solved
+				ORDER BY rank, a.submit";
+		$result = mysql_query($sql_query);
+
+	}
 }

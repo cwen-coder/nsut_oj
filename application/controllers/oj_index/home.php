@@ -7,6 +7,7 @@ class Home extends Oj_Controller{
 		$this->load->helper('url');
 		$this->load->model('problem_model','pro');
 		$this->load->model('problemsubmit_model','ps');
+		$this->load->model('user_model');
 	}
 	//载入主页
 	public function index(){
@@ -236,5 +237,17 @@ class Home extends Oj_Controller{
 		$data['cate'] = $this->pro->get_class();
 		//p($data);die;
 		$this->load->view('oj_index/problem_list.html',$data);
+	}
+	public function rank(){
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
+		$data['info'] = $this->user_model->user_rank();
+		//p($data['info']);die;
+		$this->load->view('oj_index/runk.html', $data);
 	}
 }

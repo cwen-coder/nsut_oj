@@ -106,6 +106,7 @@ class Login extends CI_Controller {
 			$data['username'] = false;
 			$data['user_id'] = false;
 		}
+		$data['user'] = $this->input->get('username');
 		$this->load->view('oj_index/user.html',$data);
 	}
 }

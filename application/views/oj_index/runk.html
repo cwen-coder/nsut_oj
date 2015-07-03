@@ -36,52 +36,44 @@
   border:none;
   border-top:2px dotted #185598;
 }
-.user_table{
-  width: 200px;
-  color:blue;
-  font-size: 15px;
-}
-.container_modal{
-    margin-left:20%;
-  }
   .label_reg{
     width:20%;
   }
-  span{
-    color:blue;
+  .table{
+    width:60%;
+  }
+  td,th{
+    text-align:center
   }
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>  
 <div class="user_info">
 <center>
-<h1><span><?php echo $user; ?></span></h1>
-<span>registered on </span>
-<hr class="class_hr">
-<table class="user_table">
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr class="th_class">
+    <th style="width:20%">Rank</th>
+  <th style="width:20%">Username</th>
+  <th style="width:20%">Solved</th>
+  <th style="width:20%">Submitted</th>
+  <th style="width:20%">AC Ratio</th>
+ </tr>
+</theaad>
+
+<tbody>
+  <?php $i=1;?>
+  <?php foreach($info as $v): ?>
   <tr>
-    <td>Rank</td>
-    <td>2</td>
+    <td><?php echo $i++;?></td>
+    <td><?php echo $v['user_id']?></td>
+    <td><?php echo $v['solved']?></td>
+    <td><?php echo $v['submit']?></td>
+    <td><?php echo $v['submit']?></td>
   </tr>
-  <tr>
-    <td>Problems Submitted</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>Problems Solved</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>Accepted</td>
-    <td>2</td>
-  </tr>
+<?php endforeach ?>
+</tbody>
 </table>
-<hr class="class_hr">
-<h3><span>List of solved problems</span><h3>
-<p></p>
-<h3><span>List of solved problems</span><h3>
-  <p></p>
-  <hr class="class_hr">
 </center>
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
