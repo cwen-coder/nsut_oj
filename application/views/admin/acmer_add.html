@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body" style="height:200px;">
       <div class="control-group">
-        <span class = "acmer_add" >输入用户名：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span class = "acmer_add" >&nbsp;&nbsp;&nbsp;&nbsp;输入用户名：&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <div class="col-lg-6">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search for..." id = "user_search" >
@@ -15,7 +15,19 @@
                 <button class="btn btn-default" type="button" id = "user_search_but" >Go!</button>
               </span>
             </div>
+            <br>
           </div>
+              <h3 id = "h1_info" style="text-align:center"></h3>
+            <table class="table table-striped user_table"  id = "user_table">
+            <thead>
+              <th>用户名</th>
+              <th>解决问题数</th>
+              <th>注册时间</th>
+              <th>操作</th>
+            </thead>
+            <tbody id = "tbody" >
+            </tbody>
+            </table>
         </div>
       </div>
       <div class="modal-footer">

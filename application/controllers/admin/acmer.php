@@ -4,6 +4,7 @@
 * @date(2015-7-5)
 */
 class Acmer extends Admin_Controller {
+
 	function __construct() {
 		parent::__construct();
 		$this->load->model('acmer_model','acmer');
@@ -15,7 +16,12 @@ class Acmer extends Admin_Controller {
 
 	public function user_search() {
 		$username = $this->input->post('username');
-		$result = $this->acmer->username($username);
+		$result = $this->acmer->user_search($username);
+		if($result == false) echo false;
+		else {
+			echo json_encode($result);
+		}
+		//echo 1;
 	}
 }
 ?>
