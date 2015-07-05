@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ACM集训队</title>
+	<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+  
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/lib/font-awesome/css/font-awesome.css');?>">
+	<style type="text/css">
+    body {
+        background: #eee;
+        /* background-image: url(http://subtlepatterns.com/patterns/furley_bg.png); */
+        background-image: url(/admin/images/furley_bg.png);
+        background-position: initial initial;
+        background-repeat: initial initial;
+        background-position: initial initial;
+        background-repeat: initial initial;
+        margin: 0px;
+        padding: 0px;
+    }
+    .container {
+        margin-top: 3%;
+    }
+    .acmer_add {
+        display:inline;
+        float:left;
+        margin-left: 5%;
+    }
+</style>
+</head>
+<body>
+<div class = "container" >
+<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal"  id = "" ><i class="icon-plus"></i>添加新成员</button>
+        <hr>
+    <div class = "well" >
+            
+    </div>
+</div>
+
+<input type="hidden" value="<?= site_url();?>" id = "hid_site">
+<?php require('acmer_add.html');?>
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/admin/js/acmer.js');?>"></script>
+</body>
+</html>
