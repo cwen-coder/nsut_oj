@@ -19,5 +19,37 @@ class Acmer_model extends CI_Model {
 		} else return false;
 	}
 
+	public function user_check($user_id) {
+		$query = "SELECT * FROM acmer WHERE id = '$user_id' ";
+		$result = mysql_query($query);
+		if($result) {
+			$num = mysql_num_rows($result);
+			if($num == 0) return true;
+			else return false;
+		} else return false;
+	}
+
+	public function acmer_add($data) {
+		$query = "INSERT INTO acmer(id,name,poj_name,hdoj_name,cf_name) VALUES('$data[user_id]','$data[user_name]','$data[poj_name]','$data[hdoj_name]','$data[cf_name]') ";
+		$result = mysql_query($query);
+		return $result;
+	}
+
+	public function get_all_acmer() {
+		$query = "SELECT * FROM acmer where 1 order by sum10 desc";
+		$result = mysql_query($query);
+		$data = array();
+		while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
+			$data[] = $row;
+		}
+		return $data;
+	}
+
+	public function acmer_del($name) {
+		$query = "DELETE FROM acmer WHERE name = '$name' ";
+		$result = mysql_query($query);
+		return $result;
+	}
+
 }
 ?>

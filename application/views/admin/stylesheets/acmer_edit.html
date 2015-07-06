@@ -1,0 +1,33 @@
+<div class="modal fade bs-example-modal-lg" id="model_edit_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class = "model-body" >
+      	<form id = "" class="oj_form" action="<?= site_url('admin/acmer/acmer_add');?>" method="post" >
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <label for="poj">POJ用户名：</label>
+                <input type="text" class="form-control" id="" name="poj_name" placeholder="输入POJ用户名">
+              </div>
+              <div class="form-group">
+                <label for="hdoj">HDOJ用户名：</label>
+                <input type="text" class="form-control" id="" name="hdoj_name" placeholder="输入HDOJ用户名">
+              </div>
+              <div class="form-group">
+                <label for="CF">CF用户名：</label>
+                <input type="text" class="form-control" id="" placeholder="输入cf用户名" name = "cf_name">
+              </div>
+              <input type="hidden" value="" id = "" name = "hide_user_id">
+              <input type="hidden" value="" id = "" name = "hide_user_name">
+              <div style="margin:0 auto;width:300px;"> 
+              <button type="submit" class="btn btn-default but_form" >确定修改</button>
+            </div>
+            </form>
+      </div>
+      <div class = "modal-footer">
+      	
+      </div>
+ 	</div>
+  </div>
+</div>

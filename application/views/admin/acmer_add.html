@@ -5,9 +5,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">添加新成员</h4>
       </div>
-      <div class="modal-body" style="height:200px;">
+      <div class="modal-body" style="height:80px;" id = "modal-body">
       <div class="control-group">
-        <span class = "acmer_add" >&nbsp;&nbsp;&nbsp;&nbsp;输入用户名：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span class = "acmer_add" >输入用户名：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <div class="col-lg-6">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search for..." id = "user_search" >
@@ -17,8 +17,10 @@
             </div>
             <br>
           </div>
-              <h3 id = "h1_info" style="text-align:center"></h3>
-            <table class="table table-striped user_table"  id = "user_table">
+            </div>
+              <h4 id = "h1_info" style="text-align:center"></h4>
+
+            <table class="table user_table"  id = "user_table">
             <thead>
               <th>用户名</th>
               <th>解决问题数</th>
@@ -26,9 +28,35 @@
               <th>操作</th>
             </thead>
             <tbody id = "tbody" >
+            <tr>
+              <td id = "username" style="width:25%;"></td>
+              <td id = "solved" style="width:25%;" ></td>
+              <td id = "reg_time" style="width:25%;"></td>
+              <td id = "do_action"style="width:25%;"><a href="javascript:;" id = "acmer_add_act" name = "" >添加</a></td>
+            </tr>
             </tbody>
             </table>
-        </div>
+            <form id = "oj_form" class="oj_form" action="<?= site_url('admin/acmer/acmer_add');?>" method="post" >
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <label for="poj">POJ用户名：</label>
+                <input type="text" class="form-control" id="poj_name" name="poj_name" placeholder="输入POJ用户名">
+              </div>
+              <div class="form-group">
+                <label for="hdoj">HDOJ用户名：</label>
+                <input type="text" class="form-control" id="hdoj_name" name="hdoj_name" placeholder="输入HDOJ用户名">
+              </div>
+              <div class="form-group">
+                <label for="CF">CF用户名：</label>
+                <input type="text" class="form-control" id="cf_name" placeholder="输入cf用户名" name = "cf_name">
+              </div>
+              <input type="hidden" value="" id = "hide_user_id" name = "hide_user_id">
+              <input type="hidden" value="" id = "hide_user_name" name = "hide_user_name">
+              <div style="margin:0 auto;width:300px;"> 
+              <button type="submit" class="btn btn-default but_form" >确定添加</button>
+            </div>
+            </form>
+ 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
