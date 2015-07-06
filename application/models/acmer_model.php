@@ -51,5 +51,21 @@ class Acmer_model extends CI_Model {
 		return $result;
 	}
 
+	public function acmer_info($name) {
+		$query = "SELECT name,poj_name,hdoj_name,cf_name FROM acmer WHERE name = '$name'";
+		$result = mysql_query($query);
+		if($result) {
+			$num = mysql_num_rows($result);
+			if($num > 0) return mysql_fetch_assoc($result);
+			else return false;
+		} else return false;
+	}
+
+	public function acmer_update($data) {
+		$query = "UPDATE acmer SET poj_name = '$data[poj_name]',hdoj_name = '$data[hdoj_name]',cf_name = '$data[cf_name]' WHERE name = '$data[name]' ";
+		$result = mysql_query($query);
+		return $result;
+	}
+
 }
 ?>

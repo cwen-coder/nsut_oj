@@ -51,5 +51,25 @@ class Acmer extends Admin_Controller {
 		$result = $this->acmer->acmer_del($name);
 		echo $result;
 	}
+
+	public function acmer_info() {
+		$name = $this->input->post('name');
+		$result = $this->acmer->acmer_info($name);
+		if($result == false) echo false;
+		else echo json_encode($result);
+	}
+
+	public function acmer_update() {
+		$data['poj_name'] = $this->input->post('poj_name');
+		$data['hdoj_name'] = $this->input->post('hdoj_name');
+		$data['cf_name'] = $this->input->post('cf_name');
+		$data['name'] = $this->input->post('name');
+		//p($data);die;
+		$result = $this->acmer->acmer_update($data);
+		if($result == true)
+			success('admin/acmer', '修改成功');
+		else 
+			error("修改失败！");
+	}
 }
 ?>

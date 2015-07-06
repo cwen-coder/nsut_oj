@@ -86,4 +86,24 @@ $(document).ready(function(){
 			});
 		});
 	});
+
+	$("a[name='acmer_edit_a']").click(function() {
+		var name = $(this).attr('id');
+		var url1 = $("#hid_site").val() + '/admin/acmer/acmer_info';
+		$.post(url1,{
+			name : name
+		},function(data) {
+			if(data == false) alert("出错啦！");
+			else {
+				var acmer = eval("("+data+")");
+				$("#acmer_name").val(acmer.name);
+				$("#hide_acmer_name").val(acmer.name);
+				$("#poj_name_edit").val(acmer.poj_name);
+				$("#hdoj_name_edit").val(acmer.hdoj_name);
+				$("#cf_name_edit").val(acmer.cf_name);
+
+			}
+		});
+
+	});
 });

@@ -43,6 +43,12 @@
          margin-right: 5%;
          display: none;
     }
+    .edit_info {
+        margin-top: 3%;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 3%;
+    }
 </style>
 </head>
 <body>
@@ -71,8 +77,8 @@
                     <td><?= $v['poj_solved'];?></td>
                     <td><?= $v['hdoj_solved'];?></td>
                     <td>
-                         <a href="javascript:;" role="button" data-toggle="modal" data-target="#acmer_edit_info" ><i class="icon-pencil"></i></a>
-              <a href="javascript:;" role="button" data-toggle="modal" data-target="#acmer_del_info" id = "<?php echo $v['name'];?>" name = "acmer_del_a"><i class="icon-remove"  ></i></a>
+                         <a href="#" role="button" data-toggle="modal" data-target="#model_edit_info" id = "<?php echo $v['name'];?>" name = "acmer_edit_a"><i class="icon-pencil"></i></a>
+              <a href="#" role="button" data-toggle="modal" data-target="#acmer_del_info" id = "<?php echo $v['name'];?>" name = "acmer_del_a"><i class="icon-remove"  ></i></a>
                     </td>
                 </tr>
             <?php endforeach;?>
