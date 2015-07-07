@@ -250,4 +250,14 @@ class Home extends Oj_Controller{
 		//p($data['info']);die;
 		$this->load->view('oj_index/runk.html', $data);
 	}
+	public function enroll(){
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
+		$this->load->view('contest/enroll.html', $data);
+	}
 }

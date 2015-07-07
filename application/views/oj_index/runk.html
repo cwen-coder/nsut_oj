@@ -65,13 +65,16 @@
   <?php $i=1;?>
   <?php foreach($info as $v): ?>
   <tr>
+    <?php if ($v['username']!=null){?>
     <td><?php echo $i++;?></td>
-    <td><?php echo $v['user_id']?></td>
+    <td><?php echo $v['username']?></td>
     <td><?php echo $v['solved']?></td>
     <td><?php echo $v['submit']?></td>
-    <td><?php echo $v['submit']?></td>
+    <td><?php if($v['submit']!=0) echo sprintf("%.2f", $v['solved']/$v['submit']*100);
+                                else echo '0.00';
+    ?>%</td>
   </tr>
-<?php endforeach ?>
+<?php } endforeach ?>
 </tbody>
 </table>
 </center>

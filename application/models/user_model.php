@@ -56,11 +56,9 @@ class  User_model extends CI_Model {
 		}
 	}
 	public function user_rank(){
-		$sql_query = "SELECT a.user_id, a.submit, a.solved, COUNT( b.solved ) rank, a.reg_time
-				FROM users a JOIN users b
-				WHERE a.solved <= b.solved
-				GROUP BY a.username, a.solved
-				ORDER BY rank, a.submit";
+		$sql_query = "select username, submit,solved
+				from users
+				order by solved desc,submit ";
 		$result = mysql_query($sql_query);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){
