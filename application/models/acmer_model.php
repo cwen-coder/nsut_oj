@@ -30,9 +30,13 @@ class Acmer_model extends CI_Model {
 	}
 
 	public function acmer_add($data) {
-		$query = "INSERT INTO acmer(id,name,poj_name,hdoj_name,cf_name) VALUES('$data[user_id]','$data[user_name]','$data[poj_name]','$data[hdoj_name]','$data[cf_name]') ";
+		$query = "INSERT INTO acmer(id,name,poj_name,hdoj_name,cf_name,last_time) VALUES('$data[user_id]','$data[user_name]','$data[poj_name]','$data[hdoj_name]','$data[cf_name]',NOW()) ";
+		$query1 = "INSERT INTO sum_solved(id,name) VALUES('$data[user_id]','$data[user_name]') ";
 		$result = mysql_query($query);
-		return $result;
+		$result1 = mysql_query($query1);
+		if($result1 && $result)
+			return true;
+		else return false;
 	}
 
 	public function get_all_acmer() {
@@ -47,8 +51,12 @@ class Acmer_model extends CI_Model {
 
 	public function acmer_del($name) {
 		$query = "DELETE FROM acmer WHERE name = '$name' ";
+		$query1 = "DELETE FROM sum_solved WHERE name = '$name' ";
 		$result = mysql_query($query);
-		return $result;
+		$result1 = mysql_query($query1);
+		if($result1 && $result)
+			return true;
+		else return false;
 	}
 
 	public function acmer_info($name) {

@@ -58,13 +58,14 @@
     <div class = "well" >
        <table class="table table-striped"  id = "">
         <thead>
-        <th style="width:14%;">排名</th>
-        <th style="width:15%;">用户名</th>
-        <th style="width:14%;">SUM10</th>
-        <th style="width:14%;">CF（RATING）</th>
-        <th style="width:14%;">POJ（SOLVED）</th>
-        <th style="width:14%;">HDOJ（SOLVED）</th>
-        <th style="width:15%;">操作</th>
+        <th style="width:7.5%;">排名</th>
+        <th style="width:20%;">用户名</th>
+        <th style="width:12.5%;">SUM10</th>
+        <th style="width:12.5%;">CF（RATING）</th>
+        <th style="width:12.5%;">SUTOJ（SOLVED）</th>
+        <th style="width:12.5%;">POJ（SOLVED）</th>
+        <th style="width:12.5%;">HDOJ（SOLVED）</th>
+        <th style="width:10%;">操作</th>
         </thead>
         <tbody>
             <?php $count = 0;?>
@@ -74,6 +75,7 @@
                     <td><?= $v['name'];?></td>
                     <td><?= $v['sum10'];?></td>
                     <td><?= $v['cf_rating'];?></td>
+                    <td><?= $v['sutoj_solved'];?></td>
                     <td><?= $v['poj_solved'];?></td>
                     <td><?= $v['hdoj_solved'];?></td>
                     <td>
