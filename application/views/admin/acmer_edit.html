@@ -1,0 +1,39 @@
+<div class="modal fade bs-example-modal-lg" id="model_edit_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改信息</h4>
+      </div>
+      <div class = "model-body" >
+      	<form id = "" class="edit_info" action="<?= site_url('admin/acmer/acmer_update');?>" method="post" >
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <label for="poj">ACM成员用户名：</label>
+                <input type="text" class="form-control" id="acmer_name" name="acmer_name" disabled="true">
+                <input type="hidden" id = "hide_acmer_name" name = "name">
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <label for="poj">POJ用户名：</label>
+                <input type="text" class="form-control" id="poj_name_edit" name="poj_name" placeholder="输入POJ用户名">
+              </div>
+              <div class="form-group">
+                <label for="hdoj">HDOJ用户名：</label>
+                <input type="text" class="form-control" id="hdoj_name_edit" name="hdoj_name" placeholder="输入HDOJ用户名">
+              </div>
+              <div class="form-group">
+                <label for="CF">CF用户名：</label>
+                <input type="text" class="form-control" id="cf_name_edit" placeholder="输入cf用户名" name = "cf_name">
+              </div>
+              <div style="margin:0 auto;width:300px;"> 
+              <button type="submit" class="btn btn-default but_form" >确定修改</button>
+            </div>
+            </form>
+      </div>
+      <div class = "modal-footer">
+      	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+ 	</div>
+  </div>
+</div>
