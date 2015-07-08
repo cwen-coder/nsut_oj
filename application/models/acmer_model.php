@@ -75,5 +75,15 @@ class Acmer_model extends CI_Model {
 		return $result;
 	}
 
+	public function get_acmer_sum10($id) {
+		$query = " SELECT day0,day1,day2,day3,day4,day5,day6,day7,day8,day9 FROM sum_solved WHERE id = '$id' ";
+		$result = mysql_query($query);
+		if($result) {
+			$num = mysql_num_rows($result);
+			if($num > 0) return mysql_fetch_assoc($result);
+			else return false;
+		} else return false;
+	}
+
 }
 ?>
