@@ -23,11 +23,11 @@ if($_SESSION['privilege'] == 1) {
 		//$data['session'] = $this->session->userdata('item');
 		//$this->load->view('admin/index.html');
 		//echo "djhhjddddddddddddd";
-		//ignore_user_abort();
-		//set_time_limit(0);
-		//while (true) {
+		ignore_user_abort();
+		set_time_limit(0);
+		while (true) {
 			# code...
-			$this->benchmark->mark('code_start');
+			//$this->benchmark->mark('code_start');
 			
 			$acmer = $this->acm_lab->all_acmer_info();
 			//p($acmer);
@@ -51,40 +51,41 @@ if($_SESSION['privilege'] == 1) {
 				$poj_url[$key] = "http://poj.org/userstatus?user_id=".$value['poj_name'];
 				$cf_url[$key] = "http://codeforces.com/profile/".$value['cf_name'];
 				$all_poj_name[$key] = $value['poj_name'];
-				$sut_name = $value['name'];
+				$sut_name[$key] = $value['name'];
 			}
 			$new_solved['hdoj'] = self::hdoj($hdoj_url);
 			$new_solved['poj'] = self::poj($poj_url,$all_poj_name);
 			$new_solved['cf'] = self::cf($cf_url);
 			$new_solved['sutoj'] = self::sutoj($sut_name);
 			$count = count($new_solved['hdoj']);
-			for($i = 0; $i < $ount; $i++) {
+			$all_new_solved = array();
+			for($i = 0; $i < $count; $i++) {
 				$all_new_solved[$i]['hdoj_solved'] = $new_solved['hdoj'][$i];
 				$all_new_solved[$i]['poj_solved'] = $new_solved['poj'][$i];
 				$all_new_solved[$i]['cf_rating'] = $new_solved['cf'][$i];
 				$all_new_solved[$i]['sutoj_solved'] = $new_solved['sutoj'][$i];
 			}
 			foreach ($acmer as $k => $value) {
-				$last_time = $this->acm_lab->update_solved($all_new_solved[$k],$value[$k]['id']);
+				$last_time = $this->acm_lab->update_solved($all_new_solved[$k],$value['id']);
 				if($last_time != false) {
-					$cha_time = (time()-strtotime($last_time)) / 3600;
+					$cha_time = (time()-strtotime($last_time['last_time'])) / 3600;
 					$all_cha = ($all_new_solved[$k]['hdoj_solved']-$old_solved[$k]['hdoj_solved']) + ($all_new_solved[$k]['poj_solved']-$old_solved[$k]['poj_solved']) + ($all_new_solved[$k]['sutoj_solved']-$old_solved[$k]['sutoj_solved']);
 					if($cha_time < 24) {
-						$result = $this->acm_lab->update_one_solved($all_cha,$value[$k]['id']);
+						$result = $this->acm_lab->update_one_solved($all_cha,$value['id']);
 					} else {
-						
-					}
-					
+						$result = $this->acm_lab->update_all_solved($all_cha,$value['id']);
+					}	
 				}
 			}
 
 			//break;
 			//p($old_solved);
-			//p($new_solved);
+			//p($all_new_solved);
 			
-			$this->benchmark->mark('code_end');
-			echo $this->benchmark->elapsed_time('code_start', 'code_end');
-		//}
+			//$this->benchmark->mark('code_end');
+			//echo $this->benchmark->elapsed_time('code_start', 'code_end');
+			sleep(1800);
+		}
 				
 	}
 
@@ -218,12 +219,14 @@ if($_SESSION['privilege'] == 1) {
 	}
 
 	private function sutoj($sut_name) {
-		foreach ($sutname as $key => $value) {
+		$result = array();
+		//P($sut_name);
+		foreach ($sut_name as $key => $value) {
 			# code...
 			$result[$key] = $this->acm_lab->get_sutoj_solved($value);
 		}
+		//p($result);
 		return $result;
-
 	}
 }
 

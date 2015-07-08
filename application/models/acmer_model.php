@@ -30,7 +30,7 @@ class Acmer_model extends CI_Model {
 	}
 
 	public function acmer_add($data) {
-		$query = "INSERT INTO acmer(id,name,poj_name,hdoj_name,cf_name,last_time) VALUES('$data[user_id]','$data[user_name]','$data[poj_name]','$data[hdoj_name]','$data[cf_name]',NOW()) ";
+		$query = "INSERT INTO acmer(id,name,poj_name,hdoj_name,cf_name,last_time) VALUES('$data[user_id]','$data[user_name]','$data[poj_name]','$data[hdoj_name]','$data[cf_name]',curdate()) ";
 		$query1 = "INSERT INTO sum_solved(id,name) VALUES('$data[user_id]','$data[user_name]') ";
 		$result = mysql_query($query);
 		$result1 = mysql_query($query1);

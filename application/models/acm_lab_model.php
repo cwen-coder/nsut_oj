@@ -35,8 +35,9 @@ class Acm_lab_model extends CI_Model {
 		$query = " SELECT solved FROM users WHERE username = '$username' ";
 		$result = mysql_query($query);
 		if($result) {
-			$data = mysql_fetch_assoc($result1);
-			return $data['solved'];
+			$data = mysql_fetch_assoc($result);
+			if(empty($data)) return 0;
+			else return $data['solved'];
 		} else return 0;
 	}
 
@@ -47,6 +48,24 @@ class Acm_lab_model extends CI_Model {
 		$result1 = mysql_query($query1);
 		if($result && $query1) return true;
 		else return false;
+	}
+
+	public function update_all_solved($cha_all,$id) {
+		$query = "UPDATE sum_solved SET day9 = day8, day8 = day7,day7 = day6,day6 = day4,day4 = day3,day3 = day2,day2 = day1,day1 = day0,day0 = '$cha_all' WHERE id = '$id' ";
+		$result = mysql_query($query);
+		if($result) {
+			$query1 = "SELECT day9+day8+day7+day6+day5+day4+day3+day2+day1+day0 as sum FROM sum_solved WHERE id = '$id' ";
+			$result1 = mysql_query($query1);
+			if($result1) {
+				$data = mysql_fetch_assoc($result1);
+				$query2 = "UPDATE acmer SET sum10 = '$data[sum]',last_time = curdate() WHERE id = '$id' ";
+				$result2 = mysql_query($query2);
+				if($result2) return true;
+				else return false;
+			}
+
+		}
+
 	}
 }
 ?>
