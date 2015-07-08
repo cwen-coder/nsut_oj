@@ -15,8 +15,14 @@ body {
     color: #fff;
 }
 
-.page-container {
-    margin: 120px auto 0 auto;
+.page-container1 {
+    margin: 160px auto 0 auto;
+}
+.page-container2 {
+    margin: 160px auto 0 auto;
+}
+.page-container3 {
+    margin: 160px auto 0 auto;
 }
 
 h1 {
