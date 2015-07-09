@@ -31,6 +31,10 @@ a{
 text-decoration:none;
 color:#fff;
 }
+.captcha_style{
+    margin-top: 20px;
+    margin-left:0;
+}
 </style>
     </head>
     <body>
@@ -42,10 +46,15 @@ color:#fff;
     <?php endif; ?>
     <?php if(!$username&&!$user_id):?>
     <div class="page-container1" id="page-container1">
-            <h1>登录报名</h1>
+            <h1>用户登录</h1>
             <form action="" method="post">
                 <input type="text" name="username" class="username" placeholder="Username">
                 <input type="password" name="password" class="password" placeholder="Password">
+                <div class ="captcha_style" >
+                    <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
+                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
+                </div>
                 <button class="button1" type="submit">点击登录</button>
                 <div class="error"><span>+</span></div>
             </form>
@@ -68,6 +77,8 @@ color:#fff;
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized.3.2.7.min.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized-init.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/scripts.js');?>"></script>
+        <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
+        <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
     </body>
 </html>
 

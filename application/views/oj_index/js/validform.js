@@ -241,7 +241,7 @@ $(document).ready(function() {
        }
    });
 
-   //登录检验验证码
+  //登录检验验证码
    $("#captcha").bind('input propertychange blur',function() {
        var pass = $("#captcha").val();
        if(pass.length == 0) {

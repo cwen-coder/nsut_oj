@@ -18,7 +18,7 @@ $(document).ready(function(){
             var str = url.substr(1); 
             strs = str.split("&"); 
             for(var i = 0; i < strs.length; i ++) { 
-            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+            theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]); 
             } 
       }    
       return theRequest; 
@@ -29,10 +29,12 @@ $(document).ready(function(){
   var user = Request['user'];
   if(pid !=undefined){
     $('[name="group"][value="1"]').attr("checked",true);
+    console.log(pid);
     $("#search_terms").val(pid);
   }
   if(user !=undefined){
     $('[name="group"][value="2"]').attr("checked",true);
     $("#search_terms").val(user);
   }
+  
 });
