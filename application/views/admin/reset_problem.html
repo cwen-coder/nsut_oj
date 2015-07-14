@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>题目重判</title>
+	<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+  
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/lib/font-awesome/css/font-awesome.css');?>">
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/css/reset_problem.css');?>">
+	<style type="text/css">
+</style>
+</head>
+<body>
+<div class="container">
+<ul class="nav nav-tabs" >
+            <li role="presentation" class="active"><a href="javascript:;" id = "pro_con">比赛题目</a></li>
+            <li role="presentation"><a href="javascript:;" id = "pro_0">题库题目</a></li>
+            <li role="presentation"><a href="javascript:;" id = "solution_id">Solution ID</a></li>
+        </ul>
+<div class="well">
+<div class="pro_con_div" id = "pro_con_div">
+    <form class="form-horizontal">
+  <div class="form-group">
+    <label for="contest_id">比赛ID</label>
+    <input type="email" class="form-control" id="contest_id" placeholder="输入比赛ID">
+  </div>
+  <div class="form-group">
+    <label for="problem_num">题号</label>
+    <select class="form-control" id = "con_pro_id" >
+    </select>
+</div>
+  <br>
+  <div class="form-group">
+    <div class="sub_rjudge">
+      <button type="submit" class="btn btn-default but_rjudge">重判</button>
+    </div>
+  </div>
+</form>
+</div>
+<div></div>
+<div></div>
+</div>
+    
+</div>
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+</body>
+</html>

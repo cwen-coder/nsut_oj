@@ -1,0 +1,30 @@
+ body {
+        background: #eee;
+        /* background-image: url(http://subtlepatterns.com/patterns/furley_bg.png); */
+        background-image: url(/admin/images/furley_bg.png);
+        background-position: initial initial;
+        background-repeat: initial initial;
+        background-position: initial initial;
+        background-repeat: initial initial;
+        margin: 0px;
+        padding: 0px;
+    }
+    .container {
+        margin-top: 3%;
+    }
+    .well {
+        margin-top: 2%;
+    }
+    .pro_con_div {
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+    .sub_rjudge {
+        text-align: center;
+    }
+    .but_rjudge {
+        width: 100%;
+    }
+    .dropdown {
+        width: 100%;
+    }
