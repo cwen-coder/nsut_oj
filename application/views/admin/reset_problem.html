@@ -14,8 +14,8 @@
 <div class="container">
 <ul class="nav nav-tabs" >
             <li role="presentation" class="active"><a href="javascript:;" id = "pro_con">比赛题目</a></li>
-            <li role="presentation"><a href="javascript:;" id = "pro_0">题库题目</a></li>
-            <li role="presentation"><a href="javascript:;" id = "solution_id">Solution ID</a></li>
+            <li role="presentation"  ><a href="javascript:;" id = "pro_0">题库题目</a></li>
+            <li role="presentation" ><a href="javascript:;" id = "solution_id">Solution ID</a></li>
         </ul>
 <div class="well">
 <div class="pro_con_div" id = "pro_con_div">
@@ -37,6 +37,34 @@
   </div>
 </form>
 </div>
+<div class="pro_div" id = "pro_div">
+    <form class="form-horizontal">
+  <div class="form-group">
+    <label for="contest_id">题目ID</label>
+    <input type="email" class="form-control" id="p_contest_id" placeholder="输入题目ID">
+  </div>
+  <br>
+  <div class="form-group">
+    <div class="sub_rjudge">
+      <button type="submit" class="btn btn-default but_rjudge">重判</button>
+    </div>
+  </div>
+</form>
+</div>
+<div class="pro_div" id = "s_pro_div">
+    <form class="form-horizontal">
+  <div class="form-group">
+    <label for="contest_id">Solution_ID</label>
+    <input type="email" class="form-control" id="s_contest_id" placeholder="输入Solution_ID">
+  </div>
+  <br>
+  <div class="form-group">
+    <div class="sub_rjudge">
+      <button type="submit" class="btn btn-default but_rjudge">重判</button>
+    </div>
+  </div>
+</form>
+</div>
 <div></div>
 <div></div>
 </div>
@@ -44,5 +72,6 @@
 </div>
 <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
 <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/admin/js/reset_pro.js');?>"></script>
 </body>
 </html>

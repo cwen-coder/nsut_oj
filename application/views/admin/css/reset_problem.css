@@ -28,3 +28,8 @@
     .dropdown {
         width: 100%;
     }
+    .pro_div {
+        margin-right: 10%;
+        margin-left: 10%;
+        display: none;
+    }
