@@ -44,12 +44,14 @@ class Problemsubmit_model extends CI_Model{
 		return mysql_fetch_array($result);
 	}
 	function status_search_pid($limit, $num, $pid){
+		//p($pid);die;
 		$sql = "select a.solution_id, b.username, a.memory, a.time, a.result, a.language, a.code_length, a.in_date, a.problem_id from solution a, users b where a.user_id=b.user_id and contest_id = '0' and problem_id = '$pid' order  by solution_id DESC limit $limit, $num";
 		$result = mysql_query($sql);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){
 			$data[] = $row;
 		}
+		//p($data);die;
 		//$mem->set(md5("mysql_query".$sql), $data, 0, 1);
 		//$mem->delete(md5("mysql_query".$sql),0);
 		return $data;

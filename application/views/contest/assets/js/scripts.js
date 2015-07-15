@@ -1,9 +1,11 @@
 
 jQuery(document).ready(function() {
-
+    var curPath = $("#hid_site").val() + '/oj_index';
     $('.page-container1 form').submit(function(){
         var username = $(this).find('.username').val();
         var password = $(this).find('.password').val();
+        var captcha = $(this).find('.input-xlarge').val();
+        console.log(captcha);
         if(username == '') {
             $(this).find('.error').fadeOut('fast', function(){
                 $(this).css('top', '27px');
@@ -11,6 +13,16 @@ jQuery(document).ready(function() {
             });
             $(this).find('.error').fadeIn('fast', function(){
                 $(this).parent().find('.username').focus();
+            });
+            return false;
+        }
+        if(captcha == '') {
+            $(this).find('.error').fadeOut('fast', function(){
+                $(this).css('top', '165px');
+            });
+            $(this).find('.error').fadeIn('fast', function(){
+                $(this).parent().find('.input-xlarge').focus();
+                $(this).parent().find('.input-xlarge').attr('placeholder', '请输入验证码');
             });
             return false;
         }
@@ -24,6 +36,23 @@ jQuery(document).ready(function() {
             });
             return false;
         }
+        
+        /*var url = curPath + '/login/log_act';
+        $.post(url,{
+            username : $("#username").val(),
+            password : $("#password").val()
+        },function(data){
+            if (data == 2) {
+            $("#captcha_c").text('验证码错误');
+            //$("#captcha_img").attr("src",url);
+        } else if(data == false) {
+          alert("用户名或密码错误");
+          url = curPath+'/login/code';
+          $("#captcha_img").attr("src",url);
+        } else {
+          history.go(0);
+        }
+        });*/
     });
     $('.page-container2 form').submit(function(){
         var username = $(this).find('.username').val();
@@ -82,6 +111,7 @@ jQuery(document).ready(function() {
             return false;
         }
     });
+
 
     $("#register").click(function(){
             //$("page-container2").find("div").show();
