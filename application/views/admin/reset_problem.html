@@ -19,14 +19,14 @@
         </ul>
 <div class="well">
 <div class="pro_con_div" id = "pro_con_div">
-    <form class="form-horizontal">
+    <form class="form-horizontal" action = "<?= site_url('admin/reset_problem/con_pro_reset');?>" method = "post">
   <div class="form-group">
     <label for="contest_id">比赛ID</label>
-    <input type="email" class="form-control" id="contest_id" placeholder="输入比赛ID">
+    <input type="text" class="form-control" id="contest_id" name="contest_id" placeholder="输入比赛ID">
   </div>
   <div class="form-group">
     <label for="problem_num">题号</label>
-    <select class="form-control" id = "con_pro_id" >
+    <select class="form-control" id = "con_pro_id" name="problem_id">
     </select>
 </div>
   <br>
@@ -38,10 +38,10 @@
 </form>
 </div>
 <div class="pro_div" id = "pro_div">
-    <form class="form-horizontal">
+    <form class="form-horizontal" action = "<?= site_url('admin/reset_problem/pro_reset');?>" method = "post">
   <div class="form-group">
     <label for="contest_id">题目ID</label>
-    <input type="email" class="form-control" id="p_contest_id" placeholder="输入题目ID">
+    <input type="text" class="form-control" id="p_contest_id" name = "problem_id" placeholder="输入题目ID">
   </div>
   <br>
   <div class="form-group">
@@ -52,10 +52,10 @@
 </form>
 </div>
 <div class="pro_div" id = "s_pro_div">
-    <form class="form-horizontal">
+    <form class="form-horizontal" action = "<?= site_url('admin/reset_problem/s_pro_reset');?>" method = "post">
   <div class="form-group">
     <label for="contest_id">Solution_ID</label>
-    <input type="email" class="form-control" id="s_contest_id" placeholder="输入Solution_ID">
+    <input type="text" class="form-control" id="s_contest_id" name = "solution_id" placeholder="输入Solution_ID">
   </div>
   <br>
   <div class="form-group">
@@ -70,6 +70,7 @@
 </div>
     
 </div>
+<input type="hidden" id = "hide_site" value="<?= site_url();?>">
 <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
 <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
 <script src="<?= base_url('application/views/admin/js/reset_pro.js');?>"></script>
