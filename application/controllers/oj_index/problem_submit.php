@@ -19,7 +19,7 @@ class Problem_submit extends Oj_Controller{
 			$data['pid'] = $this->input->post('pid', TRUE);
 			$data['ip'] = $this->session->userdata('ip_address');
 			$data['code_length'] = strlen($data['source']);
-			//p($data);die;
+			//p($data['ip']);die;
 			/*echo $data['code_length'];die;*/
 			$result = $this->ps->problem_submit($data);
 			$url = 'oj_index/home/status';
