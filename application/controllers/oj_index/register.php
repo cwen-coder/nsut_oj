@@ -34,6 +34,72 @@ class Register extends CI_Controller {
         else
             echo true;
     }
+    //获取ajax传回数据验证是否存在
+    public function teamname_check(){
+        $teamname = $this->input->post('teamname',TRUE);
+        $result = $this->user_model->teamname_check($teamname);
+        if($result > 0)
+            echo false;
+        else
+            echo true;
+    }
+    //报名 完善信息
+    public function enroll(){
+        $catpcha = $this->input->post('cap_r', TRUE);
+                if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) 
+                        echo 2;
+                $this->load->helper('form');
+                $this->load->library('form_validation');
+                $config = array(
+                    array(
+                    'field' => 'username',
+                    'label' => '队长姓名',
+                    'rules' => 'required | max_length[32] |xss_clean '
+                    ),
+                    array(
+                    'field' => 'usernum',
+                    'label' => '队长学号',
+                    'rules' => 'required | exact_length[9] | xss_clean '
+                    ),
+                    array(
+                    'field' => 'user1name',
+                    'label' => '队员1姓名',
+                    'rules' => 'max_length[32] |xss_clean '
+                    ),
+                    array(
+                    'field' => 'user1num',
+                    'label' => '队员1学号',
+                    'rules' => 'exact_length[9] | xss_clean '
+                    ),
+                    array(
+                    'field' => 'user2name',
+                    'label' => '队员2姓名',
+                    'rules' => 'max_length[32] |xss_clean '
+                    ),
+                    array(
+                    'field' => 'user2num',
+                    'label' => '队员2学号',
+                    'rules' => 'exact_length[9] |xss_clean '
+                    ),
+                    array(
+                    'field' => 'teamname',
+                    'label' => '队伍名称',
+                    'rules' => 'required | max_length[32] | xss_clean '
+                    ),
+                    array(
+                    'field' => 'phone',
+                    'label' => '手机号',
+                    'rules' => 'required | exact_length[11] | xss_clean '
+                    )
+                    );
+        $this->form_validation->set_rules($config);
+        $status = $this->form_validation->run();
+        if(!$status) 
+            echo false;
+        else{
+
+            } 
+    }
     //注册
     public function reg_act() {
         //$this->output->enable_profiler(TRUE);
@@ -44,7 +110,7 @@ class Register extends CI_Controller {
             echo 2;
             return;
         } 
-        $this->load->helper('form');
+        //$this->load->helper('form');
         $this->load->library('form_validation');
         $config = array(
                 array(

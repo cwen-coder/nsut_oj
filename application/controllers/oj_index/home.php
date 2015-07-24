@@ -198,9 +198,12 @@ class Home extends Oj_Controller{
 		$pid = $this->input->get('pid', TRUE);
 		$pn = $this->input->get('pn', TRUE);
 		$pc = $this->input->get('pc', TRUE);
-		if(!empty($pid)) $data['category'][0]=$this->pro->search_problem_byId($pid);
-		if(!empty($pn)) $data['category'][0]=$this->pro->search_problem_byTitle($pn);
-		if(!empty($pc)) $data['category']=$this->pro->search_problem_byClass($pc);
+		if(!empty($pid)) 
+			$data['category'][0]=$this->pro->search_problem_byId($pid);
+		if(!empty($pn)) 
+			$data['category'][0]=$this->pro->search_problem_byTitle($pn);
+		if(!empty($pc)) 
+			$data['category']=$this->pro->search_problem_byClass($pc);
 		if(empty($pid)&&empty($pn)&&empty($pc)){
 			$total_rows = $this->pro->problem_all_num();
 		$config['base_url'] = site_url('oj_index/home/index');   
@@ -251,13 +254,16 @@ class Home extends Oj_Controller{
 		$this->load->view('oj_index/runk.html', $data);
 	}
 	public function enroll(){
+
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
 			$data['username'] = $this->session->userdata('username');
 			$data['user_id'] = $this->session->userdata('user_id');
+			$data['contest'] = $this->user_model->school_contest();
 		}else {			
 			$data['username'] = false;
 			$data['user_id'] = false;
 		}
+		//p($data['contest']);
 		$this->load->view('contest/enroll.html', $data);
 	}
 }

@@ -25,6 +25,13 @@ class  User_model extends CI_Model {
 		$num = mysql_num_rows($result);
 		return $num;
 	}
+	public function teamname_check($teamname) {
+		$query = "select * from teams where team_name = '$teamname' ";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		return $num;
+	}
+
 
 	public function reg_act($data) {
 		$query = "insert into users (user_id, username, password, accesstime, reg_time, ip, email) values ('$data[user_id]', '$data[username]', '$data[password]', '$data[accesstime]', '$data[reg_time]' ,'$data[ip]',  '$data[email] ' )";
@@ -65,6 +72,7 @@ class  User_model extends CI_Model {
 			$data[] = $row;
 		}
 		return $data;
+
 	}
 	public function user_info($user){
 		$sql_query = "SELECT a.user_id, a.submit, a.solved, COUNT( b.solved ) rank, a.reg_time
@@ -74,5 +82,14 @@ class  User_model extends CI_Model {
 				ORDER BY rank, a.submit";
 		$result = mysql_query($sql_query);
 
+	}
+	public function school_contest(){
+		$sql = "select title, start_time from contest where start_time>NOW() and (con_class='3' or con_class='4') ";
+		$result = mysql_query($sql);
+		$data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		return $data;
 	}
 }

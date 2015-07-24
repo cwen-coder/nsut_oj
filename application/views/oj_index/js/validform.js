@@ -186,7 +186,7 @@ $(document).ready(function() {
  	 	//e.preventDefault();
     var url = curPath+'/register/reg_act';
  	 	$.post(url,{
-      cap_r : $("#captcha_r").val(),
+                      cap_r : $("#captcha_r").val(),
  	 		username : $("#r_username").val(),
  	 		password1 : $("#password1").val(),
  	 		password2 : $("#password2").val(),
@@ -197,7 +197,7 @@ $(document).ready(function() {
  	 		if (data == true) {
  	 			alert('恭喜你！注册成功！');
  	 			$("#reg_sub").attr("disabled",true);
-        history.go(0) ;
+                            history.go(0) ;
  	 		}else if(data == 2) {
         alert('验证码不正确！');
         //e.preventDefault();
@@ -268,7 +268,8 @@ $(document).ready(function() {
         //console.log (data);
         if (data == 2) {
             $("#captcha_c").text('验证码错误');
-            //$("#captcha_img").attr("src",url);
+            url = curPath+'/login/code';
+            $("#captcha_img").attr("src",url);
         } else if(data == false) {
           alert("用户名或密码错误");
           url = curPath+'/login/code';

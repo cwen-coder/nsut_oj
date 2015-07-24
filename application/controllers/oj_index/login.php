@@ -31,10 +31,13 @@ class Login extends CI_Controller {
 	public function log_act () {
 		//$this->output->enable_profiler(TRUE);
 		if(!isset($_SESSION)){
-            		session_start();
+            			session_start();	
         		}
 		$captcha = $this->input->post('captcha',TRUE);
-		
+		if($captcha == "undefined"){
+			$_SESSION ['fs'] ++;
+			$captcha = $_SESSION ['code'];
+		}
 		if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) {
 			//echo strtolower($captcha)."\n";
 			//echo strtolower($_SESSION ['code']);
@@ -94,6 +97,7 @@ class Login extends CI_Controller {
 			        			'privilege' => $result['privilege']
 			        			);
 			        		$this->session->set_userdata($newdata);
+			        		session_destroy();
 			        		echo true;
         					}
 

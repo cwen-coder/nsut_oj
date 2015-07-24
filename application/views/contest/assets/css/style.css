@@ -16,13 +16,30 @@ body {
 }
 
 .page-container1 {
-    margin: 160px auto 0 auto;
+ position: absolute;
+ width:400px;
+ height:450px;
+ left:50%;
+ top:50%; 
+margin-left:-200px;
+margin-top:-200px;
 }
 .page-container2 {
-    margin: 160px auto 0 auto;
+    position: absolute;
+    width:400px;
+    height:450px;
+    left:50%;
+    top:50%; 
+    margin-left:-200px;
+    margin-top:-200px;
 }
 .page-container3 {
-    margin: 160px auto 0 auto;
+  position: absolute;
+    width:800px;
+    height:450px;
+    left:50%;
+    top:50%; 
+    margin-left:-400px;margin-top:-300px;
 }
 
 h1 {
@@ -33,7 +50,7 @@ h1 {
 
 form {
     position: relative;
-    width: 305px;
+    /*width: 305px;*/
     margin: 15px auto 0 auto;
     text-align: center;
 }
@@ -41,7 +58,7 @@ form {
 input {
     width: 270px;
     height: 42px;
-    margin-top: 25px;
+    /*margin-top: 25px;*/
     padding: 0 15px;
     background: #2d2d2d; /* browsers that don't support rgba */
     background: rgba(45,45,45,.15);
@@ -84,7 +101,7 @@ button {
     cursor: pointer;
     width: 300px;
     height: 44px;
-    margin-top: 25px;
+    
     padding: 0;
    
     -moz-border-radius: 6px;

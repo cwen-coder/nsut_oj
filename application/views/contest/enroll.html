@@ -22,10 +22,12 @@
 .button2{
     background: #00CD00;
     border-color:#00EE00;
+    margin-top: 25px;
 }
 .button3{
-    background: #00E5EE;
-    border-color:blue;
+    background: #00CD00;
+    border-color:#00EE00;
+    margin-top: 25px;
 }
 a{
 text-decoration:none;
@@ -35,13 +37,86 @@ color:#fff;
     margin-top: 20px;
     margin-left:0;
 }
+.error_info{
+    width: 400px;
+    height: 17px;
+    margin: 5px;
+}
+.error_info_enroll{
+    width: 300px;
+    height: 17px;
+    margin: 5px;
+    margin-right:0px;
+    float: left;
+}
+.contest_info{
+    width: 600px;
+    height: 125px;
+    margin-top: 25px;
+}
+.radio_class{
+    width: 15px;
+    height: 15px;
+
+}
+.radio_div{
+    width:320px;
+    height: 25px;
+    margin-left: 100px;
+    margin-bottom: 10px;
+}
 </style>
     </head>
     <body>
         <?php if($username&&$user_id):?>
         <div class="page-container3">
-            <h1 style="color:red">沈阳工业大学第九届ACM校赛</h1>
-                <button class="button3" type="submit">报名参赛</button>
+            <div id="enroll_list">
+                <h1 style="color:red">沈阳工业大学第九届ACM校赛</h1>
+                <button class="button3" type="submit" id="enroll">报名参赛</button>
+            </div>
+                <div id = "enroll_info" style="display:none">
+                    <h1 style="color:red">完善参赛信息</h1>
+                    <textarea class="contest_info" readonly="readonly">以下是本次比赛的注意事项,请参赛队员认真阅读</textarea>
+                <form action="" method="post">
+
+                <div class="radio_div">
+                    <span style="color:red;font-size:20px;">选择参赛类型:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="radio_class" type="radio" value="3" checked="checked" name="group"><span style="color:red;">新生赛</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="radio_class" type="radio" value="4"  name="group"><span style="color:red;">老生赛
+                </span>
+                </div>
+
+                <input type="text" name="usernnum" class="usernnum" placeholder="队长学号">
+                <input type="text" name="username" class="username" placeholder="队长姓名">
+                
+                <div class="error_info_enroll" style="margin-left: 100px;"><span id="usernum_info" style="color:red;"></span></div>
+                <div class="error_info_enroll"><span id="username_info" style="color:red;"></span></div>
+                <input type="text" name="user1num" class="user1num" placeholder="队员1学号">
+                <input type="text" name="user1name" class="user1name" placeholder="队员1姓名">
+                
+                <div class="error_info_enroll" style="margin-left: 100px;"><span id="user1num_info" style="color:red;"></span></div>
+                <div class="error_info_enroll"><span id="user1name_info" style="color:red;"></span></div>
+          
+                <input type="text" name="user2name" class="user2num" placeholder="队员2学号">
+                <input type="text" name="user2name" class="user2name" placeholder="队员2姓名">
+                
+                <div class="error_info_enroll" style="margin-left: 100px;"><span id="user2num_info" style="color:red;"></span></div>
+                <div class="error_info_enroll"><span id="user2name_info" style="color:red;"></span></div>
+                <input type="text" name="teamname" class="teamname" placeholder="队伍名称">
+                <input type="text" name="phone" class="phone" placeholder="联系方式-手机号">
+                <div class="error_info_enroll" style="margin-left: 100px;"><span id="teamname_info" style="color:red;"></span></div>
+                <div class="error_info_enroll"><span id="phone_info" style="color:red;"></span></div>
+                
+                <div class ="log_captcha_style" >
+                    <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:100px;">
+                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
+                </div>
+                <div class="error_info" style="margin-left: 200px;"><span id="captch_info" style="color:red;"></span></div>
+                <button class="button1" type="submit">提交报名</button>
+                <div class="error"><span>+</span></div>
+                </form>
+                </div>
         </div>
     <?php endif; ?>
     <?php if(!$username&&!$user_id):?>
@@ -49,12 +124,17 @@ color:#fff;
             <h1>用户登录</h1>
             <form action="" method="post">
                 <input type="text" name="username" class="username" placeholder="Username">
+                <div class="error_info"><span id="user_info" style="color:red;"></span></div>
                 <input type="password" name="password" class="password" placeholder="Password">
-                <div class ="captcha_style" >
+                <div class="error_info"><span id="pass_info" style="color:red;"></span></div>
+               <?php if(isset($_SESSION ['fs'])&&$_SESSION ['fs']>2):?>
+                <div class ="log_captcha_style" >
                     <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
                     <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
-                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
+                <span style="cursor: pointer;color:red;" id="captcha_span_l">点击刷新图片</span>
+                <div><span id="captcha_info" style="color:red;">&nbsp;&nbsp;</span></div>
                 </div>
+               <?php endif;?>
                 <button class="button1" type="submit">点击登录</button>
                 <div class="error"><span>+</span></div>
             </form>
@@ -63,10 +143,23 @@ color:#fff;
     <div class="page-container2" id="page-container2" style="display:none">
             <h1>用户注册</h1>
             <form action="" method="post">
-                <input type="text" name="username" class="username" placeholder="Username"><span id="user_info"></span>
+                <input type="text" name="username" class="username" placeholder="Username">
+
+                <div class="error_info"><span id="user_info_reg" style="color:red;"></span></div>
+                
                 <input type="password" name="password" class="password" placeholder="Password">
-                <input type="password" name="repeat_password" class="repeat_password" placeholder="Repeat password"><span id="pass_info" style="color:red"></span>
+                <div class="error_info"><span id="pass1_info" style="color:red;"></span></div>
+
+                <input type="password" name="repeat_password" class="repeat_password" placeholder="Repeat password">
+                <div class="error_info"><span id="pass2_info" style="color:red;"></span></div>
                 <input type="text" name="email" class="email" placeholder="E-mail">
+                <div class="error_info"><span id="email_info" style="color:red;"></span></div>
+                <div class ="reg_captcha_style" >
+                    <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
+                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
+               <div class="error_info"><span id="captcha_info_reg" style="color:red;"></span></div>
+                </div>
                 <button class="button1" type="submit">确定</button>
                 <div class="error"><span>+</span></div>
             </form>
