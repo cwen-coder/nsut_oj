@@ -264,6 +264,12 @@ class Home extends Oj_Controller{
 			$data['user_id'] = false;
 		}
 		//p($data['contest']);
+		if($this->user_model->check_old_contest()){
+			$data['old_contest'] = true;
+		}
+		if($this->user_model->check_new_contest()){
+			$data['new_contest'] = true;
+		}
 		$this->load->view('contest/enroll.html', $data);
 	}
 }

@@ -12,37 +12,26 @@ jQuery(document).ready(function() {
         var captcha = $(this).find('.input-xlarge').val();
         if(captcha == undefined) captcha = "undefined";
         console.log(captcha);
+        console.log(username);
+        console.log(password);
         if(username == '') {
-            $(this).find('.error').fadeOut('fast', function(){
-                $(this).css('top', '27px');
                 $(this).parent().find('.username').attr('placeholder', '请输入用户名');
-            });
-            $(this).find('.error').fadeIn('fast', function(){
                 $(this).parent().find('.username').focus();
-            });
-            return false;
-        }
-        if(captcha == '') {
-            $(this).find('.error').fadeOut('fast', function(){
-                $(this).css('top', '165px');
-            });
-            $(this).find('.error').fadeIn('fast', function(){
-                $(this).parent().find('.input-xlarge').focus();
-                $(this).parent().find('.input-xlarge').attr('placeholder', '请输入验证码');
-            });
+                $("#user_info").text("用户名不能为空");
             return false;
         }
         if(password == '') {
-            $(this).find('.error').fadeOut('fast', function(){
-                $(this).css('top', '96px');
-            });
-            $(this).find('.error').fadeIn('fast', function(){
                 $(this).parent().find('.password').focus();
                 $(this).parent().find('.password').attr('placeholder', '请输入密码');
-            });
+                $("#pass_info").text("请输入密码");
             return false;
         }
-        
+        if(captcha == '') {
+                $(this).parent().find('.input-xlarge').focus();
+                $(this).parent().find('.input-xlarge').attr('placeholder', '请输入验证码');
+                $("#captcha_info").text("请输入验证码");
+            return false;
+        }
         var url = curPath + '/login/log_act';
         $.post(url,{
             username : username,
@@ -50,15 +39,17 @@ jQuery(document).ready(function() {
             captcha : captcha
         },function(data){
             if (data == 2) {
-            $("#captcha_c").text('验证码错误');
-            //$("#captcha_img").attr("src",url);
+            url = curPath+'/login/code';
+            //alert("验证码错误");
+            $("#captcha_info").text('验证码错误');
+            $("#captcha_img").attr("src",url);
         } else if(data == false) {
           alert("用户名或密码错误");
           url = curPath+'/login/code';
           $("#captcha_img").attr("src",url);
-        } else {
-            //console.log(data);
           history.go(0);
+        } else{
+            history.go(0);
         }
         });
     });
@@ -272,15 +263,15 @@ jQuery(document).ready(function() {
                 $("#phone_info").text("手机号不能为空");
             return false;
         }
+        if(phone.length != 11 || !Regx.test(phone)) {
+                $(this).parent().find('.phone').focus();
+                $("#phone_info").text("手机号必须是11纯数字");
+            return false;
+        }
         if(captcha == '') {
                 $(this).parent().find('.input-xlarge').focus();
                 $(this).parent().find('.input-xlarge').attr('placeholder', '请输入验证码');
                 $("#captch_info").text("验证码不能为空");
-            return false;
-        }
-        if(phone.length != 11 || !Regx.test(phone)) {
-                $(this).parent().find('.phone').focus();
-                $("#phone_info").text("手机号必须是11纯数字");
             return false;
         }
         if(user1num != ''){
@@ -325,8 +316,8 @@ jQuery(document).ready(function() {
                             alert('恭喜你！报名成功！');
                             history.go(0) ;
                         }else if(data == 2) {
-                    alert('验证码不正确！');
-                    //e.preventDefault();
+                        alert('验证码不正确！');
+                        //e.preventDefault();
                   } else {
                             alert('对不起！报名失败！');
                             //e.preventDefault();          
@@ -350,7 +341,14 @@ jQuery(document).ready(function() {
             $("#enroll_info").show();
             $("#enroll_list").hide();
     });
-
+    //登录
+     $('.page-container1 form .password').keyup(function(){
+        $("#pass_info").text('');
+    });
+      $('.page-container1 form .username').keyup(function(){
+        $("#user_info").text('');
+    });
+      //注册
     $('.page-container2 form .password').keyup(function(){
         $("#pass1_info").text('');
     });
@@ -366,7 +364,7 @@ jQuery(document).ready(function() {
     $('.page-container2 form .captcha').keyup(function(){
         $("#captcha_info_reg").text('');
     });
-        //page-container3
+    //报名
     $('.page-container3 form .username').keyup(function(){
         $("#username_info").text('');
     });
@@ -392,10 +390,7 @@ jQuery(document).ready(function() {
         $("#phone_info").text('');
     });
     $('.page-container3 form .input-xlarge').keyup(function(){
-        $("#captcha_span_r").text('');
-    });
-    $('.page-container1 form .username, .page-container1 form .password').keyup(function(){
-
+        $("#captch_info").text('');
     });
 
 });

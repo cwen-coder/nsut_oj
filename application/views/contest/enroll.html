@@ -81,9 +81,13 @@ color:#fff;
 
                 <div class="radio_div">
                     <span style="color:red;font-size:20px;">选择参赛类型:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="radio_class" type="radio" value="3" checked="checked" name="group"><span style="color:red;">新生赛</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="radio_class" type="radio" value="4"  name="group"><span style="color:red;">老生赛
-                </span>
+                <?php if(isset($old_contest)):?>
+                <input class="radio_class" type="radio" value="4"  name="group" checked="checked"><span style="color:red;">老生赛
+                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <?php endif; 
+                if(isset($new_contest)):?>
+                <input class="radio_class" type="radio" value="3" name="group"><span style="color:red;">新生赛</span>
+                <?php endif;?>
                 </div>
 
                 <input type="text" name="usernnum" class="usernnum" placeholder="队长学号">
@@ -132,7 +136,7 @@ color:#fff;
                     <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
                     <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
                 <span style="cursor: pointer;color:red;" id="captcha_span_l">点击刷新图片</span>
-                <div><span id="captcha_info" style="color:red;">&nbsp;&nbsp;</span></div>
+                <div class="error_info"><span id="captcha_info" style="color:red;"></span></div>
                 </div>
                <?php endif;?>
                 <button class="button1" type="submit">点击登录</button>

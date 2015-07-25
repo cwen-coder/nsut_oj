@@ -45,9 +45,11 @@ class Register extends CI_Controller {
     }
     //报名 完善信息
     public function enroll(){
-        $catpcha = $this->input->post('cap_r', TRUE);
-                if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) 
+        $captcha = $this->input->post('cap_r', TRUE);
+                if (strtolower($captcha) !=  strtolower($_SESSION ['code'])){
                         echo 2;
+                        return;
+                    }
                 $this->load->helper('form');
                 $this->load->library('form_validation');
                 $config = array(
@@ -90,6 +92,11 @@ class Register extends CI_Controller {
                     'field' => 'phone',
                     'label' => '手机号',
                     'rules' => 'required | exact_length[11] | xss_clean '
+                    ),
+                    array(
+                    'field' => 'contest_class',
+                    'label' => '比赛类型',
+                    'rules' => 'required | exact_length[1] | xss_clean '
                     )
                     );
         $this->form_validation->set_rules($config);
@@ -97,7 +104,20 @@ class Register extends CI_Controller {
         if(!$status) 
             echo false;
         else{
-
+            $this->load->library('encrypt');
+            $this->load->helper('date');
+            $format = 'DATE_W3C';
+            $time = standard_date($format, time());
+            $username = $this->input->post('username',TRUE);
+            $usernum = $this->input->post('usernum',TRUE);
+            $user1name = $this->input->post('user1name',TRUE);
+            $user1num = $this->input->post('user1num',TRUE);
+            $user2name = $this->input->post('user2name',TRUE);
+            $user2num = $this->input->post('user2num',TRUE);
+            $teamname = $this->input->post('teamname',TRUE);
+            $phone = $this->input->post('phone',TRUE);
+            $ip = $this->input->ip_address();
+            if()
             } 
     }
     //注册

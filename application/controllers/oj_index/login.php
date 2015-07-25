@@ -35,6 +35,9 @@ class Login extends CI_Controller {
         		}
 		$captcha = $this->input->post('captcha',TRUE);
 		if($captcha == "undefined"){
+			if(!isset($_SESSION['fs'])){
+				$_SESSION['fs'] = 0;
+			}
 			$_SESSION ['fs'] ++;
 			$captcha = $_SESSION ['code'];
 		}
@@ -70,7 +73,7 @@ class Login extends CI_Controller {
 	       		 } else {
 			        	//$this->load->library('encrypt');
 			        	$username = $this->input->post('username',TRUE);
-						$password = $this->input->post('password',TRUE);
+				$password = $this->input->post('password',TRUE);
 						//$captcha = $this->input->post('captcha',TRUE);
 			        	$this->load->helper('date');
 			        	$format = 'DATE_W3C';
@@ -85,7 +88,7 @@ class Login extends CI_Controller {
 			        		);
 			        	
 			        	$result = $this->user_model->log_act ($data);
-			        	//echo $result;
+			        	
 			        	if ($result == false) {
 			        		echo false;
 			        	} else {
