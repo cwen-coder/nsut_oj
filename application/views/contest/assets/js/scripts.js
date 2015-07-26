@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
     var curPath = $("#hid_site").val() + '/oj_index';
         var em = false;
         var um = false;
-
+    var contest_name = $('[name="group"]:checked').next('span').html();
     //登录
     $('.page-container1 form').submit(function(evt){
         evt.preventDefault();
@@ -55,13 +55,11 @@ jQuery(document).ready(function() {
     });
     
     //注册验证码刷新
-  $("#captcha_span_r").on("click",function(e){
+  $("#captcha_span_r").click(function(e){
     e.preventDefault();
     var url = curPath+'/login/code';
     $("#captcha_img_r").attr("src",url);
-    //$("#captcha_img").attr("src","../login/code");
-    // alert("123")
-  })
+  });
     //注册------------------------------------------------------------------------------------------------------------------------
     $('.page-container2 form').submit(function(evt){
         evt.preventDefault();
@@ -204,7 +202,7 @@ jQuery(document).ready(function() {
         //报名--------------------------------------------------------------------------------------------------------------------------
         $('.page-container3 form').submit(function(evt){
             evt.preventDefault();
-        var contest_class = $('[name="group"]:checked').val();
+        var contest_id = $('[name="group"]:checked').val();
         var username = $(this).find('.username').val();
         var usernnum = $(this).find('.usernnum').val();
         var user1name = $(this).find('.user1name').val();
@@ -214,7 +212,7 @@ jQuery(document).ready(function() {
         var teamname = $(this).find('.teamname').val();
         var phone = $(this).find('.phone').val();
         var captcha = $(this).find('.input-xlarge').val();
-        //console.log(captcha);
+        //console.log(contest_id);
         var Regx = /^[0-9]*$/ ;
         if(usernnum == '') {
                 $(this).parent().find('.usernnum').focus();
@@ -244,7 +242,7 @@ jQuery(document).ready(function() {
             $.ajax({
                 url : url,
                 type : 'POST',
-                data : {teamname:teamname},
+                data : {teamname:teamname,contest_id:contest_id},
                 async : false,
                 success : function(data){
                     if(!data){
@@ -309,16 +307,18 @@ jQuery(document).ready(function() {
                     user2num : user2num,
                     user2name : user2name,
                     phone : phone,
-                    contest_class : contest_class,
+                    contest_id : contest_id,
                     teamname : teamname
                     },function  (data) {
                         if (data == true) {
                             alert('恭喜你！报名成功！');
+                            console.log(phone);
                             history.go(0) ;
                         }else if(data == 2) {
                         alert('验证码不正确！');
                         //e.preventDefault();
                   } else {
+                            console.log(data);
                             alert('对不起！报名失败！');
                             //e.preventDefault();          
                         }
@@ -392,5 +392,7 @@ jQuery(document).ready(function() {
     $('.page-container3 form .input-xlarge').keyup(function(){
         $("#captch_info").text('');
     });
-
+    $("#old, #new").click(function(){
+        $("#teamname_info").text('');
+        });
 });

@@ -14,7 +14,24 @@
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        
 <style>
+  br { clear: both; }
+      .cntSeparator {
+        font-size: 54px;
+        margin: 10px 7px;
+        color: #000;
+      }
+      .desc { margin: 7px 3px; }
+      .desc div {
+        float: left;
+        font-family: Arial;
+        width: 70px;
+        margin-right: 70px;
+        font-size: 25px;
+        font-weight: bold;
+        color: #000;
+      }
 .button1{
     background: #ef4300;
     border-color:#ff730e;
@@ -27,7 +44,7 @@
 .button3{
     background: #00CD00;
     border-color:#00EE00;
-    margin-top: 25px;
+    margin-top: 60px;
 }
 a{
 text-decoration:none;
@@ -44,7 +61,7 @@ color:#fff;
 }
 .error_info_enroll{
     width: 300px;
-    height: 17px;
+    height: 10px;
     margin: 5px;
     margin-right:0px;
     float: left;
@@ -69,11 +86,23 @@ color:#fff;
     </head>
     <body>
         <?php if($username&&$user_id):?>
+        <?php if(isset($old_contest) || isset($new_contest)){?>
         <div class="page-container3">
+
             <div id="enroll_list">
-                <h1 style="color:red">沈阳工业大学第九届ACM校赛</h1>
-                <button class="button3" type="submit" id="enroll">报名参赛</button>
+                <div style="color:black;font-size:60px;"><?php echo $old_contest['title']; ?></div>
+                <div style="color:black;margin-top:3%;"><span>比赛开始时间：<span style="color:red"><?php echo $old_contest['start_time']?></span></span><span style="color:black;margin-left:8%">比赛结束时间：<span style="color:red"><?php echo $old_contest['end_time']?></span></span></div>
+                <div style="color:yellow;font-size:40px;margin-top:5%;"><h2>距离比赛还有:</h2></div>
+               <div id="counter" style="text-align: center;margin-left:18%;margin-top:8%;"></div>
+              <div class="desc" style="text-align: center;margin-left:20%;">
+                <div>天</div>
+                <div>小时</div>
+                <div>分钟</div>
+                <div>秒</div>
+              </div>
+              <button class="button3" type="submit" id="enroll">报名参赛</button>
             </div>
+
                 <div id = "enroll_info" style="display:none">
                     <h1 style="color:red">完善参赛信息</h1>
                     <textarea class="contest_info" readonly="readonly">以下是本次比赛的注意事项,请参赛队员认真阅读</textarea>
@@ -82,11 +111,10 @@ color:#fff;
                 <div class="radio_div">
                     <span style="color:red;font-size:20px;">选择参赛类型:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php if(isset($old_contest)):?>
-                <input class="radio_class" type="radio" value="4"  name="group" checked="checked"><span style="color:red;">老生赛
-                </span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <?php endif; 
+                <input class="radio_class" type="radio" value="<?php echo $old_contest['contest_id'];?>"  name="group" checked="checked" id="old">&nbsp;<span style="color:red;">老生赛</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <?php endif;
                 if(isset($new_contest)):?>
-                <input class="radio_class" type="radio" value="3" name="group"><span style="color:red;">新生赛</span>
+                <input class="radio_class" type="radio" value="<?php echo $new_contest['contest_id'];?>" name="group" id="new">&nbsp;<span style="color:red;">新生赛</span>
                 <?php endif;?>
                 </div>
 
@@ -112,7 +140,7 @@ color:#fff;
                 <div class="error_info_enroll"><span id="phone_info" style="color:red;"></span></div>
                 
                 <div class ="log_captcha_style" >
-                    <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:100px;">
+                    <input type="text" class="input-xlarge" id="captcha_r" name="captcha" placeholder="验证码"  style="width:100px;">
                     <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
                 <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
                 </div>
@@ -122,7 +150,15 @@ color:#fff;
                 </form>
                 </div>
         </div>
+
+    <?php } else{ ?>
+        <div class="page-container3">
+            暂无校赛<br/>
+            <a hrf="<?php site_url('oj_index/home');?>">前去练习</a>
+        </div>
+        <?php }?>
     <?php endif; ?>
+
     <?php if(!$username&&!$user_id):?>
     <div class="page-container1" id="page-container1">
             <h1>用户登录</h1>
@@ -176,6 +212,56 @@ color:#fff;
         <script src="<?php echo base_url('application/views/contest/assets/js/scripts.js');?>"></script>
         <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
         <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
+        <input id = "start_time" type="hidden" value = "<?= $old_contest['start_time']?>" />
+        <script src="<?php echo base_url('application/views/contest/js/jquery.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script src="<?php echo base_url('application/views/contest/js/jquery.countdown.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+      $(function(){
+        var hid_base = $("#hid_base").val();
+        var start_time = $("#start_time").val();
+        //console.log(start_time);
+        //var time = start_time.split(" ");
+        var time = get_unix_time(start_time);
+        var timestamp = (new Date()).valueOf();
+        timestamp = timestamp.toString().substr(0, 10);
+        var time_c =time - timestamp;
+        var seconds = time_c % 60;
+        var minutes = (parseInt(time_c / 60)) % 60;
+        var hours = (parseInt(time_c / 3600)) % 24;
+        var days = parseInt(time_c / 86400);
+        if(seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        if(minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if(hours < 10) {
+            hours = "0" + hours;
+        }
+        if(days < 10) {
+            days = "0" + days;
+        }
+        /*console.log(seconds);
+        console.log(minutes);
+        console.log(hours);
+        console.log(days);
+        console.log(time_c);*/
+        $('#counter').countdown({
+          image: hid_base + 'application/views/contest/images/digits.png',
+          startTime: days+':'+hours+': '+ minutes + ':'+ seconds,
+            timerEnd: function(){  location.reload(); }
+        });
+
+      });
+      function get_unix_time(dateStr)
+    {
+        var newstr = dateStr.replace(/-/g,'/'); 
+        var date =  new Date(newstr); 
+        var time_str = date.getTime().toString();
+        return time_str.substr(0, 10);
+    }
+
+    </script>
     </body>
 </html>
 

@@ -18,27 +18,51 @@ class  User_model extends CI_Model {
 		$num = mysql_num_rows($result);
 		return $num;
 	}
-
+	public function check_num_team($contest_id) {
+		$query = "select * from teams where contest_id = '$contest_id' ";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		return $num;
+	}
 	public function check_email($email) {
 		$query = "select * from users where email = '$email' ";
 		$result = mysql_query($query);
 		$num = mysql_num_rows($result);
 		return $num;
 	}
-	public function teamname_check($teamname) {
-		$query = "select * from teams where team_name = '$teamname' ";
+	public function teamname_check($teamname, $contest_id) {
+		$query = "select * from teams where team_name = '$teamname' and contest_id = '$contest_id' ";
 		$result = mysql_query($query);
 		$num = mysql_num_rows($result);
 		return $num;
 	}
 
+	public function enroll($data) {
+		$query = "insert into teams (user_id, contest_id, team_num1, team_name1, team_num2, team_name2, team_num3, team_name3, team_name, enroll_time, team_telephone, team_id) 
+		values ('$data[user_id]', '$data[contest_id]', '$data[team_num1]', '$data[team_name1]', '$data[team_num2]' , '$data[team_name2]',  '$data[team_num3]',  '$data[team_name3]',  '$data[team_name]',  '$data[enroll_time]',  '$data[phone]',  '$data[team_id]' )";
+		return mysql_query($query);
+	}
 
 	public function reg_act($data) {
 		$query = "insert into users (user_id, username, password, accesstime, reg_time, ip, email) values ('$data[user_id]', '$data[username]', '$data[password]', '$data[accesstime]', '$data[reg_time]' ,'$data[ip]',  '$data[email] ' )";
 		return mysql_query($query);
 	}
-
-
+	//检查是否有校赛新生组
+	public function check_new_contest(){
+		$query = "select contest_id, title, start_time, end_time, pre_start_time, pre_end_time from contest where con_class ='3' and pre_end_time > NOW()";
+		$result = mysql_query($query);
+		$data = array();
+		$data = mysql_fetch_assoc($result);
+		return $data;
+	}
+	//检查是否有校赛老生组
+	public function check_old_contest(){
+		$query = "select contest_id, title, start_time, end_time, pre_start_time, pre_end_time from contest where con_class ='4' and pre_end_time > NOW()";
+		$result = mysql_query($query);
+		$data = array();
+		$data = mysql_fetch_assoc($result);
+		return $data;
+	}
 	public function log_act ($data) {
 		$query = "select user_id,password,privilege from users where username = '$data[username]'";
 		$result = mysql_query($query);
