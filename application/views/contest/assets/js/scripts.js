@@ -39,14 +39,11 @@ jQuery(document).ready(function() {
             captcha : captcha
         },function(data){
             if (data == 2) {
-            url = curPath+'/login/code';
             //alert("验证码错误");
             $("#captcha_info").text('验证码错误');
-            $("#captcha_img").attr("src",url);
+            $("#captcha_img_r").click();
         } else if(data == false) {
           alert("用户名或密码错误");
-          url = curPath+'/login/code';
-          $("#captcha_img").attr("src",url);
           history.go(0);
         } else{
             history.go(0);
@@ -102,6 +99,7 @@ jQuery(document).ready(function() {
                 success : function(data) {
                 if (!data) {
                     $("#user_info_reg").text("用户名以存在");
+                    $("#captcha_img_r").click();
                     um = true;
                 }else
                         um = false;
@@ -114,29 +112,6 @@ jQuery(document).ready(function() {
                 $("#pass1_info").text("密码不能为空");
                 return false;
         }
-        if(repeat_password == '') {
-                $(this).parent().find('.repeat_password').focus();
-                $(this).parent().find('.repeat_password').attr('placeholder', '请输入密码');
-                $("#pass2_info").text("重复密码不能为空");
-                return false;
-        }
-        if(email == '') {
-                $(this).parent().find('.email').focus();
-                $(this).parent().find('.email').attr('placeholder', '请输入邮箱');
-                $("#email_info").text("邮箱不能为空");
-            return false;
-        }
-        if(captcha == '') {
-                $(this).parent().find('.input-xlarge').focus();
-                $(this).parent().find('.input-xlarge').attr('placeholder', '请输入验证码');
-                $("#captcha_info_reg").text("请输入验证码");
-                return false;
-        }
-        if(password != repeat_password) {
-                $(this).parent().find('.email').focus();
-                $("#pass2_info").text("两次密码输入不一致");
-            return false;
-        }
         if(password != '') {
             if(password.length<6){
                 $(this).parent().find('.password').focus();
@@ -146,6 +121,23 @@ jQuery(document).ready(function() {
                 $(this).parent().find('.password').focus();
                 $("#pass1_info").text("密码不能大于32位");
             }
+        }
+        if(repeat_password == '') {
+                $(this).parent().find('.repeat_password').focus();
+                $(this).parent().find('.repeat_password').attr('placeholder', '请输入密码');
+                $("#pass2_info").text("重复密码不能为空");
+                return false;
+        }
+        if(password != repeat_password) {
+                $(this).parent().find('.email').focus();
+                $("#pass2_info").text("两次密码输入不一致");
+            return false;
+        }
+        if(email == '') {
+                $(this).parent().find('.email').focus();
+                $(this).parent().find('.email').attr('placeholder', '请输入邮箱');
+                $("#email_info").text("邮箱不能为空");
+            return false;
         }
         if(email != ''){
             var Regx = /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-.]+$/;
@@ -164,13 +156,20 @@ jQuery(document).ready(function() {
                     if(!data){
                     $(this).parent().find('.email').focus();
                     $("#email_info").text('邮箱已被注册');
+                    $("#captcha_img_r").click();
                     em = true;
                 }else
                     em = false;
                 }
             })
             }
-            console.log(em);
+        if(captcha == '') {
+                $(this).parent().find('.input-xlarge').focus();
+                $(this).parent().find('.input-xlarge').attr('placeholder', '请输入验证码');
+                $("#captcha_info_reg").text("请输入验证码");
+                return false;
+        }
+            //console.log(em);
             if(chkreg()){
                     var url = curPath+'/register/reg_act';
                 $.post(url,{
@@ -185,6 +184,8 @@ jQuery(document).ready(function() {
                             history.go(0) ;
                         }else if(data == 2) {
                     alert('验证码不正确！');
+                    url = curPath+'/login/code';
+                    $("#captcha_img_r").click();
                     //e.preventDefault();
                   } else {
                             alert('对不起！注册失败！');
@@ -246,9 +247,10 @@ jQuery(document).ready(function() {
                 async : false,
                 success : function(data){
                     if(!data){
-                        console.log(data);
+                        //console.log(data);
                     $(this).parent().find('.teamname').focus();
                     $("#teamname_info").text("队伍名已存在");
+                    $("#captcha_img_r").click();
                     em = true;
                 }else
                     em = false;
@@ -316,9 +318,10 @@ jQuery(document).ready(function() {
                             history.go(0) ;
                         }else if(data == 2) {
                         alert('验证码不正确！');
+                        $("#captcha_img_r").click();
                         //e.preventDefault();
                   } else {
-                            console.log(data);
+                            //console.log(data);
                             alert('对不起！报名失败！');
                             //e.preventDefault();          
                         }
@@ -394,5 +397,10 @@ jQuery(document).ready(function() {
     });
     $("#old, #new").click(function(){
         $("#teamname_info").text('');
+        });
+        
+        //查看报名队伍
+        $("#view_teams").click(function(){
+            window.open(curPath + '/home/teams' , "_blank");
         });
 });

@@ -46,6 +46,11 @@
     border-color:#00EE00;
     margin-top: 60px;
 }
+.button4{
+    background: #00EE00;
+    border-color:#00EE00;
+    margin-top:5%;
+}
 a{
 text-decoration:none;
 color:#fff;
@@ -90,8 +95,8 @@ color:#fff;
         <div class="page-container3">
 
             <div id="enroll_list">
-                <div style="color:black;font-size:60px;"><?php echo $old_contest['title']; ?></div>
-                <div style="color:black;margin-top:3%;"><span>比赛开始时间：<span style="color:red"><?php echo $old_contest['start_time']?></span></span><span style="color:black;margin-left:8%">比赛结束时间：<span style="color:red"><?php echo $old_contest['end_time']?></span></span></div>
+                <div style="color:black;font-size:60px;"><?php echo isset($old_contest['title']) ? $old_contest['title'] : $new_contest['title']; ?></div>
+                <div style="color:black;margin-top:3%;"><span>比赛开始时间：<span style="color:red"><?php echo isset($old_contest['start_time']) ? $old_contest['start_time'] : $new_contest['start_time'] ?></span></span><span style="color:black;margin-left:8%">比赛结束时间：<span style="color:red"><?php echo isset($old_contest['end_time']) ? $old_contest['start_time'] :$new_contest['start_time']?></span></span></div>
                 <div style="color:yellow;font-size:40px;margin-top:5%;"><h2>距离比赛还有:</h2></div>
                <div id="counter" style="text-align: center;margin-left:18%;margin-top:8%;"></div>
               <div class="desc" style="text-align: center;margin-left:20%;">
@@ -100,7 +105,13 @@ color:#fff;
                 <div>分钟</div>
                 <div>秒</div>
               </div>
-              <button class="button3" type="submit" id="enroll">报名参赛</button>
+               <div style="margin-top: 10%"><button id="view_teams"><a href="" target="_blank" style="color:red;">查看参赛队伍</a></button></div>
+               <?php if(!$check_enroll_old || !$check_enroll_new):?>
+               <button class="button4" disabled="false">您已报名</button>
+               <?php endif;?>
+               <?php if($check_enroll_old && $check_enroll_new) :?>
+              <button class="button3" type="submit" id="enroll" >报名参赛</button>
+              <?php endif;?>
             </div>
 
                 <div id = "enroll_info" style="display:none">

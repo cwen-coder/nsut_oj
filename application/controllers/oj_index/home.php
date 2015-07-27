@@ -251,7 +251,7 @@ class Home extends Oj_Controller{
 		}
 		$data['info'] = $this->user_model->user_rank();
 		//p($data['info']);die;
-		$this->load->view('oj_index/runk.html', $data);
+		$this->load->view('oj_index/rank.html', $data);
 	}
 	public function enroll(){
 
@@ -264,14 +264,22 @@ class Home extends Oj_Controller{
 			$data['user_id'] = false;
 		}
 		//p($data['contest']);
-		if($this->user_model->check_new_contest()){
+		if(isset($data['user_id']) && $this->user_model->check_new_contest()){
 			$data['new_contest'] = $this->user_model->check_new_contest();
 			//p($this->user_model->check_new_contest());die;
 		}
-		if($this->user_model->check_old_contest()){
+		if(isset($data['user_id']) && $this->user_model->check_old_contest()){
 			$data['old_contest'] = $this->user_model->check_old_contest();
 		}
 		//p($data);die;
+                                   if(isset($data['new_contest']) ||isset($data['old_contest'])){
+                                                    $data['check_enroll_old'] = $this->user_model->check_enroll($data['user_id'], isset($data['old_contest']['contest_id'])? $data['old_contest']['contest_id'] : 0);
+                                                    $data['check_enroll_new'] = $this->user_model->check_enroll($data['user_id'], isset($data['new_contest']['contest_id'])? $data['new_contest']['contest_id'] : 0);
+                                   }
 		$this->load->view('contest/enroll.html', $data);
 	}
+                   public function teams(){
+                                   $data['info'] = $this->user_model->teams();
+                                   $this->load->view('contest/teams.html', $data);
+                   } 
 }
