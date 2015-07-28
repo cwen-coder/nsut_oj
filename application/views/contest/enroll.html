@@ -97,14 +97,16 @@ color:#fff;
             <div id="enroll_list">
                 <div style="color:black;font-size:60px;"><?php echo isset($old_contest['title']) ? $old_contest['title'] : $new_contest['title']; ?></div>
                 <div style="color:black;margin-top:3%;"><span>比赛开始时间：<span style="color:red"><?php echo isset($old_contest['start_time']) ? $old_contest['start_time'] : $new_contest['start_time'] ?></span></span><span style="color:black;margin-left:8%">比赛结束时间：<span style="color:red"><?php echo isset($old_contest['end_time']) ? $old_contest['start_time'] :$new_contest['start_time']?></span></span></div>
-                <div style="color:yellow;font-size:40px;margin-top:5%;"><h2>距离比赛还有:</h2></div>
+                <div style="color:black;margin-top:3%;"><span>报名开始时间：<span style="color:red" id="pre_start_time"><?php echo isset($old_contest['pre_start_time']) ? $old_contest['pre_start_time'] : $new_contest['pre_start_time'] ?></span></span><span style="color:black;margin-left:8%">报名结束时间：<span style="color:red" id="pre_end_time"><?php echo isset($old_contest['pre_end_time']) ? $old_contest['pre_end_time'] :$new_contest['pre_end_time']?></span></span></div>
+                <div style="color:yellow;font-size:40px;margin-top:5%;"><h2>距离比赛开始还有:</h2></div>
                <div id="counter" style="text-align: center;margin-left:18%;margin-top:8%;"></div>
-              <div class="desc" style="text-align: center;margin-left:20%;">
+               <div class="desc" style="text-align: center;margin-left:20%;">
                 <div>天</div>
                 <div>小时</div>
                 <div>分钟</div>
                 <div>秒</div>
               </div>
+               
                <div style="margin-top: 10%"><button id="view_teams"><a href="" target="_blank" style="color:red;">查看参赛队伍</a></button></div>
                <?php if(!$check_enroll_old || !$check_enroll_new):?>
                <button class="button4" disabled="false">您已报名</button>
@@ -165,7 +167,7 @@ color:#fff;
     <?php } else{ ?>
         <div class="page-container3">
             暂无校赛<br/>
-            <a hrf="<?php site_url('oj_index/home');?>">前去练习</a>
+            <a href="<?php echo site_url('oj_index/home');?>">前去练习</a>
         </div>
         <?php }?>
     <?php endif; ?>
@@ -223,7 +225,7 @@ color:#fff;
         <script src="<?php echo base_url('application/views/contest/assets/js/scripts.js');?>"></script>
         <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
         <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
-        <input id = "start_time" type="hidden" value = "<?= $old_contest['start_time']?>" />
+        <input id = "start_time" type="hidden" value = "<?php if(isset($old_contest['start_time'])) echo $old_contest['start_time']; ?>" />
         <script src="<?php echo base_url('application/views/contest/js/jquery.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo base_url('application/views/contest/js/jquery.countdown.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">

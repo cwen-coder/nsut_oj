@@ -51,6 +51,10 @@ class Register extends CI_Controller {
                         echo 2;
                         return;
                     }
+                  if(!($this->user_model->check_old_contest()['pre_start_time'] < Now() && $this->user_model->check_old_contest()['pre_end_time'] >  Now())){
+                      echo false;
+                      return;
+                  }
                 $this->load->helper('form');
                 $this->load->library('form_validation');
                 $config = array(

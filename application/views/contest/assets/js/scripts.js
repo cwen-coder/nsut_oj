@@ -1,9 +1,10 @@
 
 jQuery(document).ready(function() {
+
     var curPath = $("#hid_site").val() + '/oj_index';
         var em = false;
         var um = false;
-    var contest_name = $('[name="group"]:checked').next('span').html();
+    
     //登录
     $('.page-container1 form').submit(function(evt){
         evt.preventDefault();
@@ -299,6 +300,9 @@ jQuery(document).ready(function() {
             }
         }
         if(!em){
+            var contest_name = $('[name="group"]:checked').next('span').html();
+            var r = confirm('注意!!! 您选择的比赛类型是 ----'+ contest_name+'                 建议大一新生选择新生赛');
+            if (r){
                 var url = curPath+'/register/enroll';
                 $.post(url,{
                     cap_r : captcha,
@@ -326,6 +330,7 @@ jQuery(document).ready(function() {
                             //e.preventDefault();          
                         }
                     })
+                }
         }
 
 
@@ -341,8 +346,26 @@ jQuery(document).ready(function() {
 
      //报名/参赛列表 切换
     $("#enroll").click(function(){
+        //检查报名是否开始或者结束
+      var start_time = Date.parse($("#pre_start_time").html());
+      var end_time = Date.parse($("#pre_end_time").html());
+      var timestamp1 = Date.parse(new Date(start_time))/1000;
+      var timestamp2 = Date.parse(new Date(end_time))/1000;
+      var now_time = Date.parse(new Date())/1000;
+        //console.log(timestamp1);
+        //console.log(timestamp2);
+        //console.log(now_time);
+         if(timestamp1 < now_time && timestamp2 > now_time){
             $("#enroll_info").show();
             $("#enroll_list").hide();
+        }else if(timestamp1 > now_time){
+            alert("报名还没有开始,敬请期待");
+        }
+        else if(timestamp2 < now_time){
+            alert("报名已经结束,如有问题请联系管理员");
+            //$("#enroll_info").show();
+            //$("#enroll_list").hide();
+        }
     });
     //登录
      $('.page-container1 form .password').keyup(function(){
@@ -403,4 +426,5 @@ jQuery(document).ready(function() {
         $("#view_teams").click(function(){
             window.open(curPath + '/home/teams' , "_blank");
         });
+        
 });

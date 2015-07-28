@@ -70,7 +70,7 @@ class  User_model extends CI_Model {
 	}
 	//检查是否有校赛新生组
 	public function check_new_contest(){
-		$query = "select contest_id, title, start_time, end_time, pre_start_time, pre_end_time from contest where con_class ='3' and pre_end_time > NOW()";
+		$query = "select contest_id, title, start_time, end_time, pre_start_time, pre_end_time from contest where con_class ='3' and end_time > NOW()";
 		$result = mysql_query($query);
 		$data = array();
 		$data = mysql_fetch_assoc($result);
@@ -78,7 +78,7 @@ class  User_model extends CI_Model {
 	}
 	//检查是否有校赛老生组
 	public function check_old_contest(){
-		$query = "select contest_id, title, start_time, end_time, pre_start_time, pre_end_time from contest where con_class ='4' and pre_end_time > NOW()";
+		$query = "select contest_id, title, start_time, end_time, pre_start_time, pre_end_time from contest where con_class ='4' and end_time > NOW()";
 		$result = mysql_query($query);
 		$data = array();
 		$data = mysql_fetch_assoc($result);
