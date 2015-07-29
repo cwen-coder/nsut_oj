@@ -1,7 +1,7 @@
 
 jQuery(document).ready(function() {
 
-    var curPath = $("#hid_site").val() + '/oj_index';
+    var curPath = $("#hid_site").val();
         var em = false;
         var um = false;
     
@@ -33,7 +33,7 @@ jQuery(document).ready(function() {
                 $("#captcha_info").text("请输入验证码");
             return false;
         }
-        var url = curPath + '/login/log_act';
+        var url = curPath + '/oj_index/login/log_act';
         $.post(url,{
             username : username,
             password : password,
@@ -47,7 +47,7 @@ jQuery(document).ready(function() {
           alert("用户名或密码错误");
           history.go(0);
         } else{
-            history.go(0);
+            window.location.href= curPath + '/oj_index/home/school_contest';
         }
         });
     });
@@ -55,7 +55,7 @@ jQuery(document).ready(function() {
     //注册验证码刷新
   $("#captcha_span_r").click(function(e){
     e.preventDefault();
-    var url = curPath+'/login/code';
+    var url = curPath+'/oj_index/login/code';
     $("#captcha_img_r").attr("src",url);
   });
     //注册------------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ jQuery(document).ready(function() {
                 $("#user_info_reg").text("必须为字母或数字组合");
                 return false;
             }
-             var url = curPath+'/register/username_check';
+             var url = curPath+'/oj_index/register/username_check';
             $.ajax({
                 url : url,
                 type : 'POST',
@@ -147,7 +147,7 @@ jQuery(document).ready(function() {
                 $("#email_info").text('邮箱格式错误');
             return false;
             }
-            var url = curPath+'/register/email_check';
+            var url = curPath+'/oj_index/register/email_check';
             $.ajax({
                 url : url,
                 type : 'POST',
@@ -172,7 +172,7 @@ jQuery(document).ready(function() {
         }
             //console.log(em);
             if(chkreg()){
-                    var url = curPath+'/register/reg_act';
+                    var url = curPath+'/oj_index/register/reg_act';
                 $.post(url,{
                     cap_r : captcha,
                     username : username,
@@ -185,7 +185,7 @@ jQuery(document).ready(function() {
                             history.go(0) ;
                         }else if(data == 2) {
                     alert('验证码不正确！');
-                    url = curPath+'/login/code';
+                    url = curPath+'/oj_index/login/code';
                     $("#captcha_img_r").click();
                     //e.preventDefault();
                   } else {
@@ -240,7 +240,7 @@ jQuery(document).ready(function() {
             return false;
         }
         if(teamname != ''){
-            var url = curPath+'/register/teamname_check';
+            var url = curPath+'/oj_index/register/teamname_check';
             $.ajax({
                 url : url,
                 type : 'POST',
@@ -303,7 +303,7 @@ jQuery(document).ready(function() {
             var contest_name = $('[name="group"]:checked').next('span').html();
             var r = confirm('注意!!! 您选择的比赛类型是 ----'+ contest_name+'                 建议大一新生选择新生赛');
             if (r){
-                var url = curPath+'/register/enroll';
+                var url = curPath+'/oj_index/register/enroll';
                 $.post(url,{
                     cap_r : captcha,
                     username : username,
@@ -344,7 +344,7 @@ jQuery(document).ready(function() {
             //alert($("page-container2").style);
     });
 
-     //报名/参赛列表 切换
+     //检查报名时间是否合法
     $("#enroll").click(function(){
         //检查报名是否开始或者结束
       var start_time = Date.parse($("#pre_start_time").html());
@@ -356,8 +356,7 @@ jQuery(document).ready(function() {
         //console.log(timestamp2);
         //console.log(now_time);
          if(timestamp1 < now_time && timestamp2 > now_time){
-            $("#enroll_info").show();
-            $("#enroll_list").hide();
+                window.location.href= curPath + '/contest/school_contest/enroll';
         }else if(timestamp1 > now_time){
             alert("报名还没有开始,敬请期待");
         }
@@ -365,6 +364,7 @@ jQuery(document).ready(function() {
             alert("报名已经结束,如有问题请联系管理员");
             //$("#enroll_info").show();
             //$("#enroll_list").hide();
+            window.location.href= curPath + '/contest/school_contest/enroll';
         }
     });
     //登录
@@ -424,7 +424,7 @@ jQuery(document).ready(function() {
         
         //查看报名队伍
         $("#view_teams").click(function(){
-            window.open(curPath + '/home/teams' , "_blank");
+            window.open(curPath + '/oj_index/home/teams' , "_blank");
         });
         
 });

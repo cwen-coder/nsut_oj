@@ -44,7 +44,7 @@
 .button3{
     background: #00CD00;
     border-color:#00EE00;
-    margin-top: 60px;
+    margin-top: 30px;
 }
 .button4{
     background: #00EE00;
@@ -90,7 +90,7 @@ color:#fff;
 </style>
     </head>
     <body>
-        <?php if($username&&$user_id):?>
+        
         <?php if(isset($old_contest) || isset($new_contest)){?>
         <div class="page-container3">
 
@@ -108,10 +108,10 @@ color:#fff;
               </div>
                
                <div style="margin-top: 10%"><button id="view_teams"><a href="" target="_blank" style="color:red;">查看参赛队伍</a></button></div>
-               <?php if(!$check_enroll_old || !$check_enroll_new):?>
+               <?php if(isset($check_enroll_old) || isset($check_enroll_new) ):?>
                <button class="button4" disabled="false">您已报名</button>
                <?php endif;?>
-               <?php if($check_enroll_old && $check_enroll_new) :?>
+               <?php if(!isset($check_enroll_old) && !isset($check_enroll_new) ) :?>
               <button class="button3" type="submit" id="enroll" >报名参赛</button>
               <?php endif;?>
             </div>
@@ -170,54 +170,7 @@ color:#fff;
             <a href="<?php echo site_url('oj_index/home');?>">前去练习</a>
         </div>
         <?php }?>
-    <?php endif; ?>
 
-    <?php if(!$username&&!$user_id):?>
-    <div class="page-container1" id="page-container1">
-            <h1>用户登录</h1>
-            <form action="" method="post">
-                <input type="text" name="username" class="username" placeholder="Username">
-                <div class="error_info"><span id="user_info" style="color:red;"></span></div>
-                <input type="password" name="password" class="password" placeholder="Password">
-                <div class="error_info"><span id="pass_info" style="color:red;"></span></div>
-               <?php if(isset($_SESSION ['fs'])&&$_SESSION ['fs']>2):?>
-                <div class ="log_captcha_style" >
-                    <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
-                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
-                <span style="cursor: pointer;color:red;" id="captcha_span_l">点击刷新图片</span>
-                <div class="error_info"><span id="captcha_info" style="color:red;"></span></div>
-                </div>
-               <?php endif;?>
-                <button class="button1" type="submit">点击登录</button>
-                <div class="error"><span>+</span></div>
-            </form>
-            <button class="button2" type="submit" id="register">马上注册</button>
-        </div>
-    <div class="page-container2" id="page-container2" style="display:none">
-            <h1>用户注册</h1>
-            <form action="" method="post">
-                <input type="text" name="username" class="username" placeholder="Username">
-
-                <div class="error_info"><span id="user_info_reg" style="color:red;"></span></div>
-                
-                <input type="password" name="password" class="password" placeholder="Password">
-                <div class="error_info"><span id="pass1_info" style="color:red;"></span></div>
-
-                <input type="password" name="repeat_password" class="repeat_password" placeholder="Repeat password">
-                <div class="error_info"><span id="pass2_info" style="color:red;"></span></div>
-                <input type="text" name="email" class="email" placeholder="E-mail">
-                <div class="error_info"><span id="email_info" style="color:red;"></span></div>
-                <div class ="reg_captcha_style" >
-                    <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
-                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
-                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
-               <div class="error_info"><span id="captcha_info_reg" style="color:red;"></span></div>
-                </div>
-                <button class="button1" type="submit">确定</button>
-                <div class="error"><span>+</span></div>
-            </form>
-        </div>
-        <?php endif;?>
         <!-- Javascript -->
         <script src="<?php echo base_url('application/views/contest/assets/js/jquery-1.8.2.min.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized.3.2.7.min.js');?>"></script>

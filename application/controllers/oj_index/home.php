@@ -253,7 +253,7 @@ class Home extends Oj_Controller{
 		//p($data['info']);die;
 		$this->load->view('oj_index/rank.html', $data);
 	}
-	public function enroll(){
+	public function school_contest(){
 
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
 			$data['username'] = $this->session->userdata('username');
@@ -264,19 +264,20 @@ class Home extends Oj_Controller{
 			$data['user_id'] = false;
 		}
 		//p($data['contest']);
-		if(isset($data['user_id']) && $this->user_model->check_new_contest()){
+                                  
+		if($this->user_model->check_new_contest()){
 			$data['new_contest'] = $this->user_model->check_new_contest();
 			//p($this->user_model->check_new_contest());die;
 		}
-		if(isset($data['user_id']) && $this->user_model->check_old_contest()){
+		if($this->user_model->check_old_contest()){
 			$data['old_contest'] = $this->user_model->check_old_contest();
 		}
 		//p($data);die;
-                                   if(isset($data['new_contest']) ||isset($data['old_contest'])){
+                                   if($data['user_id'] && (isset($data['new_contest']) ||isset($data['old_contest'])) ){
                                                     $data['check_enroll_old'] = $this->user_model->check_enroll($data['user_id'], isset($data['old_contest']['contest_id'])? $data['old_contest']['contest_id'] : 0);
                                                     $data['check_enroll_new'] = $this->user_model->check_enroll($data['user_id'], isset($data['new_contest']['contest_id'])? $data['new_contest']['contest_id'] : 0);
                                    }
-		$this->load->view('contest/enroll.html', $data);
+		$this->load->view('contest/school_contest.html', $data);
 	}
                    public function teams(){
                                    $data['info'] = $this->user_model->teams();

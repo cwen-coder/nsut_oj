@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>报名参赛</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- CSS -->
+        <link rel="stylesheet" href="<?php echo base_url('application/views/contest/assets/css/reset.css');?>">
+        <link rel="stylesheet" href="<?php echo base_url('application/views/contest/assets/css/supersized.css');?>">
+        <link rel="stylesheet" href="<?php echo base_url('application/views/contest/assets/css/style.css');?>">
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+<style>
+.button1{
+    background: #ef4300;
+    border-color:#ff730e;
+}
+a{
+text-decoration:none;
+color:#fff;
+}
+.captcha_style{
+    margin-top: 20px;
+    margin-left:0;
+}
+.error_info{
+    width: 400px;
+    height: 17px;
+    margin: 5px;
+}
+.error_info_enroll{
+    width: 300px;
+    height: 10px;
+    margin: 5px;
+    margin-right:0px;
+    float: left;
+}
+.contest_info{
+    width: 600px;
+    height: 125px;
+    margin-top: 25px;
+}
+.radio_class{
+    width: 15px;
+    height: 15px;
+
+}
+.radio_div{
+    width:320px;
+    height: 25px;
+    margin-left: 100px;
+    margin-bottom: 10px;
+}
+</style>
+    </head>
+    <body>
+        <div class="page-container3">
+                <div id = "enroll_info">
+                    <h1 style="color:red">完善参赛信息</h1>
+                    <textarea class="contest_info" readonly="readonly">以下是本次比赛的注意事项,请参赛队员认真阅读</textarea>
+                <form action="" method="post">
+
+                <div class="radio_div">
+                    <span style="color:red;font-size:20px;">选择参赛类型:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php if(isset($old_contest)):?>
+                <input class="radio_class" type="radio" value="<?php echo $old_contest['contest_id'];?>"  name="group" checked="checked" id="old">&nbsp;<span style="color:red;">老生赛</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <?php endif;
+                if(isset($new_contest)):?>
+                <input class="radio_class" type="radio" value="<?php echo $new_contest['contest_id'];?>" name="group" id="new">&nbsp;<span style="color:red;">新生赛</span>
+                <?php endif;?>
+                </div>
+
+                <input type="text" name="usernnum" class="usernnum" placeholder="队长学号">
+                <input type="text" name="username" class="username" placeholder="队长姓名">
+                
+                <div class="error_info_enroll" style="margin-left: 100px;"><span id="usernum_info" style="color:red;"></span></div>
+                <div class="error_info_enroll"><span id="username_info" style="color:red;"></span></div>
+                <input type="text" name="user1num" class="user1num" placeholder="队员1学号">
+                <input type="text" name="user1name" class="user1name" placeholder="队员1姓名">
+                
+                <div class="error_info_enroll" style="margin-left: 100px;"><span id="user1num_info" style="color:red;"></span></div>
+                <div class="error_info_enroll"><span id="user1name_info" style="color:red;"></span></div>
+          
+                <input type="text" name="user2name" class="user2num" placeholder="队员2学号">
+                <input type="text" name="user2name" class="user2name" placeholder="队员2姓名">
+                
+                <div class="error_info_enroll" style="margin-left: 100px;"><span id="user2num_info" style="color:red;"></span></div>
+                <div class="error_info_enroll"><span id="user2name_info" style="color:red;"></span></div>
+                <input type="text" name="teamname" class="teamname" placeholder="队伍名称">
+                <input type="text" name="phone" class="phone" placeholder="联系方式-手机号">
+                <div class="error_info_enroll" style="margin-left: 100px;"><span id="teamname_info" style="color:red;"></span></div>
+                <div class="error_info_enroll"><span id="phone_info" style="color:red;"></span></div>
+                
+                <div class ="log_captcha_style" >
+                    <input type="text" class="input-xlarge" id="captcha_r" name="captcha" placeholder="验证码"  style="width:100px;">
+                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
+                </div>
+                <div class="error_info" style="margin-left: 200px;"><span id="captch_info" style="color:red;"></span></div>
+                <button class="button1" type="submit">提交报名</button>
+                <div class="error"><span>+</span></div>
+                </form>
+                </div>
+        </div>
+        <!-- Javascript -->
+        <script src="<?php echo base_url('application/views/contest/assets/js/jquery-1.8.2.min.js');?>"></script>
+        <script src="<?php echo base_url('application/views/contest/assets/js/supersized.3.2.7.min.js');?>"></script>
+        <script src="<?php echo base_url('application/views/contest/assets/js/supersized-init.js');?>"></script>
+        <script src="<?php echo base_url('application/views/contest/assets/js/scripts.js');?>"></script>
+        <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
+        <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
+        <input id = "start_time" type="hidden" value = "<?php if(isset($old_contest['start_time'])) echo $old_contest['start_time']; ?>" />
+    </body>
+</html>
+
