@@ -118,7 +118,7 @@
 <tbody>
   <?php foreach($result as $v): ?>
   <tr class="evenrow">
-    <td id="solution_id"><div class="div_td"><?php echo $v['solution_id']?></div></td>
+    <td id="solution_id"><span class="div_td"><?php echo $v['solution_id']?></span></td>
     <td><div class="div_td"><?php echo $v['username']?></div></td>
     <td><div class="div_td"><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=<?php echo $v['problem_id']?>"><?php echo $v['problem_id']?></a></div></td>
   <?php   if($v['username']==$this->session->userdata('username')&&$v['result']==11){ ?>
@@ -173,6 +173,6 @@ echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination)."&
 </div>
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
-<input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
+<input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
   </body>
 </html>

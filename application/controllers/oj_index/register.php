@@ -34,6 +34,124 @@ class Register extends CI_Controller {
         else
             echo true;
     }
+    //获取ajax传回数据验证是否存在
+    public function teamname_check(){
+        $teamname = $this->input->post('teamname',TRUE);
+        $contest_id = $this->input->post('contest_id',TRUE);
+        $result = $this->user_model->teamname_check($teamname, $contest_id);
+        if($result > 0)
+            echo false;
+        else
+            echo true;
+    }
+    //报名 完善信息
+    public function enroll(){
+        $captcha = $this->input->post('cap_r', TRUE);
+                if (strtolower($captcha) !=  strtolower($_SESSION ['code'])){
+                        echo 2;
+                        return;
+                    }
+                  if(!($this->user_model->check_old_contest()['pre_start_time'] < Now() && $this->user_model->check_old_contest()['pre_end_time'] >  Now())){
+                      echo false;
+                      return;
+                  }
+                $this->load->helper('form');
+                $this->load->library('form_validation');
+                $config = array(
+                    array(
+                    'field' => 'username',
+                    'label' => '队长姓名',
+                    'rules' => 'required | max_length[32] |xss_clean '
+                    ),
+                    array(
+                    'field' => 'usernum',
+                    'label' => '队长学号',
+                    'rules' => 'required | exact_length[9] | xss_clean '
+                    ),
+                    array(
+                    'field' => 'user1name',
+                    'label' => '队员1姓名',
+                    'rules' => 'max_length[32] |xss_clean '
+                    ),
+                    array(
+                    'field' => 'user1num',
+                    'label' => '队员1学号',
+                    'rules' => 'exact_length[9] | xss_clean '
+                    ),
+                    array(
+                    'field' => 'user2name',
+                    'label' => '队员2姓名',
+                    'rules' => 'max_length[32] |xss_clean '
+                    ),
+                    array(
+                    'field' => 'user2num',
+                    'label' => '队员2学号',
+                    'rules' => 'exact_length[9] |xss_clean '
+                    ),
+                    array(
+                    'field' => 'teamname',
+                    'label' => '队伍名称',
+                    'rules' => 'required | max_length[32] | xss_clean '
+                    ),
+                    array(
+                    'field' => 'phone',
+                    'label' => '手机号',
+                    'rules' => 'required | exact_length[11] | xss_clean '
+                    ),
+                    array(
+                    'field' => 'contest_id',
+                    'label' => '比赛类型',
+                    'rules' => 'required | exact_length[1] | xss_clean '
+                    )
+                    );
+        $this->form_validation->set_rules($config);
+        $status = $this->form_validation->run();
+        if(!$status) 
+            echo false;
+        else{
+
+            $this->load->library('encrypt');
+            $this->load->helper('date');
+            $format = 'DATE_W3C';
+            $time = standard_date($format, time());
+            $contest_id = $this->input->post('contest_id',TRUE);
+            $username = $this->input->post('username',TRUE);
+            $usernum = $this->input->post('usernnum',TRUE);
+            $user1name = $this->input->post('user1name',TRUE);
+            $user1num = $this->input->post('user1num',TRUE);
+            $user2name = $this->input->post('user2name',TRUE);
+            $user2num = $this->input->post('user2num',TRUE);
+            $teamname = $this->input->post('teamname',TRUE);
+            $phone = $this->input->post('phone',TRUE);
+            if($this->user_model->teamname_check($teamname, $contest_id) > 0 || empty($this->session->userdata('user_id'))){
+                    echo false;
+            }  else {
+                $user_id = $this->session->userdata('user_id');
+                $team_id = $this->user_model->check_num_team($contest_id)+1;
+                $data = array(
+                        'user_id' => $user_id,
+                        'contest_id' => $contest_id,
+                        'team_name' => $teamname,
+                        'team_num1' => $usernum,
+                        'team_name1' => $username,
+                        'team_num2' => $user1num,
+                        'team_name2' => $user1name,
+                        'team_num3' => $user2num,
+                        'team_name3' => $user2name,
+                        'enroll_time' => $time,
+                        'team_id' => 'team'.$team_id,
+                        'phone' => $phone
+                    );
+                //echo $data;
+                //$result = true;
+                $result = $this->user_model->enroll($data);
+                if($result)
+                    echo true;
+                else
+                    echo  false;
+            }
+    }
+}
     //注册
     public function reg_act() {
         //$this->output->enable_profiler(TRUE);
@@ -44,7 +162,7 @@ class Register extends CI_Controller {
             echo 2;
             return;
         } 
-        $this->load->helper('form');
+        //$this->load->helper('form');
         $this->load->library('form_validation');
         $config = array(
                 array(

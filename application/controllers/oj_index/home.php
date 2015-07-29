@@ -198,9 +198,12 @@ class Home extends Oj_Controller{
 		$pid = $this->input->get('pid', TRUE);
 		$pn = $this->input->get('pn', TRUE);
 		$pc = $this->input->get('pc', TRUE);
-		if(!empty($pid)) $data['category'][0]=$this->pro->search_problem_byId($pid);
-		if(!empty($pn)) $data['category'][0]=$this->pro->search_problem_byTitle($pn);
-		if(!empty($pc)) $data['category']=$this->pro->search_problem_byClass($pc);
+		if(!empty($pid)) 
+			$data['category'][0]=$this->pro->search_problem_byId($pid);
+		if(!empty($pn)) 
+			$data['category'][0]=$this->pro->search_problem_byTitle($pn);
+		if(!empty($pc)) 
+			$data['category']=$this->pro->search_problem_byClass($pc);
 		if(empty($pid)&&empty($pn)&&empty($pc)){
 			$total_rows = $this->pro->problem_all_num();
 		$config['base_url'] = site_url('oj_index/home/index');   
@@ -248,16 +251,35 @@ class Home extends Oj_Controller{
 		}
 		$data['info'] = $this->user_model->user_rank();
 		//p($data['info']);die;
-		$this->load->view('oj_index/runk.html', $data);
+		$this->load->view('oj_index/rank.html', $data);
 	}
 	public function enroll(){
+
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
 			$data['username'] = $this->session->userdata('username');
 			$data['user_id'] = $this->session->userdata('user_id');
+			$data['contest'] = $this->user_model->school_contest();
 		}else {			
 			$data['username'] = false;
 			$data['user_id'] = false;
 		}
+		//p($data['contest']);
+		if(isset($data['user_id']) && $this->user_model->check_new_contest()){
+			$data['new_contest'] = $this->user_model->check_new_contest();
+			//p($this->user_model->check_new_contest());die;
+		}
+		if(isset($data['user_id']) && $this->user_model->check_old_contest()){
+			$data['old_contest'] = $this->user_model->check_old_contest();
+		}
+		//p($data);die;
+                                   if(isset($data['new_contest']) ||isset($data['old_contest'])){
+                                                    $data['check_enroll_old'] = $this->user_model->check_enroll($data['user_id'], isset($data['old_contest']['contest_id'])? $data['old_contest']['contest_id'] : 0);
+                                                    $data['check_enroll_new'] = $this->user_model->check_enroll($data['user_id'], isset($data['new_contest']['contest_id'])? $data['new_contest']['contest_id'] : 0);
+                                   }
 		$this->load->view('contest/enroll.html', $data);
 	}
+                   public function teams(){
+                                   $data['info'] = $this->user_model->teams();
+                                   $this->load->view('contest/teams.html', $data);
+                   } 
 }

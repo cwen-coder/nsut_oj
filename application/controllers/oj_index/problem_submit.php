@@ -28,6 +28,7 @@ class Problem_submit extends Oj_Controller{
 	}
 	function compileinfo(){
 		$solution_id = $this->input->post('solution_id');
+		//echo $solution_id;
 		$data = $this->ps->compileinfo($solution_id);
 		echo $data['error'];
 	}
