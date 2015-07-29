@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
-    <title>参赛队伍</title>
+    <title>沈阳工业大学在线判题系统</title>
     <link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
     <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/problem_search.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
     <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
     <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
   </head>
@@ -26,10 +28,7 @@
   }
 .user_info{
   position: relative;
-  margin:80px 100px;
-  padding:60px;
-  background-color:#f5f5f5;
-  min-height:20px;
+  margin-top:150px;
 }
 .class_hr{
   width:75%;
@@ -41,53 +40,44 @@
     width:20%;
   }
   .table{
-    width:100%;
+    width:60%;
   }
   td,th{
     text-align:center
   }
   .container_modal{
     margin-left:20%;
-}
-  .old_color{
-      background-color: #a8fb98;
-  }
-  .new_color{
-      background-color: #7480df;
   }
   </style>
   <body>
+<?php $this->load->view('oj_index/header.html');?>  
 <div class="user_info">
 <center>
 <table class="table table-bordered table-hover">
   <thead>
   <tr class="th_class">
-  <th style="width:6%">序号</th>
-  <th style="width:10%">Team号</th>
-  <th style="width:26%">队名</th>
-  <th style="width:16%">队长</th>
-  <th style="width:16%">队员</th>
-  <th style="width:16%">队员</th>
-  <th style="width:10%">新生赛</th>
+    <th style="width:20%">Rank</th>
+  <th style="width:20%">Username</th>
+  <th style="width:20%">Solved</th>
+  <th style="width:20%">Submitted</th>
+  <th style="width:20%">AC Ratio</th>
  </tr>
 </theaad>
 
 <tbody>
   <?php $i=1;?>
   <?php foreach($info as $v): ?>
-  <tr <?php if($v['con_class'] == '4') echo 'class="old_color" '; else echo 'class="new_color" ' ?> >
+  <tr>
+    <?php if ($v['username']!=null){?>
     <td><?php echo $i++;?></td>
-    <td><?php echo $v['team_id']?></td>
-    <td><?php echo $v['team_name']?></td>
-    <td><?php echo $v['team_name1']?></td>
-    <td><?php echo $v['team_name2']?></td>
-    <td><?php echo $v['team_name3']?></td>
-    <td><?php if($v['con_class'] == '3') echo 'Y';
-            else 
-                    echo 'N';
-        ?></td>
+    <td><?php echo $v['username']?></td>
+    <td><?php echo $v['solved']?></td>
+    <td><?php echo $v['submit']?></td>
+    <td><?php if($v['submit']!=0) echo sprintf("%.2f", $v['solved']/$v['submit']*100);
+                                else echo '0.00';
+    ?>%</td>
   </tr>
-<?php endforeach; ?>
+<?php } endforeach ?>
 </tbody>
 </table>
 </center>

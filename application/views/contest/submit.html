@@ -66,6 +66,9 @@ editAreaLoader.init({
 			<li><a href="<?= site_url('contest/ask_pro/index/'.$contest_id);?>">提问</a></li>
 		</ul>
 		<form class="navbar-form navbar-right">
+						<h5><a href="<?= site_url('oj_index/home/log_out');?>" style="text-decoration:none;"><span class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销</a></h5>
+						</form>
+		<form class="navbar-form navbar-right">
 			<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $this->session->userdata('username');?></a></h5>
 		</form>
 		</div><!-- /.navbar-collapse -->
