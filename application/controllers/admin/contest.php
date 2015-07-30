@@ -328,6 +328,6 @@ class Contest extends Admin_Controller {
 		}
 	}
 	public function contest_res(){
-		//echo "1111";
+		$this->load->view('admin/contest_res.html');
 	}
 }?>
