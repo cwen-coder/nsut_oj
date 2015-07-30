@@ -34,7 +34,14 @@ class  User_model extends CI_Model {
                                    else
                                        return true;
                    }
-                  //检查邮箱是否重复
+                   //查询参赛信息
+                   public function enroll_info($user_id, $contest_id){
+                       $query = "select team_name, team_num1, team_name1, team_num2, team_name2, team_num3, team_name3, team_telephone  from teams where contest_id = '$contest_id' and user_id = '$user_id'";
+                       $result = mysql_query($query);
+                       return mysql_fetch_assoc($result);
+                       
+                   }
+                   //检查邮箱是否重复
 	public function check_email($email) {
 		$query = "select * from users where email = '$email' ";
 		$result = mysql_query($query);
@@ -42,8 +49,8 @@ class  User_model extends CI_Model {
 		return $num;
 	}
                  //检查队名是否存在
-	public function teamname_check($teamname, $contest_id) {
-		$query = "select * from teams where team_name = '$teamname' and contest_id = '$contest_id' ";
+	public function teamname_check($teamname, $contest_id, $user_id) {
+		$query = "select * from teams where team_name = '$teamname' and contest_id = '$contest_id' and user_id!= '$user_id' ";
 		$result = mysql_query($query);
 		$num = mysql_num_rows($result);
 		return $num;
@@ -63,8 +70,14 @@ class  User_model extends CI_Model {
 		values ('$data[user_id]', '$data[contest_id]', '$data[team_num1]', '$data[team_name1]', '$data[team_num2]' , '$data[team_name2]',  '$data[team_num3]',  '$data[team_name3]',  '$data[team_name]',  '$data[enroll_time]',  '$data[phone]',  '$data[team_id]' )";
 		return mysql_query($query);
 	}
+                //修改参赛信息
+                public function updata_enroll($data){
+                                    $query = "update teams set team_num1 = '$data[team_num1]', team_name1 = '$data[team_name1]', team_num2 = '$data[team_num2]', team_name2 = '$data[team_name2]', team_num3 = '$data[team_num3]', team_name3 = '$data[team_name3]', team_name = '$data[team_name]', enroll_time = NOW(), team_telephone = '$data[phone]'
+                                              where user_id = '$data[user_id]' and contest_id = '$data[contest_id]]' ";
+                                    return mysql_query($query);
+                }
 
-	public function reg_act($data) {
+                public function reg_act($data) {
 		$query = "insert into users (user_id, username, password, accesstime, reg_time, ip, email) values ('$data[user_id]', '$data[username]', '$data[password]', '$data[accesstime]', '$data[reg_time]' ,'$data[ip]',  '$data[email] ' )";
 		return mysql_query($query);
 	}

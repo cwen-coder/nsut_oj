@@ -216,6 +216,10 @@ jQuery(document).ready(function() {
         var captcha = $(this).find('.input-xlarge').val();
         //console.log(contest_id);
         var Regx = /^[0-9]*$/ ;
+        if(contest_id== null){
+            alert('请选择参赛类型');
+            return false;
+        }
         if(usernnum == '') {
                 $(this).parent().find('.usernnum').focus();
                 $(this).parent().find('.usernnum').attr('placeholder', '请输入队长学号');
@@ -318,8 +322,8 @@ jQuery(document).ready(function() {
                     },function  (data) {
                         if (data == true) {
                             alert('恭喜你！报名成功！');
-                            console.log(phone);
-                            history.go(0) ;
+                            //console.log(phone);
+                            window.location.href= curPath + '/oj_index/home/school_contest';
                         }else if(data == 2) {
                         alert('验证码不正确！');
                         $("#captcha_img_r").click();
@@ -344,29 +348,7 @@ jQuery(document).ready(function() {
             //alert($("page-container2").style);
     });
 
-     //检查报名时间是否合法
-    $("#enroll").click(function(){
-        //检查报名是否开始或者结束
-      var start_time = Date.parse($("#pre_start_time").html());
-      var end_time = Date.parse($("#pre_end_time").html());
-      var timestamp1 = Date.parse(new Date(start_time))/1000;
-      var timestamp2 = Date.parse(new Date(end_time))/1000;
-      var now_time = Date.parse(new Date())/1000;
-        //console.log(timestamp1);
-        //console.log(timestamp2);
-        //console.log(now_time);
-         if(timestamp1 < now_time && timestamp2 > now_time){
-                window.location.href= curPath + '/contest/school_contest/enroll';
-        }else if(timestamp1 > now_time){
-            alert("报名还没有开始,敬请期待");
-        }
-        else if(timestamp2 < now_time){
-            alert("报名已经结束,如有问题请联系管理员");
-            //$("#enroll_info").show();
-            //$("#enroll_list").hide();
-            window.location.href= curPath + '/contest/school_contest/enroll';
-        }
-    });
+   
     //登录
      $('.page-container1 form .password').keyup(function(){
         $("#pass_info").text('');
@@ -422,9 +404,44 @@ jQuery(document).ready(function() {
         $("#teamname_info").text('');
         });
         
+        
+           //检查报名是否开始或者结束
+      var start_time = Date.parse($("#pre_start_time").html());
+      var end_time = Date.parse($("#pre_end_time").html());
+      var timestamp1 = Date.parse(new Date(start_time))/1000;
+      var timestamp2 = Date.parse(new Date(end_time))/1000;
+      var now_time = Date.parse(new Date())/1000;
+          //检查报名时间是否合法
+    $("#enroll").click(function(){
+        //console.log(timestamp1);
+        //console.log(timestamp2);
+        //console.log(now_time);
+         if(timestamp1 < now_time && timestamp2 > now_time){
+                window.location.href= curPath + '/contest/school_contest/enroll';
+        }else if(timestamp1 > now_time){
+            alert("报名还没有开始,敬请期待");
+        }
+        else if(timestamp2 < now_time){
+            alert("报名已经结束,如有问题请联系管理员");
+            //$("#enroll_info").show();
+            //$("#enroll_list").hide();
+            //window.location.href= curPath + '/contest/school_contest/enroll';
+        }
+    });
         //查看报名队伍
         $("#view_teams").click(function(){
             window.open(curPath + '/oj_index/home/teams' , "_blank");
         });
-        
+        //查看报名队伍updata_info
+        $("#updata_info").click(function(){
+            if(timestamp1 < now_time && timestamp2 > now_time){
+               window.location.href= curPath + '/contest/school_contest/updata_enroll';
+        }else if(timestamp1 > now_time){
+            alert("报名还没有开始,敬请期待");
+        }
+        else if(timestamp2 < now_time){
+            alert("报名已经结束,如有问题请联系管理员");
+        }
+           
+        });
 });
