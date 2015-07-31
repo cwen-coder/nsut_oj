@@ -31,9 +31,9 @@ class School_contest extends Oj_Controller{
                                                             $data['check_enroll_old'] = $this->user_model->check_enroll($data['user_id'], isset($data['old_contest']['contest_id'])? $data['old_contest']['contest_id'] : '-1');
                                                             $data['check_enroll_new'] = $this->user_model->check_enroll($data['user_id'], isset($data['new_contest']['contest_id'])? $data['new_contest']['contest_id'] : '-1');
                      }
-                     if(!$data['check_enroll_old'] || !$data['check_enroll_new']){
-                         echo " Illegal Operation";die;
-                     }
+//                     if(!$data['check_enroll_old'] || !$data['check_enroll_new']){
+//                         echo " Illegal Operation";die;
+//                     }
                         $this->load->view('contest/enroll_page.html', $data);
             }
         }
@@ -68,7 +68,7 @@ class School_contest extends Oj_Controller{
                              echo " Illegal Operation";die;
                          }
                             $data['enroll_info'] = $this->user_model->enroll_info($data['user_id'], !$data['check_enroll_old'] ? $data['old_contest']['contest_id'] : $data['new_contest']['contest_id']);
-                            //p($data);die;
+                            p($data);die;
                             $this->load->view('contest/updata_enroll.html', $data);
             }
             

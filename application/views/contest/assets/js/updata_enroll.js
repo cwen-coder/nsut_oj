@@ -4,6 +4,9 @@ jQuery(document).ready(function() {
         var em = false;
         var um = false;
         
+         //参赛类型初始化
+         
+    
         //注册验证码刷新
   $("#captcha_span_r").click(function(e){
     e.preventDefault();
@@ -181,5 +184,5 @@ jQuery(document).ready(function() {
     $("#old, #new").click(function(){
         $("#teamname_info").text('');
         });
-    
+   
 })

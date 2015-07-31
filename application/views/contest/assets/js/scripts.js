@@ -4,7 +4,17 @@ jQuery(document).ready(function() {
     var curPath = $("#hid_site").val();
         var em = false;
         var um = false;
-    
+       //注册验证码刷新
+  $("#captcha_span_r").click(function(e){
+    e.preventDefault();
+    var url = curPath+'/oj_index/login/code';
+    $("#captcha_img_r").attr("src",url);
+  });
+  $("#captcha_span_r_").click(function(e){
+    e.preventDefault();
+    var url = curPath+'/oj_index/login/code';
+    $("#captcha_img_r_").attr("src",url);
+  });
     //登录
     $('.page-container1 form').submit(function(evt){
         evt.preventDefault();
@@ -52,12 +62,7 @@ jQuery(document).ready(function() {
         });
     });
     
-    //注册验证码刷新
-  $("#captcha_span_r").click(function(e){
-    e.preventDefault();
-    var url = curPath+'/oj_index/login/code';
-    $("#captcha_img_r").attr("src",url);
-  });
+ 
     //注册------------------------------------------------------------------------------------------------------------------------
     $('.page-container2 form').submit(function(evt){
         evt.preventDefault();
@@ -100,7 +105,7 @@ jQuery(document).ready(function() {
                 success : function(data) {
                 if (!data) {
                     $("#user_info_reg").text("用户名以存在");
-                    $("#captcha_img_r").click();
+                    $("#captcha_img_r_").click();
                     um = true;
                 }else
                         um = false;
@@ -157,7 +162,7 @@ jQuery(document).ready(function() {
                     if(!data){
                     $(this).parent().find('.email').focus();
                     $("#email_info").text('邮箱已被注册');
-                    $("#captcha_img_r").click();
+                    $("#captcha_img_r_").click();
                     em = true;
                 }else
                     em = false;
@@ -186,7 +191,7 @@ jQuery(document).ready(function() {
                         }else if(data == 2) {
                     alert('验证码不正确！');
                     url = curPath+'/oj_index/login/code';
-                    $("#captcha_img_r").click();
+                    $("#captcha_img_r_").click();
                     //e.preventDefault();
                   } else {
                             alert('对不起！注册失败！');
@@ -441,6 +446,7 @@ jQuery(document).ready(function() {
         }
         else if(timestamp2 < now_time){
             alert("报名已经结束,如有问题请联系管理员");
+            //window.location.href= curPath + '/contest/school_contest/enroll';
         }
            
         });

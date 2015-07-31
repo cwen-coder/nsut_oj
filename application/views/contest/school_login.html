@@ -103,7 +103,7 @@ color:#fff;
                 <div class ="log_captcha_style" >
                     <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
                     <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
-                <span style="cursor: pointer;color:red;" id="captcha_span_l">点击刷新图片</span>
+                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
                 <div class="error_info"><span id="captcha_info" style="color:red;"></span></div>
                 </div>
                <?php endif;?>
@@ -128,8 +128,8 @@ color:#fff;
                 <div class="error_info"><span id="email_info" style="color:red;"></span></div>
                 <div class ="reg_captcha_style" >
                     <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
-                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
-                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
+                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r_" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+                <span style="cursor: pointer;color:red;" id="captcha_span_r_">点击刷新图片</span>
                <div class="error_info"><span id="captcha_info_reg" style="color:red;"></span></div>
                 </div>
                 <button class="button1" type="submit">确定</button>

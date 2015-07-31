@@ -262,9 +262,7 @@ class Home extends Oj_Controller{
 		}else {			
 			$data['username'] = false;
 			$data['user_id'] = false;
-		}
-		//p($data['contest']);
-                                  
+		}                                
 		 if($a=$this->user_model->check_new_contest()){
 			$data['new_contest'] = $a;
 			//p($this->user_model->check_new_contest());die;
@@ -272,7 +270,6 @@ class Home extends Oj_Controller{
                                     if($b=$this->user_model->check_old_contest()){
 			$data['old_contest'] = $b;
                                     }
-		//p($data);die;
                                     $data['check_enroll_old'] = true;
                                     $data['check_enroll_new'] = true;
                                    if($data['user_id'] && (isset($data['new_contest']) ||isset($data['old_contest'])) ){

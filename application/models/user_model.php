@@ -36,7 +36,7 @@ class  User_model extends CI_Model {
                    }
                    //查询参赛信息
                    public function enroll_info($user_id, $contest_id){
-                       $query = "select team_name, team_num1, team_name1, team_num2, team_name2, team_num3, team_name3, team_telephone  from teams where contest_id = '$contest_id' and user_id = '$user_id'";
+                       $query = "select team_name, contest_id, team_num1, team_name1, team_num2, team_name2, team_num3, team_name3, team_telephone  from teams where contest_id = '$contest_id' and user_id = '$user_id'";
                        $result = mysql_query($query);
                        return mysql_fetch_assoc($result);
                        
