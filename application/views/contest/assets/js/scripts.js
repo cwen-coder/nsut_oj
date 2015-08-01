@@ -22,9 +22,9 @@ jQuery(document).ready(function() {
         var password = $(this).find('.password').val();
         var captcha = $(this).find('.input-xlarge').val();
         if(captcha == undefined) captcha = "undefined";
-        console.log(captcha);
-        console.log(username);
-        console.log(password);
+        //console.log(captcha);
+        //console.log(username);
+        //console.log(password);
         if(username == '') {
                 $(this).parent().find('.username').attr('placeholder', '请输入用户名');
                 $(this).parent().find('.username').focus();
@@ -43,7 +43,10 @@ jQuery(document).ready(function() {
                 $("#captcha_info").text("请输入验证码");
             return false;
         }
-        var url = curPath + '/oj_index/login/log_act';
+        if($("#enter").val() == undefined)
+                var url = curPath + '/oj_index/login/log_act';
+         else 
+                var url = curPath + 'contest/school_contest/school_login';
         $.post(url,{
             username : username,
             password : password,
@@ -61,7 +64,6 @@ jQuery(document).ready(function() {
         }
         });
     });
-    
  
     //注册------------------------------------------------------------------------------------------------------------------------
     $('.page-container2 form').submit(function(evt){
@@ -242,12 +244,19 @@ jQuery(document).ready(function() {
                 $("#username_info").text("队长姓名不能为空");
             return false;
         }
-        if(teamname == '') {
+        if(teamname.length == '') {
                 $(this).parent().find('.teamname').focus();
                 $(this).parent().find('.teamname').attr('placeholder', '请输入队伍名');
                 $("#teamname_info").text("队伍名不能为空");
             return false;
         }
+        if(teamname.length > 10) {
+                $(this).parent().find('.teamname').focus();
+                $(this).parent().find('.teamname').attr('placeholder', '请输入队伍名');
+                $("#teamname_info").text("队伍名不能大于10个字符");
+            return false;
+        }
+
         if(teamname != ''){
             var url = curPath+'/oj_index/register/teamname_check';
             $.ajax({
@@ -448,6 +457,10 @@ jQuery(document).ready(function() {
             alert("报名已经结束,如有问题请联系管理员");
             //window.location.href= curPath + '/contest/school_contest/enroll';
         }
-           
+        });
+        //点击进入比赛
+        $("#enter_contest").click(function(){
+//           var password = prompt("请输入密码");
+//           console.log(password);
         });
 });

@@ -33,8 +33,8 @@
         color: #000;
       }
 .button1{
-    background: #ef4300;
-    border-color:#ff730e;
+    background: #00CD00;
+    border-color:#00EE00;
 }
 .button2{
     background: #00CD00;
@@ -52,6 +52,11 @@
     margin-top:5%;
     disabled: false;
 }
+.button5{
+    background: #00CD00;
+    border-color:#00EE00;
+    margin-top: 5%;
+}
 a{
 text-decoration:none;
 color:#fff;
@@ -61,9 +66,10 @@ color:#fff;
     margin-left:0;
 }
 .error_info{
-    width: 400px;
+    width: 800px;
     height: 17px;
-    margin: 5px;
+    margin: 6px;
+    float: center;
 }
 .error_info_enroll{
     width: 300px;
@@ -88,18 +94,26 @@ color:#fff;
     margin-left: 100px;
     margin-bottom: 10px;
 }
+.page-container1 {
+  position: absolute;
+    width:800px;
+    height:450px;
+    left:50%;
+    top:50%; 
+    margin-left:-400px;margin-top:-250px;
+}
 </style>
     </head>
     <body>
         
-        <?php if(isset($old_contest) || isset($new_contest)){?>
-        <div class="page-container3">
-
+  
+       <?php if(isset($school_info)) :?>
+        <div class="page-container1">
             <div id="enroll_list">
-                <div style="color:black;font-size:60px;"><?php echo isset($old_contest['title']) ? $old_contest['title'] : $new_contest['title']; ?></div>
-                <div style="color:black;margin-top:3%;"><span>比赛开始时间：<span style="color:red"><?php echo isset($old_contest['start_time']) ? $old_contest['start_time'] : $new_contest['start_time'] ?></span></span><span style="color:black;margin-left:8%">比赛结束时间：<span style="color:red"><?php echo isset($old_contest['end_time']) ? $old_contest['end_time'] :$new_contest['end_time']?></span></span></div>
-                <div style="color:black;margin-top:3%;"><span>报名开始时间：<span style="color:red" id="pre_start_time"><?php echo isset($old_contest['pre_start_time']) ? $old_contest['pre_start_time'] : $new_contest['pre_start_time'] ?></span></span><span style="color:black;margin-left:8%">报名结束时间：<span style="color:red" id="pre_end_time"><?php echo isset($old_contest['pre_end_time']) ? $old_contest['pre_end_time'] :$new_contest['pre_end_time']?></span></span></div>
-                 <?php if((isset($old_contest['start_time']) ? $old_contest['start_time'] : $new_contest['start_time']) > Now() ):?>
+                <div style="color:black;font-size:60px;"><?php echo isset($school_info[0]['title']) ? $school_info[0]['title'] : '暂无校赛'; ?></div>
+                <div style="color:black;margin-top:3%;"><span>报名开始时间：<span style="color:red" id="pre_start_time"><?php echo isset($school_info[0]['pre_start_time']) ? $school_info[0]['pre_start_time'] : '0000-00-00 00:00:00'; ?></span></span><span style="color:black;margin-left:8%">报名结束时间：<span style="color:red" id="pre_end_time"><?php echo isset($school_info[0]['pre_end_time']) ? $school_info[0]['pre_end_time'] :'0000-00-00 00:00:00';?></span></span></div>
+                <div style="color:black;margin-top:3%;"><span>比赛开始时间：<span style="color:red"><?php echo isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0000-00-00 00:00:00'; ?></span></span><span style="color:black;margin-left:8%">比赛结束时间：<span style="color:red"><?php echo isset($school_info[0]['end_time']) ? $school_info[0]['end_time'] :'0000-00-00 00:00:00';?></span></span></div>
+                 <?php if((isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0' ) > Now() ):?>
                 <div style="color:yellow;font-size:40px;margin-top:5%;"><h2>距离比赛开始还有:</h2></div>    
                 <div id="counter" style="text-align: center;margin-left:18%;margin-top:8%;"></div>
                <div class="desc" style="text-align: center;margin-left:20%;">
@@ -109,79 +123,51 @@ color:#fff;
                 <div>秒</div>
               </div>
                 <?php endif;?>
-                <?php if((isset($old_contest['start_time']) ? $old_contest['start_time'] : $new_contest['start_time']) > Now() && (isset($old_contest['end_time']) ? $old_contest['end_time'] : $new_contest['end_time']) < Now() ): ?>               
-                <div style="color:red;font-size:40px;margin-top:5%;"><h2>比赛正在进行中......</h2></div>    
-                <div style="text-align: center;margin-left:18%;margin-top:8%;">
-                    <button class="button1" type="submit">点击进入比赛</button>
-                </div>
+                <?php if((isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0' )< Now() && (isset($school_info[0]['end_time']) ? $school_info[0]['end_time'] : '0' ) > Now() ): ?>               
+                <div style="color:red;font-size:40px;margin-top:5%;"><h2>比赛正在进行中......</h2></div>
+                <?php if(!isset($school_contest)) {?>
+
+                    <form action="" method="post">
+                        <input type="text" name="username" class="username" placeholder="Username"> 
+                        <div class="error_info"><span id="user_info" style="color:red;">*此处填写 比赛注册时填写的用户名</span></div>
+                        <input type="password" name="password" class="password" placeholder="Password">
+                        <div class="error_info"><span id="pass_info" style="color:red;">*此处填写 比赛开始前下发的密码条</span></div>
+                       <?php if(isset($_SESSION ['fs'])&&$_SESSION ['fs']>2):?>
+                        <div class ="log_captcha_style" >
+                            <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
+                            <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+                        <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
+                        <div class="error_info"><span id="captcha_info" style="color:red;"></span></div>
+                          </div>
+                       <?php endif;?>
+                       <button class="button1" type="submit" id="enter">点击进入比赛</button>
+                    </form>              
+                <?php }else{?>
+                 <button class="button1" type="submit" id="enter_contest">点击进入比赛</button>
+                <?php } ?>
+                                 
                <?php endif;?>
-               <?php if(!$check_enroll_old || !$check_enroll_new ):?>
+               <?php if((isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0' ) > Now()):?>
+               <?php if((!$check_enroll_old || !$check_enroll_new) ):?>
                <button class="button4" >您已报名</button>
                <?php endif;?>
                <?php if($check_enroll_old && $check_enroll_new ) :?>
               <button class="button3" type="submit" id="enroll" >报名参赛</button>
               <?php endif;?>
-              <div style="margin-top: 25px"><button id="view_teams"><a href="" target="_blank" style="color:red;">查看参赛队伍</a></button></div>
-              <?php if(!$check_enroll_old || !$check_enroll_new) :?>
-              <button class="button2" type="submit" id="updata_info" >修改参赛信息</button>
+              <?php endif;?>             
+              <?php if((isset($school_info[0]['end_time']) ? $school_info[0]['end_time'] : '0' ) < Now()):?>
+              <div style="color:red;font-size:40px;margin-top:5%;"><h2>比赛已结束</h2></div> 
+              <button class="button5" type="submit">查看比赛结果</button>
               <?php endif;?>
+              <div style="margin-top: 25px"><button id="view_teams"><a href="" target="_blank" style="color:red;">查看参赛队伍</a></button></div>
+              <?php if((!$check_enroll_old || !$check_enroll_new) &&(isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0' ) > Now()) :?>
+              <button class="button2" type="submit" id="updata_info" >修改参赛信息</button>
+              <?php endif;?>      
             </div>
-
-                <div id = "enroll_info" style="display:none">
-                    <h1 style="color:red">完善参赛信息</h1>
-                    <textarea class="contest_info" readonly="readonly">以下是本次比赛的注意事项,请参赛队员认真阅读</textarea>
-                <form action="" method="post">
-
-                <div class="radio_div">
-                    <span style="color:red;font-size:20px;">选择参赛类型:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <?php if(isset($old_contest)):?>
-                <input class="radio_class" type="radio" value="<?php echo $old_contest['contest_id'];?>"  name="group" checked="checked" id="old">&nbsp;<span style="color:red;">老生赛</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <?php endif;
-                if(isset($new_contest)):?>
-                <input class="radio_class" type="radio" value="<?php echo $new_contest['contest_id'];?>" name="group" id="new">&nbsp;<span style="color:red;">新生赛</span>
-                <?php endif;?>
-                </div>
-
-                <input type="text" name="usernnum" class="usernnum" placeholder="队长学号">
-                <input type="text" name="username" class="username" placeholder="队长姓名">
-                
-                <div class="error_info_enroll" style="margin-left: 100px;"><span id="usernum_info" style="color:red;"></span></div>
-                <div class="error_info_enroll"><span id="username_info" style="color:red;"></span></div>
-                <input type="text" name="user1num" class="user1num" placeholder="队员1学号">
-                <input type="text" name="user1name" class="user1name" placeholder="队员1姓名">
-                
-                <div class="error_info_enroll" style="margin-left: 100px;"><span id="user1num_info" style="color:red;"></span></div>
-                <div class="error_info_enroll"><span id="user1name_info" style="color:red;"></span></div>
-          
-                <input type="text" name="user2name" class="user2num" placeholder="队员2学号">
-                <input type="text" name="user2name" class="user2name" placeholder="队员2姓名">
-                
-                <div class="error_info_enroll" style="margin-left: 100px;"><span id="user2num_info" style="color:red;"></span></div>
-                <div class="error_info_enroll"><span id="user2name_info" style="color:red;"></span></div>
-                <input type="text" name="teamname" class="teamname" placeholder="队伍名称">
-                <input type="text" name="phone" class="phone" placeholder="联系方式-手机号">
-                <div class="error_info_enroll" style="margin-left: 100px;"><span id="teamname_info" style="color:red;"></span></div>
-                <div class="error_info_enroll"><span id="phone_info" style="color:red;"></span></div>
-                
-                <div class ="log_captcha_style" >
-                    <input type="text" class="input-xlarge" id="captcha_r" name="captcha" placeholder="验证码"  style="width:100px;">
-                    <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
-                <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
-                </div>
-                <div class="error_info" style="margin-left: 200px;"><span id="captch_info" style="color:red;"></span></div>
-                <button class="button1" type="submit">提交报名</button>
-                <div class="error"><span>+</span></div>
-                </form>
-                </div>
-        </div>
-
-    <?php } else{ ?>
-        <div class="page-container3">
-            <div style="color:red;font-size:40px;margin-top:5%;"><h2>暂无校赛</h2></div><br/>
-            <button class="button3" type="submit"><a href="<?php echo site_url('oj_index/home');?>">前去练习</a></button>
-        </div>
-        <?php }?>
-
+        </div>       
+        <?php else:?>
+        <div>暂无校赛</div>
+        <?php endif;?>
         <!-- Javascript -->
         <script src="<?php echo base_url('application/views/contest/assets/js/jquery-1.8.2.min.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized.3.2.7.min.js');?>"></script>
@@ -189,7 +175,7 @@ color:#fff;
         <script src="<?php echo base_url('application/views/contest/assets/js/scripts.js');?>"></script>
         <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
         <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
-        <input id = "start_time" type="hidden" value = "<?php echo isset($old_contest['start_time']) ? $old_contest['start_time'] : $new_contest['start_time']; ?>" />
+        <input id = "start_time" type="hidden" value = "<?php echo isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0'; ?>" />
         <script src="<?php echo base_url('application/views/contest/js/jquery.min.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script src="<?php echo base_url('application/views/contest/js/jquery.countdown.js'); ?>" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript">

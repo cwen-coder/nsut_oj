@@ -56,16 +56,29 @@ class  User_model extends CI_Model {
 		return $num;
 	}
                 //所搜所有参加校赛队伍
-                public  function teams(){
-                                    $query = "select team_id, team_name, team_name1, team_name2, team_name3, con_class from teams a, contest b where a.contest_id = b.contest_id and (b.con_class = '3' or b.con_class = '4') and b.start_time > NOW() ";
+                public  function teams(){                                   
+                                    $query = "select team_id, team_name, team_name1, team_name2, team_name3, con_class from teams a, contest b where a.contest_id = b.contest_id and (b.con_class = '3' or b.con_class = '4') and b.end_time = (
+                                             select  max(b.end_time)  from teams a, contest b where a.contest_id = b.contest_id and (b.con_class = '3' or b.con_class = '4')) order by a.enroll_time";
                                     $result = mysql_query($query);
                                     $data = array();
                                     while($row = mysql_fetch_assoc($result))
                                             $data[] = $row;
                                     return $data;
                 }
+                //校赛详情显示
+                 public  function school_info(){                                   
+                                   $query = "select contest_id, title, start_time, end_time, pre_start_time, pre_end_time from contest where (con_class = 4 or con_class= 3) and  end_time=("
+                                            . " select  max(end_time) from contest where con_class = 4 or con_class= 3)";
+		$result = mysql_query($query);
+                                    $data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}//p($data);die;
+		return $data;
+                }
                 //注册写入数据库
 	public function enroll($data) {
+                                    
 		$query = "insert into teams (user_id, contest_id, team_num1, team_name1, team_num2, team_name2, team_num3, team_name3, team_name, enroll_time, team_telephone, team_id) 
 		values ('$data[user_id]', '$data[contest_id]', '$data[team_num1]', '$data[team_name1]', '$data[team_num2]' , '$data[team_name2]',  '$data[team_num3]',  '$data[team_name3]',  '$data[team_name]',  '$data[enroll_time]',  '$data[phone]',  '$data[team_id]' )";
 		return mysql_query($query);
@@ -120,7 +133,23 @@ class  User_model extends CI_Model {
 			return false;
 		}
 	}
-	public function user_rank(){
+                 public function user_password($user_id){
+                                    $query = "select password from users where user_id = '$user_id' ";
+		$result = mysql_query($query);
+		$data = mysql_fetch_assoc($result);
+		return $this->encrypt->decode($data['password']);
+                 }
+                  //检查队伍密码
+                  public function check_teampassword($data){
+                                     $query = "select  team_pwd from teams where contest_id = '$data[contest_id]' and user_id = '$data[user_id]' ";
+                                    $result = mysql_query($query);
+                                    $meta = mysql_fetch_assoc($result);
+                                    if($meta['team_pwd'] == $data['password'] )
+                                        return $meta['team_pwd'];
+                                    else 
+                                        return false;
+                  }
+                  public function user_rank(){
 		$sql_query = "select username, submit,solved
 				from users
 				order by solved desc,submit ";
