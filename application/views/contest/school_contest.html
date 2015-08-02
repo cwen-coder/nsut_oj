@@ -100,7 +100,7 @@ color:#fff;
     height:450px;
     left:50%;
     top:50%; 
-    margin-left:-400px;margin-top:-250px;
+    margin-left:-400px;margin-top:-300px;
 }
 </style>
     </head>
@@ -124,7 +124,7 @@ color:#fff;
               </div>
                 <?php endif;?>
                 <?php if((isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0' )< Now() && (isset($school_info[0]['end_time']) ? $school_info[0]['end_time'] : '0' ) > Now() ): ?>               
-                <div style="color:red;font-size:40px;margin-top:5%;"><h2>比赛正在进行中......</h2></div>
+                <div style="color:red;font-size:40px;margin-top:5%;margin-bottom:5%;"><h2>比赛正在进行中......</h2></div>
                 <?php if(!isset($school_contest)) {?>
 
                     <form action="" method="post">

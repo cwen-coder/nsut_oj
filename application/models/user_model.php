@@ -133,19 +133,21 @@ class  User_model extends CI_Model {
 			return false;
 		}
 	}
-                 public function user_password($user_id){
-                                    $query = "select password from users where user_id = '$user_id' ";
+                 public function user_password($username){
+                                    $query = "select password from users where username = '$username' ";
 		$result = mysql_query($query);
 		$data = mysql_fetch_assoc($result);
+                                   //echo $data;
+                                   $this->load->library('encrypt');
 		return $this->encrypt->decode($data['password']);
                  }
                   //检查队伍密码
                   public function check_teampassword($data){
-                                     $query = "select  team_pwd from teams where contest_id = '$data[contest_id]' and user_id = '$data[user_id]' ";
+                                     $query = "select  a.team_pwd from teams a, users b where a.user_id=b.user_id and a.contest_id = '$data[contest_id]' and b.username = '$data[username]' ";
                                     $result = mysql_query($query);
                                     $meta = mysql_fetch_assoc($result);
-                                    if($meta['team_pwd'] == $data['password'] )
-                                        return $meta['team_pwd'];
+                                    if($meta['team_pwd'] == $data['team_password'] )
+                                        return $data['contest_id'];
                                     else 
                                         return false;
                   }

@@ -46,20 +46,21 @@ jQuery(document).ready(function() {
         if($("#enter").val() == undefined)
                 var url = curPath + '/oj_index/login/log_act';
          else 
-                var url = curPath + 'contest/school_contest/school_login';
+                var url = curPath + '/contest/school_contest/school_login';
         $.post(url,{
             username : username,
             password : password,
             captcha : captcha
         },function(data){
             if (data == 2) {
-            //alert("验证码错误");
+            alert("验证码错误");
             $("#captcha_info").text('验证码错误');
             $("#captcha_img_r").click();
         } else if(data == false) {
-          alert("用户名或密码错误");
-          history.go(0);
+          $("#captcha_img_r").click();
         } else{
+            //alert(1111);
+            console.log(data);
             window.location.href= curPath + '/oj_index/home/school_contest';
         }
         });
@@ -460,7 +461,7 @@ jQuery(document).ready(function() {
         });
         //点击进入比赛
         $("#enter_contest").click(function(){
-//           var password = prompt("请输入密码");
-//           console.log(password);
+            window.location.href= curPath + '/contest/school_contest/school_pro_list';        
+//          $("#captcha_img_r").click();
         });
 });
