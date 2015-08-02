@@ -609,7 +609,7 @@ function error($msg){
 *当前时间
 */
 function Now(){
-	$datestring = "Y-m-d h:i:s";
+	$datestring = "Y-m-d H:i:s";
 	$time = time();
 	return date($datestring, $time); 
 }

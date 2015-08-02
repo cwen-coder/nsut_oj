@@ -36,9 +36,10 @@ class Register extends CI_Controller {
     }
     //获取ajax传回数据验证是否存在
     public function teamname_check(){
+        $user_id = $this->session->userdata('user_id');
         $teamname = $this->input->post('teamname',TRUE);
         $contest_id = $this->input->post('contest_id',TRUE);
-        $result = $this->user_model->teamname_check($teamname, $contest_id);
+        $result = $this->user_model->teamname_check($teamname, $contest_id, $user_id);
         if($result > 0)
             echo false;
         else
@@ -46,12 +47,21 @@ class Register extends CI_Controller {
     }
     //报名 完善信息
     public function enroll(){
+
         $captcha = $this->input->post('cap_r', TRUE);
                 if (strtolower($captcha) !=  strtolower($_SESSION ['code'])){
                         echo 2;
                         return;
                     }
-                  if(!($this->user_model->check_old_contest()['pre_start_time'] < Now() && $this->user_model->check_old_contest()['pre_end_time'] >  Now())){
+                        if($a=$this->user_model->check_new_contest()){
+                                $new = $a;
+                        }
+                        if($b=$this->user_model->check_old_contest()){
+                                    $old = $b;
+                          }
+                    $pre_start_time = isset($old['pre_start_time']) ? $old['pre_start_time'] : $new['pre_start_time'] ;
+                    $pre_end_time = isset($old['pre_end_time']) ? $old['pre_end_time'] : $new['pre_end_time'] ;
+                  if(!($pre_start_time < Now() && $pre_end_time >  Now()) ){
                       echo false;
                       return;
                   }
@@ -101,7 +111,7 @@ class Register extends CI_Controller {
                     array(
                     'field' => 'contest_id',
                     'label' => '比赛类型',
-                    'rules' => 'required | exact_length[1] | xss_clean '
+                    'rules' => 'required | exact_length[4] | xss_clean '
                     )
                     );
         $this->form_validation->set_rules($config);
@@ -123,10 +133,11 @@ class Register extends CI_Controller {
             $user2num = $this->input->post('user2num',TRUE);
             $teamname = $this->input->post('teamname',TRUE);
             $phone = $this->input->post('phone',TRUE);
-            if($this->user_model->teamname_check($teamname, $contest_id) > 0 || empty($this->session->userdata('user_id'))){
+            $user_id = $this->session->userdata('user_id');
+            if($this->user_model->teamname_check($teamname, $contest_id, $user_id) > 0 || !isset($user_id) || !$this->user_model->check_enroll($user_id, $contest_id)  ){
                     echo false;
             }  else {
-                $user_id = $this->session->userdata('user_id');
+                
                 $team_id = $this->user_model->check_num_team($contest_id)+1;
                 $data = array(
                         'user_id' => $user_id,
