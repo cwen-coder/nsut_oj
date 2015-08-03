@@ -57,10 +57,11 @@ jQuery(document).ready(function() {
             $("#captcha_info").text('验证码错误');
             $("#captcha_img_r").click();
         } else if(data == false) {
-          $("#captcha_img_r").click();
+          alert("用户名或密码错误");
+         $("#captcha_img_r").click();
         } else{
             //alert(1111);
-            console.log(data);
+            //console.log(data);
             window.location.href= curPath + '/oj_index/home/school_contest';
         }
         });
@@ -461,7 +462,7 @@ jQuery(document).ready(function() {
         });
         //点击进入比赛
         $("#enter_contest").click(function(){
-            window.location.href= curPath + '/contest/school_contest/school_pro_list';        
-//          $("#captcha_img_r").click();
+                window.location.href= curPath + '/contest/school_contest/school_pro_list';
+//           console.log(password);
         });
 });

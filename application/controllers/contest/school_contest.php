@@ -288,10 +288,16 @@ class School_contest extends Oj_Controller{
         }
         //校赛题目列表页面
         public function school_pro_list(){
-            
-            if($a=$this->session->userdata('school_contest')){
-                $contest_id=$a;
+             if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
+                                                    $data['contest_id'] =$a;
+                                                    $data['username'] =  $b;                                                   
+			$data['user_id'] = $c;
+            }else{
+                                                    $data['username'] = false;
+			$data['user_id'] = false;
             }
-            echo $contest_id;die;
-        }
+
+            $this->load->view('contest/school_pro_list.html',$data);
+            }
+        
 }
