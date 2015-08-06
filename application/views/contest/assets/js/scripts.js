@@ -462,7 +462,7 @@ jQuery(document).ready(function() {
         });
         //点击进入比赛
         $("#enter_contest").click(function(){
-                window.location.href= curPath + '/contest/school_contest/school_pro_list';
+                window.location.href= curPath + '/contest/contest/school_pro_list';
 //           console.log(password);
         });
 });

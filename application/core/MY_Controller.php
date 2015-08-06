@@ -67,6 +67,15 @@ class Sch_Controller extends CI_Controller{
     public function __construct() {
         parent::__construct();
                 $this->load->switch_view_off();
+                $this->load->model('user_model');
+            if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
+                                                    $data['contest_id'] =$a;
+                                                    $data['username'] =  $b;                                                   
+			$data['user_id'] = $c;
+            }else{
+                                                    $data['username'] = false;
+			$data['user_id'] = false;
+            }
          if(!isset($data['contest_id'] )){
          if($this->session->userdata('school_contest')){
                                         $data['school_contest'] = $this->session->userdata('school_contest');
