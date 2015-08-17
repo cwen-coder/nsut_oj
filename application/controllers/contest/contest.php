@@ -89,6 +89,51 @@ class Contest extends Sch_Controller{
         }
         //校赛现场排名
         public function rank(){
-            $this->load->view('contest/sch_con_rank.html',$data);
+            if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
+                                                    $data['contest_id'] =$a;
+                                                    $data['username'] =  $b;                                              
+			$data['user_id'] = $c;
+            }else{
+                                                    $data['username'] = false;
+			$data['user_id'] = false;
+            }
+            if(isset($data['contest_id'] )){
+               function sec2str($sec){
+	return sprintf("%02d:%02d:%02d",$sec/3600,$sec%3600/60,$sec%60);
+               }
+               $rank = array();
+               $data['rank'] = array();
+               $user_cnt = 0;
+               $user_name='';
+                $rank = $this->sch_model->school_con_rank($data['contest_id']);
+                $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+                foreach($rank as $v):
+                    if($user_name != $v['user_id']){
+                        $user_cnt++;
+                        $data['rank'][$user_cnt]['user_id'] = $v['user_id'];
+                        $data['rank'][$user_cnt]['username'] = $v['username'];                   
+                        $user_name = $v['user_id'];
+                        $data['rank'][$user_cnt]['solved'] = 0;
+                        $data['rank'][$user_cnt]['time'] = 0;
+                    }
+                    $rank_info = $v;
+                    if (isset($data['rank'][$user_cnt]['p_ac_sec'][$rank_info['num']]) && $data['rank'][$user_cnt]['p_ac_sec'][$rank_info['num']]>0)
+                                break;
+                         if (intval($rank_info['result']) !=4){
+                                if(isset($data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']])){
+                                        $data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]++;
+                                }else{
+                                        $data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]=1;
+                                 }
+                        }else{
+                                $data['rank'][$user_cnt]['p_ac_sec'][$rank_info['num']] = sec2str(strtotime($rank_info['in_date']) - strtotime($data['contest']['start_time']));
+                                $data['rank'][$user_cnt]['solved']++;
+                                if(!isset($data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']])) $data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]=0;
+                                $data['rank'][$user_cnt]['time'] += (strtotime($rank_info['in_date']) - strtotime($data['contest']['start_time'])) +$data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]*1200;
+                        }
+                 endforeach;              
+                p($data);die;
+                $this->load->view('contest/sch_con_rank.html',$data);
+            }
         }
 }

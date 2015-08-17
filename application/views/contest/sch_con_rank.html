@@ -28,8 +28,8 @@
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
 			<li><a href="<?= site_url('contest/contest/school_pro_list');?>">比赛题目<span class="sr-only">(current)</span></a></li>
-			<li class="active"><a href="<?= site_url('contest/contest/status');?>">提交状态</a></li>
-			<li><a href="<?= site_url('contest/contest/rank);?>">现场排名</a></li>
+			<li><a href="<?= site_url('contest/contest/status');?>">提交状态</a></li>
+			<li class="active"><a href="<?= site_url('contest/contest/rank');?>">现场排名</a></li>
 			<li><a href="<?= site_url('contest/contest/ask');?>">比赛提问</a></li>
 		</ul>
 		<form class="navbar-form navbar-right">
@@ -49,29 +49,16 @@
 	<div class="well">
 		<table class="table table-bordered" id = "ran_table" style="background-color:#FFFFFF;">
 			<thead>
-				<th style="width:5%;">排名</th>
-		  		<th style="width:10%;">用户名</th>
-		  		<th style="width:6%;">罚时</th>
-		  		<?php foreach($con_pro as $v) :?>
-		  			<th style="text-align: center;
-"><?= $arr[$v['num']];?></th>
-		  		<?php endforeach;?>
+				<th style="text-align: center;width:5%;">排名</th>
+		  		<th style="text-align: center;width:10%;">用户名</th>
+                                                                     <th style="text-align: center;width:10%;">昵称</th>
+		  		<th style="text-align: center;width:6%;">罚时</th>
+		  		<?php $i=$contest['problem_sum']; for($j=0;$j<$i;$j++) {?>
+		  			<th style="text-align: center;"><?php echo chr(65+$j);?></th>
+		  		<?php }?>
 			</thead>
 			<tbody>
-				<?php foreach($con_user as $key => $vu) :?>
-					<tr>
-						<td><?= $key+1;?></td>
-						<td><?= $vu['username'];?></td>
-						<td><?= $vu['penalty'];?></td>
-						<?php foreach($con_pro as $v) :?>
-							<?php if ($vu[$v['num']]['error_sum'] > 0): ?>
-		  				<td class="td_pro" name = "<?= $vu[$v['num']]['error_sum'];?>" ><?= $vu[$v['num']]['ac_time'].'(-'.$vu[$v['num']]['error_sum'].')';?></td>
-						<?php else: ?>
-							<td class="td_pro" name = "<?= $vu[$v['num']]['error_sum'];?>"><?= $vu[$v['num']]['ac_time'];?></td>
-						<?php endif; ?>
-		  				<?php endforeach;?>
-					</tr>
-				<?php endforeach;?>
+                                                    
 			</tbody>
 		</table>
 	</div>
