@@ -76,7 +76,7 @@ class Sch_Controller extends CI_Controller{
                                                     $data['username'] = false;
 			$data['user_id'] = false;
             }
-         if(!isset($data['contest_id'] )){
+         if(!isset($data['contest_id'] ) && !isset($data['username']) && !isset($data['user_id'])){
          if($this->session->userdata('school_contest')){
                                         $data['school_contest'] = $this->session->userdata('school_contest');
                                     }

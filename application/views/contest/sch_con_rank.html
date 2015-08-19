@@ -7,16 +7,17 @@
 		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
 		<title>沈阳工业大学在线判题系统</title>
 		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
-		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
+		<link href="<?= base_url('application/views/contest/css/sch_contest.css');?>" rel="stylesheet">
 		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
 		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
-	</head>
-	<style type="text/css">
+                	<style type="text/css">
 	th {
 		background-color: #222;
 		color: #FFFFFF;
 	}
 	</style>
+	</head>
+
 <body>
 <nav class="navbar navbar-fixed-top navbar-inverse ">
 <div class="container">
@@ -58,13 +59,53 @@
 		  		<?php }?>
 			</thead>
 			<tbody>
-                                                    
-			</tbody>
+                                                     <?php $j=1;
+                                                     foreach($rank as $v): ?>
+                                                     <tr>
+                                                                   <?php $gold = "FFFF00"; $silver = "CCCCCC"; $copper = "FF9933";
+                                                                   if($contest['gold'] >= $j)
+                                                                      echo "<td style='text-align:center;color:red;background-color:#".$gold." '>";
+                                                                   if($contest['gold'] < $j && $j <= $contest['gold']+$contest['silver'])
+                                                                      echo "<td style='text-align:center;color:red;background-color:#".$silver." '>";
+                                                                   if($contest['gold']+$contest['silver']< $j && $j <=$contest['gold']+$contest['silver']+$contest['copper'])
+                                                                      echo "<td style='text-align:center;color:red;background-color:#".$copper." '>";
+                                                                    if($j > $contest['gold']+$contest['silver']+$contest['copper'])
+                                                                      echo "<td style='text-align:center;color:red'>";
+                                                                   if(substr($v['username'],0,1)!= "*"&& $j==1){
+                                                                      echo "Winner";
+                                                                      $j++;
+                                                                      }else if(substr($v['username'],0,1) == "*"){
+                                                                                echo "*";
+                                                                        }else
+                                                                                echo $j++;
+                                                                      ?></td>
+                                                                  <td style="text-align: center"><a><?php echo $v['user_id']; ?></a></td>
+                                                                  <td style="text-align: center"><div style="width:100%;height: 20px;overflow:hidden"><a><?php echo $v['username']; ?></a></div></td>
+                                                                  <td style="text-align: center;color:red;"><?php echo sec2str($v['time']); ?></td>
+                                                                  <?php
+                                                                  for($k=0;$k<$contest['problem_sum'];$k++){ ?>
+                                                                            <?php $bg_color ='eeeeee'; 
+                                                                                      if (isset($v['p_ac_sec'][$k])){
+                                                                                                $aa=0x33+$v['p_wa_num'][$k]*32;
+                                                                                                $aa=$aa>0xaa?0xaa:$aa;
+                                                                                                $aa=dechex($aa);
+                                                                                                $bg_color="$aa"."ff"."$aa";	                                            
+                                                                                       }else if(isset($v['p_wa_num'][$k])&&$v['p_wa_num'][$k]>0) {
+                                                                                                $aa=0xaa-$v['p_wa_num'][$k]*10;
+                                                                                                $aa=$aa>16?$aa:16;
+                                                                                                $aa=dechex($aa);
+                                                                                                $bg_color="ff$aa$aa";
+                                                                                        }                      
+                                                                            echo "<td style='text-align: center;background-color:#".$bg_color."'>" ?><div style="width:100%;height: 20px;overflow:hidden;background-color:000000;"><?php echo isset($v['p_ac_sec'][$k]) ? $v['p_ac_sec'][$k] : ''; if(isset($v['p_wa_num'][$k])&&$v['p_wa_num'][$k] > 0) echo "(-".$v['p_wa_num'][$k].")";?>
+                                                                                </div></td>
+			<?php } endforeach;?>
+                                                     </tr>
+                                                    </tbody>
 		</table>
 	</div>
 </div>
 <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
 <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
-<script src="<?= base_url('application/views/contest/js/con_rank.js');?>"></script>
+<!--script src="<?= base_url('application/views/contest/js/con_rank.js');?>"></script-->
 </body>
 </html>

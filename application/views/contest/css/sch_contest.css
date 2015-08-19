@@ -1,0 +1,52 @@
+body {
+	    background: #eee;
+	  /*   background-image: url(http://localhost/nsut_oj/index/images/background.jpg); */
+	    background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
+	    background-position: initial initial;
+	    background-repeat: initial initial;
+	    background-position: initial initial;
+	    background-repeat: initial initial;
+	    margin: 0px;
+	    padding: 0px;
+	}
+.container_contest {
+	 margin-top: 5%;  
+}
+.page-title {
+	text-align: center;
+			/* margin: 50px 0 30px; */
+}
+.th_status {
+	width:5%;
+}
+.th_num {
+	width:10%;
+}
+.label_reg{
+  width:20%;
+}
+.but_s {
+	/* width: 30px;
+	height: 30px; */
+}
+td{
+	height: 51px;
+	line-height:51px;
+}
+.well {
+	margin-top: 3%;
+}
+
+  .container-contest{
+              margin-top: 6%;
+  }
+  .control-group {
+		display: inline;
+		float: right;
+}
+.td_pro {
+	text-align: center;
+}
+td{
+	height: 20px;
+}

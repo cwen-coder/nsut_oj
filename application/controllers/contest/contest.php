@@ -103,8 +103,8 @@ class Contest extends Sch_Controller{
                }
                $rank = array();
                $data['rank'] = array();
-               $user_cnt = 0;
-               $user_name='';
+               $user_cnt = -1;
+               $user_name = ' ';
                 $rank = $this->sch_model->school_con_rank($data['contest_id']);
                 $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
                 foreach($rank as $v):
@@ -131,8 +131,13 @@ class Contest extends Sch_Controller{
                                 if(!isset($data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']])) $data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]=0;
                                 $data['rank'][$user_cnt]['time'] += (strtotime($rank_info['in_date']) - strtotime($data['contest']['start_time'])) +$data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]*1200;
                         }
-                 endforeach;              
-                p($data);die;
+                 endforeach;
+                 foreach ($data['rank'] as $key => $row){
+                        $solved[$key]  = $row['solved'];
+                        $time[$key] = $row['time'];
+                    }
+                 array_multisort($solved, SORT_DESC, $time, SORT_ASC, $data['rank']);
+                //p($data);die;
                 $this->load->view('contest/sch_con_rank.html',$data);
             }
         }

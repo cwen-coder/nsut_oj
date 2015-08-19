@@ -39,7 +39,7 @@ class Oj_con_model extends CI_Model {
 
 	//根据比赛id获取比赛信息
 	public function con_byId($contest_id) {
-		$query = "SELECT contest_id,title,con_class,start_time,end_time,con_pwd,problem_sum FROM contest WHERE contest_id = '$contest_id' ";
+		$query = "SELECT contest_id,title,con_class,start_time,end_time,con_pwd,problem_sum, gold, silver, copper FROM contest WHERE contest_id = '$contest_id' ";
 		$result = mysql_query($query);
 		return  mysql_fetch_assoc($result);
 	}
