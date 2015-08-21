@@ -87,6 +87,109 @@ class Contest extends Sch_Controller{
                         $this->load->view('contest/sch_con_status.html',$data);
             }
         }
+        //载入比赛题目
+        public function con_pro() {
+             if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
+                                                    $data['contest_id'] =$a;
+                                                    $data['username'] =  $b;                                              
+			$data['user_id'] = $c;
+            }else{
+                                                    $data['username'] = false;
+			$data['user_id'] = false;
+            }
+            if(isset($data['contest_id'] )){
+		$contest_id = $this->uri->segment(4);
+		$problem_id = $this->uri->segment(5);
+		$num = $this->uri->segment(6);
+		$data['pro'] = $this->oj_con->con_pro_byId($problem_id);
+		$data['num'] = $num;
+		$data['contest_id'] = $contest_id;
+                                   $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+		//echo "jdfkdjfkdfjkj";
+		//p($data);
+		$this->load->view('contest/sch_con_pro.html',$data);
+                }
+        }
+        //载入提交页
+        public function sch_pro_sub() {
+             if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
+                                                    $data['contest_id'] =$a;
+                                                    $data['username'] =  $b;                                              
+			$data['user_id'] = $c;
+            }else{
+                                                    $data['username'] = false;
+			$data['user_id'] = false;
+            }
+            if(isset($data['contest_id'] )){
+		$data['contest_id'] = $this->uri->segment(4);
+		$data['problem_id'] = $this->uri->segment(5);
+		$data['num'] = $this->uri->segment(6);
+                                   $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+                                   if (time() < strtotime($data['contest']['start_time'])) {
+			header('Content-Type:text/html;charset=utf-8');
+                                                    echo "<script type='text/javascript'> alert('对不起比赛还未开始 ');history.go(-1); </script>";
+		} else if(time() > strtotime($data['contest']['end_time'])){
+			header('Content-Type:text/html;charset=utf-8');
+                                                    echo "<script type='text/javascript'> alert('对不起比赛已经结束 ');history.go(-1); </script>";
+		}else {
+			$this->load->view('contest/sch_submit.html',$data);
+		}
+	}
+        }
+        //校赛提交动作
+        public function sch_submit() {
+                                    if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
+                                                    $data['contest_id'] =$a;
+                                                    $data['username'] =  $b;                                              
+			$data['user_id'] = $c;
+                                     }else{
+                                                    $data['username'] = false;
+			$data['user_id'] = false;
+                                     }
+            if(isset($data['contest_id'] )){
+		$data['cid'] = $this->input->post('cid', TRUE);
+		$contest = $this->oj_con->con_byId($data['cid']);
+                                   if (time() < strtotime($contest['start_time'])) {
+			header('Content-Type:text/html;charset=utf-8');
+                                                    echo "<script type='text/javascript'> alert('对不起比赛还未开始 ');history.go(-1); </script>";
+		} else if(time() > strtotime($contest['end_time'])){
+			header('Content-Type:text/html;charset=utf-8');
+                                                    echo "<script type='text/javascript'> alert('对不起比赛已经结束 ');history.go(-1); </script>";
+		}else {
+			//echo 5;
+			$data['source'] = $this->input->post('source', TRUE);
+			$data['language'] = $this->input->post('language', TRUE);
+			$data['pid'] = $this->input->post('pid', TRUE);
+			$data['ip'] = $this->session->userdata('ip_address');
+			$data['code_length'] = strlen($data['source']);
+			/*echo $data['code_length'];die;*/
+			if(!empty($data['source'])) {
+				//echo 6;
+				$check_pro = $this->oj_con->check_pro($data['pid']);
+				$check_con = $this->oj_con->check_con($data['cid']);
+				$check_con_pro = $this->oj_con->check_con_pro($data['pid'],$data['cid']);
+				if($check_pro && $check_con && $check_con_pro) {
+					$data['num'] = $check_con_pro['num'];
+					$data['source'] = base64_decode($data['source']);
+					$result = $this->oj_con->problem_submit($data);
+					$url = 'contest/home/status';
+					if($result) {
+						//echo 11;
+						redirect('contest/home/con_status/'.$data['cid']);
+					}else {
+						error("提交失败！");
+					}
+				} else {
+					//echo 8;
+					error("提交的比赛或是题目不存在！");
+				}
+			}else {
+				//echo 9;
+				error("代码长度太短！");
+			}
+		}
+	}
+        }
         //校赛现场排名
         public function rank(){
             if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
@@ -116,20 +219,20 @@ class Contest extends Sch_Controller{
                         $data['rank'][$user_cnt]['solved'] = 0;
                         $data['rank'][$user_cnt]['time'] = 0;
                     }
-                    $rank_info = $v;
-                    if (isset($data['rank'][$user_cnt]['p_ac_sec'][$rank_info['num']]) && $data['rank'][$user_cnt]['p_ac_sec'][$rank_info['num']]>0)
+                    //$rank_info = $v;
+                    if (isset($data['rank'][$user_cnt]['p_ac_sec'][$v['num']]) && $data['rank'][$user_cnt]['p_ac_sec'][$v['num']]>0)
                                 break;
-                         if (intval($rank_info['result']) !=4){
-                                if(isset($data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']])){
-                                        $data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]++;
+                         if (intval($v['result']) !=4){
+                                if(isset($data['rank'][$user_cnt]['p_wa_num'][$v['num']])){
+                                        $data['rank'][$user_cnt]['p_wa_num'][$v['num']]++;
                                 }else{
-                                        $data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]=1;
+                                        $data['rank'][$user_cnt]['p_wa_num'][$v['num']]=1;
                                  }
                         }else{
-                                $data['rank'][$user_cnt]['p_ac_sec'][$rank_info['num']] = sec2str(strtotime($rank_info['in_date']) - strtotime($data['contest']['start_time']));
+                                $data['rank'][$user_cnt]['p_ac_sec'][$v['num']] = sec2str(strtotime($v['in_date']) - strtotime($data['contest']['start_time']));
                                 $data['rank'][$user_cnt]['solved']++;
-                                if(!isset($data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']])) $data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]=0;
-                                $data['rank'][$user_cnt]['time'] += (strtotime($rank_info['in_date']) - strtotime($data['contest']['start_time'])) +$data['rank'][$user_cnt]['p_wa_num'][$rank_info['num']]*1200;
+                                if(!isset($data['rank'][$user_cnt]['p_wa_num'][$v['num']])) $data['rank'][$user_cnt]['p_wa_num'][$v['num']]=0;
+                                $data['rank'][$user_cnt]['time'] += (strtotime($v['in_date']) - strtotime($data['contest']['start_time'])) +$data['rank'][$user_cnt]['p_wa_num'][$v['num']]*1200;
                         }
                  endforeach;
                  foreach ($data['rank'] as $key => $row){

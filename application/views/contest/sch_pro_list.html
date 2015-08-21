@@ -16,7 +16,7 @@
 <div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="navbar-header">
-					<a class="navbar-brand" href="<?php echo site_url('contest/contest/school_pro_list');?>"> <?= $contest['title'];?></a>
+					<a class="navbar-brand" href="<?= site_url('contest/contest/school_pro_list');?>"> <?= $contest['title'];?></a>
 	</div>
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -69,7 +69,7 @@
 		        	<?php endif; ?>
 		        </td>
 		          <td id = "<?= $v['num']?>" ><?= $arr[$v['num']];?></td>
-		          <td><a href="<?= site_url('contest/home/con_pro/'.$contest['contest_id'].'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"> <?= $v['title'];?></a></td>
+		          <td><a href="<?= site_url('contest/contest/con_pro/'.$contest['contest_id'].'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"> <?= $v['title'];?></a></td>
 		        </tr> 
         <?php endforeach;?>   
       </tbody>

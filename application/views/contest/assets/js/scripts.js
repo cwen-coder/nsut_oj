@@ -372,6 +372,9 @@ jQuery(document).ready(function() {
       $('.page-container1 form .username').keyup(function(){
         $("#user_info").text('');
     });
+    $('.page-container1 form .input-xlarge').keyup(function(){
+        $("#captcha_info").text('');
+    });
       //注册
     $('.page-container2 form .password').keyup(function(){
         $("#pass1_info").text('');
@@ -463,6 +466,11 @@ jQuery(document).ready(function() {
         //点击进入比赛
         $("#enter_contest").click(function(){
                 window.location.href= curPath + '/contest/contest/school_pro_list';
+//           console.log(password);
+        });
+        //点击进入比赛look_contest
+        $("#look_contest").click(function(){
+                window.location.href= curPath + '/contest/contest/rank';
 //           console.log(password);
         });
 });
