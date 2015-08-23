@@ -169,23 +169,31 @@ class Contest extends Sch_Controller{
 				$check_con = $this->oj_con->check_con($data['cid']);
 				$check_con_pro = $this->oj_con->check_con_pro($data['pid'],$data['cid']);
 				if($check_pro && $check_con && $check_con_pro) {
-					$data['num'] = $check_con_pro['num'];
-					$data['source'] = base64_decode($data['source']);
-					$result = $this->oj_con->problem_submit($data);
-					$url = 'contest/home/status';
-					if($result) {
-						//echo 11;
-						redirect('contest/home/con_status/'.$data['cid']);
-					}else {
-						error("提交失败！");
-					}
+                                                                                        $user_enroll = $this->oj_con->check_user_con($data['user_id'],$data['cid']);
+                                                                                       if($user_enroll){
+                                                                                                    $data['num'] = $check_con_pro['num'];
+                                                                                                    $data['source'] = base64_decode($data['source']);
+                                                                                                    $result = $this->oj_con->problem_submit($data);
+                                                                                                    $url = 'contest/home/status';
+                                                                                                    if($result) {
+                                                                                                            redirect('contest/contest/status');
+                                                                                                    }else {
+                                                                                                            header('Content-Type:text/html;charset=utf-8');
+                                                                                                            echo "<script type='text/javascript'> alert('对不起提交失败 ');history.go(-1); </script>";
+                                                                                                    }
+                                                                                       }else{
+                                                                                            header('Content-Type:text/html;charset=utf-8');
+                                                                                            echo "<script type='text/javascript'> alert('对不起您未报名参赛');history.go(-1); </script>";
+                                                                                       }
 				} else {
-					//echo 8;
-					error("提交的比赛或是题目不存在！");
+					header('Content-Type:text/html;charset=utf-8');
+                                                                                       echo "<script type='text/javascript'> alert('对不起提交比赛或者题目不存在 ');history.go(-1); </script>";
 				}
+                                                          
+                                                                
 			}else {
-				//echo 9;
-				error("代码长度太短！");
+				header('Content-Type:text/html;charset=utf-8');
+                                                                      echo "<script type='text/javascript'> alert('代码长度太短 ');history.go(-1); </script>";
 			}
 		}
 	}
@@ -244,4 +252,72 @@ class Contest extends Sch_Controller{
                 $this->load->view('contest/sch_con_rank.html',$data);
             }
         }
+                //载入校赛比赛提问页面
+            public function ask() {
+             if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
+                                                    $data['contest_id'] =$a;
+                                                    $data['username'] =  $b;                                              
+			$data['user_id'] = $c;
+            }else{
+                                                    $data['username'] = false;
+			$data['user_id'] = false;
+            }
+            if(isset($data['contest_id'] )){
+                                  $this->load->model('ask_que_model','ask_pro');
+		$data['question_sum'] = $this->ask_pro->get_que_sum($data['contest_id']);
+                                   $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+		//后台设置后缀为空，否则分页出错
+		$this->config->set_item('url_suffix', '');
+		//载入分页类
+		$this->load->library('pagination');
+		$perPage = 12;
+		//配置项设置
+		$config['base_url'] = site_url('contest/ask_pro/index/'.$data['contest_id'].'/');
+		$config['total_rows'] = $data['question_sum'];
+		$config['per_page'] = $perPage;
+		$config['uri_segment'] = 5;
+		$config['first_link'] = '首页';
+		$config['prev_link'] = '上一页';
+		$config['next_link'] = '下一页';
+		$config['last_link'] = '尾页';
+		$config['full_tag_open'] = '';
+		$config['full_tag_close'] = '';
+		$config['cur_tag_open'] = '<li class="active"><a>'; // 当前页开始样式   
+		$config['cur_tag_close'] = '</a></li>'; 
+		$this->pagination->initialize($config);
+		$data['links'] = $this->pagination->create_links();	
+		$offset = $this->uri->segment(5);
+		if($offset < 1) $offset = 0;
+		$data['question'] = $this->ask_pro->get_all_que($data['contest_id'],$perPage,$offset);
+		$this->load->model('oj_con_model','oj_con');
+		$sum = count($data['question']);
+		for ($i = 0; $i < $sum; $i++) {
+			$result = $this->oj_con->get_username($data['question'][$i]['ask_user_id']);
+			$data['question'][$i]['username'] = $result['username'];
+			if($data['question'][$i]['ans_num'] > 0) {
+				$answer = $this->ask_pro->get_answer($data['question'][$i]['id']);
+				$data['question'][$i]['answer'] = $answer;
+			}
+		}
+		//header('Content-Type:text/html;charset=utf-8');
+		//p($data);die;
+		$this->load->view('contest/sch_ask_pro.html',$data);
+	}
+        }
+                //提交问题
+	public function ask_question() {
+                                   $this->load->model('ask_que_model','ask_pro');
+		$data['contest_id'] = $this->input->post('contest_id',TRUE);
+		$data['user_id'] = $this->input->post('user_id',TRUE);
+		$data['content'] = $this->input->post('content',TRUE);
+		if(!empty($data['content'])) {
+			$result = $this->ask_pro->ask_question($data);
+			header('Content-Type:text/html;charset=utf-8');
+			if($result) success('/contest/contest/ask/','提问成功！等待管理员回复！');
+			else error('提问失败！');
+		}
+		else {
+			error('提问内容不能为空');
+		}
+	}
 }

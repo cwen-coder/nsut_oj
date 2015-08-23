@@ -139,8 +139,8 @@
 </theaad>
 
 <tbody>
+    <?php if($category[0]!=0) {?>
   <?php foreach($category as $v): ?>
-
   <tr>
     <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>"; if($this->session->userdata('user_id')&&!$v['do']) echo "<span class='glyphicon glyphicon-star-empty'></span>";?><?php echo $v['problem_id']?></td>
     <td><a href="<?php echo site_url('oj_index/home/problem').'?pid='.$v['problem_id']?>"><?php echo $v['title']?></a></td>
@@ -153,6 +153,9 @@
 </tbody>
 </table>
 </div>
+ <?php }else{
+ echo "<div style='margin-left:50%;color:red'>木有找到!</div>";
+}?>
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
