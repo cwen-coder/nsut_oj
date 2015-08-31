@@ -1,5 +1,6 @@
 jQuery(function($){
-
+        var url = $("#hid_base").val();
+        //console.log(url);
     $.supersized({
 
         // Functionality
@@ -21,18 +22,18 @@ jQuery(function($){
         slide_links        : 'blank',    // Individual links for each slide (Options: false, 'num', 'name', 'blank')
         slides             : [    // Slideshow Images
                                                         
-                                                        {image : '../../../application/views/contest/assets/img/backgrounds/psb(1).jpg'},
-                                                        {image : '../../../application/views/contest/assets/img/backgrounds/psb(2).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(3).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(4).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(5).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(6).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(7).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(8).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(9).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(10).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(11).jpg'},
-				{image : '../../../application/views/contest/assets/img/backgrounds/psb(12).jpg'}
+                                                        {image : url+'/application/views/contest/assets/img/backgrounds/psb(1).jpg'},
+                                                        {image : url+'/application/views/contest/assets/img/backgrounds/psb(2).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(3).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(4).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(5).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(6).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(7).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(8).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(9).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(10).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(11).jpg'},
+				{image : url+'/application/views/contest/assets/img/backgrounds/psb(12).jpg'}
 
                        ]
 

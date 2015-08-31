@@ -39,7 +39,7 @@ class Oj_con_model extends CI_Model {
 
 	//根据比赛id获取比赛信息
 	public function con_byId($contest_id) {
-		$query = "SELECT contest_id,title,con_class,start_time,end_time,con_pwd,problem_sum FROM contest WHERE contest_id = '$contest_id' ";
+		$query = "SELECT contest_id,title,con_class,start_time,end_time,con_pwd,problem_sum, gold, silver, copper FROM contest WHERE contest_id = '$contest_id' ";
 		$result = mysql_query($query);
 		return  mysql_fetch_assoc($result);
 	}
@@ -117,7 +117,16 @@ class Oj_con_model extends CI_Model {
 		if($num > 0) return mysql_fetch_assoc($result);
 		else return false;
 	}
-
+                 //检测用户是否报名
+                function check_user_con($user_id, $contest_id){
+                                $query = "SELECT * FROM teams WHERE contest_id = '$contest_id' and  user_id = '$user_id' ";
+                                $result = mysql_query($query);
+                                if(empty($result))
+                                    return false;
+                                else
+                                      return true;               
+                }
+                  //提交题目动作
 	function problem_submit($data){
 		/*p($data);
 		echo Now();*/

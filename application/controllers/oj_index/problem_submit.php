@@ -11,7 +11,8 @@ class Problem_submit extends Oj_Controller{
 	function index(){
 		$data['user_id'] = $this->session->userdata('user_id');
 		if($data['user_id'] == null){
-			error('请先登录');
+			header('Content-Type:text/html;charset=utf-8');
+                                                    echo "<script type='text/javascript'> alert('请先登录 ');history.go(-1); </script>";
 		}else{
 
 			$data['source'] =base64_decode($this->input->post('source'));

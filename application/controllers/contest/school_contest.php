@@ -188,9 +188,9 @@ class School_contest extends Oj_Controller{
         }
         //进入校赛验证
         public function school_login(){
-            if(!isset($_SESSION)){
-            			session_start();	
-        		}
+                                    if(!isset($_SESSION)){
+                                                        session_start();	
+                                                }
 		$captcha = $this->input->post('captcha',TRUE);
 		if($captcha == "undefined"){
 			if(!isset($_SESSION['fs'])){
@@ -236,24 +236,24 @@ class School_contest extends Oj_Controller{
                                                                      $data0 = array(
                                                                                                         'contest_id' =>  isset($school_info[0]['contest_id'])? $school_info[0]['contest_id'] : '-1',
                                                                                                         'team_password' => $password,
-                                                                                                        'user_id' =>   $this->session->userdata('user_id')                                                                                                   
+                                                                                                        'username' =>   $username                                                                                                   
                                                                                                         );
                                                                       $data1 = array(
                                                                                                         'contest_id' =>  isset($school_info[1]['contest_id'])? $school_info[1]['contest_id'] : '-1',
                                                                                                         'team_password' => $password,
-                                                                                                        'user_id' =>   $this->session->userdata('user_id')                                                                                                   
+                                                                                                        'username' =>   $username                                                                                                   
                                                                                                         );
                                                                       
-                                                                     $data['check_enroll1'] = $this->user_model->check_teampassword($data0);
-                                                                     $data['check_enroll2'] = $this->user_model->check_teampassword($data1);
-                                                                     if(!$data['check_enroll1'] && !$data['check_enroll2']){
+                                                                     $check_enroll1 = $this->user_model->check_teampassword($data0);
+                                                                     $check_enroll2 = $this->user_model->check_teampassword($data1);
+                                                                     if(!$check_enroll1 && !$check_enroll2){
                                                                           echo false;
                                                                           return;
                                                                      }
 //                                                                     if($username == $this->session->userdata('username') ){
 //                                                                                    $this->session->set_userdata('school_contest', $data['check_enroll1'] ? $data['check_enroll1'] :$data['check_enroll2']);
 //                                                                     }                    
-                                                                                    $password = $this->user_id->user_password($this->session->userdata('user_id'));
+                                                                                    $password = $this->user_model->user_password($username);
                                                                                     $this->load->helper('date');
                                                                                     $format = 'DATE_W3C';
                                                                                     $time = standard_date($format, time());
@@ -276,18 +276,16 @@ class School_contest extends Oj_Controller{
                                                                                                             'ip' => $ip,
                                                                                                             'time' => $time,
                                                                                                             'privilege' => $result['privilege'],
-                                                                                                            'school_contest' => $data['check_enroll1'] ? $data['check_enroll1'] :$data['check_enroll2']
+                                                                                                            'school_contest' => $check_enroll1 ? $check_enroll1 :$check_enroll2
                                                                                                             );
                                                                                                     $this->session->set_userdata($newdata);
-                                                                                                    session_destroy();
+                                                                                                    //session_destroy();
                                                                                                     echo true;
                                                                                                     }
                                                                                         }
 
     			}
         }
-        //校赛题目列表页面
-        public function school_pro_list(){
-            
-        }
+
+        
 }

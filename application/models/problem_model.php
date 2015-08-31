@@ -29,6 +29,13 @@ class Problem_model extends CI_Model {
 		$num = mysql_num_rows($result);
 		return $num;
 	}
+                  public function problem_all_pc($pc){
+		$query = "select a.problem_id, title, c.class_name from problem a, problem_class b,class_name c 
+		where a.problem_id = b.problem_id and b.class_id = c.class_id and c.class_name='$pc' ;";
+		$result = mysql_query($query);
+		$num = mysql_num_rows($result);
+		return $num;
+	}
 
 	public function problem_del($problem_id) {
 		$query1 = "DELETE FROM problem_class WHERE problem_id = '$problem_id'";
@@ -133,17 +140,16 @@ class Problem_model extends CI_Model {
 	}
 
 	//按题目分类查询题目
-	public function search_problem_byClass($calss_name) {
+	public function search_problem_byClass($calss_name, $offset, $perPage) {
 		$query = "SELECT a.problem_id,a.title,c.class_name,a.accepted, a.submit FROM problem a, problem_class b,class_name c 
-		WHERE c.class_name = '$calss_name' AND a.problem_id = b.problem_id AND b.class_id = c.class_id  ";
+		WHERE c.class_name = '$calss_name' AND a.problem_id = b.problem_id AND b.class_id = c.class_id order by problem_id limit $perPage, $offset";
 		$result = mysql_query($query);
 		$num = mysql_num_rows($result);
 		if($num < 1) return 0;
 		else {
 			$problem = array();
-			while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
+			while ($row = mysql_fetch_array($result,MYSQL_ASSOC))
 				$problem[] = $row;
-			}
 			return $problem;
 		}
 	}

@@ -100,7 +100,7 @@ color:#fff;
     height:450px;
     left:50%;
     top:50%; 
-    margin-left:-400px;margin-top:-250px;
+    margin-left:-400px;margin-top:-300px;
 }
 </style>
     </head>
@@ -124,14 +124,14 @@ color:#fff;
               </div>
                 <?php endif;?>
                 <?php if((isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0' )< Now() && (isset($school_info[0]['end_time']) ? $school_info[0]['end_time'] : '0' ) > Now() ): ?>               
-                <div style="color:red;font-size:40px;margin-top:5%;"><h2>比赛正在进行中......</h2></div>
+                <div style="color:red;font-size:40px;margin-top:5%;margin-bottom:5%;"><h2>比赛正在进行中......</h2></div>
                 <?php if(!isset($school_contest)) {?>
 
                     <form action="" method="post">
                         <input type="text" name="username" class="username" placeholder="Username"> 
-                        <div class="error_info"><span id="user_info" style="color:red;">*此处填写 比赛注册时填写的用户名</span></div>
+                        <div class="error_info"><span style="color:red;">*此处填写 比赛注册时填写的用户名</span></div>
                         <input type="password" name="password" class="password" placeholder="Password">
-                        <div class="error_info"><span id="pass_info" style="color:red;">*此处填写 比赛开始前下发的密码条</span></div>
+                        <div class="error_info"><span style="color:red;">*此处填写 比赛开始前下发的密码条</span></div>
                        <?php if(isset($_SESSION ['fs'])&&$_SESSION ['fs']>2):?>
                         <div class ="log_captcha_style" >
                             <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
@@ -140,7 +140,7 @@ color:#fff;
                         <div class="error_info"><span id="captcha_info" style="color:red;"></span></div>
                           </div>
                        <?php endif;?>
-                       <button class="button1" type="submit" id="enter">点击进入比赛</button>
+                       <button class="button1" type="submit" id="enter">点击登录</button>
                     </form>              
                 <?php }else{?>
                  <button class="button1" type="submit" id="enter_contest">点击进入比赛</button>
@@ -157,7 +157,25 @@ color:#fff;
               <?php endif;?>             
               <?php if((isset($school_info[0]['end_time']) ? $school_info[0]['end_time'] : '0' ) < Now()):?>
               <div style="color:red;font-size:40px;margin-top:5%;"><h2>比赛已结束</h2></div> 
-              <button class="button5" type="submit">查看比赛结果</button>
+              <?php if(!isset($school_contest)) {?>
+                    <form action="" method="post">
+                        <input type="text" name="username" class="username" placeholder="Username"> 
+                        <div class="error_info"><span style="color:red;">*此处填写 比赛注册时填写的用户名</span></div>
+                        <input type="password" name="password" class="password" placeholder="Password">
+                        <div class="error_info"><span style="color:red;">*此处填写 比赛开始前下发的密码条</span></div>
+                       <?php if(isset($_SESSION ['fs'])&&$_SESSION ['fs']>2):?>
+                        <div class ="log_captcha_style" >
+                            <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
+                            <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+                        <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
+                        <div class="error_info"><span id="captcha_info" style="color:red;"></span></div>
+                          </div>
+                       <?php endif;?>
+                       <button class="button1" type="submit" id="enter">点击登录</button>
+                    </form>              
+                <?php }else{?>
+              <button class="button5" type="submit" id="look_contest" >查看比赛结果</button>
+              <?php } ?>
               <?php endif;?>
               <div style="margin-top: 25px"><button id="view_teams"><a href="" target="_blank" style="color:red;">查看参赛队伍</a></button></div>
               <?php if((!$check_enroll_old || !$check_enroll_new) &&(isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0' ) > Now()) :?>

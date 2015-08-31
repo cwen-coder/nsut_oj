@@ -16,15 +16,15 @@
 <div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="navbar-header">
-					<a class="navbar-brand" href="<?php echo site_url('oj_index/home/contest_list');?>">沈阳工业大学在线判题系统</a>
+					<a class="navbar-brand" href="<?= site_url('contest/contest/school_pro_list');?>"> <?= $contest['title'];?></a>
 	</div>
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="<?= site_url('contest/home/index/'.$contest['contest_id']);?>">题目<span class="sr-only">(current)</span></a></li>
-			<li><a href="<?= site_url('contest/home/con_status/'.$contest['contest_id']);?>">状态</a></li>
-			<li><a href="<?= site_url('contest/con_rank/index/'.$contest['contest_id']);?>">排名</a></li>
-			<li><a href="<?= site_url('contest/ask_pro/index/'.$contest['contest_id']);?>">提问</a></li>
+			<li class="active"><a href="<?= site_url('contest/contest/school_pro_list');?>">比赛题目<span class="sr-only">(current)</span></a></li>
+			<li><a href="<?= site_url('contest/contest/status');?>">提交状态</a></li>
+			<li><a href="<?= site_url('contest/contest/rank');?>">现场排名</a></li>
+			<li><a href="<?= site_url('contest/contest/ask');?>">比赛提问</a></li>
 		</ul>
 		<form class="navbar-form navbar-right">
 						<h5><a href="<?= site_url('oj_index/home/log_out');?>" style="text-decoration:none;"><span class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销</a></h5>
@@ -69,7 +69,7 @@
 		        	<?php endif; ?>
 		        </td>
 		          <td id = "<?= $v['num']?>" ><?= $arr[$v['num']];?></td>
-		          <td><a href="<?= site_url('contest/home/con_pro/'.$contest['contest_id'].'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"> <?= $v['title'];?></a></td>
+		          <td><a href="<?= site_url('contest/contest/con_pro/'.$contest['contest_id'].'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"> <?= $v['title'];?></a></td>
 		        </tr> 
         <?php endforeach;?>   
       </tbody>

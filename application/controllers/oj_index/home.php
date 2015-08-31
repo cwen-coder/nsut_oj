@@ -193,38 +193,60 @@ class Home extends Oj_Controller{
 	/*public function log_but() {
 		self::contest_list();
 	}*/
-	//按题号查找
+	//查找
 	public function search(){
 		$pid = $this->input->get('pid', TRUE);
 		$pn = $this->input->get('pn', TRUE);
 		$pc = $this->input->get('pc', TRUE);
 		if(!empty($pid)) 
 			$data['category'][0]=$this->pro->search_problem_byId($pid);
-		if(!empty($pn)) 
+		if(!empty($pn))
 			$data['category'][0]=$this->pro->search_problem_byTitle($pn);
-		if(!empty($pc)) 
-			$data['category']=$this->pro->search_problem_byClass($pc);
+		if(!empty($pc)){
+                                                    $total_rows = $this->pro->problem_all_pc($pc);
+                                                    $config['base_url'] = site_url('oj_index/home/search?pc='.$pc);   
+                                                    $config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
+                                                    $config['per_page'] = 10; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
+                                                    $config['first_link'] = '首页'; // 第一页显示
+                                                    $config['last_link'] = '末页'; // 最后一页显示   
+                                                    $config['next_link'] = '下一页 >'; // 下一页显示   
+                                                    $config['prev_link'] = '< 上一页'; // 上一页显示   
+                                                    $config['full_tag_open'] = '';
+                                                    $config['full_tag_close'] = '';
+                                                    $config['cur_tag_open'] = '<li><a style="color:white;background-color:black">'; // 当前页开始样式   
+                                                    $config['cur_tag_close'] = '</a></li>'; 
+                                                    $config['num_links'] = 20;//    当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
+                                                    //$config['uri_segment'] = 6; 
+                                                    $config['page_query_string'] = true;
+                                                    $this->pagination->initialize($config);
+                                                    $data['links'] = $this->pagination->create_links();
+                                                    $data['offset'] = $this->input->get('per_page', TRUE);
+                                                    //$data['offset'] = 0;
+                                                    if($data['offset'] == null) $data['offset']=0;
+			$data['category']=$this->pro->search_problem_byClass($pc,$config['per_page'], $data['offset']);
+                                                    //p($data);die;
+                                   }
 		if(empty($pid)&&empty($pn)&&empty($pc)){
 			$total_rows = $this->pro->problem_all_num();
-		$config['base_url'] = site_url('oj_index/home/index');   
-		$config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
-		$config['per_page'] = 10; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
-		$config['first_link'] = '首页'; // 第一页显示
-		$config['last_link'] = '末页'; // 最后一页显示   
-		$config['next_link'] = '下一页 >'; // 下一页显示   
-		$config['prev_link'] = '< 上一页'; // 上一页显示   
-		$config['full_tag_open'] = '';
-		$config['full_tag_close'] = '';
-		$config['cur_tag_open'] = '<li><a style="color:white;background-color:black">'; // 当前页开始样式   
-		$config['cur_tag_close'] = '</a></li>'; 
-        		$config['num_links'] = 20;//    当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
-        		$config['uri_segment'] = 4; 
-		$this->pagination->initialize($config);
-		$data['links'] = $this->pagination->create_links();
-		$data['offset'] = $this->uri->segment(4);
-		if($data['offset'] == null) $data['offset']=0;
-		$data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
-	}
+                                                    $config['base_url'] = site_url('oj_index/home/search');   
+                                                    $config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
+                                                    $config['per_page'] = 10; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
+                                                    $config['first_link'] = '首页'; // 第一页显示
+                                                    $config['last_link'] = '末页'; // 最后一页显示   
+                                                    $config['next_link'] = '下一页 >'; // 下一页显示   
+                                                    $config['prev_link'] = '< 上一页'; // 上一页显示   
+                                                    $config['full_tag_open'] = '';
+                                                    $config['full_tag_close'] = '';
+                                                    $config['cur_tag_open'] = '<li><a style="color:white;background-color:black">'; // 当前页开始样式   
+                                                    $config['cur_tag_close'] = '</a></li>'; 
+                                                    $config['num_links'] = 20;//    当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
+                                                    $config['uri_segment'] = 4; 
+                                                    $this->pagination->initialize($config);
+                                                    $data['links'] = $this->pagination->create_links();
+                                                    $data['offset'] = $this->uri->segment(4);
+                                                    if($data['offset'] == null) $data['offset']=0;
+                                                    $data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
+                                    }
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
 			$data['username'] = $this->session->userdata('username');//$this->pro->problem_check('$data[user_id]','$v[problem_id]')
 			$data['user_id'] = $this->session->userdata('user_id');
