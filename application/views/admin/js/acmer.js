@@ -71,6 +71,7 @@ $(document).ready(function(){
 	$("a[name='acmer_del_a']").click(function() {
 		var name = $(this).attr('id');
 		//alert(name);
+		$("#acmer_span").text(name);
 		$("#acmer_del_but").click(function() {
 			/* Act on the event */
 			var url = $("#hid_site").val() + '/admin/acmer/acmer_del';
