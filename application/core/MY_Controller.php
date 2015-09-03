@@ -48,6 +48,17 @@ class Admin_Controller extends CI_Controller {
        }
 	}
 }
+#志愿者控制器
+class Volunteer_Controller extends CI_Controller {
+        public function __construct(){
+        parent::__construct();
+        $this->load->switch_view_off();
+        #权限验证
+        if(!$this->session->userdata('volunteer') && (!$this->session->userdata('username') || $this->session->userdata('privilege') != 1)){
+            redirect('volunteer/privilege/index');
+       }
+    }
+}
 
 #网站前台控制器
 class Con_Controller extends CI_Controller {

@@ -28,10 +28,53 @@
 	<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal"  id = "" ><i class="icon-plus"></i>添加志愿者</button>
 		<hr>
 		<div class="well">
-			
+			         <table class="table table-striped"  id = "">
+                        <thead>
+                        <th style="width:20%;">志愿者</th>
+                        <th style="width:30%;">开始</th>
+                        <th style="width:30%;">结束</th>
+                        <th style="width:20%;">操作</th>
+                        </thead>
+                        <tbody>
+                        <?php foreach($volunteer as $v):?>
+                        <tr>
+                            <td><?= $v['name'];?></td>
+                            <td><?= $v['start'];?></td>
+                            <td><?= $v['end'];?></td>
+                            <td>
+                                <a href="#" role="button" data-toggle="modal" data-target="#volunteer_edit" id="<?= $v['id'];?>" name = "volunteer_edit_a" data-name = "<?= $v['name'];?>"><i class="icon-pencil"></i></a>&nbsp;&nbsp;
+                            <a href="#" role="button" data-toggle="modal" data-target="#volunteer_del" id = "<?= $v['id'];?>" name = "volunteer_del_a" data-name = "<?= $v['name'];?>"><i class="icon-remove"  ></i></a>&nbsp;&nbsp;
+                             <a href="#" role="button" data-toggle="modal" data-target="#volunteer_edit_pwd" id = "<?= $v['id'];?>" name = "volunteer_edit_pwd" data-name = "<?= $v['name'];?>">[修改密码]</a>
+                            </td>
+                        </tr>
+                        <?php endforeach;?>
+                        </tbody>
+                        </table>
 		</div>
 	</div>
+     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id = "volunteer_del">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">删除志愿者</h4>
+          </div>
+          <div class="modal-body">
+          <p class="error-text"><i class="icon-warning-sign modal-icon"></i>你确定要删除 <span id = "volunteer_span"></span> ?</p>
+          </div>
+          <div class="modal-footer">
+           <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+            <button class="btn btn-primary" id = "volunteer_del_but" data-dismiss="modal">删除</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" value="<?= site_url();?>" id = "hid_site">
+    <?php require('volunteer_add.html');?>
+    <?php require('volunteer_edit.html');?>
+    <?php require('volunteer_edit_pwd.html');?>
 	<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
 	<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+    <script src="<?= base_url('application/views/admin/js/volunteer.js');?>"></script>
 </body>
 </html>
