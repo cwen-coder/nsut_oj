@@ -218,9 +218,9 @@ class Register extends CI_Controller {
             if ($this->user_model->check_username($username) > 0 || $password1 != $password2 || $this->user_model->check_email($email) > 0 )
                 echo  false;
             else {
-                $user_id = md5($username.mt_rand(100,999));
+                //$user_id = md5($username.mt_rand(100,999));
                 $data = array(
-                        'user_id' => $user_id,
+                        'user_id' => $username,
                         'username' => $username,
                         'password' => $this->encrypt->encode($password1),
                         'accesstime' => $time,

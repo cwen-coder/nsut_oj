@@ -108,12 +108,101 @@ class Volunteer_model extends CI_Model {
 			if($num == 1) {
 				$this->load->library('encrypt');
 				$meta = mysql_fetch_assoc($result);
-				if ($this->encrypt->decode($meta['pwd']) != $data['password'])return false;
-				else return true;		
+				if ($this->encrypt->decode($meta['pwd']) != $data['password']) return false;
+				else{
+					return $meta;
+				}		
 			} else return false;
 		} else {
 			return false;
 		}
 		
 	}
+
+	//获取最新校赛
+	 private function get_new_school_contest() {
+		$query = " SELECT contest_id FROM contest 
+		WHERE (con_class = 3 or con_class = 4) AND start_time = (
+			SELECT MAX(start_time) FROM contest WHERE con_class = 3 or con_class = 4
+			)  ";
+		$result = mysql_query($query);
+		if ($result ==true) {
+			//$num = mysql_num_rows($result);
+			$data = array();
+			while ($row = mysql_fetch_assoc($result)) {
+				$data[] = $row;
+			}
+			return $data;
+		} else {
+			return false;
+		}
+	}
+
+	//获取未发气球
+	function get_no_balloon() {
+		$contest_id = self::get_new_school_contest();
+		//p($contest_id);
+		$school_contest = array();
+		foreach ($contest_id as $key => $value) {
+			//p($value);
+			$school_contest[] = $value['contest_id'];
+		}
+		//p(implode(',',$school_contest));
+		$query = " SELECT solution_id,num,team_id FROM solution,teams 
+		WHERE  solution.contest_id in (" . implode(",",$school_contest) . ") AND  result = 4 AND balloon != 1 AND solution.user_id = teams.user_id 
+		ORDER BY solution_id ";
+		$result = mysql_query($query);
+		if ($result ==true) {
+			//$num = mysql_num_rows($result);
+			$data = array();
+			while ($row = mysql_fetch_assoc($result)) {
+				$data[] = $row;
+			}
+			//p($data);
+			return $data;
+		} else {
+			return false;
+		}
+	}
+
+	function song_require($solution_id) {
+		$sql = "UPDATE solution SET balloon = 1 WHERE solution_id = $solution_id";
+		$result = mysql_query($sql);
+		if($result == true) return true;
+		else return false;
+	}
+
+	function song_require_back($solution_id) {
+		$sql = "UPDATE solution SET balloon = 0 WHERE solution_id = $solution_id";
+		$result = mysql_query($sql);
+		if($result == true) return true;
+		else return false;
+	}
+
+	function get_r_balloon() {
+		$contest_id = self::get_new_school_contest();
+		//p($contest_id);
+		$school_contest = array();
+		foreach ($contest_id as $key => $value) {
+			//p($value);
+			$school_contest[] = $value['contest_id'];
+		}
+		//p(implode(',',$school_contest));
+		$query = " SELECT solution_id,num,team_id FROM solution,teams 
+		WHERE  solution.contest_id in (" . implode(",",$school_contest) . ") AND  result = 4 AND balloon = 1 AND solution.user_id = teams.user_id 
+		ORDER BY solution_id DESC";
+		$result = mysql_query($query);
+		if ($result ==true) {
+			//$num = mysql_num_rows($result);
+			$data = array();
+			while ($row = mysql_fetch_assoc($result)) {
+				$data[] = $row;
+			}
+			//p($data);
+			return $data;
+		} else {
+			return false;
+		}
+	}
+
 }

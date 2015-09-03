@@ -60,7 +60,9 @@ class Privilege extends CI_Controller {
             	echo false;
             } else {
             	$newdata = array (
-            		'volunteer' => $username
+            		'volunteer' => $username,
+                    'start' => $result['start'],
+                    'end' => $result['end']
             		);
             	$this->session->set_userdata($newdata);
             	echo true;
