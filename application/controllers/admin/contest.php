@@ -327,7 +327,4 @@ class Contest extends Admin_Controller {
 			error_link($url, "题目修改失败");
 		}
 	}
-	public function contest_res(){
-		$this->load->view('admin/contest_res.html');
-	}
 }?>
