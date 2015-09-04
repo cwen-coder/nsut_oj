@@ -61,7 +61,7 @@ class Volunteer_Controller extends CI_Controller {
 }
 
 #网站前台控制器
-class Con_Controller extends CI_Controller {
+class Con_Controller extends Oj_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->switch_view_off();

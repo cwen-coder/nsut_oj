@@ -68,7 +68,7 @@
             <th style="width:10%;" >类别</th>
             <th style="width:10%;" >进行状态</th>
             <th style="width:5%;" >比赛排名</th>
-            <th style="width:5%;" >SAC抄袭监视</th>
+            <th style="width:5%;" >抄袭监视</th>
           </tr>
         </thead>
         <tbody id = "tbody" >
@@ -97,9 +97,9 @@
               else if($now > $temp['start_time'] && $now < $temp['end_time']) echo "正在进行中...";
               else echo "已结束"; ?>
           </td>
-          <td><a href="#">[比赛排名]</a></td>
+          <td><a href="<?= site_url('contest/con_rank/index').'/'.$temp['contest_id'];?>" target="_Blank">[比赛排名]</a></td> 
           <td>
-              <a href="#">[SAC抄袭监视]</a>
+              <a href="<?= site_url('admin/contest_res/contest_sim').'/'.$temp['contest_id'];?>">[抄袭监视]</a>
           </td>
         </tr>
       <?php endforeach; ?>
@@ -122,5 +122,6 @@
 <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
 <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
 <script src="<?= base_url('application/views/admin/js/contest_act.js');?>" type="text/javascript"></script>
+
 </body>
 </html>

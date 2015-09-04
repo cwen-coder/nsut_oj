@@ -15,9 +15,11 @@ class Home extends Con_Controller {
 		}*/
 		$data['contest'] = $this->oj_con->con_byId($contest_id);
 		//p($data['con']);
-		if($data['contest']['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $data['contest']['con_pwd'])) {
-				$offset = $this->uri->segment(5);
-				redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
+		if($this->session->userdata('privilege') != 1) {
+			if($data['contest']['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $data['contest']['con_pwd'])) {
+					$offset = $this->uri->segment(5);
+					redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
+			}
 		}
 		$user_id = $this->session->userdata('user_id');
 		$con_pro_id = $this->contest_model->get_con_pro_id($contest_id);
@@ -105,12 +107,14 @@ class Home extends Con_Controller {
 	public function con_status() {
 		$data['contest_id'] = $this->uri->segment(4);
 		$contest = $this->oj_con->con_byId($data['contest_id']);
-		if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd'])) {
-				$offset = $this->uri->segment(5);
-				//echo 2;
-				redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
-		}else if (time() < strtotime($contest['start_time'])) {
-				redirect('contest/home/index/'.$data['contest_id']);
+		if($this->session->userdata('privilege') != 1) {
+			if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd'])) {
+					$offset = $this->uri->segment(5);
+					//echo 2;
+					redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
+			}else if (time() < strtotime($contest['start_time'])) {
+					redirect('contest/home/index/'.$data['contest_id']);
+			}
 		}
 		$limit=0;
 		if($data['pagination'] = $this->input->get('pagination')) 
