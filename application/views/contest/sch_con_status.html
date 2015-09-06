@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,14 +9,13 @@
 		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
 		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
 		 <link href="<?= base_url('application/views/oj_index/css/sutoj.css');?>" rel="stylesheet">
-	</head>
 </head>
 <body>
 <nav class="navbar navbar-fixed-top navbar-inverse ">
 <div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="navbar-header">
-					<a class="navbar-brand" href="<?php echo site_url('oj_index/home/contest_list');?>"><?= $contest['title'];?></a>
+					<a class="navbar-brand" href="<?= site_url('contest/contest/school_pro_list');?>"> <?= $contest['title'];?></a>
 	</div>
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -84,11 +82,11 @@
 
 </div>
 <div id="center" class="center">
-<?php echo "[<a href=".$contest_id."?previous=".($pagination-2)."&pagination=".($pagination-1).">回到顶部</a>]&nbsp;&nbsp;";
+<?php echo "[<a href=?previous=".($pagination-2)."&pagination=".($pagination-1).">回到顶部</a>]&nbsp;&nbsp;";
 if (isset($previous)) 
-        echo "[<a href=".$contest_id."?previous=".($previous-1)."&pagination=".($pagination-2).">上一页</a>]&nbsp;&nbsp;";
+        echo "[<a href=?previous=".($previous-1)."&pagination=".($pagination-2).">上一页</a>]&nbsp;&nbsp;";
 if(isset($pag)) 
-echo "[<a href=".$contest_id."?previous=".($pagination-1)."&pagination=".($pagination).">下一页</a>]";
+echo "[<a href=?previous=".($pagination-1)."&pagination=".($pagination).">下一页</a>]";
 ?>
 </div>
 </div>

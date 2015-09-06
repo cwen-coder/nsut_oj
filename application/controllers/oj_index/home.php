@@ -189,10 +189,6 @@ class Home extends Oj_Controller{
 		header('Content-Type:text/html;charset=utf-8');
 		echo "<script type='text/javascript'> alert('注销成功 ');history.go(-1); </script>";
 	}
-
-	/*public function log_but() {
-		self::contest_list();
-	}*/
 	//查找
 	public function search(){
 		$pid = $this->input->get('pid', TRUE);
@@ -271,7 +267,21 @@ class Home extends Oj_Controller{
 			$data['username'] = false;
 			$data['user_id'] = false;
 		}
-		$data['info'] = $this->user_model->user_rank();
+                                   $limit=0;
+                                   $num=20;
+		if($data['pagination'] = $this->input->get('pagination')) 
+			$limit = $data['pagination']*$num-$num;
+		if($this->input->get('previous')) 
+			$data['previous'] = $this->input->get('previous');
+                                   $data['pagination'] = $limit/$num+2;
+                                   $sum = $this->user_model->user_sum();
+                                   if($data['pagination'] != 0 && $data['pagination']*$num < $sum['count(*)']) {
+			$data['pag'] = true;
+		}else if($data['pagination'] == 0 && $sum['count(*)'] > $num) {
+			$data['pag'] = true;
+		}
+		$data['info'] = $this->user_model->user_rank($limit, $num);
+                                  $data['num'] = $num;
 		//p($data['info']);die;
 		$this->load->view('oj_index/rank.html', $data);
 	}

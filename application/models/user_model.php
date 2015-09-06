@@ -151,10 +151,10 @@ class  User_model extends CI_Model {
                                     else 
                                         return false;
                   }
-                  public function user_rank(){
+                  public function user_rank($limit, $num){
 		$sql_query = "select username, submit,solved
 				from users
-				order by solved desc,submit ";
+				order by solved desc,submit limit  $limit, $num";
 		$result = mysql_query($sql_query);
 		$data = array();
 		while($row = mysql_fetch_assoc($result)){
@@ -163,7 +163,13 @@ class  User_model extends CI_Model {
 		return $data;
 
 	}
-	public function user_info($user){
+                 public function user_sum(){
+                                   $sql_query = "select count(*) from users order by solved desc,submit";
+                                   $result = mysql_query($sql_query);
+                                   return mysql_fetch_assoc($result);
+                 }
+
+                 public function user_info($user){
 		$sql_query = "SELECT a.user_id, a.submit, a.solved, COUNT( b.solved ) rank, a.reg_time
 				FROM users a JOIN users b
 				WHERE a.solved <= b.solved

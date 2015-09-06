@@ -243,6 +243,8 @@ class Contest extends Sch_Controller{
                                 $data['rank'][$user_cnt]['time'] += (strtotime($v['in_date']) - strtotime($data['contest']['start_time'])) +$data['rank'][$user_cnt]['p_wa_num'][$v['num']]*1200;
                         }
                  endforeach;
+                 $solved = array();
+                 $row = array();
                  foreach ($data['rank'] as $key => $row){
                         $solved[$key]  = $row['solved'];
                         $time[$key] = $row['time'];
