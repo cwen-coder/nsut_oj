@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>比赛气球设置</title>
+	<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+  
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/lib/font-awesome/css/font-awesome.css');?>">
+	<style type="text/css">
+    body {
+        background: #eee;
+        /* background-image: url(http://subtlepatterns.com/patterns/furley_bg.png); */
+        background-image: url(/admin/images/furley_bg.png);
+        background-position: initial initial;
+        background-repeat: initial initial;
+        background-position: initial initial;
+        background-repeat: initial initial;
+        margin: 0px;
+        padding: 0px;
+    }
+        .container {
+        margin-top: 3%;
+    }
+	</style>
+</head>
+<body>
+	<div class="container">
+	<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#myModal"  id = "" ><i class="icon-plus"></i>新增题目气球</button>
+		<hr>
+		<div class="well">
+			<table class="table table-striped"  id = "">
+            <thead>
+            <th style="width:20%;">题号</th>
+            <th style="width:60%;">颜色</th>
+            <th style="width:20%;">操作</th>
+            </thead>
+            <tbody>
+            <?php foreach($balloon as $v):?>
+            <tr>
+                <td><?= $arr[$v['id']-1];?></td>
+                <td><?= $v['color'];?></td>
+                <td>
+                    <a href="#" role="button" data-toggle="modal" data-target="#balloon_edit" id = " <?= $v['id'];?>" name = "balloon_edit_a"><i class="icon-pencil"></i></a>&nbsp;&nbsp;
+                <a href="#" role="button" data-toggle="modal" data-target="#balloon_del" id = "<?= $v['id'];?>" name = "balloon_del_a"><i class="icon-remove"  ></i></a>
+                </td>
+            </tr>
+            <?php endforeach;?>
+            </tbody>
+            </table>
+		</div>
+	</div>
+ 
+ <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id = "balloon_del">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">删除题目气球</h4>
+      </div>
+      <div class="modal-body">
+      <p class="error-text"><i class="icon-warning-sign modal-icon"></i>你确定要删除 <span id = "balloon_span"></span> 题?</p>
+      </div>
+      <div class="modal-footer">
+       <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">取消</button>
+        <button class="btn btn-primary" id = "balloon_del_but" data-dismiss="modal">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" value="<?= site_url();?>" id = "hid_site">
+<?php require('balloon_add.html');?>
+<?php require('balloon_edit.html');?>
+	<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+	<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+    <script src="<?= base_url('application/views/admin/js/balloon.js');?>"></script>
+<!--     <script type="text/javascript">
+$(document).ready(
+    function() {
+        $("#num").bind('input propertychange blur', function(event) {
+            
+        });
+    }
+    );
+</script> -->
+</body>
+</html>

@@ -1,0 +1,24 @@
+<div class="modal fade" id="volunteer_edit_pwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <h4 class="modal-title" id="myModalLabel">志愿者：<span id = "v1_span_name"></span></h4>
+       </div>
+       <form  action="<?= site_url('admin/volunteer/volunteer_edit_pwd');?>" method="post">
+       <div class="modal-body">
+     
+          <div class="form-group">
+            <label for="num">新密码</label>
+            <input type="password" class="form-control" id="new_pwd" name="new_pwd" placeholder="请输入新密码" required="required"  >
+          </div>
+       </div>
+       <input type="hidden" id="edit_id" name = "id"> 
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <button type="submit" class="btn btn-primary">Save</button>
+       </div>
+       </form>
+     </div>
+   </div>
+ </div>

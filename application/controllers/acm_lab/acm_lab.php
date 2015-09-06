@@ -1,4 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+* @author CWen Yin <[email address]>
+* @date(2015-9-4)
+*/
 
 class Acm_lab extends Admin_Controller {
 /*Session_start();

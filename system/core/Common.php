@@ -602,7 +602,7 @@ function error_link($url,$msg){
  */
 function error($msg){
     header('Content-Type:text/html;charset=utf-8');
-    echo "<script type='text/javascript'>alert('$msg');window.location.reload() ;</script>";
+    echo "<script type='text/javascript'>alert('$msg');window.history.back();</script>";
     die;
 }
 /*

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="5"> 
+	<title>志愿者送球系统</title>
+	 <style type="text/css">
+	body {
+	    font-family: 微软雅黑;
+	    background: #eee;
+	    background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
+	    background-position: initial initial;
+	    background-repeat: initial initial;
+	    background-position: initial initial;
+	    background-repeat: initial initial;
+	    margin: 0px;
+	    padding: 0px;
+	}
+	.div_left {
+		margin-left: 40px;
+		float:left;
+	}
+	.div_right {
+		margin-right: 40px;
+		float:right;
+	}
+	</style>
+</head>
+<body>
+<!-- 	<?= p($no_balloon);?>
+<?= p($r_balloon);?> -->
+	<div class="div_left">
+	<h1>未送名单</h1>
+	<table border="1">
+		<thead>
+			<th>队伍号</th>
+			<th>气球颜色</th>
+			<th>确认</th>
+		</thead>
+		<tbody>
+			<?php foreach($no_balloon as $v):?>
+				<form action="<?= site_url('volunteer/home/song_require');?>" method="post">
+					<tr>
+						<td><?= $v['team_id'];?></td>
+						<td><?= $v['color'];?></td>
+						<td><input type="hidden" name="solution_id" value="<?= $v['solution_id'];?>" />
+						<button type="submit">送球</button>
+						</td>
+					</tr>
+				</form>
+			<?php endforeach;?> 
+		</tbody>
+	</table>
+	</div>
+	<div class="div_right">
+		<h1>已送名单</h1>
+		<table border="1">
+			<thead >
+				<th>队伍号</th>
+				<th>气球颜色</th>
+				<th>确认</th>
+			</thead>
+			<tbody>
+				<?php foreach($r_balloon as $v):?>
+					<form action="<?= site_url('volunteer/home/song_require_back');?>" method="post">
+						<tr>
+							<td><?= $v['team_id'];?></td>
+							<td><?= $v['color'];?></td>
+							<td><input type="hidden" name="solution_id" value="<?= $v['solution_id'];?>" />
+							<button type="submit">撤销</button>
+							</td>
+						</tr>
+					</form>
+				<?php endforeach;?> 
+			</tbody>	
+		</table>
+	</div>
+</body>
+</html>

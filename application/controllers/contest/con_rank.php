@@ -14,12 +14,14 @@ class Con_rank extends Con_Controller {
 		$data['contest_id'] = $this->uri->segment(4);
 		$con_user = $this->rank_model->get_user_byContest($data['contest_id']);
 		$contest = $this->oj_con->con_byId($data['contest_id']);
-		if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd'])) {
-				$offset = $this->uri->segment(5);
-				//echo 2;
-				redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
-		}else if (time() < strtotime($contest['start_time'])) {
-				redirect('contest/home/index/'.$data['contest_id']);
+		if($this->session->userdata('privilege') != 1) {
+			if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd'])) {
+					$offset = $this->uri->segment(5);
+					//echo 2;
+					redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
+			}else if (time() < strtotime($contest['start_time'])) {
+					redirect('contest/home/index/'.$data['contest_id']);
+			}
 		}
 		$count = count($con_user);
 		for ($i = 0; $i < $count; $i++) {

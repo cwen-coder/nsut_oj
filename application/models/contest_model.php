@@ -137,5 +137,53 @@ class Contest_model extends CI_Model {
 			return $data['pro_id'];
 		else return false;
 	}
+
+	public function get_sim($contest_id) {
+		$query = " SELECT s_id,sim_s_id,sim FROM sim,solution WHERE contest_id = '$contest_id' AND s_id = solution_id ORDER BY sim DESC ";
+		$result = mysql_query($query);
+		if($result == true) {
+			$data = array();
+			while ($row = mysql_fetch_assoc($result)) {
+				$data[] = $row;
+			}
+			return $data;
+		} else {
+			return $result;
+		}
+	}
+
+
+	public function get_con_class($contest_id) {
+		$query = "SELECT con_class FROM contest WHERE contest_id = '$contest_id' ";
+		$result = mysql_query($query);
+		return mysql_fetch_assoc($result)['con_class'];
+	}
+
+	public function get_sim_team_id($solution_id) {
+		$query = "SELECT team_id FROM solution,teams WHERE solution_id = '$solution_id' AND solution.user_id = teams.user_id ";
+		$result = mysql_query($query);
+		$data = array();
+		$data['team_id'] = mysql_fetch_assoc($result)['team_id'];
+
+		$sql = " SELECT source FROM source_code WHERE solution_id = '$solution_id' ";
+		$res = mysql_query($sql);
+		$data['source_code'] = mysql_fetch_assoc($res)['source'];
+
+		return $data;
+	}
+
+
+	public function get_sim_user_id($solution_id) {
+		$query = "SELECT user_id FROM solution WHERE solution_id = '$solution_id' ";
+		$result = mysql_query($query);
+		$data = array();
+		$data['user_id'] = mysql_fetch_assoc($result)['user_id'];
+
+		$sql = " SELECT source FROM source_code WHERE solution_id = '$solution_id' ";
+		$res = mysql_query($sql);
+		$data['source_code'] = mysql_fetch_assoc($res)['source'];
+
+		return $data;
+	}
 }
 ?>
