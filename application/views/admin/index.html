@@ -73,7 +73,7 @@
                         <ul class="dropdown-menu">
                             <li><a tabindex="-1" href="#">My Account</a></li>
                             <li class="divider"></li>
-                            <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>
+                            
                             <li class="divider visible-phone"></li>
                             <li><a tabindex="-1" href="<?= site_url('admin/privilege/log_out');?> ">Logout</a></li>
                         </ul>
@@ -87,27 +87,29 @@
 
         <a href="#accounts-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-th-list"></i>比赛相关<i class="icon-chevron-up"></i></a>
         <ul id="accounts-menu" class="nav nav-list collapse">
-            <li ><a onclick="addTab('比赛列表','<?= site_url('/admin/contest');?>')">比赛列表</a></li>
-            <li ><a onclick="addTab('比赛分析','<?= site_url('/admin/contest_res');?>')">比赛分析</a></li>
-            <li><a onclick="addTab('比赛提问回复','<?= site_url('/admin/ans_que');?>')">比赛提问回复</a></li>
-            <li><a onclick="addTab('题目重判','<?= site_url('/admin/reset_problem');?>')">题目重判</a></li>
-            <li><a onclick="addTab('校赛气球设置','<?= site_url('/admin/balloon');?>')">校赛气球设置</a></li>
+
+            <li ><a href="javascript:void(0)" onclick="addTab('比赛列表','<?= site_url('/admin/contest');?>')">比赛列表</a></li>
+            <li ><a href="javascript:void(0)" onclick="addTab('比赛分析','<?= site_url('/admin/contest/contest_res');?>')">比赛分析</a></li>
+            <li><a href="javascript:void(0)" onclick="addTab('比赛提问回复','<?= site_url('/admin/ans_que');?>')">比赛提问回复</a></li>
+            <li><a href="javascript:void(0)" onclick="addTab('题目重判','<?= site_url('/admin/reset_problem');?>')">题目重判</a></li>
         </ul>
 
         <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-user"></i>用户相关 <i class="icon-chevron-up"></i></a>
-        <ul id="error-menu" class="nav nav-list collapse">           
-            <li ><a onclick="addTab('ACM集训队','<?= site_url('/admin/acmer');?>')">ACM集训队</a></li>
+        <ul id="error-menu" class="nav nav-list collapse">
+            <li ><a href="javascript:void(0)" onclick="addTab('ACM集训队','<?= site_url('/admin/user');?>')">用户管理</a></li>
+            <li ><a href="javascript:void(0)" onclick="addTab('ACM集训队','<?= site_url('/admin/acmer');?>')">ACM集训队</a></li>
             <li ><a onclick="addTab('志愿者管理','<?= site_url('/admin/volunteer');?>')">志愿者管理</a></li>
         </ul>
 
         <a href="#legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-th"></i>题库相关<i class="icon-chevron-up"></i></a>
         <ul id="legal-menu" class="nav nav-list collapse">
-            <li ><a onclick="addTab('添加分类','<?= site_url('/admin/problem_category');?>')">添加分类</a></li>
-            <li ><a onclick="addTab('题目列表','<?= site_url('/admin/problem');?>')">题目列表</a></li>
+            <li ><a href="javascript:void(0)" onclick="addTab('添加分类','<?= site_url('/admin/problem_category');?>')">添加分类</a></li>
+            <li ><a href="javascript:void(0)" onclick="addTab('题目列表','<?= site_url('/admin/problem');?>')">题目列表</a></li>
         </ul>
         
         <a href="#view-menu" class="nav-header collapsed"  data-toggle="collapse"><i class="icon-globe"></i>前台相关<i class="icon-chevron-up"></i></a>  
         <ul id="view-menu" class="nav nav-list collapse">
+            <li ><a href="javascript:void(0)" onclick="addTab('题目列表','<?= site_url('/admin/circular');?>')" >滚动栏</a></li>
         </ul>
         <a href="#" class="nav-header" ><i class="icon-question-sign"></i>帮助</a>
         

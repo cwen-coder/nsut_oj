@@ -29,7 +29,7 @@
   }
 .user_info{
   position: relative;
-  margin-top:150px;
+  margin-top:100px;
 }
 .class_hr{
   width:75%;
@@ -42,6 +42,10 @@
   }
   .table{
     width:60%;
+  }
+    .th_class {
+    background-color:#222;
+    color:#FFFFFF;
   }
   td,th{
     text-align:center
@@ -66,11 +70,11 @@
 </theaad>
 
 <tbody>
-  <?php $i=1;?>
+  <?php $i=($pagination-2)*$num+1;?>
   <?php foreach($info as $v): ?>
   <tr>
     <?php if ($v['username']!=null){?>
-    <td><?php echo $i++;?></td>
+    <td><?php echo $i++ ?></td>
     <td><?php echo $v['username']?></td>
     <td><?php echo $v['solved']?></td>
     <td><?php echo $v['submit']?></td>
@@ -81,7 +85,16 @@
 <?php } endforeach ?>
 </tbody>
 </table>
-</center>
+
+<div id="center" class="center">
+<?php echo "[<a href=?previous=".($pagination-2)."&pagination=".($pagination-1).">回到顶部</a>]&nbsp;&nbsp;";
+if (isset($previous)) 
+        echo "[<a href=?previous=".($previous-1)."&pagination=".($pagination-2).">上一页</a>]&nbsp;&nbsp;";
+if(isset($pag)) 
+echo "[<a href=?previous=".($pagination-1)."&pagination=".($pagination).">下一页</a>]";
+?>
+</div>
+    </center>
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
