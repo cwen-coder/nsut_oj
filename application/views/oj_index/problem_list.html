@@ -136,7 +136,7 @@
   <th style="width:20%">Problem Category</th>
   <th style="width:20%">Ratio(Accepted/Submissions)</th>
  </tr>
-</theaad>
+</thead>
 
 <tbody>
     <?php if($category[0]!=0) {?>
@@ -156,7 +156,6 @@
  <?php }else{
  echo "<div style='margin-left:50%;color:red'>木有找到!</div>";
 }?>
-</div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
 </body>

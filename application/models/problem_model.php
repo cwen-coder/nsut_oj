@@ -64,6 +64,7 @@ class Problem_model extends CI_Model {
 	public function get_class() {
 		$query = "SELECT class_id,class_name FROM class_name WHERE 1";
 		$result = mysql_query($query);
+		$data = array();
 		while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
 			$data[] = $row;
 		}
