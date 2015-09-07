@@ -11,13 +11,6 @@ class Home extends Oj_Controller{
 	}
 	//载入主页
 	public function index(){
-		/*$this->load->model('privilege_model');
-		$user_id = $this->session->userdata('user_id');	
-		$ip = implode($this->privilege_model->get_ip($user_id));
-		p($this->privilege_model->get_ip($user_id));
-		p($ip);
-		p($this->session->userdata('ip'));
-		die;*/
 		$total_rows = $this->pro->problem_all_num();
 		$config['base_url'] = site_url('oj_index/home/index');   
 		$config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
@@ -35,7 +28,7 @@ class Home extends Oj_Controller{
 		$this->pagination->initialize($config);
 		$data['links'] = $this->pagination->create_links();
 		$data['offset'] = $this->uri->segment(4);
-		if($data['offset'] == null) $data['offset']=0;
+		if($data['offset'] == null) $data['offset'] = 0;
 		$data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
 			$data['username'] = $this->session->userdata('username');//$this->pro->problem_check('$data[user_id]','$v[problem_id]')
