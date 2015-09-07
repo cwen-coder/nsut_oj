@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 		<meta charset="utf-8">
+		<meta http-equiv="refresh" content="10"> 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
@@ -96,6 +97,7 @@ echo "[<a href=?previous=".($pagination-1)."&pagination=".($pagination).">下一
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal_source_code" style="display:none" id = "source_code_but" >
  提交的代码
 </button>
+
 
 <!-- Modal -->
 <?php require('compile_info.html'); ?>
