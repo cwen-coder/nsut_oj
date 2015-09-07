@@ -139,7 +139,7 @@
 </thead>
 
 <tbody>
-    <?php if($category[0]!=0) {?>
+    <?php if(!empty($category) && $category[0] != 0) {?>
   <?php foreach($category as $v): ?>
   <tr>
     <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>"; if($this->session->userdata('user_id')&&!$v['do']) echo "<span class='glyphicon glyphicon-star-empty'></span>";?><?php echo $v['problem_id']?></td>
@@ -153,7 +153,8 @@
 </tbody>
 </table>
 </div>
- <?php }else{
+ <?php }else if(empty($category)){
+    }else{
  echo "<div style='margin-left:50%;color:red'>木有找到!</div>";
 }?>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
