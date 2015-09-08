@@ -142,6 +142,7 @@ class Login extends CI_Controller {
                                    endforeach;
                                    $data['submit'] = $this->user_model->user_sub_all($data['user']);
                                    $solved =$data['user_ac'];
+                                   $unsolved = array();
                                    //$data['unsolved'] = array_intersect($submit, $solved);
                                    foreach ($data['submit'] as $key => $value) {
                                     if(!in_array($value,$solved)){
