@@ -59,8 +59,8 @@ editAreaLoader.init({
 <div class="group">
 <form action="<?php echo site_url('oj_index/problem_submit/index');?>" method="post" onsubmit = "return check();">
   <div>
-    <span style="color:red">Problem A</span><br/>
-    <span style="color:red">Language:</span>
+      <span style="color:red;font-size: 20px">Problem Id: </span><span style="font-size: 20px"><?= $pid;?></span></br>
+    <span style="color:red;font-size: 20px">Language:   </span>
   <select id="language" name="language">
             <option value="0" >C</option>
             <option value="1" >C++</option>
