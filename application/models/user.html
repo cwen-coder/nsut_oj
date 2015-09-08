@@ -2,7 +2,6 @@
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="10"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
@@ -29,7 +28,7 @@
   }
 .user_info{
   position: relative;
-  margin-top:100px;
+  margin-top:150px;
 }
 .class_hr{
   width:75%;
@@ -37,67 +36,55 @@
   border:none;
   border-top:2px dotted #185598;
 }
+.user_table{
+  width: 200px;
+  color:blue;
+  font-size: 15px;
+}
+.container_modal{
+    margin-left:20%;
+  }
   .label_reg{
     width:20%;
   }
-  .table{
-    width:60%;
-  }
-    .th_class {
-    background-color:#222;
-    color:#FFFFFF;
-  }
-  td,th{
-    text-align:center
-  }
-  .container_modal{
-    margin-left:20%;
+  span{
+    color:blue;
   }
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>  
 <div class="user_info">
 <center>
-<table class="table table-bordered table-hover">
-  <thead>
-  <tr class="th_class">
-    <th style="width:20%">Rank</th>
-  <th style="width:20%">Username</th>
-  <th style="width:20%">Solved</th>
-  <th style="width:20%">Submitted</th>
-  <th style="width:20%">AC Ratio</th>
- </tr>
-</theaad>
-
-<tbody>
-  <?php $i=($pagination-2)*$num+1;?>
-  <?php foreach($info as $v): ?>
+<h1><span><?php echo $user; ?></span></h1>
+<span>registered on </span>
+<hr class="class_hr">
+<table class="user_table">
   <tr>
-    <?php if ($v['username']!=null){?>
-    <td><?php echo $i++ ?></td>
-    <td><?php echo $v['username']?></td>
-    <td><?php echo $v['solved']?></td>
-    <td><?php echo $v['submit']?></td>
-    <td><?php if($v['submit']!=0) echo sprintf("%.2f", $v['solved']/$v['submit']*100);
-                                else echo '0.00';
-    ?>%</td>
+    <td>Rank</td>
+    <td>2</td>
   </tr>
-<?php } endforeach ?>
-</tbody>
+  <tr>
+    <td>Problems Submitted</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Problems Solved</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Accepted</td>
+    <td>2</td>
+  </tr>
 </table>
-
-<div id="center" class="center">
-<?php echo "[<a href=?previous=".($pagination-2)."&pagination=".($pagination-1).">回到顶部</a>]&nbsp;&nbsp;";
-if (isset($previous)) 
-        echo "[<a href=?previous=".($previous-1)."&pagination=".($pagination-2).">上一页</a>]&nbsp;&nbsp;";
-if(isset($pag)) 
-echo "[<a href=?previous=".($pagination-1)."&pagination=".($pagination).">下一页</a>]";
-?>
-</div>
-    </center>
+<hr class="class_hr">
+<h3><span>List of solved problems</span><h3>
+<p></p>
+<h3><span>List of solved problems</span><h3>
+  <p></p>
+  <hr class="class_hr">
+</center>
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
-<?php require('foot.html');?>
 </body>
 </html>

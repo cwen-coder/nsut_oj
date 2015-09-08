@@ -75,9 +75,11 @@
 <a href="<?php echo site_url('oj_index/home/submitpage?pid='.$problem['problem_id']);?>"><img src="<?= base_url('application/views/contest/images/submit.jpg');?>"></a>
 <center>
 </div>
+<?php require('foot.html');?>
 </div>
 
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" /> 
+
 </body>
 </html>
