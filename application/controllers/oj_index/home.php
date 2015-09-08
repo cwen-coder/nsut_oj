@@ -14,7 +14,7 @@ class Home extends Oj_Controller{
 		$total_rows = $this->pro->problem_all_num();
 		$config['base_url'] = site_url('oj_index/home/index');   
 		$config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
-		$config['per_page'] = 10; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
+		$config['per_page'] = 20; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
 		$config['first_link'] = '首页'; // 第一页显示
 		$config['last_link'] = '末页'; // 最后一页显示   
 		$config['next_link'] = '下一页 >'; // 下一页显示   
@@ -195,7 +195,7 @@ class Home extends Oj_Controller{
                                                     $total_rows = $this->pro->problem_all_pc($pc);
                                                     $config['base_url'] = site_url('oj_index/home/search?pc='.$pc);   
                                                     $config['total_rows'] = $total_rows;//记录总数，这个没什么好说的了，就是你从数据库取得记录总数   
-                                                    $config['per_page'] = 10; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
+                                                    $config['per_page'] = 20; //每页条数。额，这个也没什么好说的。。自己设定。默认为10好像。   
                                                     $config['first_link'] = '首页'; // 第一页显示
                                                     $config['last_link'] = '末页'; // 最后一页显示   
                                                     $config['next_link'] = '下一页 >'; // 下一页显示   
