@@ -94,8 +94,10 @@ editAreaLoader.init({
 function check() {
   var val = $("#source").val();
   //alert(val);
-  $("#source").val($.base64.btoa(val));
+  console.log(val);
+ $("#source").val($.base64.btoa(val));
   //alert($("#source").val());
+  console.log(val);
   return true;
 }
   </script>
