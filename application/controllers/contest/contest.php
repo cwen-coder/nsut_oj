@@ -158,6 +158,12 @@ class Contest extends Sch_Controller{
 		}else {
 			//echo 5;
 			$data['source'] = $this->input->post('source', TRUE);
+
+      if(get_magic_quotes_gpc()){
+        $data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
+      }
+      $data['source'] = mysql_real_escape_string($data['source']);//转义 SQL 语句中使用的字符串中的特殊字符
+      
 			$data['language'] = $this->input->post('language', TRUE);
 			$data['pid'] = $this->input->post('pid', TRUE);
 			$data['ip'] = $this->session->userdata('ip_address');
