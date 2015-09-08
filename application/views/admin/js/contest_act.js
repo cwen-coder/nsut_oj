@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	goPage(1,3);
+	goPage(1,6);
 	//获取点击删除模态框的所在行的id
     $('a[href*="#myModal"]').click(function() {
       $("#contest_span").text($(this).attr("id"));

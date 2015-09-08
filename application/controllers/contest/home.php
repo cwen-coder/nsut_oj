@@ -53,8 +53,8 @@ class Home extends Con_Controller {
 	//比赛登录
 	public function con_log_act() {
 		//self:index();
-		$contest_id = $this->input->post('contest_id',TRUE);
-		$con_pwd = $this->input->post('con_pwd',TRUE);
+		$contest_id = mysql_real_escape_string($this->input->post('contest_id',TRUE));
+		$con_pwd = mysql_real_escape_string($this->input->post('con_pwd',TRUE));
 		//echo 1;
 		$result = $this->oj_con->con_log_act($contest_id,$con_pwd);
 		if($result == true) {

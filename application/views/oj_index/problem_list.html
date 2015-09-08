@@ -21,51 +21,50 @@
   .label_reg{
     width:20%;
   }
+      body {
+      font-family: 微软雅黑;
+      background: #eee;
+      background-image: url(<?= base_url('index/images/background.jpg');?>);
+      background-position: initial initial;
+      background-repeat: initial initial;
+      background-position: initial initial;
+      background-repeat: initial initial;
+      margin: 0px;
+      padding: 0px;
+    }
+      .form-control{
+        width:160px;
+        height:30px;
+      }
+    .control-group {
+      display: inline;
+      float: right;
+    }
+    .container-search{
+                margin-top: 7%;
+                margin-right: 100px;
+                display: inline;
+                float: right;
+    }
+    .table-group{
+      margin-top: 11%;
+    }
+    .th_class {
+      background-color:#222;
+      color:#FFFFFF;
+    }
+    td,th{
+      text-align:center
+    }
+    select{
+      height:30px;
+      background-color:#ffffff;
+      border:1px solid #cccccc;
+    }
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>
-<style type="text/css">
-    body {
-    font-family: 微软雅黑;
-    background: #eee;
-    background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
-    background-position: initial initial;
-    background-repeat: initial initial;
-    background-position: initial initial;
-    background-repeat: initial initial;
-    margin: 0px;
-    padding: 0px;
-  }
-    .form-control{
-      width:160px;
-      height:30px;
-    }
-	.control-group {
-		display: inline;
-		float: right;
-	}
-  .container-search{
-              margin-top: 7%;
-              margin-right: 100px;
-              display: inline;
-              float: right;
-  }
-  .table-group{
-    margin-top: 11%;
-  }
-  .th_class {
-    background-color:#222;
-    color:#FFFFFF;
-  }
-  td,th{
-    text-align:center
-  }
-  select{
-    height:30px;
-    background-color:#ffffff;
-    border:1px solid #cccccc;
-  }
-	</style>
+
   <div class="container">
 <div class="container-search">
 <div class="control-group">

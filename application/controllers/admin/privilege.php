@@ -20,7 +20,7 @@ class Privilege extends CI_Controller {
 		$config = array(
 			'width'	=>	100,
 			'height'=>	25,
-			'codeLen'=>	1,
+			'codeLen'=>	4,
 			'fontSize'=>16
 			);
 		$this->load->library('code', $config);
@@ -71,8 +71,8 @@ class Privilege extends CI_Controller {
 			$time = standard_date($format, time());
 			$ip = $this->input->ip_address();
         	$data = array(
-        		'username' => $username,
-        		'password' => $password,
+        		'username' => mysql_real_escape_string($username),
+        		'password' => mysql_real_escape_string($password),
         		'ip' => $ip,
         		'SAC' => $this->input->server('HTTP_USER_AGENT'),
         		'time' => $time

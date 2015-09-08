@@ -166,15 +166,15 @@ class School_contest extends Oj_Controller{
                 
                 $data = array(
                         'user_id' => $user_id,
-                        'contest_id' => $contest_id,
-                        'team_name' => $teamname,
-                        'team_num1' => $usernum,
-                        'team_name1' => $username,
-                        'team_num2' => $user1num,
-                        'team_name2' => $user1name,
-                        'team_num3' => $user2num,
-                        'team_name3' => $user2name,
-                        'phone' => $phone
+                        'contest_id' => mysql_real_escape_string($contest_id),
+                        'team_name' => mysql_real_escape_string($teamname),
+                        'team_num1' => mysql_real_escape_string($usernum),
+                        'team_name1' => mysql_real_escape_string($username),
+                        'team_num2' => mysql_real_escape_string($user1num),
+                        'team_name2' => mysql_real_escape_string($user1name),
+                        'team_num3' => mysql_real_escape_string($user2num),
+                        'team_name3' => mysql_real_escape_string($user2name),
+                        'phone' => mysql_real_escape_string($phone)
                     );
                 //echo $data;
                 //$result = true;
@@ -259,8 +259,8 @@ class School_contest extends Oj_Controller{
                                                                                     $time = standard_date($format, time());
                                                                                     $ip = $this->input->ip_address();
                                                                                             $data = array(
-                                                                                                    'username' => $username,
-                                                                                                    'password' => $password,
+                                                                                                    'username' => mysql_real_escape_string($username),
+                                                                                                    'password' => mysql_real_escape_string($password),
                                                                                                     'ip' => $ip,
                                                                                                     'SAC' => $this->input->server('HTTP_USER_AGENT'),
                                                                                                     'time' => $time

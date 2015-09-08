@@ -220,13 +220,13 @@ class Register extends CI_Controller {
             else {
                 //$user_id = md5($username.mt_rand(100,999));
                 $data = array(
-                        'user_id' => $username,
-                        'username' => $username,
-                        'password' => $this->encrypt->encode($password1),
+                        'user_id' => mysql_real_escape_string($username),
+                        'username' => mysql_real_escape_string($username),
+                        'password' => mysql_real_escape_string($this->encrypt->encode($password1)),
                         'accesstime' => $time,
                         'reg_time' => $time,
                         'ip' =>  $ip,
-                        'email' => $email
+                        'email' => mysql_real_escape_string($email)
                     );
                 $result = $this->user_model->reg_act($data);
                 if($result)

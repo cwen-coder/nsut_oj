@@ -15,12 +15,20 @@ class Problem_submit extends Oj_Controller{
                                                     echo "<script type='text/javascript'> alert('请先登录 ');history.go(-1); </script>";
 		}else{
 
-			$data['source'] =base64_decode($this->input->post('source'));
+			$data['source'] = base64_decode($this->input->post('source',true));
+			//$data['source'] = stripslashes($data['source']);
+			if(get_magic_quotes_gpc()){
+				$data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
+			}
+			$data['source'] = mysql_real_escape_string($data['source']);//转义 SQL 语句中使用的字符串中的特殊字符
+
 			$data['language'] = $this->input->post('language', TRUE);
 			$data['pid'] = $this->input->post('pid', TRUE);
 			$data['ip'] = $this->session->userdata('ip_address');
 			$data['code_length'] = strlen($data['source']);
-			//p($data['ip']);die;
+			//p($data);die;
+			//echo $data['source'];
+			//echo $this->input->post('source',true);
 			/*echo $data['code_length'];die;*/
 			$result = $this->ps->problem_submit($data);
 			$url = 'oj_index/home/status';
