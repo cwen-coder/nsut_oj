@@ -15,27 +15,28 @@ $(document).ready(function(){
     if($("#cate").val()==1){
       var href = "search?pid=";
       var search_terms = $("#search_terms").val();
-      $("#search_but").attr("href", href+search_terms);
+      $("#search_but").attr("href", href+encodeURIComponent(search_terms));
     }
     if($("#cate").val()==2){
       var href = "search?pn=";
       var search_terms = $("#search_terms").val();
-      $("#search_but").attr("href", href+search_terms);
+      $("#search_but").attr("href", href+encodeURIComponent(search_terms));
     }
       if($("#cate").val()==3){
       var href = "search?pc=";
       var search_terms = $("#cate_cate").val();
-      $("#search_but").attr("href", href+search_terms);
+      $("#search_but").attr("href", href + search_terms);
     }
   });
   function GetRequest() { 
       var url = location.search; //获取url中"?"符后的字串 
+      // console.log(url);
       var theRequest = new Object(); 
       if (url.indexOf("?") != -1) { 
             var str = url.substr(1); 
             strs = str.split("&"); 
             for(var i = 0; i < strs.length; i ++) { 
-            theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+            theRequest[strs[i].split("=")[0]]=strs[i].split("=")[1]; 
             } 
       }    
       return theRequest; 
@@ -45,13 +46,14 @@ $(document).ready(function(){
   var pid = Request['pid'];
   var pn = Request['pn'];
   var pc = Request['pc'];
+  //console.log(pn);
   if(pid !=undefined){
     $("#cate").val(1);
-    $("#search_terms").val(pid);
+    $("#search_terms").val(decodeURIComponent(pid));
   }
   if(pn !=undefined){
     $("#cate").val(2);
-    $("#search_terms").val(pn);
+    $("#search_terms").val(decodeURIComponent(pn));
   }
   if(pc !=undefined){
     $("#cate").val(3);
