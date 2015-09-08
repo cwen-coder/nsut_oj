@@ -135,7 +135,7 @@ function search_class(search) {
              + "</td>");
             td.appendTo(tr);
           }
-          goPage(1,3);
+          goPage(1,6);
         }
       });
 }

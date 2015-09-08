@@ -18,9 +18,9 @@ class Problem_submit extends Oj_Controller{
 			$data['source'] = base64_decode($this->input->post('source',true));
 			//$data['source'] = stripslashes($data['source']);
 			if(get_magic_quotes_gpc()){
-				$data['source']=stripslashes($data['source']);
+				$data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
 			}
-			$data['source'] = mysql_real_escape_string($data['source']);
+			$data['source'] = mysql_real_escape_string($data['source']);//转义 SQL 语句中使用的字符串中的特殊字符
 
 			$data['language'] = $this->input->post('language', TRUE);
 			$data['pid'] = $this->input->post('pid', TRUE);

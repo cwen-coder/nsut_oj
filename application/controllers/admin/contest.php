@@ -139,7 +139,7 @@ class Contest extends Admin_Controller {
 		$this->config->set_item('url_suffix', '');
 		//载入分页类
 		$this->load->library('pagination');
-		$perPage = 3;
+		$perPage = 8;
 
 		//配置项设置
 		$config['base_url'] = site_url('admin/contest/con_pro_from/'.$data['contest_id'].'/'.$data['pro_num']);

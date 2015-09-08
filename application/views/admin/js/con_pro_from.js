@@ -147,7 +147,7 @@ function search_class(search) {
             td = $("<td>"+ "<button type='button'" + "id='"+ pro[i].problem_id +"' class='btn btn-primary problem' autocomplete='off' onClick = 'add(this.id)'><i class='icon-plus'></i>选择</button>"+ "</td>");
             td.appendTo(tr);
           }
-          goPage(1,3);
+          goPage(1,6);
         }
       });
 }
