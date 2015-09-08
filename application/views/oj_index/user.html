@@ -56,31 +56,41 @@
 <div class="user_info">
 <center>
 <h1><span><?php echo $user; ?></span></h1>
-<span>registered on </span>
+<span>registered on <?= $user_info['accesstime']?></span>
 <hr class="class_hr">
 <table class="user_table">
   <tr>
     <td>Rank</td>
-    <td>2</td>
+    <td><?= $user_info['rank']?></td>
   </tr>
   <tr>
     <td>Problems Submitted</td>
-    <td>2</td>
+    <td><?= $user_info['submit'] ?></td>
   </tr>
   <tr>
     <td>Problems Solved</td>
-    <td>2</td>
+    <td><?= $user_info['sol_sum'] ?></td>
   </tr>
   <tr>
     <td>Accepted</td>
-    <td>2</td>
+    <td><?= $user_info['ac_sum'] ?></td>
   </tr>
 </table>
 <hr class="class_hr">
 <h3><span>List of solved problems</span><h3>
-<p></p>
-<h3><span>List of solved problems</span><h3>
-  <p></p>
+        <div >
+            <?php foreach($user_info['user_problem'] as $key => $val) :
+                        echo '<a href="" >'.$key.'</a>&nbsp'.'<font size="-2" color="#CC0000">'.$val['ac_num'].'/'.$val['sub_sum'].'</font>';
+                       endforeach;
+            ?>
+        </div>
+<h3><span>List of unsolved problems</span><h3>
+  <div >
+            <?php foreach($unsolved as $v) :
+                        echo '<a href="" >'.$v['problem_id'].'</a>&nbsp'.'<font size="-2" color="#CC0000">0/'.$v['sub_sum'].'</font>';
+                       endforeach;
+            ?>
+        </div>
   <hr class="class_hr">
 </center>
 </div>

@@ -117,6 +117,48 @@ class Login extends CI_Controller {
 			$data['user_id'] = false;
 		}
 		$data['user'] = $this->input->get('username');
+                                   $data['user_info'] = $this->user_model->user($data['user']);
+                                   $data['user_ac'] = $this->user_model->user_ac($data['user']);
+                                   $data['user_info']['ac_sum'] = sizeof($data['user_ac']);
+                                   $data['user_info']['user_problem'] = array();
+                                   foreach ($data['user_ac'] as $v):
+                                            if(isset($data['user_info']['user_problem'][$v['problem_id']]['ac_num']))
+                                                $data['user_info']['user_problem'][$v['problem_id']]['ac_num'] +=1;
+                                            else{
+                                                $data['user_info']['user_problem'][$v['problem_id']]['ac_num']=1;
+                                            }
+                                   endforeach;
+                                   foreach($data['user_info']['user_problem'] as $key => $val):
+                                       $data['user_info']['user_problem'][$key]['sub_sum'] = $this->user_model->user_pro_sub_num($data['user'],$key); 
+                                   endforeach;
+                                   $data['user_info']['sol_sum'] = sizeof($data['user_info']['user_problem']);
+                                   $data['user_info']['submit'] = $this->user_model->user_sub_num($data['user']); 
+                                   $rank = $this->user_model->user_rank_all();
+                                   $data['user_info']['rank'] = 1;
+                                   foreach ($rank as $v):
+                                       if($v['username'] == $data['user'])
+                                           break;
+                                       $data['user_info']['rank'] += 1;
+                                   endforeach;
+                                   $data['submit'] = $this->user_model->user_sub_all($data['user']);
+                                   $solved =$data['user_ac'];
+                                   //$data['unsolved'] = array_intersect($submit, $solved);
+                                   foreach ($data['submit'] as $key => $value) {
+                                    if(!in_array($value,$solved)){
+                                        $unsolved[]=$value;
+                                    }
+                                  }
+                                  $data['unsolved'] = array();
+                                  foreach ($unsolved as $key => $value) {
+                                    if(!in_array($value,$data['unsolved'])){
+                                        $data['unsolved'][]=$value;
+                                    }
+                                  }
+                                  $j=0;
+                                  foreach($data['unsolved'] as $v):
+                                       $data['unsolved'][$j++]['sub_sum'] = $this->user_model->user_pro_sub_num($data['user'],$v['problem_id']); 
+                                  endforeach;
+                                   //p($data);die;
 		$this->load->view('oj_index/user.html',$data);
 	}
 }

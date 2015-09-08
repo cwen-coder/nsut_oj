@@ -168,16 +168,6 @@ class  User_model extends CI_Model {
                                    $result = mysql_query($sql_query);
                                    return mysql_fetch_assoc($result);
                  }
-
-                 public function user_info($user){
-		$sql_query = "SELECT a.user_id, a.submit, a.solved, COUNT( b.solved ) rank, a.reg_time
-				FROM users a JOIN users b
-				WHERE a.solved <= b.solved
-				GROUP BY a.username, a.solved
-				ORDER BY rank, a.submit";
-		$result = mysql_query($sql_query);
-
-	}
 	public function school_contest(){
 		$sql = "select title, start_time from contest where start_time>NOW() and (con_class='3' or con_class='4') ";
 		$result = mysql_query($sql);
@@ -187,4 +177,54 @@ class  User_model extends CI_Model {
 		}
 		return $data;
 	}
+        public function user($username){
+            $sql = "select username, accesstime from users where username = '$username' ";
+            $result = mysql_query($sql);
+            $data = array();
+            $data = mysql_fetch_assoc($result);
+            return $data;    
+        }
+        public function user_ac($username){
+            $sql = "select a.problem_id from solution a, users b where a.user_id = b.user_id and a.contest_id = 0 and b.username = '$username' and a.result = 4 ";
+            $result = mysql_query($sql);
+            $data = array();
+            while($row = mysql_fetch_assoc($result)){
+	$data[] = $row;
+            }
+            return $data;  
+        }
+        
+        public function user_pro_sub_num($username,$problem_id){
+            $sql = "select a.problem_id from solution a, users b where a.user_id = b.user_id and a.contest_id = 0 and b.username = '$username' and a.problem_id = '$problem_id' and contest_id = 0 ";
+            $result = mysql_query($sql);
+            return mysql_num_rows($result); 
+        }
+        
+        public function user_sub_num($username){
+            $sql = "select a.problem_id from solution a, users b where a.user_id = b.user_id and a.contest_id = 0 and b.username = '$username' and contest_id = 0 ";
+            $result = mysql_query($sql);
+            return mysql_num_rows($result); 
+        }
+        
+         public function user_sub_all($username){
+            $sql = "select a.problem_id from solution a, users b where a.user_id = b.user_id and a.contest_id = 0 and b.username = '$username' and contest_id = 0 ";
+            $result = mysql_query($sql);
+            $data = array();
+            while($row = mysql_fetch_assoc($result)){
+                $data[] = $row;
+            }
+          return $data;
+        }
+        
+        public function user_rank_all(){
+		$sql_query = "select username, submit,solved
+				from users
+				order by solved desc,submit";
+		$result = mysql_query($sql_query);
+		$data = array();
+		while($row = mysql_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		return $data;
+        }
 }
