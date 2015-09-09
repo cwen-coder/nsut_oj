@@ -58,9 +58,8 @@
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>
-<button type="button" class="btn btn-primary " data-toggle="modal"   data-target="#myModal_con_pwd" id="con_log" aria-hidden="true" ></button>
+<button type="button" class="btn btn-primary " data-toggle="modal"   data-target="#myModal_con_pwd" id="con_log" aria-hidden="ture" style='display:none'></button>
 <?php require('con_log.html');?>
-<div class="container">
 
 
 <div class="container">
@@ -76,7 +75,7 @@
   <th style="width:20%;">开始时间</th>
   <th style="width:20%;">类型</th>
  </tr>
-</theaad>
+</thead>
 <tbody>
 
  <?php foreach($con_now as $temp):?>
@@ -111,7 +110,7 @@
   <th style="width:20%">结束时间</th>
   <th style="width:20%">类型</th>
  </tr>
-</theaad>
+</thead>
 <tbody>
   <?php foreach($con_pass as $temp):?>
     <tr>
