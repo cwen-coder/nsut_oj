@@ -162,7 +162,7 @@ class Home extends Con_Controller {
 	public function get_source_code() {
 		$solution_id = $this->input->post('solution_id',TRUE);
 		$username = $this->input->post('username',TRUE);
-		if($username == $this->session->userdata('username')) {
+		if($username == $this->session->userdata('username') || $this->session->userdata('privilege') == 1) {
 			$data = $this->oj_con->get_source_code($solution_id);
 			if($data != false) {
 				//echo json_encode($data);
