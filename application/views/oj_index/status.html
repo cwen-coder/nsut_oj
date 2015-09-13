@@ -124,7 +124,7 @@
     <?php }?>
     <td><div class="div_td"><span style="color:red"><?php echo $v['memory']?></span></div></td>
     <td><div class="div_td"><span style="color:red"><?php echo $v['time']?></span></div></td>
-  <?php   if($v['username']==$this->session->userdata('username')){ ?>
+  <?php   if($v['username']==$this->session->userdata('username') || $this->session->userdata('privilege') == 1){ ?>
     <td><div class="div_td"><a href="#" class="source" data-target='#myModal_source' data-toggle='modal'><?php echo $v['language']? "C++":"C"?></a></div></td>
   <?php }else{?>
   <td><div class="div_td"><?php echo $v['language']? "C++":"C"?></div></td>

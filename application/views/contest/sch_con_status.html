@@ -68,7 +68,7 @@
 				    <td><span style="color:red"><?php echo $v['memory']?></span></td>
 				    <td><span style="color:red"><?php echo $v['time']?></span></td>
 				    <td>
-				    <?php if ($v['username'] == $this->session->userdata('username')): ?>
+				    <?php if ($v['username'] == $this->session->userdata('username') $this->session->userdata('privilege') == 1): ?>
 				    	<a href="#" class="source_code" ><?php echo $v['language']? "C++":"C"?></a>
 				    <?php else: ?>
 				    <?php echo $v['language']? "C++":"C"?>
