@@ -36,6 +36,7 @@ class Con_sub extends Con_Controller{
 			$data['ip'] = $this->session->userdata('ip_address');
 			$data['code_length'] = strlen($data['source']);
 			/*echo $data['code_length'];die;*/
+			
 			if(!empty($data['source'])) {
 				//echo 6;
 				$check_pro = $this->oj_con->check_pro($data['pid']);
@@ -44,6 +45,10 @@ class Con_sub extends Con_Controller{
 				if($check_pro && $check_con && $check_con_pro) {
 					$data['num'] = $check_con_pro['num'];
 					$data['source'] = base64_decode($data['source']);
+				if(get_magic_quotes_gpc()){
+				$data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
+			}
+			$data['source'] = mysql_real_escape_string($data['source']);//转义 SQL 语句中使用的字符串中的特殊字符
 					$result = $this->oj_con->problem_submit($data);
 					$url = 'contest/home/status';
 					if($result) {

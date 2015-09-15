@@ -121,9 +121,9 @@
 </div>
 </div>
 <div class="table-group">
-  <div class="pagination">
+  <!--<div class="pagination">
   <td><?php  if(!empty($links))echo $links; ?></td>
-</div>
+</div>-->
 <table class="table table-bordered table-hover">
   <thead>
   <tr class="th_class">
@@ -146,6 +146,7 @@
     ?>%(<a href="<?php echo site_url().'/oj_index/home/status?pid='.$v['problem_id'].'&ps='.'accepted'?>"><?php echo $v['accepted']?></a>/<a href="<?php echo site_url().'/oj_index/home/status?pid='.$v['problem_id']?>"><?php echo $v['submit']?></a>)</td>
   </tr>
 <?php endforeach ?>
+
 </tbody>
 </table>
 </div>
@@ -153,6 +154,8 @@
     }else{
  echo "<div style='margin-left:50%;color:red'>木有找到!</div>";
 }?>
+</tbody>
+</table>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
 <?php require('foot.html');?>
