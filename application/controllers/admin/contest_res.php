@@ -27,6 +27,7 @@ class Contest_res extends Admin_Controller {
 		//p($contest_id);
 		$sim = $this->contest_model->get_sim($contest_id);
 		$con_class = $this->contest_model->get_con_class($contest_id);
+		$arr = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		//p($sim);
 		$data['sim'] = array();
 		if($con_class == 3 || $con_class == 4) {
@@ -38,6 +39,8 @@ class Contest_res extends Admin_Controller {
 				$data['sim'][$key]['user_s_id'] = $team_s['team_id'];
 				$data['sim'][$key]['s_source'] = $team_s['source_code'];	
 				$data['sim'][$key]['sim'] = $v['sim'];	
+				$data['sim'][$key]['num'] = $arr[$v['num']];
+				
 			}
 		} else {
 			foreach ($sim as $key => $v) {
@@ -49,8 +52,10 @@ class Contest_res extends Admin_Controller {
 				$data['sim'][$key]['user_s_id'] = $user_s['user_id'];
 				$data['sim'][$key]['s_source'] = $user_s['source_code'];	
 				$data['sim'][$key]['sim'] = $v['sim'];	
+				$data['sim'][$key]['num'] = $arr[$v['num']];
 			}
 		}
+
 		//p($data);
 		$this->load->view('admin/contest_sim.html',$data);
 	}

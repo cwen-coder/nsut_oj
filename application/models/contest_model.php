@@ -139,7 +139,7 @@ class Contest_model extends CI_Model {
 	}
 
 	public function get_sim($contest_id) {
-		$query = " SELECT s_id,sim_s_id,sim FROM sim,solution WHERE contest_id = '$contest_id' AND s_id = solution_id ORDER BY sim DESC ";
+		$query = " SELECT s_id,sim_s_id,sim,num FROM sim,solution WHERE contest_id = '$contest_id' AND s_id = solution_id ORDER BY sim DESC ";
 		$result = mysql_query($query);
 		if($result == true) {
 			$data = array();
