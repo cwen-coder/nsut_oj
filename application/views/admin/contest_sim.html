@@ -40,7 +40,9 @@
     			<thead>
     				<th>抄袭</th>
     				<th>被抄袭</th>
+            <th>题号</th>
     				<th>相似度</th>
+
     				<th>抄袭源码</th>
     				<th>被抄源码</th>
     			</thead>
@@ -49,6 +51,7 @@
     					<tr>
     						<td><?= $v['user_id'];?></td>
     						<td><?= $v['user_s_id'];?></td>
+                <td><?= $v['num'];?></td>
     						<td><?= $v['sim'];?></td>
     						<td><textarea class="form-control" rows="20" style="width:420px;" ><?= $v['source'];?></textarea></td>
     						<td><textarea class="form-control"  rows="20" style="width:420px;"><?= $v['s_source'];?></textarea></td>
