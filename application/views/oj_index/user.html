@@ -56,7 +56,16 @@
 <div class="user_info">
 <center>
 <h1><span><?php echo $user; ?></span></h1>
-<span>registered on <?= $user_info['accesstime']?></span>
+<h5><span>registered on <?= $user_info['accesstime']?></span></h5>
+<span>Nick : 
+<?php if($username ==$user  && empty($user_info['nick'])) {?>
+  <input type="text" class="input-xlarge " id="nick" name="nick" placeholder="输入昵称" style="width:173px;">
+  <button type="button" class="btn btn-primary btn-sm" id="set_nick">提交</button></span>
+<?php }else{?>
+<span><?php if(empty($user_info['nick']))echo '暂未设置昵称';
+  else echo $user_info['nick'];
+?></span>
+<?php }?>
 <hr class="class_hr">
 <table class="user_table">
   <tr>
@@ -96,5 +105,25 @@
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
+<script type="text/javascript">
+$("#set_nick").click(function(){
+  var r = confirm("注意!设置后无法修改.如有问题请联系管理员.");
+  if(r){
+    var curPath = $("#hid_site").val();
+    var url = curPath+'/oj_index/login/set_nick';
+    $.post(url,
+      {user_nick : $("#nick").val()},
+      function(data){
+        var data = JSON.parse(data);
+        if(data['code'] != 1){
+          alert(data['message']);
+        }else{
+            alert(data['message']);
+            history.go(0);
+        }
+      });
+  }
+});
+</script>
 </body>
 </html>

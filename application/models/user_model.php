@@ -178,7 +178,7 @@ class  User_model extends CI_Model {
 		return $data;
 	}
         public function user($username){
-            $sql = "select username, accesstime from users where username = '$username' ";
+            $sql = "select username, nick, accesstime from users where username = '$username' ";
             $result = mysql_query($sql);
             $data = array();
             $data = mysql_fetch_assoc($result);
@@ -226,5 +226,11 @@ class  User_model extends CI_Model {
 			$data[] = $row;
 		}
 		return $data;
+        }
+
+        public function set_nick($data){
+        	$sql = "update users set nick = '$data[nick]' where username = '$data[username]' ";
+        	$result = mysql_query($sql);
+        	return $result;
         }
 }

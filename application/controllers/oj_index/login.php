@@ -162,6 +162,37 @@ class Login extends CI_Controller {
                                    //p($data);die;
 		$this->load->view('oj_index/user.html',$data);
 	}
+	public function set_nick(){
+		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
+			$data['username'] = $this->session->userdata('username');
+			$data['user_id'] = $this->session->userdata('user_id');
+		}else {			
+			$data['username'] = false;
+			$data['user_id'] = false;
+		}
+		if(!$data['username']){
+			echo json_encode(array('code' => -5,  'message' => "请先登录"));
+	                	exit();
+	                }
+		$data['nick'] = mysql_real_escape_string($this->input->post('user_nick'));
+		if($data['nick'] == NULL){
+	                	echo json_encode(array('code' => -2,  'message' => "昵称不能为空"));
+	                	exit();
+            		}
+             		if(10 < iconv_strlen($data['nick'] )){
+                		echo json_encode(array('code' => -3,  'message' => "昵称不能超过10个字符"));
+                		exit();
+           		}
+           		//echo json_encode(array('code'=>1, 'message'=>$data['username']));exit();
+           		$result = $this->user_model->set_nick($data);
+           		if($result){
+           			echo json_encode(array('code' => 1, 'message' => '设置成功'));
+           		}else{
+           			echo json_encode(array('code' => -4, 'message' => '对不起,设置失败'));
+           		}
+
+
+	}
 }
 
 ?>
