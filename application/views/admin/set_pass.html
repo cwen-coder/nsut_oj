@@ -26,65 +26,54 @@
     margin: 0px;
     padding: 0px;
   }
-.user_info{
-  position: relative;
-  margin-top:150px;
-}
-.class_hr{
-  width:75%;
-  height:2px;
-  border:none;
-  border-top:2px dotted #185598;
-}
-.user_table{
-  width: 200px;
-  color:blue;
-  font-size: 15px;
-}
-.container_modal{
-    margin-left:20%;
-  }
-  .label_reg{
-    width:20%;
-  }
-  span{
-    color:blue;
+  .container{
+    margin-top: 5%;
   }
   </style>
   <body>
-<?php $this->load->view('oj_index/header.html');?>  
-<div class="user_info">
-<center>
-<h1><span><?php echo $user; ?></span></h1>
-<span>registered on </span>
-<hr class="class_hr">
-<table class="user_table">
-  <tr>
-    <td>Rank</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>Problems Submitted</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>Problems Solved</td>
-    <td>2</td>
-  </tr>
-  <tr>
-    <td>Accepted</td>
-    <td>2</td>
-  </tr>
-</table>
-<hr class="class_hr">
-<h3><span>List of solved problems</span><h3>
-<p></p>
-<h3><span>List of solved problems</span><h3>
-  <p></p>
-  <hr class="class_hr">
-</center>
+<div class="container">
+    <div class = "well" >
+       <table class="table table-striped" >
+        <thead>
+        <th style="width:10%;">ID</th>
+        <th style="width:60%;">比赛名称</th>
+        <th style="width:30%;">操作</th>
+        </thead>
+        <tbody>
+            <?php foreach($contest as $v): ?>
+                <tr>
+                    <td><?= $v['contest_id']?></td>
+                    <td><?= $v['title']?></td>
+                    <td>
+                        <button type="button" class="btn-primary " id = "<?= $v['contest_id']?>" ><i class="icon-plus"></i>批量设置密码</button>
+                        <button type="button" class="btn-success " id = "<?= $v['contest_id']?>" ><i class="icon-plus"></i>导出密码条</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+       </table>
+            
+    </div>
+
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
+<script type="text/javascript">
+   $('button.btn-primary').click(function() {
+      var contest_id = $(this).attr("id");
+        var path = $("#hid_site").val() + '/admin/set_pass/set_pass';
+        $.post(path,
+        {contest_id : contest_id},
+        function(data){
+            var data = $.parseJSON(data);
+            if(data['code'] != 1)
+                alert(data['message']);
+            if(data['code'] == 1){
+                alert(data['message']);
+                history.go(0);
+            }
+    });
+    });
+</script>
 </body>
 </html>
