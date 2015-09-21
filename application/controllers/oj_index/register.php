@@ -17,7 +17,7 @@ class Register extends CI_Controller {
         echo "sidhfi";
     }*/
     public function username_check() {
-        $username = $this->input->post('username',TRUE);
+        $username = mysql_real_escape_string($this->input->post('username',TRUE));
         $result = $this->user_model->check_username($username);
         //$this->output->enable_profiler(TRUE);
         if($result > 0)
@@ -27,7 +27,7 @@ class Register extends CI_Controller {
     }
     //获取ajax传回数据验证是否存在
     public function email_check() {
-        $email = $this->input->post('email',TRUE);
+        $email = mysql_real_escape_string($this->input->post('email',TRUE));
         $result = $this->user_model->check_email($email);
         if($result > 0)
             echo false;
@@ -37,8 +37,8 @@ class Register extends CI_Controller {
     //获取ajax传回数据验证是否存在
     public function teamname_check(){
         $user_id = $this->session->userdata('user_id');
-        $teamname = $this->input->post('teamname',TRUE);
-        $contest_id = $this->input->post('contest_id',TRUE);
+        $teamname = mysql_real_escape_string($this->input->post('teamname',TRUE));
+        $contest_id = mysql_real_escape_string($this->input->post('contest_id',TRUE));
         $result = $this->user_model->teamname_check($teamname, $contest_id, $user_id);
         if($result > 0)
             echo false;
@@ -48,7 +48,7 @@ class Register extends CI_Controller {
     //报名 完善信息
     public function enroll(){
 
-        $captcha = $this->input->post('cap_r', TRUE);
+        $captcha = mysql_real_escape_string($this->input->post('cap_r', TRUE));
                 if (strtolower($captcha) !=  strtolower($_SESSION ['code'])){
                         echo 2;
                         return;
@@ -140,18 +140,18 @@ class Register extends CI_Controller {
                 
                 $team_id = $this->user_model->check_num_team($contest_id)+1;
                 $data = array(
-                        'user_id' => $user_id,
-                        'contest_id' => $contest_id,
-                        'team_name' => $teamname,
-                        'team_num1' => $usernum,
-                        'team_name1' => $username,
-                        'team_num2' => $user1num,
-                        'team_name2' => $user1name,
-                        'team_num3' => $user2num,
-                        'team_name3' => $user2name,
+                        'user_id' => mysql_real_escape_string($user_id),
+                        'contest_id' => mysql_real_escape_string($contest_id),
+                        'team_name' => mysql_real_escape_string($teamname),
+                        'team_num1' => mysql_real_escape_string($usernum),
+                        'team_name1' => mysql_real_escape_string($username),
+                        'team_num2' => mysql_real_escape_string($user1num),
+                        'team_name2' => mysql_real_escape_string($user1name),
+                        'team_num3' => mysql_real_escape_string($user2num),
+                        'team_name3' => mysql_real_escape_string($user2name),
                         'enroll_time' => $time,
                         'team_id' => 'team'.$team_id,
-                        'phone' => $phone
+                        'phone' => mysql_real_escape_string($phone)
                     );
                 //echo $data;
                 //$result = true;
@@ -166,7 +166,7 @@ class Register extends CI_Controller {
     //注册
     public function reg_act() {
         //$this->output->enable_profiler(TRUE);
-        $captcha = $this->input->post('cap_r',TRUE);
+        $captcha = mysql_real_escape_string($this->input->post('cap_r',TRUE));
         if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) {
             //echo strtolower($captcha)."\n";
             //echo strtolower($_SESSION ['code']);

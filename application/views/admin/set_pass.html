@@ -60,19 +60,16 @@
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
 <script type="text/javascript">
    $('button.btn-primary').click(function() {
-      var contest_id = $(this).attr("id");
-        var path = $("#hid_site").val() + '/admin/set_pass/set_pass';
-        $.post(path,
-        {contest_id : contest_id},
+        var path = $("#hid_site").val();
+        var url =path + '/admin/set_pass/set_pass_';
+        //alert(url);
+        $.post(url,
+        {contest_id : $(this).attr("id")},
         function(data){
-            var data = $.parseJSON(data);
-            if(data['code'] != 1)
-                alert(data['message']);
-            if(data['code'] == 1){
-                alert(data['message']);
-                history.go(0);
-            }
-    });
+            //console.log(data);
+            var data = JSON.parse(data);
+            alert(data['message']);
+        });
     });
 </script>
 </body>

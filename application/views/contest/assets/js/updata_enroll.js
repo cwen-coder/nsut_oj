@@ -136,10 +136,10 @@ jQuery(document).ready(function() {
                         if (data == true) {
                             alert('恭喜你！修改成功！');
                             //console.log(phone);
-                            history.go(0) ;
+                            history.go(-1) ;
                         }else if(data == 2) {
                         alert('验证码不正确！');
-                        $("#captcha_img_r").click();
+                        //$("#captcha_img_r").click();
                         $("#captcha_img_r").click();
                         //e.preventDefault();
                   } else {

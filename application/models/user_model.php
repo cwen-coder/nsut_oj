@@ -85,7 +85,7 @@ class  User_model extends CI_Model {
 	}
                 //修改参赛信息
                 public function updata_enroll($data){
-                                    $query = "update teams set team_num1 = '$data[team_num1]', team_name1 = '$data[team_name1]', team_num2 = '$data[team_num2]', team_name2 = '$data[team_name2]', team_num3 = '$data[team_num3]', team_name3 = '$data[team_name3]', team_name = '$data[team_name]', enroll_time = NOW(), team_telephone = '$data[phone]'
+                                    $query = "update teams set team_num1 = '$data[team_num1]', team_name1 = '$data[team_name1]', team_num2 = '$data[team_num2]', team_name2 = '$data[team_name2]', team_num3 = '$data[team_num3]', team_name3 = '$data[team_name3]', team_name = '$data[team_name]', team_telephone = '$data[phone]'
                                               where user_id = '$data[user_id]' and contest_id = '$data[contest_id]]' ";
                                     return mysql_query($query);
                 }
@@ -232,5 +232,26 @@ class  User_model extends CI_Model {
         	$sql = "update users set nick = '$data[nick]' where username = '$data[username]' ";
         	$result = mysql_query($sql);
         	return $result;
+        }
+        
+        //返回校赛报名user_id
+        public function get_user($contest_id){
+            $sql = "select user_id from teams  where contest_id = '$contest_id' ";
+            $result = mysql_query($sql);
+            $data = array();
+            while($row = mysql_fetch_assoc($result)){
+                $data[] = $row;
+            }
+            return $data;
+        }
+        
+        //设置退伍密码
+        public function set_pass($user, $data){
+                 $sql = "update teams set team_pwd = '$data[pass]' where user_id = '$user' and contest_id = '$data[contest_id]' ";
+        	$result = mysql_query($sql);
+                 if($result)
+                    return 'success';
+                 else
+                     return 'fail';
         }
 }

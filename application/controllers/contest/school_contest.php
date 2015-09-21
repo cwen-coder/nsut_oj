@@ -75,7 +75,7 @@ class School_contest extends Oj_Controller{
         }
         //修改参赛信息动作
         public function updata_action(){
-                    $captcha = $this->input->post('cap_r', TRUE);
+                    $captcha = mysql_real_escape_string($this->input->post('cap_r', TRUE));
                 if (strtolower($captcha) !=  strtolower($_SESSION ['code'])){
                         echo 2;
                         return;

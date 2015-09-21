@@ -75,7 +75,7 @@ jQuery(document).ready(function() {
         var repeat_password = $(this).find('.repeat_password').val();
         var captcha = $(this).find('.input-xlarge').val();
         var email = $(this).find('.email').val();
-        console.log(repeat_password);
+        //console.log(repeat_password);
 
         if(username == '') {
                 $(this).parent().find('.username').attr('placeholder', '请输入用户名');
