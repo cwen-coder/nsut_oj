@@ -85,6 +85,11 @@ jQuery(document).ready(function() {
         }
         if(username != ''){
             var Regx = /^[A-Za-z0-9]*$/;
+             if(!Regx.test(username)){
+                $(this).parent().find('.username').focus();
+                $("#user_info_reg").text("必须为字母或数字组合");
+                return false;
+            }
             if(username.length < 6){
                 $(this).parent().find('.username').focus();
                 $("#user_info_reg").text("用户名不能少于6个字符");
@@ -93,11 +98,6 @@ jQuery(document).ready(function() {
             if(username.length >32) {
                 $(this).parent().find('.username').focus();
                 $("#user_info_reg").text("用户名不能大于32个字符");
-                return false;
-            }
-            if(!Regx.test(username)){
-                $(this).parent().find('.username').focus();
-                $("#user_info_reg").text("必须为字母或数字组合");
                 return false;
             }
              var url = curPath+'/oj_index/register/username_check';
@@ -111,8 +111,9 @@ jQuery(document).ready(function() {
                     $("#user_info_reg").text("用户名以存在");
                     $("#captcha_img_r_").click();
                     um = true;
-                }else
+                }else{
                         um = false;
+                    }
             }
         });
     }

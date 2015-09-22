@@ -251,6 +251,7 @@ class Contest extends Sch_Controller{
                  endforeach;
                  $solved = array();
                  $row = array();
+                 $time = array();
                  foreach ($data['rank'] as $key => $row){
                         $solved[$key]  = $row['solved'];
                         $time[$key] = $row['time'];

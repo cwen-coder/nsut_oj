@@ -82,10 +82,10 @@ class Sch_Controller extends CI_Controller{
                     if(($a=$this->session->userdata('school_contest')) && ($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
                                                             $data['contest_id'] =$a;
                                                             $data['username'] =  $b;                                                   
-                                $data['user_id'] = $c;
+                                                            $data['user_id'] = $c;
                     }else{
                                                             $data['username'] = false;
-                                $data['user_id'] = false;
+                                                            $data['user_id'] = false;
                     }
                  if(!isset($data['contest_id'] ) && !$data['username'] && !$data['user_id']){
 
