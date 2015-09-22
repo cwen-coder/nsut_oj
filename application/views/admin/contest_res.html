@@ -97,7 +97,8 @@
               else if($now > $temp['start_time'] && $now < $temp['end_time']) echo "正在进行中...";
               else echo "已结束"; ?>
           </td>
-          <td><a href="<?= site_url('contest/con_rank/index').'/'.$temp['contest_id'];?>" target="_Blank">[比赛排名]</a></td> 
+          <td>
+              <a href="<?= site_url('contest/con_rank/index').'/'.$temp['contest_id'];?>" target="_Blank">[比赛排名]</a></td> 
           <td>
               <a href="<?= site_url('admin/contest_res/contest_sim').'/'.$temp['contest_id'];?>">[抄袭监视]</a>
           </td>

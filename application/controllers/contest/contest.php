@@ -58,7 +58,7 @@ class Contest extends Sch_Controller{
                                                     $data['username'] = false;
 			$data['user_id'] = false;
             }
-            if(isset($data['contest_id'] )){
+            if(isset($data['contest_id'])){
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
 		$limit=0;
 		if($data['pagination'] = $this->input->get('pagination')) 
@@ -179,6 +179,7 @@ class Contest extends Sch_Controller{
                                                                                        if($user_enroll){
                                                                                                     $data['num'] = $check_con_pro['num'];
                                                                                                     $data['source'] = base64_decode($data['source']);
+                                                                                                    $data['source'] = mysql_real_escape_string($data['source']);
                                                                                                     $result = $this->oj_con->problem_submit($data);
                                                                                                     $url = 'contest/home/status';
                                                                                                     if($result) {
