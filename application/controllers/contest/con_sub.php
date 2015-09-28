@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
-* @author SUTNB <[email address]>
+* @author Cwen Yin <[email address]>
 * @copyright [2015.05.29]
 */
 class Con_sub extends Con_Controller{
@@ -14,18 +14,22 @@ class Con_sub extends Con_Controller{
 		$data['user_id'] = $this->session->userdata('user_id');
 		$data['cid'] = $this->input->post('cid', TRUE);
 		$contest = $this->oj_con->con_byId($data['cid']);
+
+		//后期修改damin权限问题
+		
+		$privilege = $this->session->userdata('privilege');
 		if(!$data['user_id']){
 			$offset = $this->uri->segment(5);
 		 	redirect('oj_index/home/contest_list/'.$offset.'/1000');
 		 	//echo 1;
-		} else if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd'])) {
+		} else if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd']) && $privilege != 1) {
 				$offset = $this->uri->segment(5);
 				//echo 2;
 				redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
-		} else if (time() < strtotime($contest['start_time'])) {
+		} else if (time() < strtotime($contest['start_time']) && $privilege != 1) {
 			//echo 3;
 				redirect('contest/home/index/'.$data['contest_id']);
-		} else if(time() > strtotime($contest['end_time'])){
+		} else if(time() > strtotime($contest['end_time']) && $privilege != 1){
 			//echo 4;
 			error("对不起比赛已经结束！您无法提交!");
 		}else {
