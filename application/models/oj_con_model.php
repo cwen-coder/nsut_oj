@@ -136,9 +136,15 @@ class Oj_con_model extends CI_Model {
 			$insert_id=mysql_insert_id();
 			$sql_source = "insert into source_code(solution_id, source) values('$insert_id', '$data[source]')";
 			$result_source = mysql_query($sql_source);
-			if($result_source) return true;
-			else return false;
-		} else return false;
+			if($result_source){
+                                                                return true;
+                                                    }
+			else{
+                                                        return false;
+                                                    }
+		} else{
+                                            return false;
+                                    }
 	}
 
 	//比赛题目状态页

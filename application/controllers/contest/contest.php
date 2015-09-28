@@ -58,7 +58,7 @@ class Contest extends Sch_Controller{
                                                     $data['username'] = false;
 			$data['user_id'] = false;
             }
-            if(isset($data['contest_id'] )){
+            if(isset($data['contest_id'])){
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
 		$limit=0;
 		if($data['pagination'] = $this->input->get('pagination')) 
@@ -179,6 +179,7 @@ class Contest extends Sch_Controller{
                                                                                        if($user_enroll){
                                                                                                     $data['num'] = $check_con_pro['num'];
                                                                                                     $data['source'] = base64_decode($data['source']);
+                                                                                                    $data['source'] = mysql_real_escape_string($data['source']);
                                                                                                     $result = $this->oj_con->problem_submit($data);
                                                                                                     $url = 'contest/home/status';
                                                                                                     if($result) {
@@ -224,18 +225,19 @@ class Contest extends Sch_Controller{
                $user_name = ' ';
                 $rank = $this->sch_model->school_con_rank($data['contest_id']);
                 $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+                //p($rank);die;
                 foreach($rank as $v):
                     if($user_name != $v['user_id']){
                         $user_cnt++;
                         $data['rank'][$user_cnt]['user_id'] = $v['user_id'];
-                        $data['rank'][$user_cnt]['username'] = $v['username'];                   
+                        $data['rank'][$user_cnt]['team_id'] = $v['team_id'];                   
                         $user_name = $v['user_id'];
                         $data['rank'][$user_cnt]['solved'] = 0;
                         $data['rank'][$user_cnt]['time'] = 0;
                     }
                     //$rank_info = $v;
                     if (isset($data['rank'][$user_cnt]['p_ac_sec'][$v['num']]) && $data['rank'][$user_cnt]['p_ac_sec'][$v['num']]>0)
-                                break;
+                        continue;
                          if (intval($v['result']) !=4){
                                 if(isset($data['rank'][$user_cnt]['p_wa_num'][$v['num']])){
                                         $data['rank'][$user_cnt]['p_wa_num'][$v['num']]++;
@@ -257,7 +259,7 @@ class Contest extends Sch_Controller{
                         $time[$key] = $row['time'];
                     }
                  array_multisort($solved, SORT_DESC, $time, SORT_ASC, $data['rank']);
-                //p($data);die;
+                //p($data['rank']);die;
                 $this->load->view('contest/sch_con_rank.html',$data);
             }
         }
