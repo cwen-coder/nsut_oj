@@ -9,9 +9,9 @@ body {
 	    margin: 0px;
 	    padding: 0px;
 	}
-.container_contest {
-	 margin-top: 5%;  
-}
+.container_contest{
+              margin-top: 5%;
+  }
 .page-title {
 	text-align: center;
 			/* margin: 50px 0 30px; */
@@ -62,7 +62,7 @@ valign: middle; */
         color: #000;
   }
   .container-contest{
-              margin-top: 6%;
+              margin-top: 5%;
   }
   .control-group {
 		display: inline;

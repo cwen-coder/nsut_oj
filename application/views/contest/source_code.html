@@ -25,16 +25,19 @@
 </head>
 <body>
 <div class="container container_contest">
+    <center>
     <h4>Solution_id: <?= $solution_id;?></h4>
-    <h4>Problem_id: <?= $num;?></h4>
+    <h4>Problem_id: <?= $problem_id;?></h4>
     <h4>Username: <?= $username;?></h4>
     <h4>Language: <?= $language;?></h4>
+    </center>
     <div class="well">
         <pre>
 <?php echo htmlspecialchars($source['source']);?>
 </pre>
    </div>
 </div>
+<?php require('foot.html');?>
 </body>
 </html>
  

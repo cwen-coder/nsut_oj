@@ -63,7 +63,7 @@
 				    <td><a href="<?= site_url('contest/home/con_pro/'.$contest_id.'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"><?= $arr[$v['num']];?></a></td>
 				    <td><?php echo $v['username']?></td>
 				    <td style = "text-align:center;" class="<?= $v['result'];?>">
-				    <?php if ($v['result'] == 11 && $v['username'] == $this->session->userdata('username')): ?>
+				    <?php if ($v['result'] == 11 && ($v['username'] == $this->session->userdata('username') || $this->session->userdata('privilege') == 1)): ?>
 					<a href="#" class="imformation" ><span class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?>
 				    </span>
 				    </a>
@@ -76,7 +76,7 @@
 				    <td><span style="color:red"><?php echo $v['time']?></span></td>
 				    <td>
 				    <?php if ($v['username'] == $this->session->userdata('username')|| $this->session->userdata('privilege') == 1): ?>
-				    	<a href="#" class="source_code" ><?php echo $v['language']? "C++":"C"?></a>
+				    	<a href="<?php echo site_url('contest/home/get_source_code').'/'.$v['solution_id'].'/'.$v['username'];?>" target="_blank"><?php echo $v['language']? "C++":"C"?></a>
 				    <?php else: ?>
 				    <?php echo $v['language']? "C++":"C"?>
 				    <?php endif; ?>
@@ -98,16 +98,7 @@ echo "[<a href=".$contest_id."?previous=".($pagination-1)."&pagination=".($pagin
 ?>
 </div>
 </div>
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="display:none" id = "compile_info_but" >
- 编译错误信息
-</button>
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal_source_code" style="display:none" id = "source_code_but" >
- 提交的代码
-</button>
 
-<!-- Modal -->
-<?php require('compile_info.html'); ?>
-<?php require('source_code.html'); ?>
 <input type="hidden" value = "<?= base_url('');?>" id = "hid_base" >	
 <input type="hidden" value = "<?= site_url('');?>" id = "hid_site" >	
 <?php require('foot.html');?>

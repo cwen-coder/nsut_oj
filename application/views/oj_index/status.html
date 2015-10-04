@@ -57,10 +57,6 @@
     height: 40px;
     text-align: center;
   }
-  .div_td{
-   margin-top: 5px;
-   text-align: center;
-  }
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>
@@ -107,8 +103,8 @@
   <thead>
   <tr class="th_class">
   <th style="width:8%">Run.ID</th>
-  <th style="width:10%">User</th>
   <th style="width:12%">Problem ID</th>
+  <th style="width:10%">User</th>
   <th style="width:16%">Result</th>
   <th style="width:6%">Memory</th>
   <th style="width:6%">Time</th>
@@ -120,23 +116,23 @@
 <tbody>
   <?php foreach($result as $v): ?>
   <tr class="evenrow">
-    <td id="solution_id"><span class="div_td"><?php echo $v['solution_id']?></span></td>
-    <td><div class="div_td"><?php echo $v['username']?></div></td>
-    <td><div class="div_td"><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=<?php echo $v['problem_id']?>"><?php echo $v['problem_id']?></a></div></td>
-  <?php   if($v['username']==$this->session->userdata('username')&&$v['result']==11){ ?>
-    <td><div class="div_td"><a class="compileinfo"><button class="<?php echo $judge_color[$v['result']]?>"  data-target='#myModal_compileinfo' data-toggle='modal' ><?php echo $judge_result[$v['result']]?></button></a></div></td>
+    <td id="solution_id"><?php echo $v['solution_id']?></td>
+    <td><a href="<?php echo site_url('oj_index/home/problem'); ?>?pid=<?php echo $v['problem_id']?>"><?php echo $v['problem_id']?></a></td>
+      <td><div class="div_td"><?php echo $v['username']?></td>
+    <?php   if($v['result']==11 && ($v['username']==$this->session->userdata('username') || $this->session->userdata('privilege') == 1)){ ?>
+    <td><a href="#" class="imformation" ><span class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?></span></a></td>
     <?php }else{?>
-    <td><div class="div_td"><button class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?></button></div></td>
+    <td><button class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?></button></td>
     <?php }?>
-    <td><div class="div_td"><span style="color:red"><?php echo $v['memory']?></span></div></td>
-    <td><div class="div_td"><span style="color:red"><?php echo $v['time']?></span></div></td>
+    <td><span style="color:red"><?php echo $v['memory']?></span></td>
+    <td><span style="color:red"><?php echo $v['time']?></span></td>
   <?php   if($v['username']==$this->session->userdata('username') || $this->session->userdata('privilege') == 1){ ?>
-    <td><div class="div_td"><a href="#" class="source" data-target='#myModal_source' data-toggle='modal'><?php echo $v['language']? "C++":"C"?></a></div></td>
+    <td><a href="<?php echo site_url('contest/home/get_source_code').'/'.$v['solution_id'].'/'.$v['username'];?>" target="_blank"><?php echo $v['language']? "C++":"C"?></a></td>
   <?php }else{?>
-  <td><div class="div_td"><?php echo $v['language']? "C++":"C"?></div></td>
+  <td><?php echo $v['language']? "C++":"C"?></td>
       <?php }?>
-    <td><div class="div_td"><?php echo $v['code_length']?></div></td>
-    <td><div class="div_td"><?php echo $v['in_date']?></div></td>
+    <td><?php echo $v['code_length']?></td>
+    <td><?php echo $v['in_date']?></td>
   </tr>
 <?php endforeach ?>
 </tbody>
@@ -177,6 +173,7 @@ echo "[<a href=status?previous=".($pagination-1)."&pagination=".($pagination)."&
 </div>
 <input id = "hid_site" type="hidden" value = "<?= site_url();?>" /> 
 <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
+<script src="<?= base_url('application/views/contest/js/con_status.js');?>" ></script>
 <?php require('foot.html');?>
   </body>
 </html>
