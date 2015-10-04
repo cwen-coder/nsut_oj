@@ -85,18 +85,22 @@ class Home extends Con_Controller {
 		$data['contest_id'] = $this->uri->segment(4);
 		$data['problem_id'] = $this->uri->segment(5);
 		$data['num'] = $this->uri->segment(6);
+
+		//后期修改管理员权限
+		$privilege = $this->session->userdata('privilege');
+
 		$contest = $this->oj_con->con_byId($data['contest_id']);
 		if(!$this->session->userdata('user_id')){
 			$offset = $this->uri->segment(5);
 		 	redirect('oj_index/home/contest_list/'.$offset.'/1000');
 		 	//echo 1;
-		} else if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd'])) {
+		} else if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd']) && $privilege != 1) {
 				$offset = $this->uri->segment(5);
 				//echo 2;
 				redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
-		} else if (time() < strtotime($contest['start_time'])) {
+		} else if (time() < strtotime($contest['start_time'])  && $privilege != 1) {
 				redirect('contest/home/index/'.$data['contest_id']);
-		} else if(time() > strtotime($contest['end_time'])){
+		} else if(time() > strtotime($contest['end_time'])  && $privilege != 1 ){
 			error("对不起比赛已经结束！您无法提交!");
 		}else {
 			$this->load->view('contest/submit.html',$data);

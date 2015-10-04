@@ -124,9 +124,9 @@
 <br>
 <br>
 <div class="table-group">
-   <!-- <div class="pagination">
-     <td><?php  if(!empty($links))echo $links; ?></td>
-   </div>  -->
+  <div class="pagination">
+    <td><?php  if(!empty($links))echo $links; ?></td>
+  </div>
 <table class="table table-bordered table-hover">
   <thead>
   <tr class="th_class">
@@ -138,7 +138,7 @@
 </thead>
 
 <tbody>
-    <?php if(!empty($category) && $category[0] != 0 && false) {?>
+    <?php if(!empty($category) && $category[0] != 0) {?>
   <?php foreach($category as $v): ?>
   <tr>
     <td><?php if($this->session->userdata('user_id')&&$v['do']) echo "<span class='glyphicon glyphicon-star'></span>"; if($this->session->userdata('user_id')&&!$v['do']) echo "<span class='glyphicon glyphicon-star-empty'></span>";?><?php echo $v['problem_id']?></td>
