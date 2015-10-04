@@ -115,16 +115,16 @@ color:#fff;
     <div class="page-container2" id="page-container2" style="display:none">
             <h1>用户注册</h1>
             <form action="" method="post">
-                <input type="text" name="username" class="username" placeholder="Username">
+                <input type="text" name="username" class="username" placeholder="Username(必填)" id="username">
 
                 <div class="error_info"><span id="user_info_reg" style="color:red;"></span></div>
                 
-                <input type="password" name="password" class="password" placeholder="Password">
+                <input type="password" name="password" class="password" placeholder="Password(必填)" id="password1">
                 <div class="error_info"><span id="pass1_info" style="color:red;"></span></div>
 
-                <input type="password" name="repeat_password" class="repeat_password" placeholder="Repeat password">
+                <input type="password" name="repeat_password" class="repeat_password" placeholder="Repeat password(必填)" id="password2">
                 <div class="error_info"><span id="pass2_info" style="color:red;"></span></div>
-                <input type="text" name="email" class="email" placeholder="E-mail">
+                <input type="text" name="email" class="email" placeholder="E-mail(必填)" id="email">
                 <div class="error_info"><span id="email_info" style="color:red;"></span></div>
                 <div class ="reg_captcha_style" >
                     <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
@@ -132,7 +132,7 @@ color:#fff;
                 <span style="cursor: pointer;color:red;" id="captcha_span_r_">点击刷新图片</span>
                <div class="error_info"><span id="captcha_info_reg" style="color:red;"></span></div>
                 </div>
-                <button class="button1" type="submit">确定</button>
+                <button type="submit" id="enroll_button" disabled="true">确定</button>
                 <div class="error"><span>+</span></div>
             </form>
         </div>

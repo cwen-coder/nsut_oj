@@ -75,24 +75,24 @@ color:#fff;
                 <?php endif;?>
                 </div>
 
-                <input type="text" name="usernnum" class="usernnum" placeholder="队长学号">
-                <input type="text" name="username" class="username" placeholder="队长姓名">
+                <input type="text" name="usernnum" class="usernnum" placeholder="队长学号(必填)">
+                <input type="text" name="username" class="username" placeholder="队长姓名(必填)">
                 
                 <div class="error_info_enroll" style="margin-left: 100px;"><span id="usernum_info" style="color:red;"></span></div>
                 <div class="error_info_enroll"><span id="username_info" style="color:red;"></span></div>
-                <input type="text" name="user1num" class="user1num" placeholder="队员1学号">
-                <input type="text" name="user1name" class="user1name" placeholder="队员1姓名">
+                <input type="text" name="user1num" class="user1num" placeholder="队员1学号(选填)">
+                <input type="text" name="user1name" class="user1name" placeholder="队员1姓名(选填)">
                 
                 <div class="error_info_enroll" style="margin-left: 100px;"><span id="user1num_info" style="color:red;"></span></div>
                 <div class="error_info_enroll"><span id="user1name_info" style="color:red;"></span></div>
           
-                <input type="text" name="user2name" class="user2num" placeholder="队员2学号">
-                <input type="text" name="user2name" class="user2name" placeholder="队员2姓名">
+                <input type="text" name="user2name" class="user2num" placeholder="队员2学号(选填)">
+                <input type="text" name="user2name" class="user2name" placeholder="队员2姓名(选填)">
                 
                 <div class="error_info_enroll" style="margin-left: 100px;"><span id="user2num_info" style="color:red;"></span></div>
                 <div class="error_info_enroll"><span id="user2name_info" style="color:red;"></span></div>
-                <input type="text" name="teamname" class="teamname" placeholder="队伍名称">
-                <input type="text" name="phone" class="phone" placeholder="联系方式-手机号">
+                <input type="text" name="teamname" class="teamname" placeholder="队伍名称(必填)">
+                <input type="text" name="phone" class="phone" placeholder="联系方式-手机号(必填)">
                 <div class="error_info_enroll" style="margin-left: 100px;"><span id="teamname_info" style="color:red;"></span></div>
                 <div class="error_info_enroll"><span id="phone_info" style="color:red;"></span></div>
                 
@@ -111,7 +111,7 @@ color:#fff;
         <script src="<?php echo base_url('application/views/contest/assets/js/jquery-1.8.2.min.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized.3.2.7.min.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized-init.js');?>"></script>
-        <script src="<?php echo base_url('application/views/contest/assets/js/scripts.js');?>"></script>
+        <script src="<?php echo base_url('application/views/contest/assets/js/scripts_enroll.js');?>"></script>
         <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
         <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
         <input id = "start_time" type="hidden" value = "<?php  echo isset($old_contest['start_time']) ? $old_contest['start_time'] : $new_contest['start_time']; ?>" />

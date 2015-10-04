@@ -133,13 +133,14 @@ class Home extends Con_Controller {
 		$data['judge_result']=Array("Pending", "Pending Rejudging", "Compiling", "Running & Judging", "Accepted", "Presentation Error", "Wrong Answer", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed", "Runtime Error", "Compile Error", "Compile OK","Test Running Done");
 		$data['judge_color']=Array("btn_status gray","btn_status btn-info","btn_status btn-warning","btn_status btn-warning","btn_status btn-success","btn_status btn-danger","btn_status btn-danger","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-info");
 		$data['result'] = $this->oj_con->con_problem_status($data['contest_id'],$limit, $num);
-		//p($data);
+		
 		$count = count($data['result']);
 		$data['arr'] = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		for ($i = 0; $i < $count; $i++) {
 			$result = $this->oj_con->get_username($data['result'][$i]['user_id']);
 			$data['result'][$i]['username'] = $result['username'];
 		}
+                                   //p($data);die;
 		$this->load->view('contest/con_status.html',$data);
 	}
 	//载入编译错误信息或是运行错误信息
@@ -157,22 +158,23 @@ class Home extends Con_Controller {
 			}
 		} else echo false;
 	}
-
 	//获取源码
 	public function get_source_code() {
-		$solution_id = $this->input->post('solution_id',TRUE);
-		$username = $this->input->post('username',TRUE);
-		if($username == $this->session->userdata('username') || $this->session->userdata('privilege') == 1) {
-			$data = $this->oj_con->get_source_code($solution_id);
-			if($data != false) {
-				//echo json_encode($data);
-				echo $data['source'];
-				return;
-			} else {
-				echo false;
-				return;
+		$data['solution_id'] = $this->uri->segment(4);
+                                   $data['username'] = $this->uri->segment(5);
+                                   $arr_num = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+                                   $arr_lag = array('C', 'C++');
+                                   $problem = $this->oj_con->get_pro_num($data['solution_id']);
+                                   $data['language'] = $arr_lag[$problem['language']];
+                                   $data['num'] = $arr_num[$problem['num']];
+		if($data['username'] == $this->session->userdata('username') || $this->session->userdata('privilege') == 1) {
+			$data['source'] = $this->oj_con->get_source_code($data['solution_id']);                       
+                                                    //p($data);die;
+			if($data['source'] == false) {
+				$data['source']['source'] = '请求失败';
 			}
-		} else echo false;
+		} 
+                                  $this->load->view('contest/source_code.html',$data);
 
 	}
 }

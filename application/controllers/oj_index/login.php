@@ -100,7 +100,7 @@ class Login extends CI_Controller {
 			        			'privilege' => $result['privilege']
 			        			);
 			        		$this->session->set_userdata($newdata);
-			        		session_destroy();
+			        		//session_destroy();
 			        		echo true;
         					}
 

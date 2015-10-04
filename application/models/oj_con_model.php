@@ -202,5 +202,17 @@ class Oj_con_model extends CI_Model {
 			} else return false;
 		} else return false;
 	}
+                  //获取题号
+	public function get_pro_num($solution_id) {
+		$query = "SELECT num, language FROM solution WHERE solution_id = '$solution_id' ";
+		$result = mysql_query($query);
+		//$num = mysql_num_rows($result);
+		if ($result) {
+			$num = mysql_num_rows($result);
+			if($num > 0) {
+				return mysql_fetch_assoc($result);
+			} else return false;
+		} else return false;
+	}
 }
 ?>

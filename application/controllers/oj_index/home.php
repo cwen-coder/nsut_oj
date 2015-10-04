@@ -22,7 +22,7 @@ class Home extends Oj_Controller{
 		$config['full_tag_open'] = '';
 		$config['full_tag_close'] = '';
 		$config['cur_tag_open'] = '<li><a style="color:white;background-color:black">'; // 当前页开始样式   
-		$config['cur_tag_close'] = '</a></li>'; 
+		$config['cur_tag_close'] = '</a></li>';
         		$config['num_links'] = 20;//    当前连接前后显示页码个数。意思就是说你当前页是第5页，那么你可以看到3、4、5、6、7页。   
         		$config['uri_segment'] = 4; 
 		$this->pagination->initialize($config);
@@ -271,7 +271,8 @@ class Home extends Oj_Controller{
 			$data['previous'] = $this->input->get('previous');
                                    $data['pagination'] = $limit/$num+2;
                                    $sum = $this->user_model->user_sum();
-                                   if($data['pagination'] != 0 && $data['pagination']*$num < $sum['count(*)']) {
+                                   //echo $sum['count(*)'];die;
+                                   if($data['pagination'] != 0 && ($data['pagination']-1)*$num < $sum['count(*)']) {
 			$data['pag'] = true;
 		}else if($data['pagination'] == 0 && $sum['count(*)'] > $num) {
 			$data['pag'] = true;

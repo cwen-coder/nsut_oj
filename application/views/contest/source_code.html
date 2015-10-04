@@ -1,18 +1,40 @@
-<div class="modal fade bs-example-modal-lg" id="myModal_source_code" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">提交的代码</h4>
-      </div>
-      <div class="modal-body" >
-        <textarea name="" id="source_code" style="width:100%;height:400px;border:none;" readonly>
-          
-        </textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+		<title>沈阳工业大学在线判题系统</title>
+		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+		<link href="<?= base_url('application/views/contest/css/sch_contest.css');?>" rel="stylesheet">
+		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
+		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
+                	<style type="text/css">
+                  .container_contest {
+                        margin-top: 0%;  
+                   }
+                   .well{
+                       padding: 0px;
+                       margin-top: 1%;
+                   }
+                 body {
+		background-image: url(<?= base_url('index/images/background.jpg');?>);
+	}
+	</style>
+</head>
+<body>
+<div class="container container_contest">
+    <h4>Solution_id: <?= $solution_id;?></h4>
+    <h4>Problem_id: <?= $num;?></h4>
+    <h4>Username: <?= $username;?></h4>
+    <h4>Language: <?= $language;?></h4>
+    <div class="well">
+        <pre>
+<?php echo htmlspecialchars($source['source']);?>
+</pre>
+   </div>
 </div>
+</body>
+</html>
+ 

@@ -98,7 +98,11 @@
               else echo "已结束"; ?>
           </td>
           <td>
-              <a href="<?= site_url('contest/con_rank/index').'/'.$temp['contest_id'];?>" target="_Blank">[比赛排名]</a></td> 
+              <?php if($temp['con_class']=='1' || $temp['con_class']=='2') { ?>
+              <a href="<?= site_url('contest/con_rank/index').'/'.$temp['contest_id'];?>" target="_blank">[比赛排名]</a></td> 
+              <?php }else{?>
+              <a href="<?= site_url('contest/contest/contest_rank_show').'/'.$temp['contest_id'];?>" target="_blank">[比赛排名]</a></td> 
+              <?php }?>
           <td>
               <a href="<?= site_url('admin/contest_res/contest_sim').'/'.$temp['contest_id'];?>">[抄袭监视]</a>
           </td>

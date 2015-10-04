@@ -68,7 +68,7 @@ class Contest extends Sch_Controller{
 		$num=20;
 		$sum = $this->oj_con->con_problem_status_sum($data['contest_id']);
 		//p($sum['count(*)']);
-		if($data['pagination'] != 0 && $data['pagination']*20 < $sum['count(*)']) {
+		if($data['pagination'] != 0 && $data['pagination']*$num < $sum['count(*)']) {
 			$data['pag'] = true;
 		}else if($data['pagination'] == 0 && $sum['count(*)'] > 20) {
 			$data['pag'] = true;
@@ -84,6 +84,7 @@ class Contest extends Sch_Controller{
 			$result = $this->oj_con->get_username($data['result'][$i]['user_id']);
 			$data['result'][$i]['username'] = $result['username'];
 		}
+                                   //p($data);die;
                         $this->load->view('contest/sch_con_status.html',$data);
             }
         }
@@ -331,4 +332,53 @@ class Contest extends Sch_Controller{
 			error('提问内容不能为空');
 		}
 	}
+                 //大屏幕展示排名
+                 public function contest_rank_show(){
+                     $data['contest_id'] = $this->uri->segment(4);
+                     function sec2str($sec){
+                        return sprintf("%02d:%02d:%02d",$sec/3600,$sec%3600/60,$sec%60);
+                     }
+                    $rank = array();
+                    $data['rank'] = array();
+                    $user_cnt = -1;
+                    $user_name = ' ';
+                    $rank = $this->sch_model->school_con_rank($data['contest_id']);
+                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+                    //p($rank);die;
+                    foreach($rank as $v):
+                        if($user_name != $v['user_id']){
+                            $user_cnt++;
+                            $data['rank'][$user_cnt]['user_id'] = $v['user_id'];
+                            $data['rank'][$user_cnt]['team_id'] = $v['team_id'];                   
+                            $user_name = $v['user_id'];
+                            $data['rank'][$user_cnt]['solved'] = 0;
+                            $data['rank'][$user_cnt]['time'] = 0;
+                        }
+                        //$rank_info = $v;
+                        if (isset($data['rank'][$user_cnt]['p_ac_sec'][$v['num']]) && $data['rank'][$user_cnt]['p_ac_sec'][$v['num']]>0)
+                            continue;
+                             if (intval($v['result']) !=4){
+                                    if(isset($data['rank'][$user_cnt]['p_wa_num'][$v['num']])){
+                                            $data['rank'][$user_cnt]['p_wa_num'][$v['num']]++;
+                                    }else{
+                                            $data['rank'][$user_cnt]['p_wa_num'][$v['num']]=1;
+                                     }
+                            }else{
+                                    $data['rank'][$user_cnt]['p_ac_sec'][$v['num']] = sec2str(strtotime($v['in_date']) - strtotime($data['contest']['start_time']));
+                                    $data['rank'][$user_cnt]['solved']++;
+                                    if(!isset($data['rank'][$user_cnt]['p_wa_num'][$v['num']])) $data['rank'][$user_cnt]['p_wa_num'][$v['num']]=0;
+                                    $data['rank'][$user_cnt]['time'] += (strtotime($v['in_date']) - strtotime($data['contest']['start_time'])) +$data['rank'][$user_cnt]['p_wa_num'][$v['num']]*1200;
+                            }
+                     endforeach;
+                     $solved = array();
+                     $row = array();
+                     $time = array();
+                     foreach ($data['rank'] as $key => $row){
+                            $solved[$key]  = $row['solved'];
+                            $time[$key] = $row['time'];
+                        }
+                     array_multisort($solved, SORT_DESC, $time, SORT_ASC, $data['rank']);
+                    //p($data['rank']);die;
+                    $this->load->view('contest/contest_rank_show.html',$data);
+                 }
 }

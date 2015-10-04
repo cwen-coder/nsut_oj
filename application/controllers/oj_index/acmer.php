@@ -25,6 +25,7 @@ class Acmer extends Oj_Controller{
 			$acmer[$k]['sum_10'] = $this->acmer->get_acmer_sum10($v['id']);
 		}
 		$data['acmer'] = $acmer;
+                                    //p($data);die;
 		$this->load->view('oj_index/acmer.html',$data);
 
 	}

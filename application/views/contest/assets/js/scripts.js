@@ -2,15 +2,8 @@
 jQuery(document).ready(function() {
 
     var curPath = $("#hid_site").val();
-        var em = false;
-        var um = false;
-       //注册验证码刷新
-  $("#captcha_span_r").click(function(e){
-    e.preventDefault();
-    var url = curPath+'/oj_index/login/code';
-    $("#captcha_img_r").attr("src",url);
-  });
-  $("#captcha_span_r_").click(function(e){
+    //注册验证码刷新
+    $("#captcha_span_r_").click(function(e){
     e.preventDefault();
     var url = curPath+'/oj_index/login/code';
     $("#captcha_img_r_").attr("src",url);
@@ -66,129 +59,165 @@ jQuery(document).ready(function() {
         }
         });
     });
- 
+    var uname = false;
+    var pas1 = false;
+    var pas2 = false;
+    var ema = false;
+    var cap_r = false;
+    //注册按钮检查
+        function chkreg(){  
+    	if(uname && pas1 && pas2 && ema && cap_r){  
+      		$("#enroll_button").removeAttr('disabled');
+                                   $("#enroll_button").addClass("button1");
+                                   return true;
+   	 }else {
+                        $("#reg_sub").attr("disabled",true);
+                        return false;
+                  }
+         }  
+         $("#username").blur(function() {
+         var name = $("#username").val();
+         var len = name.length;
+         var Regx = /^[A-Za-z0-9]*$/;
+         if(name.length == 0) {
+            $("#user_info_reg").text("请输入用户名");
+            usern = false;
+            chkreg();  
+        } 
+         if (len == 0 ) {
+            $("#user_info_reg").text('用户名不能为空');
+            uname = false;
+            chkreg(); 
+         }else if (!Regx.test(name)) {
+                $("#user_info_reg").text('必须为字母与数字组合');
+                uname = false;
+                chkreg(); 
+        }else if (len < 6) {
+                $("#user_info_reg").text('用户名不能少于6个字符');
+                uname = false;
+                chkreg(); 
+        }else if (len > 32) {
+                $("#user_info_reg").text('用户名不能超过32个字符');
+                uname = false;
+                chkreg(); 
+        }else {
+                 var url = curPath+'/oj_index/register/username_check';
+                $.post(url,{
+  	username:name
+  	},function(data) {
+  	//console.log(data);
+                    if (data) {
+  	//console.log(data);
+                    $("#user_info_reg").text('');
+                    uname = true;
+                    chkreg();		 			
+                    }else {
+                        $("#user_info_reg").text('用户名已存在');
+                        uname = false;
+                        chkreg(); 
+                    }
+                    })
+        }
+   });
+                     //检验第一次输入密码
+ 	 $("#password1").blur(function() {
+ 	 	var password = $("#password1").val();
+ 	 	var len = password.length;
+ 	 	//console.log(password);
+ 	 	if (len == 0 ) {
+ 	 		 $("#pass1_info").text('密码不能为空');
+                                                    pas1 = false;
+                                                    chkreg();
+ 	 	}else if (len < 6) {
+ 	 		 $("#pass1_info").text('密码不能少于6个字符');
+                                                    pas1 = false;
+                                                    chkreg();
+ 	 	}else if (len > 30) {
+ 	 		 $("#pass1_info").text('密码不能超过32个字符');
+                                                    pas1 = false;
+                                                    chkreg();
+ 	 	}else {
+ 	 		 $("#pass1_info").text('');
+ 	 		pas1 = true;
+ 	 		chkreg();
+ 	 	}
+ 	 });
+
+                    //检验第二次输入的密码
+ 	 $("#password2").blur(function() {
+ 	 	var password = $("#password2").val();
+ 	 	//console.log(password);
+ 	 	if (password.length == 0) {
+ 	 		$("#pass2_info").text('密码不能为空');
+                                                    pas2 = false;
+                                                    chkreg();
+ 	 	}else if (password == $("#password1").val()) {
+ 	 		$("#pass2_info").text('');
+ 	 		pas2 = true;
+ 	 		chkreg();
+ 	 	}else {
+ 	 		$("#pass2_info").text('两次密码不一致');
+                                                    pas2 = false;
+                                                    chkreg();
+ 	 	}
+ 	 });
+
+                    //检验邮箱
+ 	 $("#email").blur(function() {
+ 	 	var email = $("#email").val();
+ 	 	var Regx = /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-.]+$/;
+ 	 	//var Regx =  /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+ 	 	if(email.length == 0) {
+ 	 		$("#email_info").text('邮箱不能为空');
+                                                    ema = false;
+                                                    chkreg();
+ 	 	}else if (!Regx.test(email)){
+ 	 		$("#email_info").text('请输入正确的邮箱');
+                                                    ema = false;
+                                                    chkreg();
+ 	 	}else {
+                                                    var url = curPath+'/oj_index/register/email_check';
+ 	 		$.post(url, {
+ 	 			email:email
+ 	 		}, function(data) {
+ 	 			if(data) {
+ 	 				$("#email_info").text('');
+ 	 				ema = true;
+ 	 				chkreg();
+ 	 			}else {
+ 	 				$("#email_info").text('邮箱已被注册');
+                                                                                       ema = false;
+                                                                                       chkreg();
+ 	 			}
+ 	 		});
+ 	 	}
+ 	 });
+   //注册检验验证码
+   $("#captcha_r").bind('input propertychange blur',function() {
+       var pass = $("#captcha_r").val();
+       if(pass.length == 0) {
+        $("#captcha_info_reg").text('请输入验证码');
+        cap_r = false;
+        chkreg();
+       } else {
+        $("#captcha_info_reg").text('');
+        cap_r = true;
+        chkreg();
+        //chklog();
+       }
+   });
+    
     //注册------------------------------------------------------------------------------------------------------------------------
     $('.page-container2 form').submit(function(evt){
         evt.preventDefault();
-        var username = $(this).find('.username').val();
-        var password = $(this).find('.password').val();
-        var repeat_password = $(this).find('.repeat_password').val();
-        var captcha = $(this).find('.input-xlarge').val();
-        var email = $(this).find('.email').val();
-        //console.log(repeat_password);
-
-        if(username == '') {
-                $(this).parent().find('.username').attr('placeholder', '请输入用户名');
-                $(this).parent().find('.username').focus();
-                $("#user_info_reg").text("用户名不能为空");
-                return false;
-        }
-        if(username != ''){
-            var Regx = /^[A-Za-z0-9]*$/;
-             if(!Regx.test(username)){
-                $(this).parent().find('.username').focus();
-                $("#user_info_reg").text("必须为字母或数字组合");
-                return false;
-            }
-            if(username.length < 6){
-                $(this).parent().find('.username').focus();
-                $("#user_info_reg").text("用户名不能少于6个字符");
-                return false;
-            }
-            if(username.length >32) {
-                $(this).parent().find('.username').focus();
-                $("#user_info_reg").text("用户名不能大于32个字符");
-                return false;
-            }
-             var url = curPath+'/oj_index/register/username_check';
-            $.ajax({
-                url : url,
-                type : 'POST',
-                data : {username:username},
-                asyns : false,
-                success : function(data) {
-                if (!data) {
-                    $("#user_info_reg").text("用户名以存在");
-                    $("#captcha_img_r_").click();
-                    um = true;
-                }else{
-                        um = false;
-                    }
-            }
-        });
-    }
-        if(password == '') {
-                $(this).parent().find('.password').focus();
-                $(this).parent().find('.password').attr('placeholder', '请输入密码');
-                $("#pass1_info").text("密码不能为空");
-                return false;
-        }
-        if(password != '') {
-            if(password.length<6){
-                $(this).parent().find('.password').focus();
-                $("#pass1_info").text("密码不能小于6位");
-            }
-            if(password.length>32) {
-                $(this).parent().find('.password').focus();
-                $("#pass1_info").text("密码不能大于32位");
-            }
-        }
-        if(repeat_password == '') {
-                $(this).parent().find('.repeat_password').focus();
-                $(this).parent().find('.repeat_password').attr('placeholder', '请输入密码');
-                $("#pass2_info").text("重复密码不能为空");
-                return false;
-        }
-        if(password != repeat_password) {
-                $(this).parent().find('.email').focus();
-                $("#pass2_info").text("两次密码输入不一致");
-            return false;
-        }
-        if(email == '') {
-                $(this).parent().find('.email').focus();
-                $(this).parent().find('.email').attr('placeholder', '请输入邮箱');
-                $("#email_info").text("邮箱不能为空");
-            return false;
-        }
-        if(email != ''){
-            var Regx = /^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-.]+$/;
-            if(!Regx.test(email)) {
-                $(this).parent().find('.email').focus();
-                $("#email_info").text('邮箱格式错误');
-            return false;
-            }
-            var url = curPath+'/oj_index/register/email_check';
-            $.ajax({
-                url : url,
-                type : 'POST',
-                data : {email:email},
-                async : false,
-                success : function(data){
-                    if(!data){
-                    $(this).parent().find('.email').focus();
-                    $("#email_info").text('邮箱已被注册');
-                    $("#captcha_img_r_").click();
-                    em = true;
-                }else
-                    em = false;
-                }
-            })
-            }
-        if(captcha == '') {
-                $(this).parent().find('.input-xlarge').focus();
-                $(this).parent().find('.input-xlarge').attr('placeholder', '请输入验证码');
-                $("#captcha_info_reg").text("请输入验证码");
-                return false;
-        }
-            //console.log(em);
             if(chkreg()){
                     var url = curPath+'/oj_index/register/reg_act';
                 $.post(url,{
-                    cap_r : captcha,
-                    username : username,
-                    password1 : password,
-                    password2 : repeat_password,
-                    email : email
+                   cap_r : $("#captcha_r").val(),
+ 	 username : $("#username").val(),
+ 	 password1 : $("#password1").val(),
+ 	 password2 : $("#password2").val(),
+ 	 email : $("#email").val()
                     },function  (data) {
                         if (data == true) {
                             alert('恭喜你！注册成功！');
@@ -204,157 +233,6 @@ jQuery(document).ready(function() {
                         }
                     })
             }
-            function chkreg(){  
-                        if(!em && !um)
-                            return true;
-                        else
-                            return false;
-            }
-    });
-        //报名--------------------------------------------------------------------------------------------------------------------------
-        $('.page-container3 form').submit(function(evt){
-            evt.preventDefault();
-        var contest_id = $('[name="group"]:checked').val();
-        var username = $(this).find('.username').val();
-        var usernnum = $(this).find('.usernnum').val();
-        var user1name = $(this).find('.user1name').val();
-        var user1num = $(this).find('.user1num').val();
-        var user2num = $(this).find('.user2num').val();
-        var user2name = $(this).find('.user2name').val();
-        var teamname = $(this).find('.teamname').val();
-        var phone = $(this).find('.phone').val();
-        var captcha = $(this).find('.input-xlarge').val();
-        //console.log(contest_id);
-        var Regx = /^[0-9]*$/ ;
-        if(contest_id== null){
-            alert('请选择参赛类型');
-            return false;
-        }
-        if(usernnum == '') {
-                $(this).parent().find('.usernnum').focus();
-                $(this).parent().find('.usernnum').attr('placeholder', '请输入队长学号');
-                $("#usernum_info").text("队长学号不能为空");
-            return false;
-        }
-        if(usernnum.length !=9 || !Regx.test(usernnum)){
-                $(this).parent().find('.usernnum').focus();
-                $("#usernum_info").text("学号必须是9为纯数字");
-            return false;
-        }
-        if(username == '') {
-                $(this).parent().find('.username').focus();
-                $(this).parent().find('.username').attr('placeholder', '请输队长姓名');
-                $("#username_info").text("队长姓名不能为空");
-            return false;
-        }
-        if(teamname.length == '') {
-                $(this).parent().find('.teamname').focus();
-                $(this).parent().find('.teamname').attr('placeholder', '请输入队伍名');
-                $("#teamname_info").text("队伍名不能为空");
-            return false;
-        }
-        if(teamname.length > 10) {
-                $(this).parent().find('.teamname').focus();
-                $(this).parent().find('.teamname').attr('placeholder', '请输入队伍名');
-                $("#teamname_info").text("队伍名不能大于10个字符");
-            return false;
-        }
-
-        if(teamname != ''){
-            var url = curPath+'/oj_index/register/teamname_check';
-            $.ajax({
-                url : url,
-                type : 'POST',
-                data : {teamname:teamname,contest_id:contest_id},
-                async : false,
-                success : function(data){
-                    if(!data){
-                        //console.log(data);
-                    $(this).parent().find('.teamname').focus();
-                    $("#teamname_info").text("队伍名已存在");
-                    $("#captcha_img_r").click();
-                    em = true;
-                }else
-                    em = false;
-                }
-            })
-        }
-        if(phone == '') {
-                $(this).parent().find('.phone').focus();
-                $(this).parent().find('.phone').attr('placeholder', '请输入联系方式');
-                $("#phone_info").text("手机号不能为空");
-            return false;
-        }
-        if(phone.length != 11 || !Regx.test(phone)) {
-                $(this).parent().find('.phone').focus();
-                $("#phone_info").text("手机号必须是11纯数字");
-            return false;
-        }
-        if(captcha == '') {
-                $(this).parent().find('.input-xlarge').focus();
-                $(this).parent().find('.input-xlarge').attr('placeholder', '请输入验证码');
-                $("#captch_info").text("验证码不能为空");
-            return false;
-        }
-        if(user1num != ''){
-            if(user1num.length !=9 || !Regx.test(user1num)) {
-                    $(this).parent().find('.user1num').focus();
-                    $("#user1num_info").text("学号不合法");
-                return false;
-            }
-            if(user1name == ''){
-                    $(this).parent().find('.user1name').focus();
-                    $("#user1name_info").text("姓名不能为空");
-                    return false;
-            }
-        }
-        if(user2num != ''){
-            if(user2num.length !=9 || !Regx.test(user2num)) {
-                    $(this).parent().find('.user2num').focus();
-                    $("#user2num_info").text("学号不合法");
-                    return false;
-            }
-            if(user2name == ''){
-                    $(this).parent().find('.user2name').focus();
-                    $("#user2name_info").text("姓名不能为空");
-                    return false;
-            }
-        }
-        if(!em){
-            var contest_name = $('[name="group"]:checked').next('span').html();
-            var r = confirm('注意!!! 您选择的比赛类型是 ----'+ contest_name+'                 建议大一新生选择新生赛');
-            if (r){
-                var url = curPath+'/oj_index/register/enroll';
-                $.post(url,{
-                    cap_r : captcha,
-                    username : username,
-                    usernnum : usernnum,
-                    user1num : user1num,
-                    user1name : user1name,
-                    user2num : user2num,
-                    user2name : user2name,
-                    phone : phone,
-                    contest_id : contest_id,
-                    teamname : teamname
-                    },function  (data) {
-                        if (data == true) {
-                            alert('恭喜你！报名成功！');
-                            //console.log(phone);
-                            window.location.href= curPath + '/oj_index/home/school_contest';
-                        }else if(data == 2) {
-                        alert('验证码不正确！');
-                        $("#captcha_img_r").click();
-                        //e.preventDefault();
-                  } else {
-                            //console.log(data);
-                            alert('对不起！报名失败！');
-                            //e.preventDefault();          
-                        }
-                    })
-                }
-        }
-
-
     });
     //登录注册切换
     $("#register").click(function(){
@@ -392,37 +270,7 @@ jQuery(document).ready(function() {
     $('.page-container2 form .captcha').keyup(function(){
         $("#captcha_info_reg").text('');
     });
-    //报名
-    $('.page-container3 form .username').keyup(function(){
-        $("#username_info").text('');
-    });
-    $('.page-container3 form .usernnum').keyup(function(){
-        $("#usernum_info").text('');
-    });
-    $('.page-container3 form .user1name').keyup(function(){
-        $("#user1name_info").text('');
-    });
-    $('.page-container3 form .user1num').keyup(function(){
-        $("#user1num_info").text('');
-    });
-    $('.page-container3 form .user2num').keyup(function(){
-        $("#user2num_info").text('');
-    });
-    $('.page-container3 form .user2name').keyup(function(){
-        $("#user2name_info").text('');
-    });
-    $('.page-container3 form .teamname').keyup(function(){
-        $("#teamname_info").text('');
-    });
-    $('.page-container3 form .phone').keyup(function(){
-        $("#phone_info").text('');
-    });
-    $('.page-container3 form .input-xlarge').keyup(function(){
-        $("#captch_info").text('');
-    });
-    $("#old, #new").click(function(){
-        $("#teamname_info").text('');
-        });
+    
         
         
            //检查报名是否开始或者结束

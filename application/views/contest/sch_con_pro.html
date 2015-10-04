@@ -10,6 +10,11 @@
 		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
 		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
 		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
+                <style type="text/css">
+                 body {
+		background-image: url(<?= base_url('index/images/background.jpg');?>);
+	}
+	</style>
 	</head>
 <body>
 	<nav class="navbar navbar-fixed-top navbar-inverse ">
@@ -44,35 +49,35 @@
 		<span style = "color:red;"><?= $pro['memory_limit'] ;?>&nbsp;&nbsp;MB</span>
 	</div>
 	<h4>题目描述：</h4>
-	<div class="well" style="margin-top: 1%; ">
-		<pre><?= $pro['description'] ;?></pre>
+	<div  style="margin-top: 1%; ">
+		<pre><div><?= $pro['description'] ;?></div></pre>
 	</div>
 	<h4>输入：</h4>
-	<div class="well" style="margin-top: 1%; ">
-		<pre><?= $pro['input'] ;?></pre>
+	<div  style="margin-top: 1%; ">
+		<pre><div><?= $pro['input'] ;?></div></pre>
 	</div>
 	<h4>样例输入：</h4>
-	<div class="well" style="margin-top: 1%; ">
-		<pre><?= $pro['output'] ;?></pre>
+	<div  style="margin-top: 1%; ">
+		<pre><div><?= $pro['output'] ;?></div></pre>
 	</div>
 	<h4>样例输出：</h4>
-	<div class="well" style="margin-top: 1%; ">
-		<pre><?= $pro['sample_input'] ;?></pre>
+	<div  style="margin-top: 1%; ">
+		<pre><div><?= $pro['sample_input'] ;?></div></pre>
 	</div>
 	<h4>输出：</h4>
-	<div class="well" style="margin-top: 1%; ">
-		<pre><?= $pro['sample_output'] ;?></pre>
+	<div  style="margin-top: 1%; ">
+		<pre><div><?= $pro['sample_output'] ;?></div></pre>
 	</div>
 	<?php if (!empty($pro['hint'])) : ?>
 	<h4>提示：</h4>
-	<div class="well" style="margin-top: 1%; ">
-		<pre><?= $pro['hint'] ;?></pre>
+	<div  style="margin-top: 1%; ">
+		<pre><div><?= $pro['hint'] ;?></div></pre>
 	</div>
 	<?php endif; ?>
 	<?php if (!empty($pro['source'])) : ?>
 	<h4>提示：</h4>
-	<div class="well" style="margin-top: 1%; ">
-		<pre><?= $pro['source'] ;?></pre>
+	<div  style="margin-top: 1%; ">
+		<pre><div><?= $pro['source'] ;?></div></pre>
 	</div>
 	<?php endif; ?>
 	<center>

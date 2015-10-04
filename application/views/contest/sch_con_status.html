@@ -10,6 +10,11 @@
 		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
 		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
 		 <link href="<?= base_url('application/views/oj_index/css/sutoj.css');?>" rel="stylesheet">
+                 <style type="text/css">
+                 body {
+		background-image: url(<?= base_url('index/images/background.jpg');?>);
+	}
+	</style>
 </head>
 <body>
 <nav class="navbar navbar-fixed-top navbar-inverse ">
@@ -53,7 +58,7 @@
 	  		<?php foreach ($result as $v): ?>
 	  			 <tr class="evenrow">
 				    <td><?php echo $v['solution_id']?></td>
-				    <td><a href="<?= site_url('contest/home/con_pro/'.$contest_id.'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"><?= $arr[$v['num']];?></a></td>
+				    <td><a href="<?= site_url('contest/contest/con_pro/'.$contest_id.'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"><?= $arr[$v['num']];?></a></td>
 				    <td><?php echo $v['username']?></td>
 				    <td style = "text-align:center;" class="<?= $v['result'];?>">
 				    <?php if ($v['result'] == 11 && $v['username'] == $this->session->userdata('username')): ?>
@@ -68,8 +73,8 @@
 				    <td><span style="color:red"><?php echo $v['memory']?></span></td>
 				    <td><span style="color:red"><?php echo $v['time']?></span></td>
 				    <td>
-				    <?php if ($v['username'] == $this->session->userdata('username') && $this->session->userdata('privilege') == 1): ?>
-				    	<a href="#" class="source_code" ><?php echo $v['language']? "C++":"C"?></a>
+				    <?php if ($v['username'] == $this->session->userdata('username') || $this->session->userdata('privilege') == 1): ?>
+                                    <a href="<?php echo site_url('contest/home/get_source_code').'/'.$v['solution_id'].'/'.$v['username'];?>" target="_blank"><?php echo $v['language']? "C++":"C"?></a>
 				    <?php else: ?>
 				    <?php echo $v['language']? "C++":"C"?>
 				    <?php endif; ?>
