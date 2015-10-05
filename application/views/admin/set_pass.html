@@ -71,6 +71,13 @@
             alert(data['message']);
         });
     });
+    
+    $('button.btn-success').click(function() {
+        var path = $("#hid_site").val();
+        var url =path + '/admin/set_pass/upload_pass/';
+        //alert(url);
+        window.location.href= url + $(this).attr("id");
+    });
 </script>
 </body>
 </html>

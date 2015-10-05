@@ -254,4 +254,15 @@ class  User_model extends CI_Model {
                  else
                      return 'fail';
         }
+        
+        //获得校赛密码
+        public function get_team_pass($contest_id){
+            $sql = "select team_id, team_pwd from teams where contest_id = '$contest_id' ";
+            $result = mysql_query($sql);
+            $data = array();
+            while($row = mysql_fetch_assoc($result)){
+                $data[] = $row;
+            }
+            return $data;
+        }
 }
