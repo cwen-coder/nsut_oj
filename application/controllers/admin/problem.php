@@ -130,6 +130,7 @@ class Problem extends Admin_Controller{
 				'sample_output' => $this->input->post('sample_output',TRUE),
 				'hint' => $this->input->post('hint',TRUE),
 				'spj' => $this->input->post('spj',TRUE),
+				'hide' => $this->input->post('hide',TRUE),
 				'source' => $this->input->post('source',TRUE)				
 			);
 		//echo $_POST['content_des'];
@@ -230,6 +231,7 @@ class Problem extends Admin_Controller{
 				'sample_output' => $this->input->post('sample_output',TRUE),
 				'hint' => $this->input->post('hint',TRUE),
 				'spj' => $this->input->post('spj',TRUE),
+				'hide' => $this->input->post('hide',TRUE),
 				'source' => $this->input->post('source',TRUE)				
 			);
 		$result_w_in = false;

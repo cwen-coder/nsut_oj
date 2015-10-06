@@ -12,7 +12,7 @@ class Problem_model extends CI_Model {
 
 
 	public function problem_list($perPage, $offset) {
-		$query = "select a.problem_id, a.title, c.class_name, a.accepted, a.submit from problem a, problem_class b,class_name c 
+		$query = "select a.problem_id, a.title, c.class_name, a.accepted, a.submit, a.hide from problem a, problem_class b,class_name c 
 		where a.problem_id = b.problem_id and b.class_id = c.class_id order by problem_id limit $offset,$perPage;";
 		$result = mysql_query($query);
 		$data = array();
@@ -82,10 +82,10 @@ class Problem_model extends CI_Model {
 	//题目添加动作
 	public function add_act($data) {
 		$query_p = "INSERT into problem(problem_id,title,time_limit,memory_limit,
-		description,input,output,sample_input,sample_output,hint,source,spj,in_date,defunct) 
+		description,input,output,sample_input,sample_output,hint,source,spj,hide,in_date,defunct) 
 		VALUES ('$data[problem_id]','$data[title]','$data[time_limit]','$data[memory_limit]',
 		'$data[description]','$data[input]','$data[output]','$data[sample_input]',
-		'$data[sample_output]','$data[hint]','$data[source]','$data[spj]',NOW(),'N')";
+		'$data[sample_output]','$data[hint]','$data[source]','$data[spj]','$data[hide]',NOW(),'N')";
 		$query_c = "INSERT into problem_class(problem_id,class_id) VALUES ('$data[problem_id]','$data[class_id]')";
 		$result_p = mysql_query($query_p);
 		$result_c = mysql_query($query_c);
@@ -112,7 +112,7 @@ class Problem_model extends CI_Model {
 		$query_p = "UPDATE problem SET title = '$data[title]',time_limit = '$data[time_limit]',
 		memory_limit = '$data[memory_limit]',description = '$data[description]',input = '$data[input]',
 		output =  '$data[output]',sample_input = '$data[sample_input]',sample_output = '$data[sample_output]',
-		hint = '$data[hint]',source = '$data[source]',spj = '$data[spj]',in_date = NOW(),defunct = 'N'
+		hint = '$data[hint]',source = '$data[source]',spj = '$data[spj]',hide = '$data[hide]',in_date = NOW(),defunct = 'N'
 		WHERE problem_id = '$data[problem_id]'";
 		$query_c = "UPDATE problem_class SET class_id = '$data[class_id]' WHERE problem_id = '$data[problem_id]'";
 		$result_p = mysql_query($query_p);
@@ -160,6 +160,16 @@ class Problem_model extends CI_Model {
 		$result = mysql_query($query);
 		if(mysql_num_rows($result)==0) return false;
 			else return true;
+	}
+
+	//获取题目是否隐藏
+	public function get_pro_hide($id) {
+		$query = "select hide from problem where problem_id = '$id' ";
+		$result = mysql_query($query);
+		if($result) {
+			if(mysql_num_rows($result) != 1) return false;
+				else return mysql_fetch_assoc($result);
+		} else return false;
 	}
 
 }
