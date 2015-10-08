@@ -7,7 +7,7 @@ class Problem_submit extends Oj_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('problemsubmit_model','ps');
-		
+                                   $this->load->model('oj_con_model','oj_con');
 	}
 	function index(){
 
@@ -27,33 +27,37 @@ class Problem_submit extends Oj_Controller{
 
 			$data['source'] = base64_decode($this->input->post('source',true));
 			//$data['source'] = stripslashes($data['source']);
-			if(get_magic_quotes_gpc()){
-				$data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
-			}
+//			if(get_magic_quotes_gpc()){
+//				$data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
+//			}
 			$data['source'] = mysql_real_escape_string($data['source']);//转义 SQL 语句中使用的字符串中的特殊字符
-
-			$data['language'] = $this->input->post('language', TRUE);
-			$data['pid'] = $this->input->post('pid', TRUE);
-			$data['ip'] = $this->session->userdata('ip_address');
-			$data['code_length'] = strlen($data['source']);
-			//p($data);die;
-			//echo $data['source'];
-			//echo $this->input->post('source',true);
-			/*echo $data['code_length'];die;*/
-			$result = $this->ps->problem_submit($data);
-			$url = 'oj_index/home/status';
-			if($result) success($url);
+                                                    $data['pid'] = $this->input->post('pid', TRUE);                            
+                                                    $check_pro = $this->oj_con->check_pro($data['pid']);
+                                                    if($check_pro){
+                                                                    if(!empty($data['source'])){
+                                                                            $data['language'] = $this->input->post('language', TRUE);
+                                                                            
+                                                                            $data['ip'] = $this->session->userdata('ip_address');
+                                                                            $data['code_length'] = strlen($data['source']);
+                                                                            //p($data);die;
+                                                                            //echo $data['source'];
+                                                                            //echo $this->input->post('source',true);
+                                                                            /*echo $data['code_length'];die;*/
+                                                                            $result = $this->ps->problem_submit($data);
+                                                                            $url = 'oj_index/home/status';
+                                                                            if($result) success($url);
+                                                                            else{
+                                                                                header('Content-Type:text/html;charset=utf-8');
+                                                                                      echo "<script type='text/javascript'> alert('提交失败! ');history.go(-1); </script>";
+                                                                            }
+                                                                    }else{
+                                                                                     header('Content-Type:text/html;charset=utf-8');
+                                                                                      echo "<script type='text/javascript'> alert('代码长度太短! ');history.go(-1); </script>";
+                                                                            }
+                                                    }else{
+                                                        header('Content-Type:text/html;charset=utf-8');
+                                                        echo "<script type='text/javascript'> alert('对不起提交题目不存在! ');history.go(-1); </script>";
+                                                    }
 		}
-	}
-	function compileinfo(){
-		$solution_id = $this->input->post('solution_id');
-		//echo $solution_id;
-		$data = $this->ps->compileinfo($solution_id);
-		echo $data['error'];
-	}
-	function source(){
-		$solution_id = $this->input->post('solution_id');
-		$data = $this->ps->source($solution_id);
-		echo $data['source'];
 	}
 }
