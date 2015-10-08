@@ -155,7 +155,10 @@ class Home extends Con_Controller {
                                    $arr_lag = array('C', 'C++');
                                    $problem = $this->oj_con->get_pro_num($data['solution_id']);
                                    $data['language'] = $arr_lag[$problem['language']];
-                                   $data['num'] = $arr_num[$problem['num']];
+                                    if($problem['contest_id'] != 0)
+                                        $data['problem_id'] = $arr_num[$problem['num']];
+		else
+                                        $data['problem_id'] = $problem['problem_id'];
 		if($data['username'] == $this->session->userdata('username') || $this->session->userdata('privilege') == 1) {
 			$data['error'] = $this->oj_con->get_compile_false($data['solution_id']);                       
                                                     //p($data);die;
