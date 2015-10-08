@@ -40,7 +40,7 @@ class Acmer_model extends CI_Model {
 	}
 
 	public function get_all_acmer() {
-		$query = "SELECT a.id, a.name, b.nick, a.sutoj_solved, a.poj_solved, a.hdoj_solved, a.cf_rating FROM acmer a, users b where a.id=b.user_id order by sum10 desc";
+		$query = "SELECT a.id, a.name, b.nick, a.sutoj_solved, a.poj_solved, a.hdoj_solved, a.cf_rating, sum10 FROM acmer a, users b where a.id=b.user_id order by sum10 desc";
 		$result = mysql_query($query);
 		$data = array();
 		while ($row = mysql_fetch_array($result,MYSQL_ASSOC)) {
