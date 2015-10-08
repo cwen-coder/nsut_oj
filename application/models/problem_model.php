@@ -172,5 +172,18 @@ class Problem_model extends CI_Model {
 		} else return false;
 	}
 
+	public function all_hide($hide) {
+		$query = "UPDATE problem set hide = '$hide' where 1 ";
+		return  mysql_query($query);
+	}
+
+	public  function pro_hide($data) {
+		$query = " UPDATE problem set hide = '$data[hide]' WHERE problem_id = '$data[problem_id]' ";
+		$result = mysql_query($query);
+		if($result &&  mysql_affected_rows() == 1) {
+		    return true;
+		} else return false;
+	}
+
 }
 ?>

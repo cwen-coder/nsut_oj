@@ -306,7 +306,50 @@ class Problem extends Admin_Controller{
 		
 	}
 
-	
+	public function pro_hide() {
+		$this->load->view("admin/pro_hide.html");
+	}
+
+	public function all_hide() {
+		$hide = $this->input->post("all_hide");
+		$clean = array();
+		if($hide == 0 || $hide == 1) {
+			$clean["hide"] = $hide;
+			$result = $this->problem_model->all_hide($clean["hide"]);
+			if($result == true) {
+				success('admin/problem/pro_hide','修改成功');
+			} else {
+				error('修改失败');
+			}
+		} else {
+			error("修改失败");
+		}
+	}
+
+	public function one_pro_hide() {
+		$problem_id = $this->input->post("problem_id");
+		$hide = $this->input->post("pro_hide");
+		$clean = array();
+		if(empty($problem_id)) {
+			error("题目ID不能为空");
+		} else if(!is_numeric($problem_id)) {
+			error("输入不合法");
+		} else {
+			$clean["problem_id"] = $problem_id;
+		}
+
+		if($hide == 0 || $hide == 1) {
+			$clean["hide"] = $hide;
+			$result = $this->problem_model->pro_hide($clean);
+			if($result == true) {
+				success('admin/problem/pro_hide','修改成功');
+			} else {
+				error('修改失败');
+			}
+		} else {
+			error("修改失败");
+		}
+	}
 	
 }
 
