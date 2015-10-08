@@ -10,11 +10,20 @@ class Problem_submit extends Oj_Controller{
                                    $this->load->model('oj_con_model','oj_con');
 	}
 	function index(){
+
 		$data['user_id'] = $this->session->userdata('user_id');
 		if($data['user_id'] == null){
 			header('Content-Type:text/html;charset=utf-8');
                                                     echo "<script type='text/javascript'> alert('请先登录 ');history.go(-1); </script>";
 		}else{
+			$this->load->model('problem_model','pro');
+			$result = $this->pro->get_pro_hide( $this->input->post('pid', TRUE));
+			/*p($result['hide'] != 1);die;*/
+			if($result == false) {
+				redirect('oj_index/home/index');
+			} else if($result['hide'] == 1 && $this->session->userdata('privilege') != 1) {
+				redirect('oj_index/home/index');
+			}
 
 			$data['source'] = base64_decode($this->input->post('source',true));
 			//$data['source'] = stripslashes($data['source']);

@@ -46,9 +46,6 @@ class Home extends Oj_Controller{
 	}
 	//显示题目具体内容
 	public function problem(){
-		/*if($this->session->userdata('priviege') != 1) {
-			redirect('oj_index/home/index');
-		}*/
 		$pid=$this->input->get('pid', TRUE);
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
 			$data['username'] = $this->session->userdata('username');
@@ -58,6 +55,9 @@ class Home extends Oj_Controller{
 			$data['user_id'] = false;
 		}
 		$data['problem']=$this->pro->get_problem_id($pid);
+		if($data['problem']['hide'] == 1 && $this->session->userdata('privilege') != 1) {
+			redirect('oj_index/home/index');
+		}
 		$this->load->view('oj_index/problem.html',$data);
 	}
 	//比赛列表显示
@@ -176,6 +176,13 @@ class Home extends Oj_Controller{
 			$data['pid'] = $this->input->get('pid', TRUE);
 			$data['username'] = $this->session->userdata('username');
 			$data['user_id'] = $this->session->userdata('user_id');
+			$result = $this->pro->get_pro_hide($data['pid']);
+			/*p($result['hide'] != 1);die;*/
+			if($result == false) {
+				redirect('oj_index/home/index');
+			} else if($result['hide'] == 1 && $this->session->userdata('privilege') != 1) {
+				redirect('oj_index/home/index');
+			}
 			$this->load->view('oj_index/submitpage.html', $data);
 		}
 	}
