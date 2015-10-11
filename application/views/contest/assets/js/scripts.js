@@ -285,7 +285,7 @@ jQuery(document).ready(function() {
         //console.log(timestamp2);
         //console.log(now_time);
          if(timestamp1 < now_time && timestamp2 > now_time){
-                window.location.href= curPath + '/contest/school_contest/enroll';
+                 JavaScript:window.location.href= curPath + '/contest/school_contest/enroll';
         }else if(timestamp1 > now_time){
             alert("报名还没有开始,敬请期待");
         }
@@ -298,9 +298,9 @@ jQuery(document).ready(function() {
     });
         //查看报名队伍
         $("#view_teams").click(function(){
-            window.open(curPath + '/oj_index/home/teams' , "_blank");
+             JavaScript:window.open(curPath + '/oj_index/home/teams' , "_blank");
         });
-        //查看报名队伍updata_info
+        //updata_info
         $("#updata_info").click(function(){
             if(timestamp1 < now_time && timestamp2 > now_time){
                window.location.href= curPath + '/contest/school_contest/updata_enroll';
