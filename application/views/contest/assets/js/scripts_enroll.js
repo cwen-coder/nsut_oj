@@ -1,7 +1,7 @@
      jQuery(document).ready(function() {
          var curPath = $("#hid_site").val();
      //报名--------------------------------------------------------------------------------------------------------------------------
-        $('.page-container3 form').submit(function(evt){
+        $('.page form').submit(function(evt){
             evt.preventDefault();
         var contest_id = $('[name="group"]:checked').val();
         var username = $(this).find('.username').val();
