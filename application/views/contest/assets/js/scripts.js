@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
     $("#captcha_img_r_").attr("src",url);
   });
     //登录
-    $('.page-container1 form').submit(function(evt){
+    $('.page form').submit(function(evt){
         evt.preventDefault();
         var username = $(this).find('.username').val();
         var password = $(this).find('.password').val();

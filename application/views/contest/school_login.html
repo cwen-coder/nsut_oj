@@ -87,12 +87,17 @@ color:#fff;
     margin-left: 100px;
     margin-bottom: 10px;
 }
+.page {
+    width:800px;
+    height:450px;
+    margin-top:10%;
+}
 </style>
     </head>
     <body>
-
+    <center>
     <?php if(!$username&&!$user_id):?>
-    <div class="page-container1" id="page-container1">
+    <div class="page" id="page-container1">
             <h1>用户登录</h1>
             <form action="" method="post">
                 <input type="text" name="username" class="username" placeholder="Username">
@@ -137,14 +142,15 @@ color:#fff;
             </form>
         </div>
         <?php endif;?>
-        <!-- Javascript -->
-        <script src="<?php echo base_url('application/views/contest/assets/js/jquery-1.8.2.min.js');?>"></script>
+        <!-- Javascript -->   
+    </center>
+    <script src="<?php echo base_url('application/views/contest/assets/js/jquery-1.8.2.min.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized.3.2.7.min.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized-init.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/scripts.js');?>"></script>
         <input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
         <input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
         <input id = "start_time" type="hidden" value = "<?php if(isset($old_contest['start_time'])) echo $old_contest['start_time']; ?>" />
-    </body>
+   </body>
 </html>
 
