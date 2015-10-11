@@ -284,18 +284,19 @@ jQuery(document).ready(function() {
         //console.log(timestamp1);
         //console.log(timestamp2);
         //console.log(now_time);
-         if(timestamp1 < now_time && timestamp2 > now_time){
-             alert('success');
-                 window.open(curPath + '/contest/school_contest/enroll' , "_self");
-        }else if(timestamp1 > now_time){
-            alert("报名还没有开始,敬请期待");
-        }
-        else if(timestamp2 < now_time){
-            alert("报名已经结束,如有问题请联系管理员");
-            //$("#enroll_info").show();
-            //$("#enroll_list").hide();
-            //window.location.href= curPath + '/contest/school_contest/enroll';
-        }
+        window.open(curPath + '/contest/school_contest/enroll' , "_self");
+//         if(timestamp1 < now_time && timestamp2 > now_time){
+//             alert('success');
+//                 window.open(curPath + '/contest/school_contest/enroll' , "_self");
+//        }else if(timestamp1 > now_time){
+//            alert("报名还没有开始,敬请期待");
+//        }
+//        else if(timestamp2 < now_time){
+//            alert("报名已经结束,如有问题请联系管理员");
+//            //$("#enroll_info").show();
+//            //$("#enroll_list").hide();
+//            //window.location.href= curPath + '/contest/school_contest/enroll';
+//        }
     });
         //查看报名队伍
         $("#view_teams").click(function(){
