@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>题目隐藏</title>
+    <link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+  
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/lib/font-awesome/css/font-awesome.css');?>">
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/css/reset_problem.css');?>">
+    <style type="text/css">
+</style>
+</head>
+<body>
+<div class="container">
+<ul class="nav nav-tabs" >
+            <li role="presentation" class="active"><a href="javascript:;" id = "reset_user">一键改变全部</a></li>
+            <li role="presentation"  ><a href="javascript:;" id = "reset_team">按题号</a></li>
+        </ul>
+<div class="well">
+<div class="pro_con_div" id = "pro_con_div">
+    <form class="form-horizontal" action = "<?= site_url('admin/problem/all_hide');?>" method = "post">
+    <div class="radio">
+      <label>
+        <input type="radio" name="all_hide"  value="0" checked>
+        全部显示
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="all_hide" value="1">
+       全部隐藏
+      </label>
+    </div>
+  <br>
+  <div class="form-group">
+    <div class="sub_rjudge">
+      <button type="submit" class="btn btn-default but_rjudge">确认修改</button>
+    </div>
+  </div>
+</form>
+</div>
+<div class="pro_div" id = "pro_div">
+<form class="form-horizontal" action = "<?= site_url('admin/problem/one_pro_hide');?>" method = "post">
+  <div class="form-group">
+    <label for="team_id">题目ID</label>
+    <input type="text" class="form-control" name = "problem_id" placeholder="请输入题目ID">
+  </div>
+ <div class="radio">
+   <label>
+     <input type="radio" name="pro_hide"  value="0" checked>
+     显示题目
+   </label>
+ </div>
+ <div class="radio">
+   <label>
+     <input type="radio" name="pro_hide" value="1">
+    隐藏题目
+   </label>
+ </div>
+  <br>
+  <div class="form-group">
+    <div class="sub_rjudge">
+      <button type="submit" class="btn btn-default but_rjudge">确认修改</button>
+    </div>
+  </div>
+</form>
+</div>
+
+<div></div>
+<div></div>
+</div>
+    
+</div>
+<input type="hidden" id = "hide_site" value="<?= site_url();?>">
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/admin/js/reset_pwd.js');?>"></script>
+</body>
+</html>
