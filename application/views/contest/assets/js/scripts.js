@@ -148,7 +148,7 @@ jQuery(document).ready(function() {
  	 	var password = $("#password2").val();
  	 	//console.log(password);
  	 	if (password.length == 0) {
- 	 		$("#pass2_info").text('密码不能为空');
+ 	 		$("#pass2_info").text('重复密码不能为空');
                                                     pas2 = false;
                                                     chkreg();
  	 	}else if (password == $("#password1").val()) {
@@ -208,7 +208,7 @@ jQuery(document).ready(function() {
    });
     
     //注册------------------------------------------------------------------------------------------------------------------------
-    $('.page-container2 form').submit(function(evt){
+    $('.page2 form').submit(function(evt){
         evt.preventDefault();
             if(chkreg()){
                     var url = curPath+'/oj_index/register/reg_act';
@@ -237,9 +237,9 @@ jQuery(document).ready(function() {
     //登录注册切换
     $("#register").click(function(){
             //$("page-container2").find("div").show();
-            $(".page-container2").show();
+            $(".page2").show();
             //$("#page-container2").show();
-            $(".page-container1").hide();
+            $(".page").hide();
             //alert($("page-container2").style);
     });
 
@@ -274,11 +274,11 @@ jQuery(document).ready(function() {
         
         
            //检查报名是否开始或者结束
-      var start_time = Date.parse($("#pre_start_time").html());
-      var end_time = Date.parse($("#pre_end_time").html());
-      var timestamp1 = Date.parse(new Date(start_time))/1000;
-      var timestamp2 = Date.parse(new Date(end_time))/1000;
-      var now_time = Date.parse(new Date())/1000;
+//      var start_time = Date.parse($("#pre_start_time").html());
+//      var end_time = Date.parse($("#pre_end_time").html());
+//      var timestamp1 = Date.parse(new Date(start_time))/1000;
+//      var timestamp2 = Date.parse(new Date(end_time))/1000;
+//      var now_time = Date.parse(new Date())/1000;
           //检查报名时间是否合法
     $("#enroll").click(function(){
         //console.log(timestamp1);
