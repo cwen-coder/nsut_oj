@@ -94,13 +94,10 @@ color:#fff;
     margin-left: 100px;
     margin-bottom: 10px;
 }
-.page-container1 {
-  position: absolute;
+.page{
     width:800px;
     height:450px;
-    left:50%;
-    top:50%; 
-    margin-left:-400px;margin-top:-300px;
+    margin-top:5%;
 }
 .box{
     margin-top:350px;
@@ -112,7 +109,8 @@ color:#fff;
         
   
        <?php if(isset($school_info)) :?>
-        <div class="page-container1">
+    <center>
+        <div class="page">
             <div id="enroll_list">
                 <div style="color:black;font-size:60px;"><?php echo isset($school_info[0]['title']) ? $school_info[0]['title'] : '暂无校赛'; ?></div>
                 <div style="color:black;margin-top:3%;"><span>报名开始时间：<span style="color:red" id="pre_start_time"><?php echo isset($school_info[0]['pre_start_time']) ? $school_info[0]['pre_start_time'] : '0000-00-00 00:00:00'; ?></span></span><span style="color:black;margin-left:8%">报名结束时间：<span style="color:red" id="pre_end_time"><?php echo isset($school_info[0]['pre_end_time']) ? $school_info[0]['pre_end_time'] :'0000-00-00 00:00:00';?></span></span></div>
@@ -190,6 +188,8 @@ color:#fff;
         <?php else:?>
         <div class="box"><h1>暂无校赛</h1></div>
         <?php endif;?>
+            </center>
+
         <!-- Javascript -->
         <script src="<?php echo base_url('application/views/contest/assets/js/jquery-1.8.2.min.js');?>"></script>
         <script src="<?php echo base_url('application/views/contest/assets/js/supersized.3.2.7.min.js');?>"></script>
