@@ -20,7 +20,10 @@ class  User_model extends CI_Model {
 	}
                 //获得已注册队伍数
 	public function check_num_team($contest_id) {
-		$query = "select * from teams where contest_id = '$contest_id' ";
+                                   $sql = "select pre_start_time from contest where contest_id = '$contest_id' ";
+		$result = mysql_query($sql);
+                                   $time = mysql_fetch_assoc($result)['pre_start_time'];
+                                   $query = "select * from teams where enroll_time >  '$time' ";
 		$result = mysql_query($query);
 		$num = mysql_num_rows($result);
 		return $num;
@@ -77,16 +80,18 @@ class  User_model extends CI_Model {
 		return $data;
                 }
                 //注册写入数据库
-	public function enroll($data) {
-                                    
+	public function enroll($data) {                         
 		$query = "insert into teams (user_id, contest_id, team_num1, team_name1, team_num2, team_name2, team_num3, team_name3, team_name, enroll_time, team_telephone, team_id) 
 		values ('$data[user_id]', '$data[contest_id]', '$data[team_num1]', '$data[team_name1]', '$data[team_num2]' , '$data[team_name2]',  '$data[team_num3]',  '$data[team_name3]',  '$data[team_name]',  '$data[enroll_time]',  '$data[phone]',  '$data[team_id]' )";
 		return mysql_query($query);
 	}
                 //修改参赛信息
                 public function updata_enroll($data){
+                                   $sql = "select pre_start_time from contest where contest_id = '$contest_id' ";
+		$result = mysql_query($sql);
+                                   $time = mysql_fetch_assoc($result)['pre_start_time'];
                                     $query = "update teams set team_num1 = '$data[team_num1]', team_name1 = '$data[team_name1]', team_num2 = '$data[team_num2]', team_name2 = '$data[team_name2]', team_num3 = '$data[team_num3]', team_name3 = '$data[team_name3]', team_name = '$data[team_name]', team_telephone = '$data[phone]'
-                                              where user_id = '$data[user_id]' and contest_id = '$data[contest_id]]' ";
+                                              ,contest_id = '$data[contest_id]' where user_id = '$data[user_id]' and enroll_time > '$time' ";
                                     return mysql_query($query);
                 }
 

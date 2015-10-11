@@ -45,6 +45,7 @@ jQuery(document).ready(function() {
             password : password,
             captcha : captcha
         },function(data){
+           //console.log(data);
             if (data == 2) {
             alert("验证码错误");
             $("#captcha_info").text('验证码错误');
@@ -52,6 +53,7 @@ jQuery(document).ready(function() {
         } else if(data == false) {
           alert("用户名或密码错误");
          $("#captcha_img_r").click();
+         //history.go(0); 
         } else{
             //alert(1111);
             //console.log(data);
@@ -71,6 +73,7 @@ jQuery(document).ready(function() {
                                    $("#enroll_button").addClass("button1");
                                    return true;
    	 }else {
+                        //console.log(cap_r);
                         $("#reg_sub").attr("disabled",true);
                         return false;
                   }
@@ -193,9 +196,10 @@ jQuery(document).ready(function() {
  	 	}
  	 });
    //注册检验验证码
-   $("#captcha_r").bind('input propertychange blur',function() {
-       var pass = $("#captcha_r").val();
-       if(pass.length == 0) {
+   $("#captcha_r_register").bind('input propertychange blur',function() {
+       var captcha = $("#captcha_r_register").val();
+       //console.log(captcha);
+       if(captcha.length == 0) {
         $("#captcha_info_reg").text('请输入验证码');
         cap_r = false;
         chkreg();
@@ -213,12 +217,13 @@ jQuery(document).ready(function() {
             if(chkreg()){
                     var url = curPath+'/oj_index/register/reg_act';
                 $.post(url,{
-                   cap_r : $("#captcha_r").val(),
+                   cap_r : $("#captcha_r_register").val(),
  	 username : $("#username").val(),
  	 password1 : $("#password1").val(),
  	 password2 : $("#password2").val(),
  	 email : $("#email").val()
                     },function  (data) {
+                        //console.log(data);
                         if (data == true) {
                             alert('恭喜你！注册成功！');
                             history.go(0) ;
@@ -245,29 +250,29 @@ jQuery(document).ready(function() {
 
    
     //登录
-     $('.page-container1 form .password').keyup(function(){
+     $('.page form .password').keyup(function(){
         $("#pass_info").text('');
     });
-      $('.page-container1 form .username').keyup(function(){
+      $('.page form .username').keyup(function(){
         $("#user_info").text('');
     });
-    $('.page-container1 form .input-xlarge').keyup(function(){
+    $('.page form .input-xlarge').keyup(function(){
         $("#captcha_info").text('');
     });
       //注册
-    $('.page-container2 form .password').keyup(function(){
+    $('.page2 form .password').keyup(function(){
         $("#pass1_info").text('');
     });
-    $('.page-container2 form .username').keyup(function(){
+    $('.page2 form .username').keyup(function(){
         $("#user_info_reg").text('');
     });
-    $('.page-container2 form .repeat_password').keyup(function(){
+    $('.page2 form .repeat_password').keyup(function(){
         $("#pass2_info").text('');
     });
-    $('.page-container2 form .email').keyup(function(){
+    $('.page2 form .email').keyup(function(){
         $("#email_info").text('');
     });
-    $('.page-container2 form .captcha').keyup(function(){
+    $('.page2 form .captcha').keyup(function(){
         $("#captcha_info_reg").text('');
     });
     

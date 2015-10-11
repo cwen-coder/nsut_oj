@@ -111,7 +111,7 @@ color:#fff;
                 <div class="error_info"><span id="pass_info" style="color:red;"></span></div>
                <?php if(isset($_SESSION ['fs'])&&$_SESSION ['fs']>2):?>
                 <div class ="log_captcha_style" >
-                    <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
+                    <input type="text" class="input-xlarge " id="captcha_r_login" name="captcha" placeholder="验证码"  style="width:60px;">
                     <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
                 <span style="cursor: pointer;color:red;" id="captcha_span_r">点击刷新图片</span>
                 <div class="error_info"><span id="captcha_info" style="color:red;"></span></div>
@@ -137,7 +137,7 @@ color:#fff;
                 <input type="text" name="email" class="email" placeholder="E-mail(必填)" id="email">
                 <div class="error_info"><span id="email_info" style="color:red;"></span></div>
                 <div class ="reg_captcha_style" >
-                    <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="验证码"  style="width:60px;">
+                    <input type="text" class="input-xlarge " id="captcha_r_register" name="captcha" placeholder="验证码"  style="width:60px;">
                     <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r_" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
                 <span style="cursor: pointer;color:red;" id="captcha_span_r_">点击刷新图片</span>
                <div class="error_info"><span id="captcha_info_reg" style="color:red;"></span></div>

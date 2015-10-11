@@ -149,31 +149,31 @@
     $("#captcha_img_r").attr("src",url);
   });
     //报名
-    $('.page-container3 form .username').keyup(function(){
+    $('.page form .username').keyup(function(){
         $("#username_info").text('');
     });
-    $('.page-container3 form .usernnum').keyup(function(){
+    $('.page form .usernnum').keyup(function(){
         $("#usernum_info").text('');
     });
-    $('.page-container3 form .user1name').keyup(function(){
+    $('.page form .user1name').keyup(function(){
         $("#user1name_info").text('');
     });
-    $('.page-container3 form .user1num').keyup(function(){
+    $('.page form .user1num').keyup(function(){
         $("#user1num_info").text('');
     });
-    $('.page-container3 form .user2num').keyup(function(){
+    $('.page form .user2num').keyup(function(){
         $("#user2num_info").text('');
     });
-    $('.page-container3 form .user2name').keyup(function(){
+    $('.page form .user2name').keyup(function(){
         $("#user2name_info").text('');
     });
-    $('.page-container3 form .teamname').keyup(function(){
+    $('.page form .teamname').keyup(function(){
         $("#teamname_info").text('');
     });
-    $('.page-container3 form .phone').keyup(function(){
+    $('.page form .phone').keyup(function(){
         $("#phone_info").text('');
     });
-    $('.page-container3 form .input-xlarge').keyup(function(){
+    $('.page form .input-xlarge').keyup(function(){
         $("#captch_info").text('');
     });
     $("#old, #new").click(function(){

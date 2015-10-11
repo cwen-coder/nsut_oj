@@ -42,9 +42,10 @@ class Login extends CI_Controller {
 			$captcha = $_SESSION ['code'];
 		}
 		if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) {
-			//echo strtolower($captcha)."\n";
-			//echo strtolower($_SESSION ['code']);
+//			echo strtolower($captcha)."\n";
+//			echo strtolower($_SESSION ['code']);
 			echo 2;
+                                                     return;
 		} 
 
 		else {
@@ -100,7 +101,6 @@ class Login extends CI_Controller {
 			        			'privilege' => $result['privilege']
 			        			);
 			        		$this->session->set_userdata($newdata);
-			        		//session_destroy();
 			        		echo true;
         					}
 

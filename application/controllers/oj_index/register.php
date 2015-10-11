@@ -47,7 +47,6 @@ class Register extends CI_Controller {
     }
     //报名 完善信息
     public function enroll(){
-
         $captcha = mysql_real_escape_string($this->input->post('cap_r', TRUE));
                 if (strtolower($captcha) !=  strtolower($_SESSION ['code'])){
                         echo 2;
@@ -166,11 +165,10 @@ class Register extends CI_Controller {
     //注册
     public function reg_act() {
         //$this->output->enable_profiler(TRUE);
-        $captcha = mysql_real_escape_string($this->input->post('cap_r',TRUE));
+        $captcha = $this->input->post('cap_r',TRUE);
         if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) {
-            //echo strtolower($captcha)."\n";
-            //echo strtolower($_SESSION ['code']);
-            echo 2;
+            echo strtolower($captcha);
+            //echo 2;
             return;
         } 
         //$this->load->helper('form');

@@ -90,7 +90,7 @@ class School_contest extends Oj_Controller{
         }
         //修改参赛信息动作
         public function updata_action(){
-                    $captcha = mysql_real_escape_string($this->input->post('cap_r', TRUE));
+                    $captcha = $this->input->post('cap_r', TRUE);
                 if (strtolower($captcha) !=  strtolower($_SESSION ['code'])){
                         echo 2;
                         return;
@@ -161,7 +161,6 @@ class School_contest extends Oj_Controller{
         if(!$status) 
             echo false;
         else{
-
             $this->load->library('encrypt');
             $this->load->helper('date');
             $format = 'DATE_W3C';
@@ -175,7 +174,7 @@ class School_contest extends Oj_Controller{
             $teamname = $this->input->post('teamname',TRUE);
             $phone = $this->input->post('phone',TRUE);
             $user_id = $this->session->userdata('user_id');
-            if(!isset($user_id) || $this->user_model->teamname_check($teamname, $contest_id, $user_id) > 0 || $this->user_model->check_enroll($user_id, $contest_id) ){
+            if(!isset($user_id) || $this->user_model->teamname_check($teamname, $contest_id, $user_id) > 0){
                     echo false;
             }  else {
                 
