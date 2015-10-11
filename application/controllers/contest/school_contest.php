@@ -34,7 +34,15 @@ class School_contest extends Oj_Controller{
                      if(!$data['check_enroll_old'] || !$data['check_enroll_new']){
                          echo " Illegal Operation";die;
                      }
-                        $this->load->view('contest/enroll_page.html', $data);
+                     if (time() < strtotime($data['old_contest']['pre_start_time'])) {
+			header('Content-Type:text/html;charset=utf-8');
+                                                    echo "<script type='text/javascript'> alert('报名还没有开始,敬请期待 ');history.go(-1); </script>";
+		} else if(time() > strtotime($data['old_contest']['pre_end_time'])){
+			header('Content-Type:text/html;charset=utf-8');
+                                                    echo "<script type='text/javascript'> alert('报名已经结束,如有问题请联系管理员');history.go(-1); </script>";
+                                }else{
+                                            $this->load->view('contest/enroll_page.html', $data);
+                                }
             }
         }
         //修改参赛信息页面
