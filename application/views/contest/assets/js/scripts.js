@@ -304,15 +304,16 @@ jQuery(document).ready(function() {
         });
         //updata_info
         $("#updata_info").click(function(){
-            if(timestamp1 < now_time && timestamp2 > now_time){
-               window.location.href= curPath + '/contest/school_contest/updata_enroll';
-        }else if(timestamp1 > now_time){
-            alert("报名还没有开始,敬请期待");
-        }
-        else if(timestamp2 < now_time){
-            alert("报名已经结束,如有问题请联系管理员");
-            //window.location.href= curPath + '/contest/school_contest/enroll';
-        }
+             window.open(curPath + '/contest/school_contest/updata_enroll' , "_self");
+//            if(timestamp1 < now_time && timestamp2 > now_time){
+//               window.location.href= curPath + '/contest/school_contest/updata_enroll';
+//        }else if(timestamp1 > now_time){
+//            alert("报名还没有开始,敬请期待");
+//        }
+//        else if(timestamp2 < now_time){
+//            alert("报名已经结束,如有问题请联系管理员");
+//            //window.location.href= curPath + '/contest/school_contest/enroll';
+//        }
         });
         //点击进入比赛
         $("#enter_contest").click(function(){
