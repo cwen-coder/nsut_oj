@@ -285,6 +285,7 @@ jQuery(document).ready(function() {
         //console.log(timestamp2);
         //console.log(now_time);
          if(timestamp1 < now_time && timestamp2 > now_time){
+             alert('success');
                  window.open(curPath + '/contest/school_contest/enroll' , "_self");
         }else if(timestamp1 > now_time){
             alert("报名还没有开始,敬请期待");
