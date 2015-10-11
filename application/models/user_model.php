@@ -58,7 +58,7 @@ class  User_model extends CI_Model {
                 //所搜所有参加校赛队伍
                 public  function teams(){                                   
                                     $query = "select team_id, team_name, team_name1, team_name2, team_name3, con_class from teams a, contest b where a.contest_id = b.contest_id and (b.con_class = '3' or b.con_class = '4') and b.end_time = (
-                                             select  max(b.end_time)  from teams a, contest b where a.contest_id = b.contest_id and (b.con_class = '3' or b.con_class = '4')) order by a.enroll_time";
+                                             select  max(end_time)  from  contest  where con_class = '3' or con_class = '4') order by a.enroll_time";
                                     $result = mysql_query($query);
                                     $data = array();
                                     while($row = mysql_fetch_assoc($result))
