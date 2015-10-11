@@ -155,7 +155,7 @@ color:#fff;
                <button class="button4" >您已报名</button>
                <?php endif;?>
                <?php if($check_enroll_old && $check_enroll_new ) :?>
-              <button class="button3" type="submit" id="enroll" >报名参赛</button>
+              <button class="button3" type="submit" id="enroll" ><a  target="_self">报名参赛</a></button>
               <?php endif;?>
               <?php endif;?>             
               <?php if((isset($school_info[0]['end_time']) ? $school_info[0]['end_time'] : '0' ) < Now()):?>
@@ -180,7 +180,7 @@ color:#fff;
               <button class="button5" type="submit" id="look_contest" >查看比赛结果</button>
               <?php } ?>
               <?php endif;?>
-              <div style="margin-top: 25px"><button id="view_teams"><a href="" target="_blank" style="color:red;">查看参赛队伍</a></button></div>
+              <div style="margin-top: 25px"><button id="view_teams"><a target="_blank" style="color:red;">查看参赛队伍</a></button></div>
               <?php if((!$check_enroll_old || !$check_enroll_new) &&(isset($school_info[0]['start_time']) ? $school_info[0]['start_time'] : '0' ) > Now()) :?>
               <button class="button2" type="submit" id="updata_info" >修改参赛信息</button>
               <?php endif;?>      
