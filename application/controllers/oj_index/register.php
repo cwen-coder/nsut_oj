@@ -167,7 +167,7 @@ class Register extends CI_Controller {
         //$this->output->enable_profiler(TRUE);
         $captcha = $this->input->post('cap_r',TRUE);
         if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) {
-            echo strtolower($captcha);
+            echo 2;
             //echo 2;
             return;
         } 
