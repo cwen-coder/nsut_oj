@@ -174,7 +174,7 @@ class School_contest extends Oj_Controller{
             $teamname = $this->input->post('teamname',TRUE);
             $phone = $this->input->post('phone',TRUE);
             $user_id = $this->session->userdata('user_id');
-            if(!isset($user_id) || $this->user_model->teamname_check($teamname, $contest_id, $user_id) > 0){
+            if(!$user_id || $this->user_model->teamname_check($teamname, $contest_id, $user_id) > 0){
                     echo false;
             }  else {
                 
