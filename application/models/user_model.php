@@ -53,7 +53,7 @@ class  User_model extends CI_Model {
 	}
                  //检查队名是否存在
 	public function teamname_check($teamname, $contest_id, $user_id) {
-		$query = "select * from teams where team_name = '$teamname' and contest_id = '$contest_id' and user_id!= '$user_id' ";
+		$query = "select * from teams where team_name = '$teamname' and contest_id = '$contest_id' and user_id = '$user_id' ";
 		$result = mysql_query($query);
 		$num = mysql_num_rows($result);
 		return $num;

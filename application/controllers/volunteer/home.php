@@ -6,7 +6,7 @@ class Home extends Volunteer_Controller{
 		parent::__construct();
 		$this->load->model('volunteer_model','volunteer');
 	}
-	 #ÔØÈëÖ¾Ô¸ÕßËÍÇòÒ³Ãæ
+	 #Ã”Ã˜ÃˆÃ«Ã–Â¾Ã”Â¸Ã•ÃŸÃ‹ÃÃ‡Ã²Ã’Â³ÃƒÃ¦
 	function index() {
 		//$data['session'] = $this->session->userdata('item');
 		$start = $this->session->userdata('start');
@@ -51,7 +51,7 @@ class Home extends Volunteer_Controller{
 		if($result == true) {
 			redirect('volunteer/home/index');
 		} else {
-			error("ËÍÇòÊ§°Ü£¡");
+			error("Ã‹ÃÃ‡Ã²ÃŠÂ§Â°ÃœÂ£Â¡");
 		}
 	}
 
@@ -62,7 +62,7 @@ class Home extends Volunteer_Controller{
 		if($result == true) {
 			redirect('volunteer/home/index');
 		} else {
-			error("³·ÏúÊ§°Ü£¡");
+			error("Â³Â·ÃÃºÃŠÂ§Â°ÃœÂ£Â¡");
 		}
 	}
 
