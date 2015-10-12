@@ -108,14 +108,14 @@ color:#fff;
                 
                 <div class="error_info_enroll" style="margin-left: 100px;"><span id="usernum_info" style="color:red;"></span></div>
                 <div class="error_info_enroll"><span id="username_info" style="color:red;"></span></div>
-                <input type="text" name="user1num" class="user1num" value="<?php echo $enroll_info['team_num2']?>" placeholder="队员1学号">
-                <input type="text" name="user1name" class="user1name" value="<?php echo $enroll_info['team_name2']?>" placeholder="队员1姓名">
+                <input type="text" name="user1num" class="user1num" value="<?php if(!empty($enroll_info['team_num2'])) echo $enroll_info['team_num2']?>" placeholder="队员1学号">
+                <input type="text" name="user1name" class="user1name" value="<?php if(!empty($enroll_info['team_name2'])) echo $enroll_info['team_name2']?>" placeholder="队员1姓名">
                 
                 <div class="error_info_enroll" style="margin-left: 100px;"><span id="user1num_info" style="color:red;"></span></div>
                 <div class="error_info_enroll"><span id="user1name_info" style="color:red;"></span></div>
           
-                <input type="text" name="user2name" class="user2num" value="<?php echo $enroll_info['team_num3']?>" placeholder="队员2学号">
-                <input type="text" name="user2name" class="user2name" value="<?php echo $enroll_info['team_name3']?>" placeholder="队员2姓名">
+                <input type="text" name="user2name" class="user2num" value="<?php if(!empty($enroll_info['team_num3'])) echo $enroll_info['team_num3']?>" placeholder="队员2学号">
+                <input type="text" name="user2name" class="user2name" value="<?php if(!empty($enroll_info['team_num3'])) echo $enroll_info['team_name3']?>" placeholder="队员2姓名">
                 
                 <div class="error_info_enroll" style="margin-left: 100px;"><span id="user2num_info" style="color:red;"></span></div>
                 <div class="error_info_enroll"><span id="user2name_info" style="color:red;"></span></div>

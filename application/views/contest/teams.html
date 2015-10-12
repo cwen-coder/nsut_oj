@@ -79,10 +79,10 @@
   <tr <?php if($v['con_class'] == '4') echo 'class="old_color" '; else echo 'class="new_color" ' ?> >
     <td><?php echo $i++;?></td>
     <td><?php echo $v['team_id']?></td>
-    <td><?php echo $v['team_name']?></td>
-    <td><?php echo $v['team_name1']?></td>
-    <td><?php echo $v['team_name2']?></td>
-    <td><?php echo $v['team_name3']?></td>
+    <td><?php echo htmlspecialchars($v['team_name']);?></td>
+    <td><?php echo htmlspecialchars($v['team_name1']);?></td>
+    <td><?php echo htmlspecialchars($v['team_name2']);?></td>
+    <td><?php echo htmlspecialchars($v['team_name3']);?></td>
     <td><?php if($v['con_class'] == '3') echo 'Y';
             else 
                     echo 'N';
