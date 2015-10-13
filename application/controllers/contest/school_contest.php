@@ -196,7 +196,7 @@ class School_contest extends Oj_Controller{
                 if($result)
                     echo true;
                 else
-                    echo  true;
+                    echo  false;
             }
     }
         }
