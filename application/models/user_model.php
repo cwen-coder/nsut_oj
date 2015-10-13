@@ -87,7 +87,7 @@ class  User_model extends CI_Model {
 	}
                 //修改参赛信息
                 public function updata_enroll($data){
-                                   $sql = "select pre_start_time from contest where contest_id = '$contest_id' ";
+                                   $sql = "select pre_start_time from contest where contest_id = '$data[contest_id]' ";
 		$result = mysql_query($sql);
                                    $time = mysql_fetch_assoc($result)['pre_start_time'];
                                     $query = "update teams set team_num1 = '$data[team_num1]', team_name1 = '$data[team_name1]', team_num2 = '$data[team_num2]', team_name2 = '$data[team_name2]', team_num3 = '$data[team_num3]', team_name3 = '$data[team_name3]', team_name = '$data[team_name]', team_telephone = '$data[phone]'

@@ -143,7 +143,7 @@ class School_contest extends Oj_Controller{
                     array(
                     'field' => 'teamname',
                     'label' => '队伍名称',
-                    'rules' => 'required | max_length[32] | xss_clean '
+                    'rules' => 'required | max_length[10] | xss_clean '
                     ),
                     array(
                     'field' => 'phone',
@@ -196,7 +196,7 @@ class School_contest extends Oj_Controller{
                 if($result)
                     echo true;
                 else
-                    echo  false;
+                    echo  true;
             }
     }
         }
