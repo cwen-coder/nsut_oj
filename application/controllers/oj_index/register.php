@@ -70,7 +70,7 @@ class Register extends CI_Controller {
                     array(
                     'field' => 'username',
                     'label' => '队长姓名',
-                    'rules' => 'required | max_length[32] |xss_clean '
+                    'rules' => 'required | max_length[10] |xss_clean '
                     ),
                     array(
                     'field' => 'usernum',
@@ -115,6 +115,7 @@ class Register extends CI_Controller {
                     );
         $this->form_validation->set_rules($config);
         $status = $this->form_validation->run();
+
         if(!$status) 
             echo false;
         else{
@@ -135,7 +136,7 @@ class Register extends CI_Controller {
             $user_id = $this->session->userdata('user_id');
             if($this->user_model->teamname_check($teamname, $contest_id, $user_id) > 0 || !$user_id || !$this->user_model->check_enroll($user_id, $contest_id)){
                     echo false;
-            }  else {              
+            }else {              
                 $team_id = $this->user_model->check_num_team($contest_id)+1;
                 $data = array(
                         'user_id' => mysql_real_escape_string($user_id),
