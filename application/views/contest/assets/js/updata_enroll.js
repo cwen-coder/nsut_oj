@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
     $("#captcha_img_r").attr("src",url);
   });
         
-         //报名--------------------------------------------------------------------------------------------------------------------------
+         //修改参赛信息--------------------------------------------------------------------------------------------------------------------------
         $('.page form').submit(function(evt){
             evt.preventDefault();
         var contest_id = $('[name="group"]:checked').val();
@@ -54,6 +54,12 @@ jQuery(document).ready(function() {
                 $(this).parent().find('.teamname').focus();
                 $(this).parent().find('.teamname').attr('placeholder', '请输入队伍名');
                 $("#teamname_info").text("队伍名不能为空");
+            return false;
+        }
+         if(teamname.length > 10) {
+                $(this).parent().find('.teamname').focus();
+                $(this).parent().find('.teamname').attr('placeholder', '请输入队伍名');
+                $("#teamname_info").text("队伍名不能大于10个字符");
             return false;
         }
         if(teamname != ''){
