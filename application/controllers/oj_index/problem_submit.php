@@ -17,7 +17,15 @@ class Problem_submit extends Oj_Controller{
                                                     echo "<script type='text/javascript'> alert('请先登录 ');history.go(-1); </script>";
 		}else{
 			$this->load->model('problem_model','pro');
-			$result = $this->pro->get_pro_hide( $this->input->post('pid', TRUE));
+            $pid = $this->input->post('pid', TRUE);
+            $clean = array();
+            if(is_numeric($pid)) {
+                $clen["$pid"] = mysql_real_escape_string($pid);
+                $result = $this->pro->get_pro_hide($clen["$pid"]);
+            } else {
+                $result = false
+            }
+			
 			/*p($result['hide'] != 1);die;*/
 			if($result == false) {
 				redirect('oj_index/home/index');
