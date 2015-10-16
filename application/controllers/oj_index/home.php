@@ -46,7 +46,7 @@ class Home extends Oj_Controller{
 	}
 	//显示题目具体内容
 	public function problem(){
-		$pid=$this->input->get('pid', TRUE);
+		$pid=mysql_real_escape_string($this->input->get('pid', TRUE));
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
 			$data['username'] = $this->session->userdata('username');
 			$data['user_id'] = $this->session->userdata('user_id');
