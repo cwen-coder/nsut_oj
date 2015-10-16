@@ -12,7 +12,7 @@ class Con_sub extends Con_Controller{
 
 	public function index() {
 		$data['user_id'] = $this->session->userdata('user_id');
-		$data['cid'] = $this->input->post('cid', TRUE);
+		$data['cid'] = mysql_real_escape_string($this->input->post('cid', TRUE));
 		$contest = $this->oj_con->con_byId($data['cid']);
 
 		//后期修改damin权限问题
@@ -34,10 +34,10 @@ class Con_sub extends Con_Controller{
 			error("对不起比赛已经结束！您无法提交!");
 		}else {
 			//echo 5;
-			$data['source'] = $this->input->post('source', TRUE);
-			$data['language'] = $this->input->post('language', TRUE);
-			$data['pid'] = $this->input->post('pid', TRUE);
-			$data['ip'] = $this->session->userdata('ip_address');
+			$data['source'] = mysql_real_escape_string($this->input->post('source', TRUE));
+			$data['language'] = mysql_real_escape_string($this->input->post('language', TRUE));
+			$data['pid'] = mysql_real_escape_string($this->input->post('pid', TRUE));
+			$data['ip'] = mysql_real_escape_string($this->session->userdata('ip_address'));
 			$data['code_length'] = strlen($data['source']);
 			/*echo $data['code_length'];die;*/
 			

@@ -14,7 +14,7 @@ class Ask_pro extends Con_Controller {
 	public function index() {
 
 
-		$data['contest_id'] = $this->uri->segment(4);
+		$data['contest_id'] = mysql_real_escape_string($this->uri->segment(4));
 
 		$contest = $this->oj_con->con_byId($data['contest_id']);
 		if($this->session->userdata('privilege') != 1) {
@@ -74,9 +74,9 @@ class Ask_pro extends Con_Controller {
 
 	//提交问题
 	public function ask_question() {
-		$data['contest_id'] = $this->input->post('contest_id',TRUE);
-		$data['user_id'] = $this->input->post('user_id',TRUE);
-		$data['content'] = $this->input->post('content',TRUE);
+		$data['contest_id'] = mysql_real_escape_string($this->input->post('contest_id',TRUE));
+		$data['user_id'] = mysql_real_escape_string($this->input->post('user_id',TRUE));
+		$data['content'] = mysql_real_escape_string($this->input->post('content',TRUE));
 		if(!empty($data['content'])) {
 			$result = $this->ask_pro->ask_question($data);
 			header('Content-Type:text/html;charset=utf-8');

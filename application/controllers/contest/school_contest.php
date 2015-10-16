@@ -90,7 +90,7 @@ class School_contest extends Oj_Controller{
         }
         //修改参赛信息动作
         public function updata_action(){
-                    $captcha = $this->input->post('cap_r', TRUE);
+                    $captcha = mysql_real_escape_string$this->input->post('cap_r', TRUE));
                 if (strtolower($captcha) !=  strtolower($_SESSION ['code'])){
                         echo 2;
                         return;
@@ -164,15 +164,15 @@ class School_contest extends Oj_Controller{
             $this->load->library('encrypt');
             $this->load->helper('date');
             $format = 'DATE_W3C';
-            $contest_id = $this->input->post('contest_id',TRUE);
-            $username = $this->input->post('username',TRUE);
-            $usernum = $this->input->post('usernnum',TRUE);
-            $user1name = $this->input->post('user1name',TRUE);
-            $user1num = $this->input->post('user1num',TRUE);
-            $user2name = $this->input->post('user2name',TRUE);
-            $user2num = $this->input->post('user2num',TRUE);
-            $teamname = $this->input->post('teamname',TRUE);
-            $phone = $this->input->post('phone',TRUE);
+            $contest_id = mysql_real_escape_string($this->input->post('contest_id',TRUE));
+            $username = mysql_real_escape_string($this->input->post('username',TRUE));
+            $usernum = mysql_real_escape_string($this->input->post('usernnum',TRUE));
+            $user1name = mysql_real_escape_string($this->input->post('user1name',TRUE));
+            $user1num = mysql_real_escape_string($this->input->post('user1num',TRUE));
+            $user2name = mysql_real_escape_string($this->input->post('user2name',TRUE));
+            $user2num = mysql_real_escape_string($this->input->post('user2num',TRUE));
+            $teamname = mysql_real_escape_string($this->input->post('teamname',TRUE));
+            $phone = mysql_real_escape_string($this->input->post('phone',TRUE));
             $user_id = $this->session->userdata('user_id');
             $str = "[^\x80-\xff]";
 //            if(eregi($str,$username)){ 
@@ -210,7 +210,7 @@ class School_contest extends Oj_Controller{
                                     if(!isset($_SESSION)){
                                                         session_start();	
                                                 }
-		$captcha = $this->input->post('captcha',TRUE);
+		$captcha = mysql_real_escape_string($this->input->post('captcha',TRUE));
 		if($captcha == "undefined"){
 			if(!isset($_SESSION['fs'])){
 				$_SESSION['fs'] = 0;
@@ -249,8 +249,8 @@ class School_contest extends Oj_Controller{
 	        			echo false;
 	       		 } else {
 			        	//$this->load->library('encrypt');
-			        	$username = $this->input->post('username',TRUE);
-				$password = $this->input->post('password',TRUE);
+			        	$username = mysql_real_escape_string($this->input->post('username',TRUE));
+				$password = mysql_real_escape_string($this->input->post('password',TRUE));
                                                                      $school_info = $this->user_model->school_info();
                                                                      $data0 = array(
                                                                                                         'contest_id' =>  isset($school_info[0]['contest_id'])? $school_info[0]['contest_id'] : '-1',
@@ -276,7 +276,7 @@ class School_contest extends Oj_Controller{
                                                                                     $this->load->helper('date');
                                                                                     $format = 'DATE_W3C';
                                                                                     $time = standard_date($format, time());
-                                                                                    $ip = $this->input->ip_address();
+                                                                                    $ip = mysql_real_escape_string($this->input->ip_address());
                                                                                             $data = array(
                                                                                                     'username' => mysql_real_escape_string($username),
                                                                                                     'password' => mysql_real_escape_string($password),

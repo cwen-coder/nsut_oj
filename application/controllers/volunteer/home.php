@@ -45,7 +45,7 @@ class Home extends Volunteer_Controller{
 	}
 
 	public function song_require() {
-		$solution_id = $this->input->post('solution_id',TRUE);
+		$solution_id = mysql_real_escape_string($this->input->post('solution_id',TRUE));
 		p($solution_id);
 		$result = $this->volunteer->song_require($solution_id);
 		if($result == true) {
@@ -56,7 +56,7 @@ class Home extends Volunteer_Controller{
 	}
 
 	public function song_require_back() {
-		$solution_id = $this->input->post('solution_id',TRUE);
+		$solution_id = mysql_real_escape_string($this->input->post('solution_id',TRUE));
 		p($solution_id);
 		$result = $this->volunteer->song_require_back($solution_id);
 		if($result == true) {

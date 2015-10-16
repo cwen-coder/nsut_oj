@@ -15,7 +15,7 @@ class Privilege extends CI_Controller {
     		session_start();
     	}
 
-    	$captcha = $this->input->post('captcha',TRUE);
+    	$captcha = mysql_real_escape_string($this->input->post('captcha',TRUE));
     	if (strtolower($captcha) !=  strtolower($_SESSION ['code'])) {
     			echo 2;
     	} else {
@@ -43,13 +43,13 @@ class Privilege extends CI_Controller {
             	echo false;
             } else {
 
-            $username = $this->input->post('username',TRUE);
-    		$password = $this->input->post('password',TRUE);
+            $username = mysql_real_escape_string($this->input->post('username',TRUE));
+    		$password = mysql_real_escape_string($this->input->post('password',TRUE));
     			//$captcha = $this->input->post('captcha',TRUE);
             $this->load->helper('date');
             $format = 'DATE_W3C';
     		$time = standard_date($format, time());
-    		$ip = $this->input->ip_address();
+    		$ip = mysql_real_escape_string($this->input->ip_address());
             $data = array(
             	'username' => $username,
             	'password' => $password
