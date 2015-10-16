@@ -134,6 +134,11 @@ class Register extends CI_Controller {
             $teamname = $this->input->post('teamname',TRUE);
             $phone = $this->input->post('phone',TRUE);
             $user_id = $this->session->userdata('user_id');
+ //           $str = "[^\x80-\xff]";
+//            if(eregi($str,$username) && eregi($str,$user1name) && eregi($str,$user2name)){ 
+//                echo false;
+//                return;
+//            } 
             if($this->user_model->teamname_check($teamname, $contest_id, $user_id) > 0 || !$user_id || !$this->user_model->check_enroll($user_id, $contest_id)){
                     echo false;
             }else {              
