@@ -17,14 +17,14 @@ class Problem_submit extends Oj_Controller{
                                                     echo "<script type='text/javascript'> alert('请先登录 ');history.go(-1); </script>";
 		}else{
 			$this->load->model('problem_model','pro');
-            $pid = $this->input->post('pid', TRUE);
-            $clean = array();
-            if(is_numeric($pid)) {
-                $clen["$pid"] = mysql_real_escape_string($pid);
-                $result = $this->pro->get_pro_hide($clen["$pid"]);
-            } else {
-                $result = false
-            }
+                                                    $pid = $this->input->post('pid', TRUE);
+                                                    $clean = array();
+                                                    if(is_numeric($pid)) {
+                                                        $clen["$pid"] = mysql_real_escape_string($pid);
+                                                        $result = $this->pro->get_pro_hide($clen["$pid"]);
+                                                    } else {
+                                                        $result = false;
+                                                    }
 			
 			/*p($result['hide'] != 1);die;*/
 			if($result == false) {
@@ -43,7 +43,7 @@ class Problem_submit extends Oj_Controller{
                                                     $check_pro = $this->oj_con->check_pro($data['pid']);
                                                     if($check_pro){
                                                                     if(!empty($data['source'])){
-                                                                            $data['language'] = $this->input->post('language', TRUE);
+                                                                            $data['language'] = mysql_real_escape_string($this->input->post('language', TRUE));
                                                                             
                                                                             $data['ip'] = $this->session->userdata('ip_address');
                                                                             $data['code_length'] = strlen($data['source']);
