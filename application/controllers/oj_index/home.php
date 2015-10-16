@@ -27,7 +27,7 @@ class Home extends Oj_Controller{
         		$config['uri_segment'] = 4; 
 		$this->pagination->initialize($config);
 		$data['links'] = $this->pagination->create_links();
-		$data['offset'] = $this->uri->segment(4);
+		$data['offset'] = mysql_real_escape_string($this->uri->segment(4));
 		if($data['offset'] == null) $data['offset'] = 0;
 		$data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
@@ -95,7 +95,7 @@ class Home extends Oj_Controller{
 		$this->pagination->initialize($config);
 
 		$data['links'] = $this->pagination->create_links();	
-		$offset = $this->uri->segment(4);
+		$offset = mysql_real_escape_string($this->uri->segment(4));
 		if($offset < 1) $offset = 0;
 		//$this->db->limit($perPage, $offset);
 		$data['con_pass'] = $this->oj_con->con_pass_list($perPage, $offset);
@@ -104,11 +104,11 @@ class Home extends Oj_Controller{
 		die;*/
 		//echo $data['links'];die;
 	 	$this->load->view('oj_index/contest_list.html',$data);
-	 	$offset1 = $this->uri->segment(5);
+	 	$offset1 = mysql_real_escape_string($this->uri->segment(5));
 	 	if($offset1 == 1000 && !$this->session->userdata('username')) {
 	 		echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click(); }</script>";
 	 	} else if($offset1 == 1001) {
-	 		$offset_con = $this->uri->segment(6);
+	 		$offset_con = mysql_real_escape_string($this->uri->segment(6));
 	 		$data['contest'] = $this->oj_con->con_byId($offset_con);
 	 		if(!$this->session->userdata('username')) {
 	 			echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click(); }</script>";
@@ -120,17 +120,17 @@ class Home extends Oj_Controller{
 	}
 	//提交状态显示
 	public function status(){
-		$user = $this->input->get('user', TRUE);
-		$pid = $this->input->get('pid', TRUE);
-		$ps = $this->input->get('ps', TRUE);
+		$user = mysql_real_escape_string($this->input->get('user', TRUE));
+		$pid = mysql_real_escape_string($this->input->get('pid', TRUE));
+		$ps = mysql_real_escape_string($this->input->get('ps', TRUE));
 
 		$data['judge_result']=Array("Pending", "Pending Rejudging", "Compiling", "Running & Judging", "Accepted", "Presentation Error", "Wrong Answer", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed", "Runtime Error", "Compile Error", "Compile OK","Test Running Done");
 		$data['judge_color']=Array("btn_status gray","btn_status btn-info","btn_status btn-warning","btn_status btn-warning","btn_status btn-success","btn_status btn-danger","btn_status btn-danger","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-info");
 		$limit=0;
-		if($data['pagination'] = $this->input->get('pagination')) 
+		if($data['pagination'] = mysql_real_escape_string($this->input->get('pagination'))) 
 			$limit = $data['pagination']*20-20;
-		if($this->input->get('previous')) 
-			$data['previous'] = $this->input->get('previous');
+		if(mysql_real_escape_string($this->input->get('previous'))) 
+			$data['previous'] = mysql_real_escape_string($this->input->get('previous'));
 		$num=20;
 		if(!empty($pid)) {
 			if(!empty($ps)){
@@ -173,7 +173,7 @@ class Home extends Oj_Controller{
 			self::problem();
 			echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click();}</script>";
 		}else{
-			$data['pid'] = $this->input->get('pid', TRUE);
+			$data['pid'] = mysql_real_escape_string($this->input->get('pid', TRUE));
 			$data['username'] = $this->session->userdata('username');
 			$data['user_id'] = $this->session->userdata('user_id');
 			$result = $this->pro->get_pro_hide($data['pid']);
@@ -194,9 +194,9 @@ class Home extends Oj_Controller{
 	}
 	//查找
 	public function search(){
-		$pid = $this->input->get('pid', TRUE);
-		$pn = $this->input->get('pn', TRUE);
-		$pc = $this->input->get('pc', TRUE);
+		$pid = mysql_real_escape_string($this->input->get('pid', TRUE));
+		$pn = mysql_real_escape_string($this->input->get('pn', TRUE));
+		$pc = mysql_real_escape_string($this->input->get('pc', TRUE));
 		if(!empty($pid)) 
 			$data['category'][0]=$this->pro->search_problem_byId($pid);
 		if(!empty($pn))
@@ -219,7 +219,7 @@ class Home extends Oj_Controller{
                                                     $config['page_query_string'] = true;
                                                     $this->pagination->initialize($config);
                                                     $data['links'] = $this->pagination->create_links();
-                                                    $data['offset'] = $this->input->get('per_page', TRUE);
+                                                    $data['offset'] = mysql_real_escape_string($this->input->get('per_page'));
                                                     //$data['offset'] = 0;
                                                     if($data['offset'] == null) $data['offset']=0;
 			$data['category']=$this->pro->search_problem_byClass($pc,$config['per_page'], $data['offset']);
@@ -242,7 +242,7 @@ class Home extends Oj_Controller{
                                                     $config['uri_segment'] = 4; 
                                                     $this->pagination->initialize($config);
                                                     $data['links'] = $this->pagination->create_links();
-                                                    $data['offset'] = $this->uri->segment(4);
+                                                    $data['offset'] = mysql_real_escape_string($this->uri->segment(4));
                                                     if($data['offset'] == null) $data['offset']=0;
                                                     $data['category']=$this->pro->problem_list($config['per_page'], $data['offset']);
                                     }
@@ -272,10 +272,10 @@ class Home extends Oj_Controller{
 		}
                                    $limit=0;
                                    $num=20;
-		if($data['pagination'] = $this->input->get('pagination')) 
+		if($data['pagination'] = mysql_real_escape_string($this->input->get('pagination'))) 
 			$limit = $data['pagination']*$num-$num;
-		if($this->input->get('previous')) 
-			$data['previous'] = $this->input->get('previous');
+		if(mysql_real_escape_string($this->input->get('previous'))) 
+			$data['previous'] = mysql_real_escape_string($this->input->get('previous'));
                                    $data['pagination'] = $limit/$num+2;
                                    $sum = $this->user_model->user_sum();
                                    //echo $sum['count(*)'];die;

@@ -33,7 +33,7 @@ class Login extends CI_Controller {
 		if(!isset($_SESSION)){
             			session_start();	
         		}
-		$captcha = $this->input->post('captcha',TRUE);
+		$captcha = mysql_real_escape_string($this->input->post('captcha',TRUE));
 		if($captcha == "undefined"){
 			if(!isset($_SESSION['fs'])){
 				$_SESSION['fs'] = 0;
