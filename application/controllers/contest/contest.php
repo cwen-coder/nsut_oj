@@ -61,10 +61,10 @@ class Contest extends Sch_Controller{
             if(isset($data['contest_id'])){
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
 		$limit=0;
-		if($data['pagination'] = $this->input->get('pagination')) 
+		if($data['pagination'] = mysql_real_escape_string($this->input->get('pagination'))) 
 			$limit = $data['pagination']*20-20;
-		if($this->input->get('previous')) 
-			$data['previous'] = $this->input->get('previous');
+		if(mysql_real_escape_string($this->input->get('previous'))) 
+			$data['previous'] = mysql_real_escape_string($this->input->get('previous'));
 		$num=20;
 		$sum = $this->oj_con->con_problem_status_sum($data['contest_id']);
 		//p($sum['count(*)']);
@@ -99,9 +99,9 @@ class Contest extends Sch_Controller{
 			$data['user_id'] = false;
             }
             if(isset($data['contest_id'] )){
-		$contest_id = $this->uri->segment(4);
-		$problem_id = $this->uri->segment(5);
-		$num = $this->uri->segment(6);
+		$contest_id = mysql_real_escape_string($this->uri->segment(4));
+		$problem_id = mysql_real_escape_string($this->uri->segment(5));
+		$num = mysql_real_escape_string($this->uri->segment(6));
 		$data['pro'] = $this->oj_con->con_pro_byId($problem_id);
 		$data['num'] = $num;
 		$data['contest_id'] = $contest_id;
@@ -122,9 +122,9 @@ class Contest extends Sch_Controller{
 			$data['user_id'] = false;
             }
             if(isset($data['contest_id'] )){
-		$data['contest_id'] = $this->uri->segment(4);
-		$data['problem_id'] = $this->uri->segment(5);
-		$data['num'] = $this->uri->segment(6);
+		$data['contest_id'] = mysql_real_escape_string($this->uri->segment(4));
+		$data['problem_id'] = mysql_real_escape_string($this->uri->segment(5));
+		$data['num'] = mysql_real_escape_string($this->uri->segment(6));
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
                                    if (time() < strtotime($data['contest']['start_time'])) {
 			header('Content-Type:text/html;charset=utf-8');
@@ -148,7 +148,7 @@ class Contest extends Sch_Controller{
 			$data['user_id'] = false;
                                      }
             if(isset($data['contest_id'] )){
-		$data['cid'] = $this->input->post('cid', TRUE);
+		$data['cid'] = mysql_real_escape_string($this->input->post('cid', TRUE));
 		$contest = $this->oj_con->con_byId($data['cid']);
                                    if (time() < strtotime($contest['start_time'])) {
 			header('Content-Type:text/html;charset=utf-8');
@@ -158,15 +158,15 @@ class Contest extends Sch_Controller{
                                                     echo "<script type='text/javascript'> alert('对不起比赛已经结束 ');history.go(-1); </script>";
 		}else {
 			//echo 5;
-			$data['source'] = $this->input->post('source', TRUE);
+			$data['source'] = mysql_real_escape_string($this->input->post('source', TRUE));
 
       if(get_magic_quotes_gpc()){
         $data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
       }
       $data['source'] = mysql_real_escape_string($data['source']);//转义 SQL 语句中使用的字符串中的特殊字符
       
-			$data['language'] = $this->input->post('language', TRUE);
-			$data['pid'] = $this->input->post('pid', TRUE);
+			$data['language'] = mysql_real_escape_string($this->input->post('language', TRUE));
+			$data['pid'] = mysql_real_escape_string($this->input->post('pid', TRUE));
 			$data['ip'] = $this->session->userdata('ip_address');
 			$data['code_length'] = strlen($data['source']);
 			/*echo $data['code_length'];die;*/
@@ -298,7 +298,7 @@ class Contest extends Sch_Controller{
 		$config['cur_tag_close'] = '</a></li>'; 
 		$this->pagination->initialize($config);
 		$data['links'] = $this->pagination->create_links();	
-		$offset = $this->uri->segment(5);
+		$offset = mysql_real_escape_string($this->uri->segment(5));
 		if($offset < 1) $offset = 0;
 		$data['question'] = $this->ask_pro->get_all_que($data['contest_id'],$perPage,$offset);
 		$this->load->model('oj_con_model','oj_con');
@@ -319,9 +319,9 @@ class Contest extends Sch_Controller{
                 //提交问题
 	public function ask_question() {
                                    $this->load->model('ask_que_model','ask_pro');
-		$data['contest_id'] = $this->input->post('contest_id',TRUE);
-		$data['user_id'] = $this->input->post('user_id',TRUE);
-		$data['content'] = $this->input->post('content',TRUE);
+		$data['contest_id'] = mysql_real_escape_string($this->input->post('contest_id',TRUE));
+		$data['user_id'] = mysql_real_escape_string($this->input->post('user_id',TRUE));
+		$data['content'] = mysql_real_escape_string($this->input->post('content',TRUE));
 		if(!empty($data['content'])) {
 			$result = $this->ask_pro->ask_question($data);
 			header('Content-Type:text/html;charset=utf-8');
@@ -334,7 +334,7 @@ class Contest extends Sch_Controller{
 	}
                  //大屏幕展示排名
                  public function contest_rank_show(){
-                     $data['contest_id'] = $this->uri->segment(4);
+                     $data['contest_id'] = mysql_real_escape_string($this->uri->segment(4));
                      function sec2str($sec){
                         return sprintf("%02d:%02d:%02d",$sec/3600,$sec%3600/60,$sec%60);
                      }

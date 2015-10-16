@@ -8,7 +8,7 @@ class Home extends Con_Controller {
 	}
 
 	public function index(){
-		$contest_id = $this->uri->segment(4);
+		$contest_id = mysql_real_escape_string($this->uri->segment(4));
 		/*if(!$this->session->userdata('username')) {
 			self::contest_list();
 			echo "<script type='text/javascript'>window.onload=function(){document.getElementById('signin').click(); }</script>";
@@ -17,7 +17,7 @@ class Home extends Con_Controller {
 		//p($data['con']);
 		if($this->session->userdata('privilege') != 1) {
 			if($data['contest']['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $data['contest']['con_pwd'])) {
-					$offset = $this->uri->segment(5);
+					$offset = mysql_real_escape_string($this->uri->segment(5));
 					redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
 			}
 		}
@@ -69,9 +69,9 @@ class Home extends Con_Controller {
 	}
 	//载入比赛题目
 	public function con_pro() {
-		$contest_id = $this->uri->segment(4);
-		$problem_id = $this->uri->segment(5);
-		$num = $this->uri->segment(6);
+		$contest_id = mysql_real_escape_string($this->uri->segment(4));
+		$problem_id = mysql_real_escape_string($this->uri->segment(5));
+		$num = mysql_real_escape_string($this->uri->segment(6));
 		$data['pro'] = $this->oj_con->con_pro_byId($problem_id);
 		$data['num'] = $num;
 		$data['contest_id'] = $contest_id;
@@ -82,20 +82,20 @@ class Home extends Con_Controller {
 
 	//载入提交页
 	public function con_pro_sub() {
-		$data['contest_id'] = $this->uri->segment(4);
-		$data['problem_id'] = $this->uri->segment(5);
-		$data['num'] = $this->uri->segment(6);
+		$data['contest_id'] = mysql_real_escape_string($this->uri->segment(4));
+		$data['problem_id'] = mysql_real_escape_string($this->uri->segment(5));
+		$data['num'] = mysql_real_escape_string($this->uri->segment(6));
 
 		//后期修改管理员权限
 		$privilege = $this->session->userdata('privilege');
 
 		$contest = $this->oj_con->con_byId($data['contest_id']);
 		if(!$this->session->userdata('user_id')){
-			$offset = $this->uri->segment(5);
+			$offset = mysql_real_escape_string($this->uri->segment(5));
 		 	redirect('oj_index/home/contest_list/'.$offset.'/1000');
 		 	//echo 1;
 		} else if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd']) && $privilege != 1) {
-				$offset = $this->uri->segment(5);
+				$offset = mysql_real_escape_string($this->uri->segment(5));
 				//echo 2;
 				redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
 		} else if (time() < strtotime($contest['start_time'])  && $privilege != 1) {
@@ -109,11 +109,11 @@ class Home extends Con_Controller {
 
 	//载入状态页
 	public function con_status() {
-		$data['contest_id'] = $this->uri->segment(4);
+		$data['contest_id'] = mysql_real_escape_string($this->uri->segment(4));
 		$contest = $this->oj_con->con_byId($data['contest_id']);
 		if($this->session->userdata('privilege') != 1) {
 			if($contest['con_class'] == 2 && (!$this->session->userdata('con_pwd') || $this->session->userdata('con_pwd') != $contest['con_pwd'])) {
-					$offset = $this->uri->segment(5);
+					$offset = mysql_real_escape_string($this->uri->segment(5));
 					//echo 2;
 					redirect('oj_index/home/contest_list/'.$offset.'/1001/'.$contest_id);
 			}else if (time() < strtotime($contest['start_time'])) {
@@ -121,10 +121,10 @@ class Home extends Con_Controller {
 			}
 		}
 		$limit=0;
-		if($data['pagination'] = $this->input->get('pagination')) 
+		if($data['pagination'] = mysql_real_escape_string($this->input->get('pagination'))) 
 			$limit = $data['pagination']*20-20;
-		if($this->input->get('previous')) 
-			$data['previous'] = $this->input->get('previous');
+		if(mysql_real_escape_string($this->input->get('previous')))
+			$data['previous'] = mysql_real_escape_string($this->input->get('previous'));
 		$num=20;
 		$sum = $this->oj_con->con_problem_status_sum($data['contest_id']);
 		//p($sum['count(*)']);
@@ -149,8 +149,8 @@ class Home extends Con_Controller {
 	}
 	//载入编译错误信息或是运行错误信息
 	public function false_imformation() {
-		$data['solution_id'] = $this->uri->segment(4);
-                                   $data['username'] = $this->uri->segment(5);
+		$data['solution_id'] = mysql_real_escape_string($this->uri->segment(4));
+                                   $data['username'] = mysql_real_escape_string($this->uri->segment(5));
                                    $arr_num = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
                                    $arr_lag = array('C', 'C++');
                                    $problem = $this->oj_con->get_pro_num($data['solution_id']);
@@ -170,8 +170,8 @@ class Home extends Con_Controller {
 	}
 	//获取源码
 	public function get_source_code() {
-		$data['solution_id'] = $this->uri->segment(4);
-                                   $data['username'] = $this->uri->segment(5);
+		$data['solution_id'] = mysql_real_escape_string($this->uri->segment(4));
+                                   $data['username'] = mysql_real_escape_string($this->uri->segment(5));
                                    $arr_num = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
                                    $arr_lag = array('C', 'C++');
                                    $problem = $this->oj_con->get_pro_num($data['solution_id']);
