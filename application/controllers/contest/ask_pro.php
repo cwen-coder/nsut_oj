@@ -8,6 +8,7 @@ class Ask_pro extends Con_Controller {
 		parent::__construct();
 		$this->load->model('ask_que_model','ask_pro');
 		$this->load->model('oj_con_model','oj_con');
+		$this->load->model('news_model','news');
 	}
 
 	//载入比赛提问页面
@@ -69,6 +70,12 @@ class Ask_pro extends Con_Controller {
 		}
 		header('Content-Type:text/html;charset=utf-8');
 		//p($data);die;
+		$news = $this->news->getNews($data['contest_id']);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+		}
 		$this->load->view('contest/ask_pro.html',$data);
 	}
 

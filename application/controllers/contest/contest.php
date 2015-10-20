@@ -6,6 +6,7 @@ class Contest extends Sch_Controller{
         $this->load->model('school_contest_model','sch_model');
         $this->load->model('oj_con_model','oj_con');
         $this->load->model('contest_model');
+        $this->load->model('news_model','news');
     }
     
     //载入校赛题目页
@@ -45,6 +46,12 @@ class Contest extends Sch_Controller{
 		}
 		$data['arr'] = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
                           //p($con_pro_id);p($con_pro_sub);p($con_pro_ac);die;
+                          $news = $this->news->getNews($data['contest_id']);
+                          if(isset($news)) {
+                            $data['news'] = $news;
+                          }else {
+                            $data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+                          }
                           $this->load->view('contest/sch_pro_list.html',$data);
             }
         }
@@ -85,6 +92,12 @@ class Contest extends Sch_Controller{
 			$data['result'][$i]['username'] = $result['username'];
 		}
                                    //p($data);die;
+                                   $news = $this->news->getNews($data['contest_id']);
+                                   if(isset($news)) {
+                                     $data['news'] = $news;
+                                   }else {
+                                     $data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+                                   }
                         $this->load->view('contest/sch_con_status.html',$data);
             }
         }
@@ -108,6 +121,12 @@ class Contest extends Sch_Controller{
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
 		//echo "jdfkdjfkdfjkj";
 		//p($data);
+      $news = $this->news->getNews($data['contest_id']);
+      if(isset($news)) {
+        $data['news'] = $news;
+      }else {
+        $data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+      }
 		$this->load->view('contest/sch_con_pro.html',$data);
                 }
         }
@@ -133,6 +152,12 @@ class Contest extends Sch_Controller{
 			header('Content-Type:text/html;charset=utf-8');
                                                     echo "<script type='text/javascript'> alert('对不起比赛已经结束 ');history.go(-1); </script>";
 		}else {
+      $news = $this->news->getNews($data['contest_id']);
+      if(isset($news)) {
+        $data['news'] = $news;
+      }else {
+        $data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+      }
 			$this->load->view('contest/sch_submit.html',$data);
 		}
 	}
@@ -261,6 +286,12 @@ class Contest extends Sch_Controller{
                     }
                  array_multisort($solved, SORT_DESC, $time, SORT_ASC, $data['rank']);
                 //p($data['rank']);die;
+                $news = $this->news->getNews($data['contest_id']);
+                if(isset($news)) {
+                  $data['news'] = $news;
+                }else {
+                  $data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+                }
                 $this->load->view('contest/sch_con_rank.html',$data);
             }
         }
@@ -313,6 +344,12 @@ class Contest extends Sch_Controller{
 		}
 		//header('Content-Type:text/html;charset=utf-8');
 		//p($data);die;
+    $news = $this->news->getNews($data['contest_id']);
+    if(isset($news)) {
+      $data['news'] = $news;
+    }else {
+      $data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+    }
 		$this->load->view('contest/sch_ask_pro.html',$data);
 	}
         }

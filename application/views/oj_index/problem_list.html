@@ -61,7 +61,7 @@
   </style>
   <body>
 <?php $this->load->view('oj_index/header.html');?>
-
+<?php require("news.html");?>
   <div class="container">
 <div class="container-search">
 <div class="control-group">
@@ -120,9 +120,7 @@
         </div>
 </div>
 </div>
-<br>
-<br>
-<br>
+
 <div class="table-group">
   <div class="pagination">
     <td><?php  if(!empty($links))echo $links; ?></td>

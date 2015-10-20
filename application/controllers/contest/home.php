@@ -5,6 +5,7 @@ class Home extends Con_Controller {
 		parent::__construct();
 		$this->load->model('oj_con_model','oj_con');
 		$this->load->model('contest_model');
+		$this->load->model('news_model','news');
 	}
 
 	public function index(){
@@ -48,6 +49,12 @@ class Home extends Con_Controller {
 			}
 		}
 		$data['arr'] = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+		$news = $this->news->getNews($contest_id);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+		}
 		$this->load->view('contest/contest.html',$data);
 	}
 	//比赛登录
@@ -77,6 +84,12 @@ class Home extends Con_Controller {
 		$data['contest_id'] = $contest_id;
 		//echo "jdfkdjfkdfjkj";
 		//p($data);
+		$news = $this->news->getNews($contest_id);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+		}
 		$this->load->view('contest/con_pro.html',$data);
 	}
 
@@ -103,6 +116,12 @@ class Home extends Con_Controller {
 		} else if(time() > strtotime($contest['end_time'])  && $privilege != 1 ){
 			error("对不起比赛已经结束！您无法提交!");
 		}else {
+			$news = $this->news->getNews($data['contest_id']);
+			if(isset($news)) {
+				$data['news'] = $news;
+			}else {
+				$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+			}
 			$this->load->view('contest/submit.html',$data);
 		}
 	}
@@ -145,6 +164,12 @@ class Home extends Con_Controller {
 			$data['result'][$i]['username'] = $result['username'];
 		}
                                    //p($data);die;
+         $news = $this->news->getNews($data['contest_id']);
+         if(isset($news)) {
+         	$data['news'] = $news;
+         }else {
+         	$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+         }
 		$this->load->view('contest/con_status.html',$data);
 	}
 	//载入编译错误信息或是运行错误信息

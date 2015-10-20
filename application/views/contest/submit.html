@@ -34,7 +34,7 @@ editAreaLoader.init({
     width:20%;
   }
     .group{
-    margin-top: 8%;
+    margin-top: 4%;
   }
   body {
     font-family: 微软雅黑;
@@ -74,8 +74,11 @@ editAreaLoader.init({
 		</div><!-- /.navbar-collapse -->
 </div><!-- /.container-fluid -->
 </nav>
+
 <center>
+
 <div class="group">
+<?php require("news.html");?>
 <form action="<?php echo site_url('contest/con_sub/index');?>" method="post" onsubmit = "return check();" >
 	<div>
 	    <h3 style="color:red">Problem： <?= $num?></h3><br/>

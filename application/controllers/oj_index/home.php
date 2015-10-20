@@ -8,6 +8,7 @@ class Home extends Oj_Controller{
 		$this->load->model('problem_model','pro');
 		$this->load->model('problemsubmit_model','ps');
 		$this->load->model('user_model');
+		$this->load->model('news_model','news');
 	}
 	//载入主页
 	public function index(){
@@ -42,6 +43,12 @@ class Home extends Oj_Controller{
 		}
 		$data['cate'] = $this->pro->get_class();
 		//p($data);die;
+		$news = $this->news->getNews(0);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+		}
 		$this->load->view('oj_index/problem_list.html',$data);
 	}
 	//显示题目具体内容
@@ -57,6 +64,12 @@ class Home extends Oj_Controller{
 		$data['problem']=$this->pro->get_problem_id($pid);
 		if($data['problem']['hide'] == 1 && $this->session->userdata('privilege') != 1) {
 			redirect('oj_index/home/index');
+		}
+		$news = $this->news->getNews(0);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
 		}
 		$this->load->view('oj_index/problem.html',$data);
 	}
@@ -103,6 +116,12 @@ class Home extends Oj_Controller{
 		p($data['con_pass']);
 		die;*/
 		//echo $data['links'];die;
+		$news = $this->news->getNews(0);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+		}
 	 	$this->load->view('oj_index/contest_list.html',$data);
 	 	$offset1 = mysql_real_escape_string($this->uri->segment(5));
 	 	if($offset1 == 1000 && !$this->session->userdata('username')) {
@@ -163,6 +182,12 @@ class Home extends Oj_Controller{
 		}else {			
 			$data['username'] = false;
 			$data['user_id'] = false;
+		}
+		$news = $this->news->getNews(0);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
 		}
 	 	$this->load->view('oj_index/status.html', $data);
 	}
@@ -287,6 +312,12 @@ class Home extends Oj_Controller{
 		$data['info'] = $this->user_model->user_rank($limit, $num);
                                   $data['num'] = $num;
 		//p($data['info']);die;
+		$news = $this->news->getNews(0);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+		}
 		$this->load->view('oj_index/rank.html', $data);
 	}
 	public function school_contest(){
@@ -319,6 +350,7 @@ class Home extends Oj_Controller{
                                                     $data['school_info'] = $c;
                                    }
                                    //p(isset($data['user_id']));die;
+                                      
 		$this->load->view('contest/school_contest.html', $data);
 	}
                    public function teams(){

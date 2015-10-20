@@ -8,6 +8,7 @@ class Con_rank extends Con_Controller {
 		parent::__construct();
 		$this->load->model('rank_model');
 		$this->load->model('oj_con_model','oj_con');
+		$this->load->model('news_model','news');
 	}
 
 	public function index() {
@@ -83,6 +84,12 @@ class Con_rank extends Con_Controller {
 		$data['arr'] = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		$data['con_user'] = $con_user;
 		$data['con_pro'] = $con_pro;
+		$news = $this->news->getNews($data['contest_id']);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+		}
 		$this->load->view('contest/con_rank.html',$data);
 
 	}
