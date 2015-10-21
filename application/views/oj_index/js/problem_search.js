@@ -13,7 +13,7 @@ $(document).ready(function(){
   });
   $("#search_but").click(function(){
       var url = $("#hid_site").val()+'/oj_index/home/';
-      console.log(url);
+      //console.log(url);
     if($("#cate").val()==1){   
       var href = url + "search?pid=";
       var search_terms = $("#search_terms").val();
