@@ -171,7 +171,7 @@ class Contest extends Admin_Controller {
 				'contest_id' => $this->input->post('contest_id',TRUE),
 				'num' => $this->input->post('pro_num',TRUE),
 				'problem_id' => $this->input->post('problem_id',TRUE),
-				'title' => $this->input->post('title',TRUE),
+				'title' => mysql_real_escape_string($this->input->post('title',TRUE)),
 				'source' => 1
 			);
 		$result = $this->contest_model->add_pro_list($data);
