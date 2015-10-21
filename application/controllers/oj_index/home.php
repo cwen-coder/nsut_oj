@@ -285,6 +285,12 @@ class Home extends Oj_Controller{
 		}
 		$data['cate'] = $this->pro->get_class();
 		//p($data);die;
+			$news = $this->news->getNews(0);
+		if(isset($news)) {
+			$data['news'] = $news;
+		}else {
+			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
+		}
 		$this->load->view('oj_index/problem_list.html',$data);
 	}
 	public function rank(){
