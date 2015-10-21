@@ -256,7 +256,8 @@ class Contest extends Sch_Controller{
                     if($user_name != $v['user_id']){
                         $user_cnt++;
                         $data['rank'][$user_cnt]['user_id'] = $v['user_id'];
-                        $data['rank'][$user_cnt]['team_id'] = $v['team_id'];                   
+                        $data['rank'][$user_cnt]['team_id'] = $v['team_id'];
+                        $data['rank'][$user_cnt]['team_name'] = $v['team_name'];
                         $user_name = $v['user_id'];
                         $data['rank'][$user_cnt]['solved'] = 0;
                         $data['rank'][$user_cnt]['time'] = 0;
@@ -371,6 +372,14 @@ class Contest extends Sch_Controller{
 	}
                  //大屏幕展示排名
                  public function contest_rank_show(){
+                     if(($b=$this->session->userdata('username')) && ($c=$this->session->userdata('user_id')) ){
+                                                    $data['username'] =  $b;                                              
+			$data['user_id'] = $c;
+            }else{
+                                                    $data['username'] = false;
+			$data['user_id'] = false;
+            }
+            if($data['username'] && $data['user_id']){
                      $data['contest_id'] = mysql_real_escape_string($this->uri->segment(4));
                      function sec2str($sec){
                         return sprintf("%02d:%02d:%02d",$sec/3600,$sec%3600/60,$sec%60);
@@ -386,7 +395,8 @@ class Contest extends Sch_Controller{
                         if($user_name != $v['user_id']){
                             $user_cnt++;
                             $data['rank'][$user_cnt]['user_id'] = $v['user_id'];
-                            $data['rank'][$user_cnt]['team_id'] = $v['team_id'];                   
+                            $data['rank'][$user_cnt]['team_id'] = $v['team_id'];
+                            $data['rank'][$user_cnt]['team_name'] = $v['team_name'];
                             $user_name = $v['user_id'];
                             $data['rank'][$user_cnt]['solved'] = 0;
                             $data['rank'][$user_cnt]['time'] = 0;
@@ -417,5 +427,6 @@ class Contest extends Sch_Controller{
                      array_multisort($solved, SORT_DESC, $time, SORT_ASC, $data['rank']);
                     //p($data['rank']);die;
                     $this->load->view('contest/contest_rank_show.html',$data);
+                 }
                  }
 }

@@ -19,11 +19,10 @@ class School_contest_model extends CI_Model {
               //排名信息
               public function school_con_rank($contest_id){
                   $query = "SELECT
-                                solution.user_id,teams.team_id,solution.result,solution.num,solution.in_date
+                                solution.user_id,teams.team_name,teams.team_id,solution.result,solution.num,solution.in_date
                                         FROM
-                                                (select * from solution where solution.contest_id='$contest_id' and num>=0 ) solution
-                                        left join teams
-                                        on teams.user_id=solution.user_id
+                                                (select * from solution where solution.contest_id='$contest_id' and num>=0 ) solution,teams
+                                        where teams.user_id=solution.user_id  and teams.contest_id='$contest_id' 
                                 ORDER BY teams.user_id,in_date";
                   $result = mysql_query($query);
                   $data = array();
