@@ -12,18 +12,20 @@ $(document).ready(function(){
     }
   });
   $("#search_but").click(function(){
-    if($("#cate").val()==1){
-      var href = "search?pid=";
+      var url = $("#hid_site").val()+'/oj_index/home/';
+      console.log(url);
+    if($("#cate").val()==1){   
+      var href = url + "search?pid=";
       var search_terms = $("#search_terms").val();
       $("#search_but").attr("href", href+encodeURIComponent(search_terms));
     }
     if($("#cate").val()==2){
-      var href = "search?pn=";
+      var href = url + "search?pn=";
       var search_terms = $("#search_terms").val();
       $("#search_but").attr("href", href+encodeURIComponent(search_terms));
     }
       if($("#cate").val()==3){
-      var href = "search?pc=";
+      var href = url + "search?pc=";
       var search_terms = $("#cate_cate").val();
       $("#search_but").attr("href", href + search_terms);
     }
