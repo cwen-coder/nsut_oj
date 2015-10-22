@@ -59,19 +59,19 @@
 	</div>
 	<h4>输入：</h4>
 	<div  style="margin-top: 1%; ">
-		<pre><div><?= $pro['input'] ;?></div></pre>
+		<pre><div><?= htmlspecialchars($pro['input']) ;?></div></pre>
 	</div>
 	<h4>样例输入：</h4>
 	<div  style="margin-top: 1%; ">
-		<pre><div><?= $pro['output'] ;?></div></pre>
+		<pre><div><?= htmlspecialchars($pro['output']) ;?></div></pre>
 	</div>
 	<h4>样例输出：</h4>
 	<div  style="margin-top: 1%; ">
-		<pre><div><?= $pro['sample_input'] ;?></div></pre>
+		<pre><div><?= htmlspecialchars($pro['sample_input']) ;?></div></pre>
 	</div>
 	<h4>输出：</h4>
 	<div  style="margin-top: 1%; ">
-		<pre><div><?= $pro['sample_output'] ;?></div></pre>
+		<pre><div><?= htmlspecialchars($pro['sample_output']) ;?></div></pre>
 	</div>
 	<?php if (!empty($pro['hint'])) : ?>
 	<h4>提示：</h4>
