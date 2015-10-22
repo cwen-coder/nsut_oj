@@ -119,7 +119,7 @@ class Problem extends Admin_Controller{
 	public function add_act() {
 		$data = array(
 				'problem_id' => $this->input->post('problem_id',TRUE),
-				'title' => $this->input->post('pro_title',TRUE),
+				'title' => mysql_real_escape_string($this->input->post('pro_title',TRUE)),
 				'class_id' => $this->input->post('pro_class',TRUE),
 				'time_limit' => $this->input->post('time_limit',TRUE),
 				'memory_limit' => $this->input->post('memory_limit',TRUE),
@@ -220,7 +220,7 @@ class Problem extends Admin_Controller{
 	public function edit_act() {
 		$data = array(
 				'problem_id' => $this->input->post('problem_id',TRUE),
-				'title' => $this->input->post('pro_title',TRUE),
+				'title' => mysql_real_escape_string($this->input->post('pro_title',TRUE)),
 				'class_id' => $this->input->post('pro_class',TRUE),
 				'time_limit' => $this->input->post('time_limit',TRUE),
 				'memory_limit' => $this->input->post('memory_limit',TRUE),
