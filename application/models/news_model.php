@@ -23,7 +23,7 @@ class  News_model extends CI_Model {
 				return mysql_query($queryAdd);
 			} else {
 				$queryUpdate = "UPDATE news SET content = '$data[newContent]' WHERE contest_id = '$data[contestId]' " ;
-				return mysql_query($queryAdd);
+				return mysql_query($queryUpdate);
 			}
 		} else {
 			return false;

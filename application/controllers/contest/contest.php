@@ -337,8 +337,8 @@ class Contest extends Sch_Controller{
 		$this->load->model('oj_con_model','oj_con');
 		$sum = count($data['question']);
 		for ($i = 0; $i < $sum; $i++) {
-			$result = $this->oj_con->get_username($data['question'][$i]['ask_user_id']);
-			$data['question'][$i]['username'] = $result['username'];
+			$result = $this->oj_con->get_teamname($data['question'][$i]['ask_user_id'], $data['contest_id']);
+			$data['question'][$i]['username'] = $result['team_id'].'---'.$result['team_name'];
 			if($data['question'][$i]['ans_num'] > 0) {
 				$answer = $this->ask_pro->get_answer($data['question'][$i]['id']);
 				$data['question'][$i]['answer'] = $answer;
