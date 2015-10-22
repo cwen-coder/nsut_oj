@@ -14,6 +14,14 @@
                  body {
 		background-image: url(<?= base_url('index/images/background.jpg');?>);
 	}
+                    .th_class {
+                background-color:#222;
+                color:#FFFFFF;
+              }
+                td,th{
+    height: 40px;
+    text-align: center;
+  }
 	</style>
 </head>
 <body>
@@ -42,25 +50,27 @@
 </nav>
 <div class="container container-contest">
 <?php require("news.html");?>
-<div class = "well" >
-	  	<table class="table table-striped "  >
-	  	<thead>
-	  		<th>运行ID</th>
-	  		<th>题号</th>
-	  		<th>用户名</th>
-	  		<th style = "text-align:center;">结果</th>
-	  		<th>内存</th>
-	  		<th>耗时</th>
-	  		<th>语言</th>
-	  		<th>代码长度</th>
-	  		<th>提交时间</th>
+
+	  	<table class="table table-bordered table-hover"  >
+	  	<thead class="th_class">
+	  		<th style="width:8%">运行ID</th>
+	  		<th style="width:6%">题号</th>
+                                                    <th style="width:8%">队伍号</th>
+	  		<th style="width:14%">用户名</th>
+	  		<th style="width:16%">结果</th>
+	  		<th style="width:6%">内存</th>
+	  		<th style="width:6%">耗时</th>
+	  		<th style="width:6%">语言</th>
+	  		<th style="width:8%">代码长度</th>
+	  		<th style="width:16%">提交时间</th>
 	  	</thead>
 	  	<tbody>
 	  		<?php foreach ($result as $v): ?>
 	  			 <tr class="evenrow">
 				    <td><?php echo $v['solution_id']?></td>
 				    <td><a href="<?= site_url('contest/contest/con_pro/'.$contest_id.'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"><?= $arr[$v['num']];?></a></td>
-				    <td><?php echo $v['username']?></td>
+                                                                         <td><a><?php echo $v['team_id']?></a></td>
+                                                                         <td><a><?php echo $v['username']?></a></td>
 				    <td style = "text-align:center;" class="<?= $v['result'];?>">
 				    <?php if ($v['result'] == 11 && ($v['username'] == $this->session->userdata('username') || $this->session->userdata('privilege') == 1)): ?>
 					<a href="#" class="imformation" ><span class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?>
@@ -87,7 +97,7 @@
 	  	</tbody>
 	  	</table>
 
-</div>
+
 <div id="center" class="center">
 <?php echo "[<a href=?previous=".($pagination-2)."&pagination=".($pagination-1).">回到顶部</a>]&nbsp;&nbsp;";
 if (isset($previous)) 

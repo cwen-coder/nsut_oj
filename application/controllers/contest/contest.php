@@ -88,8 +88,9 @@ class Contest extends Sch_Controller{
 		$count = count($data['result']);
 		$data['arr'] = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		for ($i = 0; $i < $count; $i++) {
-			$result = $this->oj_con->get_username($data['result'][$i]['user_id']);
-			$data['result'][$i]['username'] = $result['username'];
+			$result = $this->oj_con->get_teamname($data['result'][$i]['user_id'], $data['contest_id']);
+			$data['result'][$i]['username'] = $result['team_name'];
+                                                    $data['result'][$i]['team_id'] = $result['team_id'];
 		}
                                    //p($data);die;
                                    $news = $this->news->getNews($data['contest_id']);

@@ -177,7 +177,17 @@ class Oj_con_model extends CI_Model {
 			} else return false;
 		} else return false;
 	}
-
+                //获取队伍名
+                    public function get_teamname($user_id, $contest_id) {
+		$query = "SELECT team_name,team_id FROM teams WHERE user_id = '$user_id' and contest_id = '$contest_id' ";
+		$result = mysql_query($query);
+		if ($result) {
+			$num = mysql_num_rows($result);
+			if($num > 0) {
+				return mysql_fetch_assoc($result);
+			} else return false;
+		} else return false;
+	}
 	//获取编译错误信息
 	public function get_compile_false($solution_id) {
 		$query = "SELECT error FROM compileinfo WHERE solution_id = '$solution_id' ";
