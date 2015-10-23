@@ -77,7 +77,8 @@ editAreaLoader.init({
 <center>
 <div class="group">
 <?php require("news.html");?>
-<form action="<?php echo site_url('contest/contest/sch_submit');?>" method="post" onsubmit = "return check();" >
+<form action="<?php echo site_url('contest/contest/sch_submit');?>" method="post"  onsubmit = "return check();">
+<!-- onsubmit = "return check();" -->
 	<div>
 	    <h3 style="color:red">Problem： <?= $num?></h3><br/>
 	    <span style="color:red">Language:</span>

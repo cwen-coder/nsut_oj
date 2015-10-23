@@ -128,6 +128,12 @@ class Contest extends Sch_Controller{
       }else {
         $data['news'] = "欢迎使用沈阳工业大学Online Judge!";
       }
+      $con_class = $this->oj_con->get_con_class($contest_id);
+      if($con_class != false && isset($con_class)) {
+        $data["con_class"] = 3;
+      } else {
+        $data["con_class"] = 4;
+      }
 		$this->load->view('contest/sch_con_pro.html',$data);
                 }
         }
@@ -184,8 +190,8 @@ class Contest extends Sch_Controller{
                                                     echo "<script type='text/javascript'> alert('对不起比赛已经结束 ');history.go(-1); </script>";
 		}else {
 			//echo 5;
-			$data['source'] = mysql_real_escape_string($this->input->post('source', TRUE));
-
+			$data['source'] = mysql_real_escape_string($this->input->post('source', false));
+      /*p($data['source']);die;*/
       if(get_magic_quotes_gpc()){
         $data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
       }
@@ -196,6 +202,7 @@ class Contest extends Sch_Controller{
 			$data['ip'] = $this->session->userdata('ip_address');
 			$data['code_length'] = strlen($data['source']);
 			/*echo $data['code_length'];die;*/
+
 			if(!empty($data['source'])) {
 				//echo 6;
 				$check_pro = $this->oj_con->check_pro($data['pid']);

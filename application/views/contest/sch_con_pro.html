@@ -57,34 +57,42 @@
 	<div  style="margin-top: 1%; ">
 		<pre><div><?= $pro['description'] ;?></div></pre>
 	</div>
-	<h4>输入：</h4>
-	<div  style="margin-top: 1%; ">
-		<pre><div><?= htmlspecialchars($pro['input']) ;?></div></pre>
-	</div>
-	<h4>样例输入：</h4>
-	<div  style="margin-top: 1%; ">
-		<pre><div><?= htmlspecialchars($pro['output']) ;?></div></pre>
-	</div>
-	<h4>样例输出：</h4>
-	<div  style="margin-top: 1%; ">
-		<pre><div><?= htmlspecialchars($pro['sample_input']) ;?></div></pre>
-	</div>
-	<h4>输出：</h4>
-	<div  style="margin-top: 1%; ">
-		<pre><div><?= htmlspecialchars($pro['sample_output']) ;?></div></pre>
-	</div>
+	<?php if($con_class == 3):?>
+		<h4>输入(将下方代码中的answer替换成你计算出的答案，然后选择c语言提交代码)：</h4>
+		<div  style="margin-top: 1%; ">
+<pre><div><?php echo htmlspecialchars('#include <stdio.h>
+int main()
+{
+	printf("answer answer answer answer");
+	return 0;
+}'); ?></div></pre>
+		</div>
+	<?php else:?>
+		<h4>输入：</h4>
+		<div  style="margin-top: 1%; ">
+			<pre><div><?= htmlspecialchars($pro['input']) ;?></div></pre>
+		</div>
+		<h4>输出：</h4>
+		<div  style="margin-top: 1%; ">
+			<pre><div><?= htmlspecialchars($pro['output']) ;?></div></pre>
+		</div>
+		<h4>样例输入：</h4>
+		<div  style="margin-top: 1%; ">
+			<pre><div><?= htmlspecialchars($pro['sample_input']) ;?></div></pre>
+		</div>
+		<h4>样例输出：</h4>
+		<div  style="margin-top: 1%; ">
+			<pre><div><?= htmlspecialchars($pro['sample_output']) ;?></div></pre>
+		</div>
+	<?php endif;?>
+	
 	<?php if (!empty($pro['hint'])) : ?>
 	<h4>提示：</h4>
 	<div  style="margin-top: 1%; ">
 		<pre><div><?= $pro['hint'] ;?></div></pre>
 	</div>
 	<?php endif; ?>
-	<?php if (!empty($pro['source'])) : ?>
-	<h4>提示：</h4>
-	<div  style="margin-top: 1%; ">
-		<pre><div><?= $pro['source'] ;?></div></pre>
-	</div>
-	<?php endif; ?>
+
 	<center>
 		<a href="<?= site_url('contest/contest/sch_pro_sub/'.$contest_id.'/'.$pro['problem_id'].'/'.$num);?>"><img src="<?= base_url('application/views/contest/images/submit.jpg');?>"></a>
 	</center>
