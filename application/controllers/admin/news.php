@@ -53,7 +53,7 @@ class News extends Admin_Controller {
 	private function checkText($data) {
 		if(empty($data)){
 			return "不能空";
-		} else if(strlen($data) > 100) {
+		} else if(strlen($data) > 500) {
 			return "内容过长";
 		}
 		return "合法";
