@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="refresh" content="10"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+		<title>沈阳工业大学在线判题系统</title>
+		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
+		 <link href="<?= base_url('application/views/oj_index/css/sutoj.css');?>" rel="stylesheet">
+		 <style type="text/css">
+		 body {
+		 	background-image: url(<?= base_url('index/images/background.jpg');?>);
+		 }
+		 </style>
+	</head>
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse ">
+<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+					<a class="navbar-brand" href="<?php echo site_url('oj_index/home/contest_list');?>">沈阳工业大学在线判题系统</a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li ><a href="<?= site_url('contest/home/index/'.$contest_id);?>">题目<span class="sr-only">(current)</span></a></li>
+			<li class="active"><a href="<?= site_url('contest/home/con_status/'.$contest_id);?>">状态</a></li>
+			<li><a href="<?= site_url('contest/con_rank/index/'.$contest_id);?>">排名</a></li>
+			<li><a href="<?= site_url('contest/ask_pro/index/'.$contest_id);?>">提问</a></li>
+		</ul>
+		<form class="navbar-form navbar-right">
+						<h5><a href="<?= site_url('oj_index/home/log_out');?>" style="text-decoration:none;"><span class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销</a></h5>
+						</form>
+		<form class="navbar-form navbar-right">
+			<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $this->session->userdata('username');?></a></h5>
+		</form>
+		</div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<div class="container container-contest">
+<?php require("news.html");?>
+<div class = "well" >
+	  	<table class="table table-striped "  >
+	  	<thead>
+	  		<th>运行ID</th>
+	  		<th>题号</th>
+	  		<th>用户名</th>
+	  		<th style = "text-align:center;">结果</th>
+	  		<th>内存</th>
+	  		<th>耗时</th>
+	  		<th>语言</th>
+	  		<th>代码长度</th>
+	  		<th>提交时间</th>
+	  	</thead>
+	  	<tbody>
+	  		<?php foreach ($result as $v): ?>
+	  			 <tr class="evenrow">
+				    <td><?php echo $v['solution_id']?></td>
+				    <td><a href="<?= site_url('contest/home/con_pro/'.$contest_id.'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"><?= $arr[$v['num']];?></a></td>
+				    <td><?php echo $v['username']?></td>
+				    <td style = "text-align:center;" class="<?= $v['result'];?>">
+				    <?php if ($v['result'] == 11 && ($v['username'] == $this->session->userdata('username') || $this->session->userdata('privilege') == 1)): ?>
+					<a href="#" class="imformation" ><span class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?>
+				    </span>
+				    </a>
+				    <?php else: ?>
+				    <span class="<?php echo $judge_color[$v['result']]?>"><?php echo $judge_result[$v['result']]?>
+				    </span>
+				    <?php endif; ?>
+				    </td>
+				    <td><span style="color:red"><?php echo $v['memory']?></span></td>
+				    <td><span style="color:red"><?php echo $v['time']?></span></td>
+				    <td>
+				    <?php if ($v['username'] == $this->session->userdata('username')|| $this->session->userdata('privilege') == 1): ?>
+				    	<a href="<?php echo site_url('contest/home/get_source_code').'/'.$v['solution_id'].'/'.$v['username'];?>" target="_blank"><?php echo $v['language']? "C++":"C"?></a>
+				    <?php else: ?>
+				    <?php echo $v['language']? "C++":"C"?>
+				    <?php endif; ?>
+				    </td>
+				    <td><?php echo $v['code_length']?></td>
+				    <td><?php echo $v['in_date']?></td>
+				  </tr>
+	  		<?php endforeach; ?>
+	  	</tbody>
+	  	</table>
+
+</div>
+<div id="center" class="center">
+<?php echo "[<a href=".$contest_id."?previous=".($pagination-2)."&pagination=".($pagination-1).">回到顶部</a>]&nbsp;&nbsp;";
+if (isset($previous)) 
+        echo "[<a href=".$contest_id."?previous=".($previous-1)."&pagination=".($pagination-2).">上一页</a>]&nbsp;&nbsp;";
+if(isset($pag)) 
+echo "[<a href=".$contest_id."?previous=".($pagination-1)."&pagination=".($pagination).">下一页</a>]";
+?>
+</div>
+</div>
+
+<input type="hidden" value = "<?= base_url('');?>" id = "hid_base" >	
+<input type="hidden" value = "<?= site_url('');?>" id = "hid_site" >	
+<?php require('foot.html');?>
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/contest/js/con_status.js');?>" ></script>
+</body>
+</html>

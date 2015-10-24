@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+    <title>沈阳工业大学在线判题系统</title>
+    <link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+    <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/problem_search.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
+    <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
+  </head>
+  <style type="text/css">
+      body {
+    font-family: 微软雅黑;
+    background: #eee;
+    background-image: url(http://localhost/nsut_oj/index/images/background.jpg);
+    background-position: initial initial;
+    background-repeat: initial initial;
+    background-position: initial initial;
+    background-repeat: initial initial;
+    margin: 0px;
+    padding: 0px;
+  }
+  .container{
+    margin-top: 5%;
+  }
+  </style>
+  <body>
+<div class="container">
+    <div class = "well" >
+       <table class="table table-striped" >
+        <thead>
+        <th style="width:10%;">ID</th>
+        <th style="width:60%;">比赛名称</th>
+        <th style="width:30%;">操作</th>
+        </thead>
+        <tbody>
+            <?php foreach($contest as $v): ?>
+                <tr>
+                    <td><?= $v['contest_id']?></td>
+                    <td><?= $v['title']?></td>
+                    <td>
+                        <button type="button" class="btn-primary " id = "<?= $v['contest_id']?>" ><i class="icon-plus"></i>批量设置密码</button>
+                        <button type="button" class="btn-success " id = "<?= $v['contest_id']?>" ><i class="icon-plus"></i>导出密码条</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+       </table>
+            
+    </div>
+
+</div>
+<input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
+<input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
+<script type="text/javascript">
+   $('button.btn-primary').click(function() {
+        var path = $("#hid_site").val();
+        var url =path + '/admin/set_pass/set_pass_';
+        //alert(url);
+        $.post(url,
+        {contest_id : $(this).attr("id")},
+        function(data){
+            //console.log(data);
+            var data = JSON.parse(data);
+            alert(data['message']);
+        });
+    });
+    
+    $('button.btn-success').click(function() {
+        var path = $("#hid_site").val();
+        var url =path + '/admin/set_pass/upload_pass/';
+        //alert(url);
+        window.location.href= url + $(this).attr("id");
+    });
+</script>
+</body>
+</html>

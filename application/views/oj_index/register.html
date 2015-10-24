@@ -1,0 +1,60 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal02" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">注册信息</h4>
+      </div>
+      <form class="form-horizontal"  method="post"   id="reg_form" name="reg_form" >
+        <div class="modal-body">
+          <div class="container_modal">
+            
+            <div class="form-group">
+              <label class="control-label label_reg" for="r_username">用户名</label>
+              <input type="text" class="input-xlarge " id="r_username" name="r_username" placeholder="用户名由字母和数字组成"  style="width:173px;">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="cname"></span>
+            </div>
+            <div class="form-group">
+              <label class="control-label label_reg" for="password1"  >
+              密码</label>
+              <input type="password" class="input-xlarge" id="password1" name="password1" placeholder="密码"  style="width:173px;">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="pass1"></span>
+            </div>
+            <div class="form-group">
+              <label class="control-label label_reg" for="Password2">确认密码</label>
+              <input type="password" class="input-xlarge" id="password2" name="password2" placeholder="确认密码"  style="width:173px;">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="pass2"></span>
+            </div>
+            <div class="form-group">
+              <label class="control-label label_reg" for="email">Email</label>
+              <input type="email" class="input-xlarge" id="email" name="email" placeholder="输入你的邮箱"  style="width:173px;">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="email1"></span>
+            </div>
+            <div class="form-group">
+              <label class="control-label label_reg" for="captcha"  >验证码</label>
+              <input type="text" class="input-xlarge " id="captcha_r" name="captcha" placeholder="输入验证码"  style="width:173px;">
+              <span style="color:red;">*</span>
+              <span style="color:red;" id="captcha_c1"></span>
+            </div>
+            <div class="form-group">
+            <label type="hidden" class="control-label label_reg" for="password"  ></label>
+             <img src="<?php echo site_url('oj_index/login/code') ?>" alt="" id="captcha_img_r" onclick= this.src="<?php echo site_url('oj_index/login/code').'/';?>"+Math.random() style="cursor: pointer;" title="看不清？点击更换另一个验证码。" />
+             <span style="color:red;" id="captcha_span_r">点击刷新图片</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="reg_sub" disabled >提交</button>
+          <button type="reset" class="btn btn-primary" onclick="formReset()" >重置</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

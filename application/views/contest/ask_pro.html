@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+		<title>沈阳工业大学在线判题系统</title>
+		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
+		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
+		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
+		<style type="text/css">
+		.div_textarea {
+			width: 70%;
+		}
+		.all_question {
+			width: 70%;
+			margin-left: 16%;
+			text-align: left;
+		}
+		body {
+			background-image: url(<?= base_url('index/images/background.jpg');?>);
+		}
+		</style>
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse ">
+<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+					<a class="navbar-brand" href="<?php echo site_url('oj_index/home/contest_list');?>">沈阳工业大学在线判题系统</a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li ><a href="<?= site_url('contest/home/index/'.$contest_id);?>">题目<span class="sr-only">(current)</span></a></li>
+			<li><a href="<?= site_url('contest/home/con_status/'.$contest_id);?>">状态</a></li>
+			<li><a href="<?= site_url('contest/con_rank/index/'.$contest_id);?>">排名</a></li>
+			<li class="active"><a href="<?= site_url('contest/ask_pro/index/'.$contest_id);?>">提问</a></li>
+		</ul>
+		<form class="navbar-form navbar-right">
+						<h5><a href="<?= site_url('oj_index/home/log_out');?>" style="text-decoration:none;"><span class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销</a></h5>
+						</form>
+		<form class="navbar-form navbar-right">
+			<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $this->session->userdata('username');?></a></h5>
+		</form>
+	<!-- 	<?php $this->load->view('oj_index/login.html'); ?>
+	<?php $this->load->view('oj_index/register.html'); ?> -->
+		</div><!-- /.navbar-collapse -->
+
+
+</div><!-- /.container-fluid -->
+</nav>
+<div class="container container_contest">
+<?php require("news.html");?>
+	<div class="well" style="text-align:center;">
+	<form action="<?php echo site_url('contest/ask_pro/ask_question');?>" method="post" role="form" onsubmit = "return check();">
+	<div class="form-group div_textarea"  style="margin:0 auto;">
+	<label for="name" style="float:left;">向管理员提问</label>
+	<span style="float:right;">总共 <?= $question_sum;?> 条提问记录</span>
+		<textarea name="content" id="content"  rows="3" class="form-control" ></textarea>
+		<input type="hidden" name = "contest_id" value="<?= $contest_id;?>" >
+		<input type="hidden" name = "user_id" value="<?= $this->session->userdata('user_id');?>" >
+		<br>
+		 <button type="submit" class="btn btn-primary" style="float:right;">马上提问</button>
+		 <br>
+	</div>
+	</form>
+	<div class = "all_question" >
+	<h4><strong>所有参赛者提问记录(<?= $question_sum;?>)</strong></h4>
+		<?php foreach($question as $v): ?>
+			<p ><span style="color:blue;"><strong><?= $v['username']; ?> </strong></span>  &nbsp;&nbsp;&nbsp;&nbsp;提问 ：</p>
+			<p><?= $v['content']; ?></p>
+			<p style="color:blue;"><?= $v['time']; ?></p>
+			<?php if($v['ans_num'] > 0):?>
+				<?php foreach ($v['answer'] as $ans): ?>
+				<p style="margin-left:5%;"><strong style="color:blue;" >管理员回复</strong>：<?= $ans['content'];?></p>
+				<p style="color:blue;margin-left:16%;"><?= $ans['time']; ?></p>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			<hr>
+		<?php endforeach;?>
+	</div>
+	<div class="pagination" style="text-align:right;" id = "links">
+  		<?php echo $links;?>
+	</div>
+	</div>
+</div>
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/contest/js/ask_pro.js');?>"></script>
+<?php require('foot.html');?>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+    <title>参赛队伍</title>
+    <link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+    <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+    <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script>
+    <!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
+  </head>
+  <style type="text/css">
+      body {
+    font-family: 微软雅黑;
+    background: #eee;
+    background-image: url(<?= base_url('index/images/background.jpg');?>);
+    background-position: initial initial;
+    background-repeat: initial initial;
+    background-position: initial initial;
+    background-repeat: initial initial;
+    margin: 0px;
+    padding: 0px;
+  }
+.user_info{
+  position: relative;
+  margin:2% 8%;
+  padding:40px;
+  background-color:#f5f5f5;
+  min-height:20px;
+}
+.class_hr{
+  width:75%;
+  height:2px;
+  border:none;
+  border-top:2px dotted #185598;
+}
+  .label_reg{
+    width:20%;
+  }
+  .table{
+    width:100%;
+  }
+  td,th{
+    text-align:center
+  }
+  .container_modal{
+    margin-left:20%;
+}
+  .old_color{
+      background-color: #a8fb98;
+  }
+  .new_color{
+      background-color: #7480df;
+  }
+  </style>
+  <body>
+<div class="user_info">
+<center>
+    <h2>参赛队伍</h2>
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr class="th_class">
+  <th style="width:6%">序号</th>
+  <th style="width:10%">Team号</th>
+  <th style="width:26%">队名</th>
+  <th style="width:16%">队长</th>
+  <th style="width:16%">队员</th>
+  <th style="width:16%">队员</th>
+  <th style="width:10%">新生赛</th>
+ </tr>
+</theaad>
+
+<tbody>
+  <?php $i=1;?>
+  <?php foreach($info as $v): ?>
+  <tr <?php if($v['con_class'] == '4') echo 'class="old_color" '; else echo 'class="new_color" ' ?> >
+    <td><?php echo $i++;?></td>
+    <td><?php echo $v['team_id']?></td>
+    <td><?php echo htmlspecialchars($v['team_name']);?></td>
+    <td><?php echo htmlspecialchars($v['team_name1']);?></td>
+    <td><?php echo htmlspecialchars($v['team_name2']);?></td>
+    <td><?php echo htmlspecialchars($v['team_name3']);?></td>
+    <td><?php if($v['con_class'] == '3') echo 'Y';
+            else 
+                    echo 'N';
+        ?></td>
+  </tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+</center>
+</div>
+<?php require('foot.html');?>
+<input id = "hid_site" type="hidden" value = "<?= site_url();?>" />
+<input id = "hid_base" type="hidden" value = "<?= base_url();?>" />
+</body>
+</html>

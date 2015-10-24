@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+		<title>沈阳工业大学在线判题系统</title>
+		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
+		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
+		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
+                <style type="text/css">
+                 body {
+		background-image: url(<?= base_url('index/images/background.jpg');?>);
+	}
+	</style>
+	</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse ">
+
+<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+					<a class="navbar-brand" href="<?= site_url('contest/contest/school_pro_list');?>"> <?= $contest['title'];?></a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="<?= site_url('contest/contest/school_pro_list');?>">比赛题目<span class="sr-only">(current)</span></a></li>
+			<li><a href="<?= site_url('contest/contest/status');?>">提交状态</a></li>
+			<li><a href="<?= site_url('contest/contest/rank');?>">现场排名</a></li>
+			<li><a href="<?= site_url('contest/contest/ask');?>">比赛提问</a></li>
+		</ul>
+		<form class="navbar-form navbar-right">
+						<h5><a href="<?= site_url('oj_index/home/log_out');?>" style="text-decoration:none;"><span class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销</a></h5>
+						</form>
+		<form class="navbar-form navbar-right">
+			<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $team_id;?></a></h5>
+		</form>
+	<!-- 	<?php $this->load->view('oj_index/login.html'); ?>
+	<?php $this->load->view('oj_index/register.html'); ?> -->
+		</div><!-- /.navbar-collapse -->
+
+
+</div><!-- /.container-fluid -->
+</nav>
+<div class="container container_contest">
+<?php require("news.html");?>
+	<h2  class="page-title"> <?= $contest['title'];?></h2>
+	<div style="text-align: center;">
+		<span>开始时间： </span>
+		<span style = "color:red;" id = "start_time" ><?= $contest['start_time'] ;?></span>
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结束时间： </span>
+		<span style = "color:red;"><?= $contest['end_time'] ;?></span>
+	</div>
+	<div class="well">
+  	<table class="table table-striped " id = "pro_table" >
+      <thead>
+        <tr>
+        <th class="th_status" ></th>
+          <th class="th_num" >题号</th>
+          <th class="th_title" >题目标题</th>
+        </tr>
+      </thead>
+      <tbody id = "tbody0" >
+		<?php foreach($pro as $v):?>
+		        <tr>
+		        <td>
+		        	<?php if(isset($v['status'])):?>
+		        		<?php if($v['status'] == true):?>
+		        			<?= "<div class='btn btn-success but_s'>Y</div>"?>
+		        		<?php else: ?>
+							<?= "<div class='btn btn-danger but_s'>N</div>"?>
+		        	<?php endif; ?>
+		        	<?php endif; ?>
+		        </td>
+		          <td id = "<?= $v['num']?>" ><?= $arr[$v['num']];?></td>
+		          <td><a href="<?= site_url('contest/contest/con_pro/'.$contest['contest_id'].'/'.$v['problem_id'].'/'.$arr[$v['num']]);?>"> <?= $v['title'];?></a></td>
+		        </tr> 
+        <?php endforeach;?>   
+      </tbody>
+    </table>
+    
+</div>
+	<!-- <?php p($pro);?> -->
+</div>
+<?php require('foot.html');?>
+<input type="hidden" value = "<?= base_url('');?>" id = "hid_base" >
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/validform.js');?>"></script>
+
+</body>
+			
+</html>

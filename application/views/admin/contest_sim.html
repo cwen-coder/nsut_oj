@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>比赛分析</title>
+  <link rel="stylesheet" type="text/css" href="<?= base_url('application/views/admin/lib/bootstrap/css/bootstrap.min.css');?>">
+  
+    <link rel="stylesheet" href="<?= base_url('application/views/admin/lib/font-awesome/css/font-awesome.css');?>">
+    <style type="text/css">
+      body {
+      background: #eee;
+      background-image: url(/admin/images/furley_bg.png);
+      background-position: initial initial;
+      background-repeat: initial initial;
+      background-position: initial initial;
+      background-repeat: initial initial;
+      margin: 0px;
+      padding: 0px;
+    }
+    .container{
+    	margin-top: 30px;
+    	margin-left: 20px;
+    	margin-right: 20px;
+    }
+    .div_sim{
+    	float: left;
+    }
+      </style>
+</head>
+<body>
+    <div class="container">
+    	<!-- <h1>抄袭监视详情</h1>
+    	<a href="<?= site_url('/admin/contest_res');?>">返回</a> -->
+    	<div>
+    		<h3 style="display:inline"> 抄袭监视详情</h3>
+    		<h3  style="display:inline;margin-left:100px;"><a href="<?= site_url('/admin/contest_res');?>">返回</a></h3>
+    	</div>
+    	<div class="div_sim" >
+    		<table border="1" class="table table-bordered">
+    			<thead>
+    				<th>抄袭</th>
+    				<th>被抄袭</th>
+            <th>题号</th>
+    				<th>相似度</th>
+
+    				<th>抄袭源码</th>
+    				<th>被抄源码</th>
+    			</thead>
+    			<tbody>
+    				<?php foreach($sim as $v):?>
+    					<tr>
+    						<td><?= $v['user_id'];?></td>
+    						<td><?= $v['user_s_id'];?></td>
+                <td><?= $v['num'];?></td>
+    						<td><?= $v['sim'];?></td>
+    						<td><textarea class="form-control" rows="20" style="width:420px;" ><?= $v['source'];?></textarea></td>
+    						<td><textarea class="form-control"  rows="20" style="width:420px;"><?= $v['s_source'];?></textarea></td>
+    					</tr>
+    				<?php endforeach;?>
+    			</tbody>
+    		</table>
+    	</div>
+    </div>
+</body>
+</html>

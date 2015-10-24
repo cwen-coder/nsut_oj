@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+		<title>沈阳工业大学在线判题系统</title>
+		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
+		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
+		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> -->
+		<script language="Javascript" type="text/javascript" src="<?php echo base_url('edit_area/edit_area_full.js');?>"></script> 
+		<script language="Javascript" type="text/javascript">
+
+editAreaLoader.init({
+          id: "source"            
+          ,start_highlight: true 
+          ,allow_resize: "both"
+          ,allow_toggle: true
+          ,word_wrap: true
+          ,language: "en"
+          ,syntax: "cpp"  
+      ,font_size: "8"
+          /*,syntax_selection_allow: "basic,c,cpp,java,pas,perl,php,python,ruby"*/
+      ,toolbar: "search, go_to_line, fullscreen, |, undo, redo, |, select_font,|, change_smooth_selection, highlight, reset_highlight, word_wrap, |, help"          
+  });
+</script>
+ <style type="text/css">
+  .container_modal{
+    margin-left:20%;
+  }
+  .label_reg{
+    width:20%;
+  }
+    .group{
+    margin-top: 4%;
+  }
+  body {
+    font-family: 微软雅黑;
+    background: #eee;
+    background-image: url(<?= base_url('index/images/background.jpg');?>);
+    background-position: initial initial;
+    background-repeat: initial initial;
+    background-position: initial initial;
+    background-repeat: initial initial;
+    margin: 0px;
+    padding: 0px;
+  }
+</style>
+	
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse ">
+<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+					<a class="navbar-brand" href="<?php echo site_url('oj_index/home/contest_list');?>">沈阳工业大学在线判题系统</a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="<?= site_url('contest/home/index/'.$contest_id);?>">题目<span class="sr-only">(current)</span></a></li>
+			<li><a href="<?= site_url('contest/home/con_status/'.$contest_id);?>">状态</a></li>
+			<li><a href="<?= site_url('contest/con_rank/index/'.$contest_id);?>">排名</a></li>
+			<li><a href="<?= site_url('contest/ask_pro/index/'.$contest_id);?>">提问</a></li>
+		</ul>
+		<form class="navbar-form navbar-right">
+						<h5><a href="<?= site_url('oj_index/home/log_out');?>" style="text-decoration:none;"><span class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销</a></h5>
+						</form>
+		<form class="navbar-form navbar-right">
+			<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $this->session->userdata('username');?></a></h5>
+		</form>
+		</div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+
+<center>
+
+<div class="group">
+<?php require("news.html");?>
+<form action="<?php echo site_url('contest/con_sub/index');?>" method="post" onsubmit = "return check();" >
+	<div>
+	    <h3 style="color:red">Problem： <?= $num?></h3><br/>
+	    <span style="color:red">Language:</span>
+	  <select id="language" name="language">
+	            <option value="0" >C</option>
+	            <option value="1" >C++</option>
+	</select>
+		</div>
+	<input type='hidden' value='<?= $contest_id;?>' name="cid">
+	<input type='hidden' value='<?= $problem_id;?>' name="pid"> 
+	<textarea style="width:60%;" cols=60 rows=20 id="source" name="source" ></textarea>
+
+	<input type="submit" id = "sub_but" class="btn btn-primary" value="提交">
+	<input type="reset" class="btn btn-default" value="重置">
+</form>
+</div>
+</center>
+<?php require('foot.html');?>
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script language="Javascript" type="text/javascript" src="<?php echo base_url('application/views/contest/js/jquery.base64.js');?>"></script> 
+<script type="text/javascript">
+ /*$(function(){
+ 	//console.log("jfdffffffffff");
+	//console.log($.base64.btoa("jddddjdj"));
+ 	$("form").submit(function(event) {
+ 		var val = document.getElementById("source").innerHTML;
+ 		alert($.base64.btoa(val));
+ 	});
+});*/
+function check() {
+	var val = $("#source").val();
+	//alert(val);
+	$("#source").val($.base64.btoa(val));
+	//alert($("#source").val());
+	return true;
+}
+</script>
+</body>
+</html>

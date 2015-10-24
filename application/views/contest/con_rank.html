@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta http-equiv="refresh" content="10"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
+		<title>沈阳工业大学在线判题系统</title>
+		<link href="<?= base_url('application/views/oj_index/css/bootstrap.min.css');?>" rel="stylesheet">
+		<link href="<?= base_url('application/views/contest/css/contest.css');?>" rel="stylesheet">
+		<!-- <script src="<?= base_url('application/views/oj_index/js/html5shiv.js');?>"></script> -->
+		<!-- <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script> --> 
+	</head>
+	<style type="text/css">
+	th {
+		background-color: #222;
+		color: #FFFFFF;
+	}
+	body {
+		background-image: url(<?= base_url('index/images/background.jpg');?>);
+	}
+	</style>
+<body>
+<nav class="navbar navbar-fixed-top navbar-inverse ">
+<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+					<a class="navbar-brand" href="<?php echo site_url('oj_index/home/contest_list');?>">沈阳工业大学在线判题系统</a>
+	</div>
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li ><a href="<?= site_url('contest/home/index/'.$contest_id);?>">题目<span class="sr-only">(current)</span></a></li>
+			<li><a href="<?= site_url('contest/home/con_status/'.$contest_id);?>">状态</a></li>
+			<li class="active"><a href="<?= site_url('contest/con_rank/index/'.$contest_id);?>">排名</a></li>
+			<li><a href="<?= site_url('contest/ask_pro/index/'.$contest_id);?>">提问</a></li>
+		</ul>
+		<form class="navbar-form navbar-right">
+						<h5><a href="<?= site_url('oj_index/home/log_out');?>" style="text-decoration:none;"><span class="glyphicon glyphicon-off"></span> &nbsp;&nbsp;注销</a></h5>
+						</form>
+		<form class="navbar-form navbar-right">
+			<h5><a href="" style="text-decoration:none;"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> &nbsp;&nbsp;<?= $this->session->userdata('username');?></a></h5>
+		</form>
+	<!-- 	<?php $this->load->view('oj_index/login.html'); ?>
+	<?php $this->load->view('oj_index/register.html'); ?> -->
+		</div><!-- /.navbar-collapse -->
+
+
+</div><!-- /.container-fluid -->
+</nav>
+<div class="container container_contest">
+<?php require("news.html");?>
+	<div class="well">
+		<table class="table table-bordered" id = "ran_table" style="background-color:#FFFFFF;">
+			<thead>
+				<th style="width:5%;">排名</th>
+		  		<th style="width:10%;">用户名</th>
+		  		<th style="width:6%;">罚时</th>
+		  		<?php foreach($con_pro as $v) :?>
+		  			<th style="text-align: center;
+"><?= $arr[$v['num']];?></th>
+		  		<?php endforeach;?>
+			</thead>
+			<tbody>
+				<?php foreach($con_user as $key => $vu) :?>
+					<tr>
+						<td><?= $key+1;?></td>
+						<td><?= $vu['username'];?></td>
+						<td><?= $vu['penalty'];?></td>
+						<?php foreach($con_pro as $v) :?>
+							<?php if ($vu[$v['num']]['error_sum'] > 0): ?>
+		  				<td class="td_pro" name = "<?= $vu[$v['num']]['error_sum'];?>" ><?= $vu[$v['num']]['ac_time'].'(-'.$vu[$v['num']]['error_sum'].')';?></td>
+						<?php else: ?>
+							<td class="td_pro" name = "<?= $vu[$v['num']]['error_sum'];?>"><?= $vu[$v['num']]['ac_time'];?></td>
+						<?php endif; ?>
+		  				<?php endforeach;?>
+					</tr>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<?php require('foot.html');?>
+<script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
+<script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
+<script src="<?= base_url('application/views/contest/js/con_rank.js');?>"></script>
+</body>
+</html>

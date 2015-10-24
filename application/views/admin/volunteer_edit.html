@@ -1,0 +1,28 @@
+<div class="modal fade" id="volunteer_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <h4 class="modal-title" id="myModalLabel">志愿者：<span id = "v_span_name"></span></h4>
+       </div>
+       <form class="form-inline" action="<?= site_url('admin/volunteer/volunteer_edit');?>" method="post">
+       <div class="modal-body">
+     
+          <div class="form-group">
+            <label for="num">开始：</label>
+            <input type="text" class="form-control" id="start_edit" name="start" placeholder="请输入开始队伍 如 1" required="required"  >
+          </div>
+          <div class="form-group">
+            <label for="color">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结束</label>
+            <input type="text" class="form-control" id="end_edit" name = "end" placeholder="请输入结束队伍 如 1" required="required">
+          </div>
+        <input type="hidden" id = "hide_id"  value="" name = "hide_id" />
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <button type="submit" class="btn btn-primary">Save</button>
+       </div>
+       </form>
+     </div>
+   </div>
+ </div>
