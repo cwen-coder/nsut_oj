@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 		<meta charset="utf-8">
-		<meta http-equiv="refresh" content="10"> 
+<!--     <meta http-equiv="refresh" content="10">  -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="<?= base_url('index/images/SUT.ico');?>"/>  <!-- 网站图标-->
@@ -87,5 +87,27 @@
 <script src="<?= base_url('application/views/oj_index/js/jquery-1.9.1.min.js');?>"></script>
 <script src="<?= base_url('application/views/oj_index/js/bootstrap.min.js');?>"></script>
 <!--script src="<?= base_url('application/views/contest/js/con_rank.js');?>"></script-->
+<script>
+var t = 10;  
+  function showTime() {
+     t -= 1; 
+      var  url = window.location.href;
+      var urls = url.split('/');
+      var newurl;
+      if(t==0) {
+        if(urls[urls.length-1] == 1005) {
+          urls[urls.length-1] = 1006;
+          newurl =  urls.join('/');
+        } else {
+             urls[urls.length-1] = 1005;
+            newurl =  urls.join('/');
+        }
+        window.location.href = newurl;
+    }
+      //console.log();
+     setTimeout("showTime()",1000);  
+  };
+  showTime();  
+</script>
 </body>
 </html>

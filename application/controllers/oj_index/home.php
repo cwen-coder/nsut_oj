@@ -326,7 +326,7 @@ class Home extends Oj_Controller{
 		}
 		$this->load->view('oj_index/rank.html', $data);
 	}
-	public function test_school_contest(){
+	public function school_contest(){
 
 		if($this->session->userdata('username') && $this->session->userdata('user_id')) {
 			$data['username'] = $this->session->userdata('username');
@@ -361,10 +361,10 @@ class Home extends Oj_Controller{
 	}
 
 
-
+/*
 	public function school_contest(){
 		$this->load->view("oj_index/404.html");
-	}
+	}*/
 
 
 
