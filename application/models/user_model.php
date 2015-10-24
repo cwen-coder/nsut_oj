@@ -277,7 +277,7 @@ class  User_model extends CI_Model {
         public function reset_user($data) {
             $query = "UPDATE users SET password = '$data[newPwd]' WHERE username = '$data[username]' ";
             $result = mysql_query($query);
-            if($result &&  mysql_affected_rows() == 1) {
+            if($result &&  mysql_affected_rows() > 0) {
                 return true;
             } else return false;
         }
@@ -286,7 +286,7 @@ class  User_model extends CI_Model {
         public function reset_team($data) {
             $query = "UPDATE teams SET team_pwd = '$data[newPwd]' WHERE team_id = '$data[team_id]' ";
             $result = mysql_query($query);
-            if($result &&  mysql_affected_rows() == 1) {
+            if($result &&  mysql_affected_rows() > 0) {
                 return true;
             } else return false;
         }

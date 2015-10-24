@@ -132,7 +132,7 @@ class Contest extends Sch_Controller{
       }
       $con_class = $this->oj_con->get_con_class($contest_id);
       if($con_class != false && isset($con_class)) {
-        $data["con_class"] = 3;
+        $data["con_class"] = $con_class;
       } else {
         $data["con_class"] = 4;
       }
