@@ -224,5 +224,16 @@ class Oj_con_model extends CI_Model {
 			} else return false;
 		} else return false;
 	}
+	public function get_con_class($id) {
+		$query = "SELECT con_class FROM contest WHERE contest_id = '$id' ";
+		$result = mysql_query($query);
+		//$num = mysql_num_rows($result);
+		if ($result) {
+			$num = mysql_num_rows($result);
+			if($num > 0) {
+				return mysql_fetch_assoc($result)["con_class"];
+			} else return false;
+		} else return false;
+	}
 }
 ?>

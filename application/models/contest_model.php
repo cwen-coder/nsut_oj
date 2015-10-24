@@ -192,5 +192,6 @@ class Contest_model extends CI_Model {
             $data = array();
              return mysql_fetch_assoc($result)['team_id'];
         }
+
 }
 ?>

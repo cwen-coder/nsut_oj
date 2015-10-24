@@ -290,4 +290,14 @@ class  User_model extends CI_Model {
                 return true;
             } else return false;
         }
+        public function getLoginLog() {
+            $query = " SELECT team_id,contest_id,ip,time,SAC FROM teams,loginlog WHERE teams.user_id = loginlog.user_id ";
+            $result = mysql_query($query);
+            if($result == false) return false;
+            $data = array();
+            while($row = mysql_fetch_assoc($result)){
+                $data[] = $row;
+            }
+            return $data;
+        }
 } 

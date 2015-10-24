@@ -118,6 +118,7 @@ class Problem extends Admin_Controller{
 	//题目添加动作
 	public function add_act() {
 		$data = array(
+<<<<<<< HEAD
 				'problem_id' => $this->input->post('problem_id',TRUE),
 				'title' => mysql_real_escape_string($this->input->post('pro_title',TRUE)),
 				'class_id' => $this->input->post('pro_class',TRUE),
@@ -132,6 +133,22 @@ class Problem extends Admin_Controller{
 				'spj' => $this->input->post('spj',TRUE),
 				'hide' => $this->input->post('hide',TRUE),
 				'source' => $this->input->post('source',TRUE)				
+=======
+				'problem_id' => mysql_real_escape_string($this->input->post('problem_id',TRUE)),
+				'title' => mysql_real_escape_string($this->input->post('pro_title',TRUE)),
+				'class_id' => mysql_real_escape_string($this->input->post('pro_class',TRUE)),
+				'time_limit' => mysql_real_escape_string($this->input->post('time_limit',TRUE)),
+				'memory_limit' => mysql_real_escape_string($this->input->post('memory_limit',TRUE)),
+				'description' => mysql_real_escape_string($this->input->post('content_des',TRUE)),
+				'input' => mysql_real_escape_string($this->input->post('content_input',TRUE)),
+				'output' => mysql_real_escape_string($this->input->post('content_output',TRUE)),
+				'sample_input' => mysql_real_escape_string($this->input->post('sample_input',TRUE)),
+				'sample_output' => mysql_real_escape_string($this->input->post('sample_output',TRUE)),
+				'hint' => mysql_real_escape_string($this->input->post('hint',TRUE)),
+				'spj' => mysql_real_escape_string($this->input->post('spj',TRUE)),
+				'hide' => mysql_real_escape_string($this->input->post('hide',TRUE)),
+				'source' => mysql_real_escape_string($this->input->post('source',TRUE))				
+>>>>>>> nsut_oj/master
 			);
 		//echo $_POST['content_des'];
 		//p($data);die;
@@ -219,6 +236,7 @@ class Problem extends Admin_Controller{
 	//编辑动作
 	public function edit_act() {
 		$data = array(
+<<<<<<< HEAD
 				'problem_id' => $this->input->post('problem_id',TRUE),
 				'title' => mysql_real_escape_string($this->input->post('pro_title',TRUE)),
 				'class_id' => $this->input->post('pro_class',TRUE),
@@ -233,6 +251,22 @@ class Problem extends Admin_Controller{
 				'spj' => $this->input->post('spj',TRUE),
 				'hide' => $this->input->post('hide',TRUE),
 				'source' => $this->input->post('source',TRUE)				
+=======
+				'problem_id' => mysql_real_escape_string($this->input->post('problem_id',TRUE)),
+				'title' => mysql_real_escape_string($this->input->post('pro_title',TRUE)),
+				'class_id' => mysql_real_escape_string($this->input->post('pro_class',TRUE)),
+				'time_limit' => mysql_real_escape_string($this->input->post('time_limit',TRUE)),
+				'memory_limit' => mysql_real_escape_string($this->input->post('memory_limit',TRUE)),
+				'description' => mysql_real_escape_string($this->input->post('content_des',TRUE)),
+				'input' => mysql_real_escape_string($this->input->post('content_input',TRUE)),
+				'output' => mysql_real_escape_string($this->input->post('content_output',TRUE)),
+				'sample_input' => mysql_real_escape_string($this->input->post('sample_input',TRUE)),
+				'sample_output' => mysql_real_escape_string($this->input->post('sample_output',TRUE)),
+				'hint' => mysql_real_escape_string($this->input->post('hint',TRUE)),
+				'spj' => mysql_real_escape_string($this->input->post('spj',TRUE)),
+				'hide' => mysql_real_escape_string($this->input->post('hide',TRUE)),
+				'source' => mysql_real_escape_string($this->input->post('source',TRUE))					
+>>>>>>> nsut_oj/master
 			);
 		$result_w_in = false;
 		$result_w_out = false;

@@ -41,6 +41,7 @@ class Set_pass extends Admin_Controller {
             
         //设值 
         $resultPHPExcel->getActiveSheet()->setCellValue('A1', 'team号'); 
+<<<<<<< HEAD
         $resultPHPExcel->getActiveSheet()->setCellValue('B1', '用户名'); 
         $resultPHPExcel->getActiveSheet()->setCellValue('C1', '密码'); 
         $resultPHPExcel->getActiveSheet()->mergeCells('C1:D1');
@@ -53,6 +54,18 @@ class Set_pass extends Admin_Controller {
         $resultPHPExcel->getActiveSheet()->setCellValue('A' . $i, $item['team_id']); 
         $resultPHPExcel->getActiveSheet()->setCellValue('B' . $i, $item['user_id']);
         $resultPHPExcel->getActiveSheet()->setCellValue('C' . $i, $item['team_pwd']); 
+=======
+        $resultPHPExcel->getActiveSheet()->setCellValue('B1', '密码'); 
+        $resultPHPExcel->getActiveSheet()->mergeCells('B1:C1');
+        $i = 2; 
+        foreach($data as $item):
+        $a = 'B' . $i;
+        $b = 'C' . $i;
+        //合并单元格
+        $resultPHPExcel->getActiveSheet()->mergeCells("$a:$b");
+        $resultPHPExcel->getActiveSheet()->setCellValue('A' . $i, $item['team_id']); 
+        $resultPHPExcel->getActiveSheet()->setCellValue('B' . $i, $item['team_pwd']); 
+>>>>>>> nsut_oj/master
         $i ++; 
         endforeach;
         

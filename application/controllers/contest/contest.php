@@ -21,7 +21,10 @@ class Contest extends Sch_Controller{
             }
             if(isset($data['contest_id'] )){
                           $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+<<<<<<< HEAD
                           $data['team_id'] = $this->contest_model->get_team_id($data['contest_id'], $data['user_id']);
+=======
+>>>>>>> nsut_oj/master
                           //$data['pro'] = $this->sch_model->contest_pro($data['contest_id']);                  
                           $con_pro_id = $this->contest_model->get_con_pro_id($data['contest_id']);
                           $con_pro_sub = $this->oj_con->get_con_pro_sub($data['user_id'], $data['contest_id']);
@@ -68,7 +71,10 @@ class Contest extends Sch_Controller{
             }
             if(isset($data['contest_id'])){
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+<<<<<<< HEAD
                                    $data['team_id'] = $this->contest_model->get_team_id($data['contest_id'], $data['user_id']);
+=======
+>>>>>>> nsut_oj/master
 		$limit=0;
 		if($data['pagination'] = mysql_real_escape_string($this->input->get('pagination'))) 
 			$limit = $data['pagination']*20-20;
@@ -86,12 +92,20 @@ class Contest extends Sch_Controller{
 		$data['judge_result']=Array("Pending", "Pending Rejudging", "Compiling", "Running & Judging", "Accepted", "Presentation Error", "Wrong Answer", "Time Limit Exceed", "Memory Limit Exceed", "Output Limit Exceed", "Runtime Error", "Compile Error", "Compile OK","Test Running Done");
 		$data['judge_color']=Array("btn_status gray","btn_status btn-info","btn_status btn-warning","btn_status btn-warning","btn_status btn-success","btn_status btn-danger","btn_status btn-danger","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-warning","btn_status btn-info");
 		$data['result'] = $this->oj_con->con_problem_status($data['contest_id'],$limit, $num);
+<<<<<<< HEAD
 		//p($data);die;
+=======
+		//p($data);
+>>>>>>> nsut_oj/master
 		$count = count($data['result']);
 		$data['arr'] = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 		for ($i = 0; $i < $count; $i++) {
 			$result = $this->oj_con->get_teamname($data['result'][$i]['user_id'], $data['contest_id']);
+<<<<<<< HEAD
 			$data['result'][$i]['team_name'] = $result['team_name'];
+=======
+			$data['result'][$i]['username'] = $result['team_name'];
+>>>>>>> nsut_oj/master
                                                     $data['result'][$i]['team_id'] = $result['team_id'];
 		}
                                    //p($data);die;
@@ -124,13 +138,25 @@ class Contest extends Sch_Controller{
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
 		//echo "jdfkdjfkdfjkj";
 		//p($data);
+<<<<<<< HEAD
                                    $data['team_id'] = $this->contest_model->get_team_id($data['contest_id'], $data['user_id']);
+=======
+>>>>>>> nsut_oj/master
       $news = $this->news->getNews($data['contest_id']);
       if(isset($news)) {
         $data['news'] = $news;
       }else {
         $data['news'] = "欢迎使用沈阳工业大学Online Judge!";
       }
+<<<<<<< HEAD
+=======
+      $con_class = $this->oj_con->get_con_class($contest_id);
+      if($con_class != false && isset($con_class)) {
+        $data["con_class"] = 3;
+      } else {
+        $data["con_class"] = 4;
+      }
+>>>>>>> nsut_oj/master
 		$this->load->view('contest/sch_con_pro.html',$data);
                 }
         }
@@ -149,7 +175,10 @@ class Contest extends Sch_Controller{
 		$data['problem_id'] = mysql_real_escape_string($this->uri->segment(5));
 		$data['num'] = mysql_real_escape_string($this->uri->segment(6));
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
+<<<<<<< HEAD
                                    $data['team_id'] = $this->contest_model->get_team_id($data['contest_id'], $data['user_id']);
+=======
+>>>>>>> nsut_oj/master
                                    if (time() < strtotime($data['contest']['start_time'])) {
 			header('Content-Type:text/html;charset=utf-8');
                                                     echo "<script type='text/javascript'> alert('对不起比赛还未开始 ');history.go(-1); </script>";
@@ -188,8 +217,13 @@ class Contest extends Sch_Controller{
                                                     echo "<script type='text/javascript'> alert('对不起比赛已经结束 ');history.go(-1); </script>";
 		}else {
 			//echo 5;
+<<<<<<< HEAD
 			$data['source'] = mysql_real_escape_string($this->input->post('source', TRUE));
 
+=======
+			$data['source'] = mysql_real_escape_string($this->input->post('source', false));
+      /*p($data['source']);die;*/
+>>>>>>> nsut_oj/master
       if(get_magic_quotes_gpc()){
         $data['source']=stripslashes($data['source']);//删除由 addslashes() 函数添加的反斜杠
       }
@@ -200,6 +234,10 @@ class Contest extends Sch_Controller{
 			$data['ip'] = $this->session->userdata('ip_address');
 			$data['code_length'] = strlen($data['source']);
 			/*echo $data['code_length'];die;*/
+<<<<<<< HEAD
+=======
+
+>>>>>>> nsut_oj/master
 			if(!empty($data['source'])) {
 				//echo 6;
 				$check_pro = $this->oj_con->check_pro($data['pid']);
@@ -247,7 +285,10 @@ class Contest extends Sch_Controller{
 			$data['user_id'] = false;
             }
             if(isset($data['contest_id'] )){
+<<<<<<< HEAD
                 $data['team_id'] = $this->contest_model->get_team_id($data['contest_id'], $data['user_id']);
+=======
+>>>>>>> nsut_oj/master
                function sec2str($sec){
 	return sprintf("%02d:%02d:%02d",$sec/3600,$sec%3600/60,$sec%60);
                }
@@ -313,7 +354,10 @@ class Contest extends Sch_Controller{
 			$data['user_id'] = false;
             }
             if(isset($data['contest_id'] )){
+<<<<<<< HEAD
                 $data['team_id'] = $this->contest_model->get_team_id($data['contest_id'], $data['user_id']);
+=======
+>>>>>>> nsut_oj/master
                                   $this->load->model('ask_que_model','ask_pro');
 		$data['question_sum'] = $this->ask_pro->get_que_sum($data['contest_id']);
                                    $data['contest'] = $this->oj_con->con_byId($data['contest_id']);
