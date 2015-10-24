@@ -90,10 +90,6 @@ class Home extends Con_Controller {
 		}else {
 			$data['news'] = "欢迎使用沈阳工业大学Online Judge!";
 		}
-<<<<<<< HEAD
-=======
-		
->>>>>>> nsut_oj/master
 		$this->load->view('contest/con_pro.html',$data);
 	}
 
