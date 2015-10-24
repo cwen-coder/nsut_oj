@@ -149,7 +149,7 @@ class Volunteer_model extends CI_Model {
 		}
 		//p(implode(',',$school_contest));
 		$query = " SELECT solution_id,num,team_id FROM solution,teams 
-		WHERE  solution.contest_id in (" . implode(",",$school_contest) . ") AND  result = 4 AND balloon != 1 AND solution.user_id = teams.user_id 
+		WHERE  solution.contest_id in (" . implode(",",$school_contest) . ") AND teams.contest_id in (" . implode(",",$school_contest) . ") AND  result = 4 AND balloon != 1 AND solution.user_id = teams.user_id 
 		ORDER BY solution_id ";
 		$result = mysql_query($query);
 		if ($result ==true) {
@@ -189,7 +189,7 @@ class Volunteer_model extends CI_Model {
 		}
 		//p(implode(',',$school_contest));
 		$query = " SELECT solution_id,num,team_id FROM solution,teams 
-		WHERE  solution.contest_id in (" . implode(",",$school_contest) . ") AND  result = 4 AND balloon = 1 AND solution.user_id = teams.user_id 
+		WHERE  solution.contest_id in (" . implode(",",$school_contest) . ") AND teams.contest_id in (" . implode(",",$school_contest) . ") AND  result = 4 AND balloon = 1 AND solution.user_id = teams.user_id 
 		ORDER BY solution_id DESC";
 		$result = mysql_query($query);
 		if ($result ==true) {

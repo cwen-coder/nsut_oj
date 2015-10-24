@@ -13,7 +13,6 @@ class Home extends Volunteer_Controller{
 		$end = $this->session->userdata('end');
 		$no_balloon = $this->volunteer->get_no_balloon();
 		$r_balloon =  $this->volunteer->get_r_balloon();
-		//p($r_balloon);
 		$data['no_balloon'] = array();
 		$data['r_balloon'] = array();
 		$count = 0;
